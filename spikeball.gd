@@ -11,6 +11,5 @@ func _ready():
 
 
 func _on_shake_body_entered(body):
-	print("hello")
 	if body.is_in_group("dog"):
 		emit_signal("CollidedPlayer")

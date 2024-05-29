@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://dxo0h0k8bfdee"]
+[gd_scene load_steps=66 format=3 uid="uid://dxo0h0k8bfdee"]
 
 [ext_resource type="Script" path="res://MainGame.gd" id="1_sw385"]
 [ext_resource type="Material" uid="uid://ljykvhhh40y4" path="res://foliageshader.tres" id="2_dxpn6"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://deugyslheru4s" path="res://art/tileforestspritesheet2t.png" id="8_k2ypf"]
 [ext_resource type="Texture2D" uid="uid://3wd3rklsf40w" path="res://art/tileforestspritesheet2.png" id="9_npacs"]
 [ext_resource type="Texture2D" uid="uid://duwjmjjsqfbdc" path="res://art/maskgrass.png" id="9_qrbg4"]
-[ext_resource type="PackedScene" uid="uid://bd24oc54elotu" path="res://enemy.tscn" id="10_g6gpl"]
 [ext_resource type="Shader" path="res://fog.gdshader" id="10_nn7nr"]
 [ext_resource type="Texture2D" uid="uid://ca0dsha2m0ass" path="res://art/parallaxbg/mid1.png" id="11_g7yt2"]
 [ext_resource type="PackedScene" uid="uid://0drrtr1rw0n1" path="res://bat.tscn" id="11_kq7jp"]
@@ -749,9 +748,6 @@ position = Vector2(2, 5)
 [node name="cameras event" type="Node" parent="BG"]
 
 [node name="enemy&npc" type="Node" parent="."]
-
-[node name="enemy" parent="enemy&npc" instance=ExtResource("10_g6gpl")]
-position = Vector2(302, 243)
 
 [node name="spikes2" parent="." node_paths=PackedStringArray("CameraRef") instance=ExtResource("22_kqo1w")]
 position = Vector2(109, -48)

@@ -1,7 +1,6 @@
-[gd_scene load_steps=43 format=3 uid="uid://bml6u56g1k747"]
+[gd_scene load_steps=39 format=3 uid="uid://bml6u56g1k747"]
 
 [ext_resource type="Resource" uid="uid://bbrqxe028fk5p" path="res://DefaultMovement.tres" id="1_boqx8"]
-[ext_resource type="Texture2D" uid="uid://c3h0x4p7csl8f" path="res://art/dogidle-Sheet.png" id="1_e630x"]
 [ext_resource type="Texture2D" uid="uid://bwotynnxhce0s" path="res://art/dogattack-Sheet.png" id="2_2mhbe"]
 [ext_resource type="Texture2D" uid="uid://d2gqif03w3wph" path="res://art/dogrun-Sheet.png" id="2_d05wt"]
 [ext_resource type="Texture2D" uid="uid://dvws8363h4ex" path="res://art/dogjump-Sheet.png" id="2_yok4w"]
@@ -21,7 +20,7 @@ script/source = "extends CharacterBody2D
 @onready var light = $doglight
 #@onready var walkparticles = $walkparticles
 @onready var BiteDamage = $biterange
-@export var push_force: int = 800.0
+@export var push_force: int = 800
 @export var pull_force: int = 500
 var air_jump = false
 var gravity = ProjectSettings.get_setting(\"physics/2d/default_gravity\")
@@ -29,7 +28,7 @@ var doDash = false
 var dashDirection : int
 var isgrounded = true
 #attack 
-var attackType: String
+var attackType = null
 var currentAttack: bool
 
 @onready var coyote_jumps = $\"Coyote Jumps\"
@@ -37,7 +36,10 @@ var currentAttack: bool
 
 func _ready():
 	Global.dogCharacter = self
+	Global.dogDamageZone = BiteDamage
+	currentAttack = false
 	light.hide()
+	
 func _physics_process(delta):
 	##dust landing effect
 	if isgrounded == false and is_on_floor() == true:
@@ -58,13 +60,14 @@ func _physics_process(delta):
 	apply_air_resistance(input_axis, delta)
 	handle_acceleration(input_axis, delta)
 	update_animations(input_axis)
+	attack()
 	var was_on_floor = is_on_floor()
 	move_and_slide()
 	var just_left_edge = was_on_floor and not is_on_floor() and velocity.y >= 0
 	if just_left_edge:
 		coyote_jumps.start()	
 	dashpower(input_axis)
-	attack()
+
 	interactBox()
 	
 func dashpower(input_axis):
@@ -132,14 +135,20 @@ func apply_friction(input_axis, delta):
 
 
 func update_animations(input_axis):
-	if input_axis != 0:
-		anim.flip_h = (input_axis < 0)
-		anim.play(\"run2\")
-	else:
-		anim.play(\"idle2\")
-	
-	if not is_on_floor():
-		anim.play(\"jump\")
+	if !currentAttack:
+		if input_axis == 1:
+			BiteDamage.scale.x = 2
+			anim.flip_h = false
+			anim.play(\"run2\")
+		elif input_axis == -1:
+			BiteDamage.scale.x = -2
+			anim.flip_h = true
+			anim.play(\"run2\")
+		else:
+			anim.play(\"idle2\")
+		
+		if not is_on_floor():
+			anim.play(\"jump\")
 		
 
 
@@ -170,24 +179,37 @@ func create_dash_effect():
 	dogcopy.queue_free()
 	
 func attack():
-		if Input.is_action_just_pressed(\"attackL\") or Input.is_action_just_pressed(\"attackR\"):
-			currentAttack = true
-			if Input.is_action_just_pressed(\"attackL\"):
-				attackType = \"wave\"
-			elif Input.is_action_just_pressed(\"attackR\"):
-				attackType = \"bite\"
+	if Input.is_action_just_pressed(\"attackL\") or Input.is_action_just_pressed(\"attackR\"):
+		currentAttack = true
+		if Input.is_action_just_pressed(\"attackL\") and is_on_floor():
+			attackType = \"wave\"
+		elif Input.is_action_just_pressed(\"attackR\") and is_on_floor():
+			attackType = \"bite\"
+		SetDamage(attackType)
 		HandleAttackAnimation(attackType)
 		
 
-func _on_dash_effect_timeout():
-	create_dash_effect()
 
 func HandleAttackAnimation(attackType):
 	if currentAttack:
 		var animation = str(attackType,\"_attack\")
 		anim.play(animation)
-		print(attackType)
+		toggle_damage_collisions(attackType)
 
+func toggle_damage_collisions(attackType):
+	var damageZone = BiteDamage.get_node(\"CollisionShape2D\")
+	var wait_time: float
+	if attackType == \"bite\":
+		wait_time = 0.8 #calculated with how many frames divided by fps in this case 4 frams for bite divided by 5fps speed
+	if attackType == \"wave\":
+		wait_time = 0 #havent made animation for wave type of attack	
+	damageZone.disabled = false
+	await get_tree().create_timer(wait_time).timeout
+	damageZone.disabled = true
+	
+func _on_dash_effect_timeout():
+	create_dash_effect()
+	
 func allign_to_slope():
 	if is_on_floor():
 		var normal: Vector2 = get_floor_normal()
@@ -195,7 +217,6 @@ func allign_to_slope():
 
 		var offset: float = deg_to_rad(90)
 		self.rotation = normal.angle() + offset
-
 
 
 #unstable
@@ -222,6 +243,19 @@ func interactBox():
 func _on_lighton_body_entered(body):
 	if body.is_in_group(\"dog\"):
 		light.show()
+
+
+func _on_animated_sprite_2d_animation_finished():
+	currentAttack = false
+
+func SetDamage(attackType):
+	var currentDamagetoDeal: int
+	if attackType == \"wave\":
+		currentDamagetoDeal = 8
+	elif attackType == \"bite\":
+		currentDamagetoDeal = 16
+	Global.dogDamageAmount = currentDamagetoDeal
+	
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l3c7c"]
@@ -234,18 +268,6 @@ region = Rect2(64, 0, 64, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gaw4u"]
 atlas = ExtResource("2_2mhbe")
-region = Rect2(128, 0, 64, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_oj0cq"]
-atlas = ExtResource("1_e630x")
-region = Rect2(0, 0, 64, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5b8ti"]
-atlas = ExtResource("1_e630x")
-region = Rect2(64, 0, 64, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4ahqv"]
-atlas = ExtResource("1_e630x")
 region = Rect2(128, 0, 64, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xudjg"]
@@ -307,23 +329,12 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_gaw4u")
-}],
-"loop": true,
-"name": &"bite_attack",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_oj0cq")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5b8ti")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4ahqv")
+"texture": SubResource("AtlasTexture_gaw4u")
 }],
 "loop": false,
-"name": &"idle",
+"name": &"bite_attack",
 "speed": 5.0
 }, {
 "frames": [{
@@ -410,6 +421,7 @@ color_ramp = SubResource("GradientTexture1D_1e21j")
 color_initial_ramp = SubResource("GradientTexture1D_q201u")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8v75x"]
+radius = 15.6546
 
 [sub_resource type="Gradient" id="Gradient_emsso"]
 offsets = PackedFloat32Array(0.216374, 0.732943)
@@ -542,8 +554,8 @@ position = Vector2(-10.4167, 19.2307)
 position = Vector2(4.96708e-07, 2.84217e-14)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_qgewx")
-animation = &"idle"
-frame = 2
+animation = &"bite_attack"
+frame = 3
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -575,12 +587,11 @@ amount = 10
 trail_enabled = true
 
 [node name="biterange" type="Area2D" parent="."]
-visible = false
 position = Vector2(2.86102e-06, -2.38419e-07)
 scale = Vector2(2, 2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="biterange"]
-position = Vector2(20.8334, -1.92307)
+position = Vector2(22.9168, -1.92307)
 shape = SubResource("CircleShape2D_8v75x")
 
 [node name="doglight" type="PointLight2D" parent="."]
