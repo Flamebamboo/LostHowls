@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://coe2bigkbj883"]
+[gd_scene load_steps=4 format=3 uid="uid://coe2bigkbj883"]
 
+[ext_resource type="Script" path="res://boxes.gd" id="1_ht78v"]
 [ext_resource type="Texture2D" uid="uid://dxjiubhqybhm7" path="res://icon.svg" id="1_uqrvc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nc8sa"]
@@ -9,6 +10,8 @@ size = Vector2(44, 42)
 top_level = true
 z_index = 560
 collision_mask = 2
+mass = 0.42
+script = ExtResource("1_ht78v")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 650

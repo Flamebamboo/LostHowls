@@ -526,16 +526,6 @@ position = Vector2(816, 1480)
 collision_mask = 3
 mass = 10.0
 
-[node name="Node2D" parent="Node2D" instance=ExtResource("2_yv6nv")]
-position = Vector2(736, 1432)
-collision_mask = 3
-mass = 10.0
-
-[node name="Node2D" parent="Node2D/Node2D" instance=ExtResource("2_yv6nv")]
-position = Vector2(648, 1480)
-collision_mask = 3
-mass = 10.0
-
 [node name="tilemaps" type="Node" parent="."]
 
 [node name="vines" type="TileMap" parent="tilemaps"]
@@ -572,7 +562,7 @@ shape = SubResource("RectangleShape2D_qo0ma")
 
 [node name="dog" parent="." instance=ExtResource("22_vkaud")]
 z_index = 6
-position = Vector2(-351, 67)
+position = Vector2(-346, 112)
 floor_snap_length = 4.9
 
 [node name="bat" parent="." instance=ExtResource("11_kq7jp")]
@@ -829,7 +819,7 @@ libraries = {
 autoplay = "hide"
 
 [node name="Camera" type="Camera2D" parent="."]
-position = Vector2(-228, 17)
+position = Vector2(-228, 62)
 scale = Vector2(0.479998, 0.520001)
 zoom = Vector2(2.5, 2.5)
 limit_left = 0
@@ -851,7 +841,7 @@ CameraRef = NodePath("../../Camera")
 area_pcam = NodePath("defaultcam")
 
 [node name="defaultcam" type="Node2D" parent="Camera types/after fallen" node_paths=PackedStringArray("follow_target")]
-position = Vector2(0, -96.1533)
+position = Vector2(10.4166, -9.61536)
 script = ExtResource("26_u61q3")
 follow_mode = 2
 follow_target = NodePath("../../../dog")
@@ -883,7 +873,7 @@ position = Vector2(272, 349.5)
 shape = SubResource("RectangleShape2D_71g07")
 
 [node name="startingcam" type="Node2D" parent="Camera types/beginning" node_paths=PackedStringArray("follow_target")]
-position = Vector2(230.4, 321)
+position = Vector2(230.4, 366)
 scale = Vector2(0.479998, 0.520001)
 script = ExtResource("26_u61q3")
 priority = 10
@@ -912,7 +902,7 @@ position = Vector2(1014.59, -284.615)
 shape = SubResource("RectangleShape2D_4af8u")
 
 [node name="PhantomCamera2D" type="Node2D" parent="Camera types/obstacles cam" node_paths=PackedStringArray("follow_target")]
-position = Vector2(127.084, -155.769)
+position = Vector2(137.501, -69.2307)
 scale = Vector2(4.34031, 3.69821)
 script = ExtResource("26_u61q3")
 follow_mode = 2
