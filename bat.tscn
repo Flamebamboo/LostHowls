@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://0drrtr1rw0n1"]
+[gd_scene load_steps=30 format=3 uid="uid://0drrtr1rw0n1"]
 
 [ext_resource type="Script" path="res://bat.gd" id="1_g0myn"]
 [ext_resource type="Texture2D" uid="uid://pr8p3h0dkd52" path="res://BatFire_Attack.png" id="2_g0vxg"]
@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b2e4477ngdotj" path="res://BatFire_Hurt.png" id="5_proka"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fsgoc"]
-radius = 5.0
+radius = 13.0384
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j5uuw"]
 atlas = ExtResource("2_g0vxg")
@@ -114,7 +114,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_y77gk")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack",
 "speed": 5.0
 }, {
@@ -140,7 +140,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_q8jg1")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
 "speed": 5.0
 }, {
@@ -157,7 +157,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_myp6i")
 }],
-"loop": true,
+"loop": false,
 "name": &"flying",
 "speed": 5.0
 }, {
@@ -174,10 +174,13 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_q8a1f")
 }],
-"loop": true,
+"loop": false,
 "name": &"hurt",
 "speed": 5.0
 }]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mab1i"]
+radius = 14.0
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 4
@@ -192,9 +195,14 @@ scale = Vector2(1.5, 1.5)
 sprite_frames = SubResource("SpriteFrames_ed2sb")
 animation = &"flying"
 autoplay = "flying"
-frame_progress = 0.887554
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
 
+[node name="BatHitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BatHitbox"]
+shape = SubResource("CircleShape2D_mab1i")
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="BatHitbox" to="." method="_on_bat_hitbox_area_entered"]

@@ -565,7 +565,7 @@ position = Vector2(-346, 112)
 floor_snap_length = 4.9
 
 [node name="bat" parent="." instance=ExtResource("11_kq7jp")]
-position = Vector2(-296, 43)
+position = Vector2(246, 1160)
 
 [node name="effects" type="Node" parent="."]
 
