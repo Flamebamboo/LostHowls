@@ -5,4 +5,4 @@ var dogDamageZone: Area2D
 var dogDamageAmount: int
 
 var batDamageZone: Area2D
-var batDamageAmount
+var batDamageAmount: int

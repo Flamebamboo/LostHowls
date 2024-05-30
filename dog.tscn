@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bml6u56g1k747"]
+[gd_scene load_steps=46 format=3 uid="uid://bml6u56g1k747"]
 
 [ext_resource type="Resource" uid="uid://bbrqxe028fk5p" path="res://DefaultMovement.tres" id="1_boqx8"]
 [ext_resource type="Texture2D" uid="uid://bwotynnxhce0s" path="res://art/dogattack-Sheet.png" id="2_2mhbe"]
@@ -10,6 +10,7 @@
 
 [sub_resource type="GDScript" id="GDScript_8m6v6"]
 script/source = "extends CharacterBody2D
+class_name dog
 @export var boxes: RigidBody2D
 @onready var anim = $AnimatedSprite2D
 @onready var dash_effect = $DashEffect
@@ -32,13 +33,15 @@ var isgrounded = true
 var attackType = null
 var currentAttack: bool
 #health
-var health = 100
-var healthMax = 100
+@export var maxHealth = 100
+@onready var currentHealth: int = maxHealth
 var healthMin = 0
 var can_take_damage: bool
 var dead: bool
 @onready var coyote_jumps = $\"Coyote Jumps\"
 
+
+signal healthChanged
 
 func _ready():
 	Global.dogCharacter = self
@@ -70,6 +73,7 @@ func _physics_process(delta):
 		interact_box()
 		landing_effect()
 		check_hitbox()
+		
 	move_and_slide()
 		
 		
@@ -80,32 +84,33 @@ func check_hitbox():
 		var hitbox = hitbox_areas.front()
 		if hitbox.get_parent() is BatEnemy:
 			damage = Global.batDamageAmount
-	
+			
 	if can_take_damage:
 		take_damage(damage)
-		
+	
 func take_damage(damage):
 	if damage != 0:
-		if health > 0:
-			health -= damage
-			print(\"health \", health)
-		if health <= 0:
-			health = 0
+		if currentHealth > 0:
+			currentHealth -= damage
+			print(\"health \", currentHealth)
+		if currentHealth <= 0:
+			currentHealth = 0
 			dead = true
 			Global.dogAlive = false
+			respawn_player()
 			#handle_death_animation()
 		take_damage_cooldown(1.0)
-	
+		$ProgressBar.value = currentHealth
+		
 func handle_death_animation():
 	#anim.play(\"dead\")
 	#await get_tree().create_timer(3.5).timeout
 	#self.queue_free()
-	
+	pass
 func take_damage_cooldown(wait_time):
 	can_take_damage = false
 	await get_tree().create_timer(wait_time).timeout
 	can_take_damage = true
-		
 		
 		
 	
@@ -297,6 +302,9 @@ func _on_lighton_body_entered(body):
 	if body.is_in_group(\"dog\"):
 		light.show()
 
+func _on_lighton_body_exited(body):
+	if body.is_in_group(\"dog\"):
+		light.hide()
 
 func _on_animated_sprite_2d_animation_finished():
 	currentAttack = false
@@ -308,7 +316,43 @@ func SetDamage(attackType):
 	elif attackType == \"bite\":
 		currentDamagetoDeal = 16
 	Global.dogDamageAmount = currentDamagetoDeal
+
+func respawn_player():
+	# get spawn nodes
+	var spawn_points = get_tree().get_nodes_in_group(\"respawn_points\")
+
+	# assume the first spawn node is closest
+	var nearest_spawn_point = spawn_points[0]
+
+	# look through spawn nodes to see if any are closer
+	for spawn_point in spawn_points:
+		if spawn_point.global_position.distance_to(self.global_position) < nearest_spawn_point.global_position.distance_to(self.global_position):
+			nearest_spawn_point = spawn_point
+
+	# reposition player
+	self.global_position = nearest_spawn_point.global_position
+	currentHealth = maxHealth
+	dead = false
+	Global.dogAlive = true
+
+
 "
+
+[sub_resource type="Theme" id="Theme_ssv0o"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vw7ha"]
+bg_color = Color(1, 0.0470588, 0.0862745, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7lcme"]
+bg_color = Color(1.44155e-05, 0.694406, 0.145446, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l3c7c"]
 atlas = ExtResource("2_2mhbe")
@@ -620,8 +664,24 @@ floor_constant_speed = true
 floor_snap_length = 2.0
 script = SubResource("GDScript_8m6v6")
 movement_data = ExtResource("1_boqx8")
-push_force = null
-pull_force = null
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -29.1668
+offset_top = -48.0768
+offset_right = 30.8332
+offset_bottom = -37.0768
+grow_horizontal = 0
+size_flags_horizontal = 8
+theme = SubResource("Theme_ssv0o")
+theme_override_styles/background = SubResource("StyleBoxFlat_vw7ha")
+theme_override_styles/fill = SubResource("StyleBoxFlat_7lcme")
+value = 100.0
+show_percentage = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="aireffect" type="Marker2D" parent="."]
 position = Vector2(4.96708e-07, 21.1538)
@@ -682,7 +742,7 @@ texture = SubResource("GradientTexture2D_rvcc3")
 [node name="Sprite2D" type="Sprite2D" parent="doglight"]
 modulate = Color(1, 0.290196, 0, 0.635294)
 material = SubResource("CanvasItemMaterial_7l54n")
-position = Vector2(-3, -9.99999)
+position = Vector2(-3.00001, -8.07693)
 scale = Vector2(1.62305, 1.62305)
 texture = SubResource("GradientTexture2D_rxw8f")
 
@@ -696,7 +756,6 @@ autoplay = "lighjt"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="dogHitbox"]
 position = Vector2(-6.25003, 2.88461)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_pp52c")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
