@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://0drrtr1rw0n1"]
+[gd_scene load_steps=31 format=3 uid="uid://0drrtr1rw0n1"]
 
 [ext_resource type="Script" path="res://bat.gd" id="1_g0myn"]
 [ext_resource type="Texture2D" uid="uid://pr8p3h0dkd52" path="res://BatFire_Attack.png" id="2_g0vxg"]
@@ -182,6 +182,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_mab1i"]
 radius = 14.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_trqen"]
+radius = 15.0
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 4
 script = ExtResource("1_g0myn")
@@ -203,6 +206,11 @@ autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BatHitbox"]
 shape = SubResource("CircleShape2D_mab1i")
+
+[node name="DealDamageArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DealDamageArea"]
+shape = SubResource("CircleShape2D_trqen")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="area_entered" from="BatHitbox" to="." method="_on_bat_hitbox_area_entered"]

@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+class_name BatEnemy
 @export var SPEED = 30
 var dir: Vector2
 var batChase: bool
@@ -10,23 +10,30 @@ var healthMin = 0
 var dead = false
 var takingDamage = false
 var isRoaming: bool
+var DamagetoDeal = 20
 func _ready():
 	batChase = true
 	
 	
 func _process(delta):
-	
+	Global.batDamageAmount = DamagetoDeal
+	Global.batDamageZone = $DealDamageArea
 	if is_on_floor() and dead:
 		await get_tree().create_timer(3.0).timeout
 		self.queue_free()
 	move(delta)
 	handle_animation()
+	if Global.dogAlive:
+		batChase = true
+		
+	elif !Global.dogAlive:
+		batChase = false
 #bat logic
 func move(delta):
 	dog = Global.dogCharacter
 	if !dead:
 		isRoaming = true
-		if !takingDamage and batChase: 
+		if !takingDamage and batChase and Global.dogAlive: 
 			dog = Global.dogCharacter
 			velocity = position.direction_to(dog.position) * SPEED
 			dir.x = abs(velocity.x) / velocity.x
