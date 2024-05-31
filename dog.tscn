@@ -11,7 +11,6 @@
 [sub_resource type="GDScript" id="GDScript_8m6v6"]
 script/source = "extends CharacterBody2D
 class_name dog
-@export var boxes: RigidBody2D
 @onready var anim = $AnimatedSprite2D
 @onready var dash_effect = $DashEffect
 @onready var dash_duration = $DashDuration
@@ -30,7 +29,7 @@ var doDash = false
 var dashDirection : int
 var isgrounded = true
 #attack 
-var attackType = null
+var attackType: String
 var currentAttack: bool
 #health
 @export var maxHealth = 100
@@ -199,7 +198,7 @@ func update_animations(input_axis):
 #air resistance		
 func apply_air_resistance(input_axis, delta):
 	if input_axis == 0 and not is_on_floor():
-		velocity.x == move_toward(velocity.x, 0, movement_data.air_resistance * delta)
+		velocity.x = move_toward(velocity.x, 0, movement_data.air_resistance * delta)
 
 #dashing 
 func _on_dash_duration_timeout():
@@ -280,7 +279,6 @@ func landing_effect():
 
 #unstable
 func interact_box():
-	var add_force = false
 	# Loop through all collisions detected
 	if Input.is_action_pressed(\"pushbox\"):
 		for i in get_slide_collision_count():
@@ -294,7 +292,7 @@ func interact_box():
 			if c.get_collider() is boxes:
 				var follow_player = (self.global_position - c.get_collider().global_position).normalized()
 				c.get_collider().apply_impulse(follow_player * pull_force)
-				add_force = true
+				
 	
 
 		
