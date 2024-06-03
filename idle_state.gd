@@ -1,19 +1,18 @@
+
 extends NodeState
 
-@export var characterBody : CharacterBody2D
-@export var animatedSprite : AnimatedSprite2D
-@export var slowSpeed : int = 50
+@export var characterBody: CharacterBody2D
+@export var animatedSprite: AnimatedSprite2D
 
-func on_process(delta : float):
-	pass
-
-func _physics_process(delta : float):
-	characterBody.velocity.x = move_toward(characterBody.velocity.x, 0, slowSpeed * delta)
-	animatedSprite.play("idle")
-	characterBody.move_and_slide()
 func enter():
+	animatedSprite.play("idle")
+
+func on_process():
 	pass
+
+func _physics_process(_delta):
+	characterBody.velocity = Vector2.ZERO
+	characterBody.move_and_slide()
 
 func exit():
 	pass
-	

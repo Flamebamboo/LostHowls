@@ -38,7 +38,7 @@ func move(delta):
 			velocity = position.direction_to(dog.position) * SPEED
 			dir.x = abs(velocity.x) / velocity.x
 		elif takingDamage:
-			var knockbackDir = position.direction_to(dog.position) * -50
+			var knockbackDir = position.direction_to(dog.position) * -500
 			velocity = knockbackDir
 			
 			
@@ -96,4 +96,4 @@ func takeDamage(damage):
 		dead = true
 	print(str(self), "current health is ", health)
 
-		
+

@@ -185,10 +185,9 @@ radius = 14.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_trqen"]
 radius = 15.0
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["bat"]]
 collision_layer = 4
 script = ExtResource("1_g0myn")
-SPEED = 50
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_fsgoc")
@@ -203,11 +202,15 @@ autoplay = "flying"
 autostart = true
 
 [node name="BatHitbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BatHitbox"]
 shape = SubResource("CircleShape2D_mab1i")
 
 [node name="DealDamageArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DealDamageArea"]
 shape = SubResource("CircleShape2D_trqen")

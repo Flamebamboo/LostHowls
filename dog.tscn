@@ -1,8 +1,8 @@
-[gd_scene load_steps=46 format=3 uid="uid://bml6u56g1k747"]
+[gd_scene load_steps=62 format=3 uid="uid://bml6u56g1k747"]
 
 [ext_resource type="Resource" uid="uid://bbrqxe028fk5p" path="res://DefaultMovement.tres" id="1_boqx8"]
 [ext_resource type="Texture2D" uid="uid://bwotynnxhce0s" path="res://art/dogattack-Sheet.png" id="2_2mhbe"]
-[ext_resource type="Texture2D" uid="uid://d2gqif03w3wph" path="res://art/dogrun-Sheet.png" id="2_d05wt"]
+[ext_resource type="Texture2D" uid="uid://c65ftsu4un3e2" path="res://barkeffect-Sheet.png" id="2_layen"]
 [ext_resource type="Texture2D" uid="uid://dvws8363h4ex" path="res://art/dogjump-Sheet.png" id="2_yok4w"]
 [ext_resource type="Texture2D" uid="uid://byfd752ylnvxh" path="res://dogdeadSheet.png" id="3_kd2ox"]
 [ext_resource type="Texture2D" uid="uid://d0tvs2eft04eb" path="res://art/dogidlev2-Sheet.png" id="3_pftu0"]
@@ -20,7 +20,8 @@ class_name dog
 @onready var particles = $dashparticles
 @onready var light = $doglight
 #@onready var walkparticles = $walkparticles
-@onready var BiteDamage = $biterange
+@onready var BiteDamage = $damagesrange
+@onready var WaveDamage = $damagesrange
 @export var push_force: int = 300
 @export var pull_force: int = 500
 var air_jump = false
@@ -28,8 +29,8 @@ var gravity = ProjectSettings.get_setting(\"physics/2d/default_gravity\")
 var doDash = false 
 var dashDirection : int
 var isgrounded = true
-#attack 
-var attackType: String
+var bounce_impulse = 200.0
+#attack
 var currentAttack: bool
 #health
 @export var maxHealth = 100
@@ -38,7 +39,11 @@ var healthMin = 0
 var can_take_damage: bool
 var dead: bool
 @onready var coyote_jumps = $\"Coyote Jumps\"
+@onready var attack_effects = $\"damagesrange/attack effects\"
+@onready var waveparticles = $damagesrange/waveparticles
+@onready var bloodparticles = $damagesrange/bloodparticles
 
+@export var projectile_scene: PackedScene
 
 signal healthChanged
 
@@ -48,10 +53,11 @@ func _ready():
 	currentAttack = false
 	light.hide()
 	BiteDamage.get_node(\"bitecollision\").disabled = true
+	WaveDamage.get_node(\"wavecollision\").disabled = true
 	dead = false
 	can_take_damage = true
 	Global.dogAlive = true
-	
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 func _physics_process(delta):
 	if !dead: #only if alive this fuctions are working
 		##dust landing effect
@@ -68,24 +74,40 @@ func _physics_process(delta):
 		update_animations(input_axis)
 		attack()
 		dash_power(input_axis)
-		coyote_jump()
 		interact_box()
 		landing_effect()
-		check_hitbox()
+		#check_hitbox()
+		var was_on_floor = is_on_floor()
+		move_and_slide()
+		#asteroid_bounce()
+		var just_left_edge = was_on_floor and not is_on_floor() and velocity.y >= 0
+		if just_left_edge:
+			coyote_jumps.start()
 		
-	move_and_slide()
 		
-		
-func check_hitbox():
-	var hitbox_areas = $dogHitbox.get_overlapping_areas()
+#func check_hitbox():
+	#var hitbox_areas = $dogHitbox.get_overlapping_areas()
+	#var damage: int
+	#if hitbox_areas:
+		#var hitbox = hitbox_areas.front()
+		#if hitbox.get_parent() is BatEnemy:
+			#print(\"batdetect\")
+			#damage = Global.batDamageAmount
+			#
+	#if can_take_damage:
+		#take_damage(damage)
+	
+func _on_dog_hitbox_body_entered(_body):
 	var damage: int
-	if hitbox_areas:
-		var hitbox = hitbox_areas.front()
-		if hitbox.get_parent() is BatEnemy:
+	var overlapping_bodies = $dogHitbox.get_overlapping_bodies()
+	print(\"Overlapping bodies: \", overlapping_bodies)
+	
+	for enemy in overlapping_bodies:	
+		if enemy.is_in_group(\"bat\"):
 			damage = Global.batDamageAmount
 			
-	if can_take_damage:
-		take_damage(damage)
+		if can_take_damage:
+			take_damage(damage)
 	
 func take_damage(damage):
 	if damage != 0:
@@ -97,15 +119,9 @@ func take_damage(damage):
 			dead = true
 			Global.dogAlive = false
 			respawn_player()
-			#handle_death_animation()
-		take_damage_cooldown(1.0)
 		$ProgressBar.value = currentHealth
 		
-func handle_death_animation():
-	#anim.play(\"dead\")
-	#await get_tree().create_timer(3.5).timeout
-	#self.queue_free()
-	pass
+	
 func take_damage_cooldown(wait_time):
 	can_take_damage = false
 	await get_tree().create_timer(wait_time).timeout
@@ -140,13 +156,14 @@ func handle_wall_jump():
 	if Input.is_action_just_pressed(\"moveup\") and wall_normal == Vector2.LEFT:
 		velocity.x = wall_normal.x * movement_data.speed 
 		velocity.y = movement_data.jump_velocity	
+		#
 func handle_jump():
 	if is_on_floor(): air_jump = true
 	
 	if is_on_floor() or coyote_jumps.time_left > 0.0:
 		if Input.is_action_just_pressed(\"moveup\"):
 			velocity.y = movement_data.jump_velocity
-
+			coyote_jumps.stop()
 	elif not is_on_floor():
 		if Input.is_action_just_released(\"moveup\") and velocity.y < movement_data.jump_velocity / 2:
 			velocity.y = movement_data.jump_velocity / 2
@@ -158,7 +175,11 @@ func handle_jump():
 			airjumpInstance.global_position = $aireffect.global_position
 			get_parent().add_child(airjumpInstance)
 			air_jump = false
-			
+	
+		# Short hop logic
+		if Input.is_action_just_released(\"moveup\") and velocity.y < movement_data.jump_velocity / 2:
+			velocity.y = movement_data.jump_velocity / 2
+						
 func handle_acceleration(input_axis, delta):
 	if not is_on_floor(): return
 	if input_axis != 0:
@@ -221,14 +242,11 @@ func create_dash_effect():
 	await get_tree().create_timer(animationTime).timeout
 	dogcopy.queue_free()
 
+		
 
-func coyote_jump():
-	var was_on_floor = is_on_floor()
-	var just_left_edge = was_on_floor and not is_on_floor() and velocity.y >= 0
-	if just_left_edge:
-		coyote_jumps.start()	
-				
+				#
 func attack():
+	var attackType: String = \"\"
 	if Input.is_action_just_pressed(\"attackL\") or Input.is_action_just_pressed(\"attackR\"):
 		currentAttack = true
 		if Input.is_action_just_pressed(\"attackL\") and is_on_floor():
@@ -240,28 +258,52 @@ func attack():
 		
 
 
-func HandleAttackAnimation(attackType):
+func HandleAttackAnimation(attackType: String):
 	if currentAttack:
 		var animation = str(attackType,\"_attack\")
 		anim.play(animation)
 		toggle_damage_collisions(attackType)
 
-func toggle_damage_collisions(attackType):
-	var damageZone = BiteDamage.get_node(\"bitecollision\")
+func toggle_damage_collisions(attackType: String):
+	#bitedamage and wave damage is damage range area2d
+	var damagebiteZone = BiteDamage.get_node(\"bitecollision\")
 	var wait_time: float
+	var damagewaveZone = WaveDamage.get_node(\"wavecollision\")
+	#attack effects refers to animatedsprite
 	if attackType == \"bite\":
-		wait_time = 0.8 #calculated with how many frames divided by fps in this case 4 frams for bite divided by 5fps speed
+		bloodparticles.emitting = true
+		wait_time = 0.6 #calculated with how many frames divided by fps in this case 4 frams for bite divided by 5fps speed
+		damagebiteZone.disabled = false #on
+		await get_tree().create_timer(wait_time).timeout
+		damagebiteZone.disabled = true #off
+		bloodparticles.emitting = false
+		
+	
 	if attackType == \"wave\":
-		wait_time = 0 #havent made animation for wave type of attack	
-	damageZone.disabled = false
-	await get_tree().create_timer(wait_time).timeout
-	damageZone.disabled = true
+		attack_effects.play(\"wave\")
+		attack_effects.show()
+		waveparticles.emitting = true
+		damagewaveZone.disabled = false
+		wait_time = 0.4 #havent made animation for wave type of attack	
+		await get_tree().create_timer(wait_time).timeout
+		damagewaveZone.disabled = true	
+		waveparticles.emitting = false
+		attack_effects.hide()
+	
+
+
 	
 func _on_dash_effect_timeout():
 	create_dash_effect()
 	
 func allign_to_slope():
-	if is_on_floor():
+	var on_asteroid = false
+	for i in get_slide_collision_count():
+			var c = get_slide_collision(i)
+			if c.get_collider().is_in_group(\"asteroids\"):
+				on_asteroid = true
+
+	if is_on_floor() and !on_asteroid:
 		var normal: Vector2 = get_floor_normal()
 		self.rotation = normal.angle()
 
@@ -292,8 +334,14 @@ func interact_box():
 			if c.get_collider() is boxes:
 				var follow_player = (self.global_position - c.get_collider().global_position).normalized()
 				c.get_collider().apply_impulse(follow_player * pull_force)
+
 				
-	
+#func asteroid_bounce():
+	#for i in get_slide_collision_count():
+			#var c = get_slide_collision(i)
+			#if c.get_collider() is boxes: #getcollider means something that is attached to
+				#c.get_collider().apply_central_impulse(-c.get_normal() * push_force)
+				
 
 		
 func _on_lighton_body_entered(body):
@@ -318,7 +366,7 @@ func SetDamage(attackType):
 func respawn_player():
 	# get spawn nodes
 	var spawn_points = get_tree().get_nodes_in_group(\"respawn_points\")
-
+	
 	# assume the first spawn node is closest
 	var nearest_spawn_point = spawn_points[0]
 
@@ -332,6 +380,9 @@ func respawn_player():
 	currentHealth = maxHealth
 	dead = false
 	Global.dogAlive = true
+
+
+
 
 
 "
@@ -416,9 +467,17 @@ region = Rect2(320, 0, 64, 32)
 atlas = ExtResource("5_055w5")
 region = Rect2(384, 0, 64, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d0eia"]
-atlas = ExtResource("2_d05wt")
+[sub_resource type="AtlasTexture" id="AtlasTexture_lvy75"]
+atlas = ExtResource("2_2mhbe")
 region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kgl6f"]
+atlas = ExtResource("2_2mhbe")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rg4bg"]
+atlas = ExtResource("2_2mhbe")
+region = Rect2(128, 0, 64, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_qgewx"]
 animations = [{
@@ -503,7 +562,13 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_d0eia")
+"texture": SubResource("AtlasTexture_lvy75")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kgl6f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rg4bg")
 }],
 "loop": false,
 "name": &"wave_attack",
@@ -536,8 +601,100 @@ scale_max = 5.0
 color_ramp = SubResource("GradientTexture1D_1e21j")
 color_initial_ramp = SubResource("GradientTexture1D_q201u")
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_8v75x"]
-radius = 19.7917
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7bk6x"]
+light_mode = 1
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wrtfk"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 56.2
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+scale_max = 3.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6xnov"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+emission_shape = 2
+emission_sphere_radius = 1.0
+spread = 67.991
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+radial_accel_max = 99.69
+scale_max = 4.0
+color = Color(1, 0, 0, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_quurk"]
+light_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uecmm"]
+atlas = ExtResource("2_layen")
+region = Rect2(0, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8y4iq"]
+atlas = ExtResource("2_layen")
+region = Rect2(96, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i44ea"]
+atlas = ExtResource("2_layen")
+region = Rect2(192, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_74m7p"]
+atlas = ExtResource("2_layen")
+region = Rect2(288, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ket87"]
+atlas = ExtResource("2_layen")
+region = Rect2(384, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0x8y"]
+atlas = ExtResource("2_layen")
+region = Rect2(480, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uvrke"]
+atlas = ExtResource("2_layen")
+region = Rect2(576, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vbhxc"]
+atlas = ExtResource("2_layen")
+region = Rect2(672, 0, 96, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gkhy2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uecmm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8y4iq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i44ea")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_74m7p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ket87")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t0x8y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uvrke")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vbhxc")
+}],
+"loop": false,
+"name": &"wave",
+"speed": 12.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jahpe"]
+radius = 13.461
+height = 172.917
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_esst7"]
+radius = 28.1908
 
 [sub_resource type="Gradient" id="Gradient_emsso"]
 offsets = PackedFloat32Array(0.216374, 0.732943)
@@ -652,7 +809,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pp52c"]
-size = Vector2(62.5002, 51.9229)
+size = Vector2(104.167, 71.1537)
 
 [node name="dog" type="CharacterBody2D" groups=["dog"]]
 position = Vector2(-2.38419e-07, 0)
@@ -691,9 +848,7 @@ position = Vector2(-10.4167, 19.2307)
 position = Vector2(4.96708e-07, 2.84217e-14)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_qgewx")
-animation = &"dead"
-frame = 2
-frame_progress = 1.0
+animation = &"bite_attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-6.25002, 2.88462)
@@ -708,7 +863,7 @@ wait_time = 0.4
 wait_time = 0.1
 
 [node name="Coyote Jumps" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.5
 one_shot = true
 
 [node name="dashparticles" type="GPUParticles2D" parent="."]
@@ -723,16 +878,57 @@ emitting = false
 amount = 10
 trail_enabled = true
 
-[node name="biterange" type="Area2D" parent="."]
-position = Vector2(2.86102e-06, -2.38419e-07)
+[node name="damagesrange" type="Area2D" parent="."]
+position = Vector2(4.96708e-07, -3.38813e-21)
 scale = Vector2(2, 2)
+collision_layer = 2
 collision_mask = 4
 
-[node name="bitecollision" type="CollisionShape2D" parent="biterange"]
-position = Vector2(22.9168, -1.92307)
-shape = SubResource("CircleShape2D_8v75x")
+[node name="waveparticles" type="GPUParticles2D" parent="damagesrange"]
+z_as_relative = false
+material = SubResource("CanvasItemMaterial_7bk6x")
+position = Vector2(168.751, -1.42109e-14)
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_wrtfk")
+speed_scale = 4.85
+explosiveness = 0.6
+randomness = 1.0
+
+[node name="bloodparticles" type="GPUParticles2D" parent="damagesrange"]
+z_as_relative = false
+material = SubResource("CanvasItemMaterial_7bk6x")
+position = Vector2(29.1668, -0.961537)
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_6xnov")
+speed_scale = 3.25
+explosiveness = 0.6
+randomness = 1.0
+
+[node name="attack effects" type="AnimatedSprite2D" parent="damagesrange"]
+visible = false
+material = SubResource("CanvasItemMaterial_quurk")
+position = Vector2(91.6671, 0)
+scale = Vector2(1.73698, 1)
+sprite_frames = SubResource("SpriteFrames_gkhy2")
+animation = &"wave"
+frame = 7
+frame_progress = 1.0
+
+[node name="wavecollision" type="CollisionShape2D" parent="damagesrange"]
+position = Vector2(92.7087, -7.87581e-15)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_jahpe")
+debug_color = Color(0.918206, 6.65194e-05, 0.702959, 0.42)
+
+[node name="bitecollision" type="CollisionShape2D" parent="damagesrange"]
+position = Vector2(30.2085, -0.961537)
+shape = SubResource("CircleShape2D_esst7")
+debug_color = Color(0.864585, 0.000594066, 0.864113, 0.42)
 
 [node name="doglight" type="PointLight2D" parent="."]
+visible = false
 z_index = 900
 position = Vector2(3, 10)
 texture = SubResource("GradientTexture2D_rvcc3")
@@ -751,11 +947,14 @@ libraries = {
 autoplay = "lighjt"
 
 [node name="dogHitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="dogHitbox"]
-position = Vector2(-6.25003, 2.88461)
+position = Vector2(0, 9.53674e-07)
 shape = SubResource("RectangleShape2D_pp52c")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="DashDuration" to="." method="_on_dash_duration_timeout"]
 [connection signal="timeout" from="DashEffect" to="." method="_on_dash_effect_timeout"]
+[connection signal="body_entered" from="dogHitbox" to="." method="_on_dog_hitbox_body_entered"]

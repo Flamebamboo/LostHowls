@@ -152,8 +152,6 @@ radius = 28.0596
 
 [node name="firespawnpoints" type="AnimatedSprite2D" groups=["respawn_points"]]
 top_level = true
-light_mask = 7
-visibility_layer = 7
 position = Vector2(1, -4)
 scale = Vector2(1, 1.09375)
 sprite_frames = SubResource("SpriteFrames_33ups")
@@ -178,6 +176,8 @@ libraries = {
 autoplay = "new_animation"
 
 [node name="interact" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("3_y04lr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="interact"]

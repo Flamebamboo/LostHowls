@@ -22,9 +22,16 @@ Signals="*res://signals.gd"
 
 [display]
 
+window/size/viewport_width=720
+window/size/viewport_height=320
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
+window/stretch/scale_mode="integer"
 window/transparent_background=false
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
 
 [input]
 
@@ -95,6 +102,9 @@ pullbox={
 
 [layer_names]
 
+2d_render/layer_1="Tilemaps"
+2d_render/layer_2="Player"
+2d_render/layer_3="Enemy"
 2d_physics/layer_2="dog"
 2d_physics/layer_4="cameraarea"
 

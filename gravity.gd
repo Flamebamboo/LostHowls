@@ -3,7 +3,7 @@ extends Node
 @export var characterBody : CharacterBody2D
 @export var animatedSprite :  AnimatedSprite2D
 
-const gravity : int = 10000
+const gravity : int = 1000
 
 func _physics_process(delta):
 	if !characterBody.is_on_floor():

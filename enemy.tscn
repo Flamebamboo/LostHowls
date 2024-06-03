@@ -1,124 +1,112 @@
-[gd_scene load_steps=22 format=3 uid="uid://bd24oc54elotu"]
+[gd_scene load_steps=18 format=3 uid="uid://bd24oc54elotu"]
 
-[ext_resource type="Texture2D" uid="uid://rkwhm7h4ccnj" path="res://art/dino.png" id="1_dlwmh"]
-[ext_resource type="Texture2D" uid="uid://rtdxoxnputr1" path="res://art/dino-idle.png" id="2_i0jfk"]
+[ext_resource type="Texture2D" uid="uid://b88byidmosgvk" path="res://dragonwater-Sheet.png" id="2_u5o7v"]
 [ext_resource type="Script" path="res://enemystatemachine/StateMachine.gd" id="3_gyre8"]
 [ext_resource type="Script" path="res://gravity.gd" id="3_ykn3i"]
 [ext_resource type="Script" path="res://Controller.gd" id="4_25j3u"]
 [ext_resource type="Script" path="res://idle_state.gd" id="5_7hgmi"]
 [ext_resource type="Script" path="res://attack_state.gd" id="6_5ck6p"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6f341"]
-atlas = ExtResource("1_dlwmh")
-region = Rect2(0, 0, 32, 26)
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhvnq"]
+atlas = ExtResource("2_u5o7v")
+region = Rect2(0, 0, 150, 150)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_l2qjp"]
-atlas = ExtResource("1_dlwmh")
-region = Rect2(32, 0, 32, 26)
+[sub_resource type="AtlasTexture" id="AtlasTexture_4hmbo"]
+atlas = ExtResource("2_u5o7v")
+region = Rect2(150, 0, 150, 150)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nrovy"]
-atlas = ExtResource("1_dlwmh")
-region = Rect2(64, 0, 32, 26)
+[sub_resource type="AtlasTexture" id="AtlasTexture_v2amo"]
+atlas = ExtResource("2_u5o7v")
+region = Rect2(300, 0, 150, 150)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_sedji"]
-atlas = ExtResource("1_dlwmh")
-region = Rect2(96, 0, 32, 26)
+[sub_resource type="AtlasTexture" id="AtlasTexture_xroj1"]
+atlas = ExtResource("2_u5o7v")
+region = Rect2(450, 0, 150, 150)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ynyyh"]
-atlas = ExtResource("1_dlwmh")
-region = Rect2(128, 0, 32, 26)
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ksu3"]
+atlas = ExtResource("2_u5o7v")
+region = Rect2(600, 0, 150, 150)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fio2g"]
-atlas = ExtResource("1_dlwmh")
-region = Rect2(160, 0, 32, 26)
+[sub_resource type="AtlasTexture" id="AtlasTexture_wyg3j"]
+atlas = ExtResource("2_u5o7v")
+region = Rect2(750, 0, 150, 150)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_y10ym"]
-atlas = ExtResource("1_dlwmh")
-region = Rect2(192, 0, 32, 26)
+[sub_resource type="AtlasTexture" id="AtlasTexture_jnp6l"]
+atlas = ExtResource("2_u5o7v")
+region = Rect2(0, 0, 150, 150)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_hd3i8"]
-atlas = ExtResource("2_i0jfk")
-region = Rect2(0, 0, 32, 26)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_77mno"]
-atlas = ExtResource("2_i0jfk")
-region = Rect2(32, 0, 32, 26)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b5o63"]
-atlas = ExtResource("2_i0jfk")
-region = Rect2(64, 0, 32, 26)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_00pnc"]
-atlas = ExtResource("2_i0jfk")
-region = Rect2(96, 0, 32, 26)
+[sub_resource type="AtlasTexture" id="AtlasTexture_cogsw"]
+atlas = ExtResource("2_u5o7v")
+region = Rect2(300, 0, 150, 150)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_h0w82"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6f341")
+"texture": SubResource("AtlasTexture_qhvnq")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_l2qjp")
+"texture": SubResource("AtlasTexture_4hmbo")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nrovy")
+"texture": SubResource("AtlasTexture_v2amo")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_sedji")
+"texture": SubResource("AtlasTexture_xroj1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ynyyh")
+"texture": SubResource("AtlasTexture_5ksu3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fio2g")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_y10ym")
+"texture": SubResource("AtlasTexture_wyg3j")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack",
-"speed": 13.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hd3i8")
+"texture": SubResource("AtlasTexture_jnp6l")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_77mno")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b5o63")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_00pnc")
+"texture": SubResource("AtlasTexture_cogsw")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 10.0
+"speed": 4.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_wqtwf"]
-radius = 9.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_kudxs"]
+radius = 16.0312
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ivd0l"]
-radius = 16.7798
+radius = 102.02
 
 [node name="enemy" type="CharacterBody2D"]
-scale = Vector2(4, 4)
+z_index = 250
 collision_layer = 4
 collision_mask = 3
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(2, -13)
+position = Vector2(-46, -76)
 sprite_frames = SubResource("SpriteFrames_h0w82")
-animation = &"attack"
-frame = 3
-frame_progress = 0.00238405
+animation = &"idle"
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
+position = Vector2(-64, -25)
+shape = SubResource("CircleShape2D_kudxs")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(-42, -38)
+shape = SubResource("CircleShape2D_kudxs")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-16, -24)
+shape = SubResource("CircleShape2D_kudxs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -9)
-shape = SubResource("CircleShape2D_wqtwf")
+shape = SubResource("CircleShape2D_kudxs")
 
 [node name="gravity" type="Node" parent="." node_paths=PackedStringArray("characterBody", "animatedSprite")]
 script = ExtResource("3_ykn3i")
@@ -129,27 +117,29 @@ animatedSprite = NodePath("../AnimatedSprite2D")
 script = ExtResource("4_25j3u")
 node_finite_state_machine = NodePath("../StateMachine")
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_node_state")]
 script = ExtResource("3_gyre8")
+initial_node_state = NodePath("idle")
 
 [node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("characterBody", "animatedSprite")]
 script = ExtResource("5_7hgmi")
 characterBody = NodePath("../..")
 animatedSprite = NodePath("../../AnimatedSprite2D")
-slowSpeed = 100
 
-[node name="attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("characterBody", "animatedSprite")]
+[node name="attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("node_finite_state_machine", "characterBody", "animatedSprite")]
 script = ExtResource("6_5ck6p")
+node_finite_state_machine = NodePath("..")
 characterBody = NodePath("../..")
 animatedSprite = NodePath("../../AnimatedSprite2D")
 speed = 150
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 4
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -9)
+position = Vector2(-19, -50)
 shape = SubResource("CircleShape2D_ivd0l")
 debug_color = Color(1, 0, 0.27451, 0.419608)
 
