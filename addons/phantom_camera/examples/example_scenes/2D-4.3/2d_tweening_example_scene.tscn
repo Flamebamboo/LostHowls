@@ -569,7 +569,7 @@ size = Vector2(140, 160)
 [sub_resource type="Resource" id="Resource_mtp70"]
 script = ExtResource("10_guf2v")
 duration = 0.6
-transition = 5
+transition = 1
 ease = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_clm0y"]

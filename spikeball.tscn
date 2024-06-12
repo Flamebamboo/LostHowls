@@ -98,7 +98,6 @@ texture = ExtResource("4_dersf")
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="shake"]
-visible = false
 position = Vector2(0.661108, 68.151)
 shape = SubResource("CircleShape2D_nuodg")
 

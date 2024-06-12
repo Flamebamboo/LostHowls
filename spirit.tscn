@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://r8fwkr0ot8rp"]
+
+[ext_resource type="Script" path="res://Spirit.gd" id="1_y24hh"]
+[ext_resource type="Texture2D" uid="uid://bmwrsq48ywc50" path="res://addons/dialogic/Editor/Images/Resources/icon_character.png" id="2_d78p6"]
+[ext_resource type="Script" path="res://Line2D.gd" id="3_tc1tc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8sp57"]
+
+[sub_resource type="Curve" id="Curve_dpxfj"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_y24hh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8sp57")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(9.53674e-07, -9.53674e-07)
+scale = Vector2(0.389946, 0.340422)
+texture = ExtResource("2_d78p6")
+
+[node name="Line2D" type="Line2D" parent="."]
+show_behind_parent = true
+width_curve = SubResource("Curve_dpxfj")
+script = ExtResource("3_tc1tc")

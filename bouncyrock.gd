@@ -4,7 +4,6 @@ var initial_position: Vector2
 var target_position: Vector2
 var player_on_rock: bool = false
 
-# Rock movement parameters
 @export var float_height: float = 50.0
 @export var float_speed: float = 100.0
 @export var sink_height: float = 20.0

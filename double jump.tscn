@@ -1,35 +1,42 @@
-[gd_scene load_steps=10 format=3 uid="uid://cw44dgyxf2qio"]
+[gd_scene load_steps=11 format=3 uid="uid://cw44dgyxf2qio"]
 
-[ext_resource type="Texture2D" uid="uid://50ll30rwyy6" path="res://doublejump effect2.0.png" id="1_bt4gn"]
+[ext_resource type="Texture2D" uid="uid://b6r8dr5hwp0ss" path="res://doublejump-Sheet.png" id="1_duofu"]
 [ext_resource type="Script" path="res://double jump.gd" id="2_f6ryi"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nlox8"]
-atlas = ExtResource("1_bt4gn")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8fo8"]
+atlas = ExtResource("1_duofu")
+region = Rect2(0, 0, 64, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_8rg6r"]
-atlas = ExtResource("1_bt4gn")
-region = Rect2(32, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5348"]
+atlas = ExtResource("1_duofu")
+region = Rect2(64, 0, 64, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_o7pxy"]
-atlas = ExtResource("1_bt4gn")
-region = Rect2(64, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_pvsoy"]
+atlas = ExtResource("1_duofu")
+region = Rect2(128, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yrjc0"]
+atlas = ExtResource("1_duofu")
+region = Rect2(192, 0, 64, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_kt04b"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nlox8")
+"texture": SubResource("AtlasTexture_q8fo8")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8rg6r")
+"texture": SubResource("AtlasTexture_v5348")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_o7pxy")
+"texture": SubResource("AtlasTexture_pvsoy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yrjc0")
 }],
 "loop": false,
 "name": &"default",
-"speed": 5.0
+"speed": 20.0
 }]
 
 [sub_resource type="Animation" id="Animation_u8fwg"]
@@ -37,22 +44,10 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
+tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(2, 2)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -65,23 +60,11 @@ length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
+tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1.5, 1.5), Vector2(1.5, 1.5)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.8),
+"times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 0.407843, 1, 1), Color(1, 0.407843, 1, 0.466667)]
@@ -97,10 +80,9 @@ _data = {
 modulate = Color(1, 0.407843, 1, 1)
 top_level = true
 z_index = 990
-scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_kt04b")
 autoplay = "default"
-frame = 2
+frame = 3
 frame_progress = 1.0
 script = ExtResource("2_f6ryi")
 
