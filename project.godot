@@ -128,8 +128,12 @@ dialogic_default_action={
 2d_render/layer_1="Tilemaps"
 2d_render/layer_2="Player"
 2d_render/layer_3="Enemy"
+2d_physics/layer_1="Tiles"
 2d_physics/layer_2="dog"
+2d_physics/layer_3="Enemy"
 2d_physics/layer_4="cameraarea"
+2d_physics/layer_5="Bullet"
+2d_physics/layer_6="Breakable Objects"
 
 [rendering]
 

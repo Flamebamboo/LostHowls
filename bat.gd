@@ -10,10 +10,10 @@ var healthMin = 0
 var dead = false
 var takingDamage = false
 var isRoaming: bool
-var DamagetoDeal = 20
+var DamagetoDeal = 1
 func _ready():
 	batChase = true
-	
+	add_to_group("enemies")
 	
 func _process(delta):
 	Global.batDamageAmount = DamagetoDeal
@@ -38,7 +38,7 @@ func move(delta):
 			velocity = position.direction_to(dog.position) * SPEED
 			dir.x = abs(velocity.x) / velocity.x
 		elif takingDamage:
-			var knockbackDir = position.direction_to(dog.position) * -500
+			var knockbackDir = position.direction_to(dog.position) * -50
 			velocity = knockbackDir
 			
 			
@@ -82,11 +82,12 @@ func handle_animation():
 
 	
 
-
+# if the dog area of damage is turned on and overlapped with this bat hitbox then the bat will take damage
 func _on_bat_hitbox_area_entered(area):
 	if area == Global.dogDamageZone:
 		var damage = Global.dogDamageAmount
 		takeDamage(damage)
+	
 
 func takeDamage(damage):
 	health -= damage
@@ -96,4 +97,10 @@ func takeDamage(damage):
 		dead = true
 	print(str(self), "current health is ", health)
 
-
+func take_bullet_damage():
+	health -= 1
+	takingDamage = true
+	if health <= 0:
+		health = 0
+		dead = true
+	print(str(self), "current health is ", health)

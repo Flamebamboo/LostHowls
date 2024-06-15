@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c01ahkdod1x1"
-path="res://.godot/imported/vetak Background Removed.png-5dd0ee609eeaa1cd8360afd9e39a2a1c.ctex"
+uid="uid://b0ord3vdolbpn"
+path="res://.godot/imported/pushables rocks.png-34ebb63b7fce7e6527e09e1b770322b7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://vetak Background Removed.png"
-dest_files=["res://.godot/imported/vetak Background Removed.png-5dd0ee609eeaa1cd8360afd9e39a2a1c.ctex"]
+source_file="res://pushables rocks.png"
+dest_files=["res://.godot/imported/pushables rocks.png-34ebb63b7fce7e6527e09e1b770322b7.ctex"]
 
 [params]
 

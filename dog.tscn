@@ -19,7 +19,6 @@ class_name dog
 @onready var Aireffect = preload(\"res://double jump.tscn\")
 @export var movement_data : PlayerMovementData
 @onready var particles = $dashparticles
-@onready var light = $doglight
 #@onready var walkparticles = $walkparticles
 @onready var BiteDamage = $damagesrange
 @onready var WaveDamage = $damagesrange
@@ -76,7 +75,7 @@ func _physics_process(delta):
 		apply_air_resistance(input_axis, delta)
 		handle_acceleration(input_axis, delta)
 		update_animations(input_axis)
-		attack()
+		#attack()
 		dash_power(input_axis)
 		interact_box()
 		landing_effect()
@@ -89,18 +88,7 @@ func _physics_process(delta):
 			coyote_jumps.start()
 		
 		
-#func check_hitbox():
-	#var hitbox_areas = $dogHitbox.get_overlapping_areas()
-	#var damage: int
-	#if hitbox_areas:
-		#var hitbox = hitbox_areas.front()
-		#if hitbox.get_parent() is BatEnemy:
-			#print(\"batdetect\")
-			#damage = Global.batDamageAmount
-			#
-	#if can_take_damage:
-		#take_damage(damage)
-	
+#this is how much damage the dog will get when overlapped with bat enemies
 func _on_dog_hitbox_body_entered(_body):
 	var damage: int
 	var overlapping_bodies = $dogHitbox.get_overlapping_bodies()

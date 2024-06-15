@@ -74,12 +74,12 @@ fill_from = Vector2(0.5, 0.5)
 blend_mode = 1
 light_mode = 2
 
-[sub_resource type="Gradient" id="Gradient_1dukv"]
+[sub_resource type="Gradient" id="Gradient_h88mc"]
 offsets = PackedFloat32Array(0, 0.54811)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_r2lg7"]
-gradient = SubResource("Gradient_1dukv")
+gradient = SubResource("Gradient_h88mc")
 width = 100
 height = 100
 fill = 1
