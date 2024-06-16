@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfx4dl7ri46i7"
-path="res://.godot/imported/testingtile2.0-Sheet.png-65db1394c890b5a3747e15d585d702c7.ctex"
+uid="uid://c6w0ratlrbirk"
+path="res://.godot/imported/purpleplant.png-d186f717364a61f9b384c697c4998f79.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/testingtile2.0-Sheet.png"
-dest_files=["res://.godot/imported/testingtile2.0-Sheet.png-65db1394c890b5a3747e15d585d702c7.ctex"]
+source_file="res://art/purpleplant.png"
+dest_files=["res://.godot/imported/purpleplant.png-d186f717364a61f9b384c697c4998f79.ctex"]
 
 [params]
 

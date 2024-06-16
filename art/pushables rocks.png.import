@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfx4dl7ri46i7"
-path="res://.godot/imported/testingtile2.0-Sheet.png-65db1394c890b5a3747e15d585d702c7.ctex"
+uid="uid://b0ord3vdolbpn"
+path="res://.godot/imported/pushables rocks.png-947cd45eff89d2c738d423e6a4202640.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/testingtile2.0-Sheet.png"
-dest_files=["res://.godot/imported/testingtile2.0-Sheet.png-65db1394c890b5a3747e15d585d702c7.ctex"]
+source_file="res://art/pushables rocks.png"
+dest_files=["res://.godot/imported/pushables rocks.png-947cd45eff89d2c738d423e6a4202640.ctex"]
 
 [params]
 

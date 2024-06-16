@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://dt6fc2iyuufac"]
+
+[ext_resource type="Script" path="res://playerlauncher.gd" id="1_nw48g"]
+[ext_resource type="Script" path="res://hurtbox.gd" id="2_41p8o"]
+[ext_resource type="Texture2D" uid="uid://dxjiubhqybhm7" path="res://icon.svg" id="2_db6dr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_umw0n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3vujq"]
+
+[node name="Playerlauncher" type="CharacterBody2D" node_paths=PackedStringArray("areabox")]
+collision_mask = 2
+script = ExtResource("1_nw48g")
+areabox = NodePath("areabox")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -9.53674e-07)
+scale = Vector2(0.0888672, 0.316406)
+texture = ExtResource("2_db6dr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_umw0n")
+
+[node name="areabox" type="Area2D" parent="."]
+collision_mask = 2
+script = ExtResource("2_41p8o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="areabox"]
+shape = SubResource("RectangleShape2D_3vujq")
+
+[connection signal="body_entered" from="areabox" to="areabox" method="_on_body_entered"]

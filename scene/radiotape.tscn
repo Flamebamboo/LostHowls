@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://dyts0n16u8h8n"]
+
+[ext_resource type="Texture2D" uid="uid://8uyd0xs07ktp" path="res://art/radiotape.png" id="1_1swwa"]
+[ext_resource type="Script" path="res://scripts/radiotape.gd" id="2_wjbjp"]
+[ext_resource type="FontFile" uid="uid://bnf2p438dv3b5" path="res://Pixellari.ttf" id="3_2ae5x"]
+[ext_resource type="AudioStream" uid="uid://dlfkmmnrm6heh" path="res://music/fallensoundsv2.mp3" id="3_x8aq8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_11wey"]
+radius = 31.0644
+
+[node name="Radiotape" type="Sprite2D"]
+texture = ExtResource("1_1swwa")
+
+[node name="Area2D" type="Area2D" parent="." node_paths=PackedStringArray("radio_tape")]
+collision_mask = 2
+script = ExtResource("2_wjbjp")
+radio_tape = NodePath("AudioStreamPlayer2D")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Area2D"]
+unique_name_in_owner = true
+position = Vector2(-43, -54)
+stream = ExtResource("3_x8aq8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_11wey")
+
+[node name="Label" type="Label" parent="."]
+texture_filter = 1
+offset_left = -43.0
+offset_top = -54.0
+offset_right = 43.0
+offset_bottom = -31.0
+theme_override_fonts/font = ExtResource("3_2ae5x")
+text = "E to interact
+"
+
+[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
+[connection signal="finished" from="Area2D/AudioStreamPlayer2D" to="Area2D" method="_on_audio_stream_player_2d_finished"]

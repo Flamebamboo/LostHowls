@@ -1,0 +1,978 @@
+[gd_scene load_steps=65 format=3 uid="uid://bml6u56g1k747"]
+
+[ext_resource type="Resource" uid="uid://bbrqxe028fk5p" path="res://DefaultMovement.tres" id="1_boqx8"]
+[ext_resource type="Texture2D" uid="uid://bwotynnxhce0s" path="res://art/dogattack-Sheet.png" id="2_2mhbe"]
+[ext_resource type="Texture2D" uid="uid://c65ftsu4un3e2" path="res://art/barkeffect-Sheet.png" id="2_layen"]
+[ext_resource type="Texture2D" uid="uid://byfd752ylnvxh" path="res://art/dogdeadSheet.png" id="3_kd2ox"]
+[ext_resource type="Texture2D" uid="uid://d0tvs2eft04eb" path="res://art/dogidlev2-Sheet.png" id="3_pftu0"]
+[ext_resource type="Texture2D" uid="uid://b5po54oukvgdx" path="res://art/dogrunv2-Sheet-Sheet.png" id="5_055w5"]
+[ext_resource type="Texture2D" uid="uid://c2nqpycfu27b2" path="res://art/dogjumpv2-Sheet.png" id="5_npe2q"]
+[ext_resource type="Texture2D" uid="uid://xovc2j71k24l" path="res://art/bushtest.png" id="8_k4moo"]
+
+[sub_resource type="GDScript" id="GDScript_8m6v6"]
+script/source = "extends CharacterBody2D
+class_name dog
+@onready var anim = $AnimatedSprite2D
+@onready var dash_effect = $DashEffect
+@onready var dash_duration = $DashDuration
+@onready var Dust = preload(\"res://scene/Dust.tscn\")
+@onready var Aireffect = preload(\"res://scene/double jump.tscn\")
+@export var movement_data : PlayerMovementData
+@onready var particles = $dashparticles
+#@onready var walkparticles = $walkparticles
+@onready var BiteDamage = $damagesrange
+@onready var WaveDamage = $damagesrange
+@export var push_force: int = 300
+@export var pull_force: int = 500
+var air_jump = false
+var gravity = ProjectSettings.get_setting(\"physics/2d/default_gravity\")
+var doDash = false 
+var dashDirection : int
+var isgrounded = true
+var bounce_impulse = 200.0
+#attack
+var currentAttack: bool
+#health
+@export var maxHealth = 100
+@onready var currentHealth: int = maxHealth
+var healthMin = 0
+var can_take_damage: bool
+var dead: bool
+@onready var coyote_jumps = $\"Coyote Jumps\"
+@onready var attack_effects = $\"damagesrange/attack effects\"
+@onready var waveparticles = $damagesrange/waveparticles
+@onready var bloodparticles = $damagesrange/bloodparticles
+@export var CameraRef: Camera2D
+
+var current_animation: String
+
+
+
+signal healthChanged
+
+func _ready():
+	Global.dogCharacter = self
+	Global.dogDamageZone = BiteDamage
+	currentAttack = false
+	BiteDamage.get_node(\"bitecollision\").disabled = true
+	WaveDamage.get_node(\"wavecollision\").disabled = true
+	dead = false
+	can_take_damage = true
+	Global.dogAlive = true
+func _physics_process(delta):
+	if !dead: #only if alive this fuctions are working
+		##dust landing effect
+		
+		var input_axis = Input.get_axis(\"moveleft\", \"moveright\")
+		
+			
+		#handle_wall_jump()
+		apply_gravity(delta)
+		handle_jump()
+		allign_to_slope()
+		handle_air_acceleration(input_axis, delta )
+		apply_friction(input_axis, delta)	
+		apply_air_resistance(input_axis, delta)
+		handle_acceleration(input_axis, delta)
+		update_animations(input_axis)
+		#attack()
+		dash_power(input_axis)
+		interact_box()
+		landing_effect()
+		#check_hitbox()
+		var was_on_floor = is_on_floor()
+		move_and_slide()
+		#asteroid_bounce()
+		var just_left_edge = was_on_floor and not is_on_floor() and velocity.y >= 0
+		if just_left_edge:
+			coyote_jumps.start()
+		
+		
+#this is how much damage the dog will get when overlapped with bat enemies
+func _on_dog_hitbox_body_entered(_body):
+	var damage: int
+	var overlapping_bodies = $dogHitbox.get_overlapping_bodies()
+	print(\"Overlapping bodies: \", overlapping_bodies)
+	
+	for enemy in overlapping_bodies:	
+		if enemy.is_in_group(\"bat\"):
+			damage = Global.batDamageAmount
+			
+		if can_take_damage:
+			take_damage(damage)
+	
+func take_damage(damage):
+	if damage != 0:
+		if currentHealth > 0:
+			currentHealth -= damage
+			print(\"health \", currentHealth)
+		if currentHealth <= 0:
+			currentHealth = 0
+			dead = true
+			Global.dogAlive = false
+			respawn_player()
+		$ProgressBar.value = currentHealth
+		
+	
+func take_damage_cooldown(wait_time):
+	can_take_damage = false
+	await get_tree().create_timer(wait_time).timeout
+	can_take_damage = true
+		
+		
+	
+func dash_power(input_axis):
+	if is_on_floor():	
+		if Input.is_action_just_pressed(\"dash\"):
+			dashDirection = -1 if anim.flip_h else 1
+			doDash = true
+			dash_duration.start()
+			dash_effect.start()
+		
+	if doDash:
+		velocity.x = dashDirection * movement_data.speed * movement_data.SpeedMultiplicator
+		velocity.y = 0
+	elif input_axis:velocity.x = input_axis * movement_data.speed
+	else: velocity.x = move_toward(velocity.x,0,movement_data.speed)
+		
+func apply_gravity(delta):
+	if not is_on_floor():
+		velocity.y += gravity * movement_data.gravity_scale * delta
+
+func handle_wall_jump():
+	if not is_on_wall(): return #if not on wall ignore this completely
+	var wall_normal = get_wall_normal()
+	if Input.is_action_just_pressed(\"moveup\") and wall_normal == Vector2.LEFT:
+		velocity.x = wall_normal.x * movement_data.speed 
+		velocity.y = movement_data.jump_velocity
+	if Input.is_action_just_pressed(\"moveup\") and wall_normal == Vector2.LEFT:
+		velocity.x = wall_normal.x * movement_data.speed 
+		velocity.y = movement_data.jump_velocity	
+		#
+func handle_jump():
+	if is_on_floor(): air_jump = true
+	
+	if is_on_floor() or coyote_jumps.time_left > 0.0:
+		if Input.is_action_just_pressed(\"moveup\"):
+			velocity.y = movement_data.jump_velocity
+			coyote_jumps.stop()
+			var tween = get_tree().create_tween()
+			tween.tween_property(anim, \"scale\", Vector2(0.8, 1), 0.2).set_trans(Tween.TRANS_SPRING).set_ease(Tween.EASE_IN_OUT)
+	elif not is_on_floor():
+		if Input.is_action_just_released(\"moveup\") and velocity.y < movement_data.jump_velocity / 2:
+			velocity.y = movement_data.jump_velocity / 2
+			var tween = get_tree().create_tween()
+			tween.tween_property(anim, \"scale\", Vector2(1, 1), 0.2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)	
+		
+		if Input.is_action_just_pressed(\"moveup\") and air_jump:
+			velocity.y = movement_data.jump_velocity * 1
+			var airjumpInstance = Aireffect.instantiate()
+			CameraRef.apply_shake(30.0, 80.0)
+			%AnimationPlayer.play(\"jump\")
+			airjumpInstance.global_position = $aireffect.global_position
+			get_parent().add_child(airjumpInstance)
+			air_jump = false
+			
+	
+		# Short hop logic
+		if Input.is_action_just_released(\"moveup\") and velocity.y < movement_data.jump_velocity / 2:
+			velocity.y = movement_data.jump_velocity / 2
+						
+func handle_acceleration(input_axis, delta):
+	if not is_on_floor(): return
+	if input_axis != 0:
+		velocity.x = move_toward(velocity.x, movement_data.speed * input_axis, movement_data.acceleration * delta)
+
+
+func handle_air_acceleration(input_axis, delta):
+	if is_on_floor(): return
+	if input_axis != 0:
+		velocity.x = move_toward(velocity.x, movement_data.speed * input_axis, movement_data.air_acceleration * delta)
+
+
+
+func apply_friction(input_axis, delta):
+	if input_axis == 0 and is_on_floor:
+		velocity.x = move_toward(velocity.x, 0, movement_data.friction * delta)
+
+
+func update_animations(input_axis):
+	if !currentAttack:
+			if input_axis == 1:
+				BiteDamage.scale.x = 2
+				anim.flip_h = false
+				anim.play(\"run2\")
+				
+			elif input_axis == -1:
+				BiteDamage.scale.x = -2
+				anim.flip_h = true
+				anim.play(\"run2\")
+			elif input_axis == 0:
+				anim.play(\"idle2\")
+				var tween = get_tree().create_tween()
+				tween.tween_property(anim, \"scale\", Vector2(1, 1), 0.2).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+			if velocity.y < 0:
+				anim.play(\"jump\")
+				
+			elif velocity.y > 0:
+				anim.play(\"fall\")
+#air resistance		
+func apply_air_resistance(input_axis, delta):
+	if input_axis == 0 and not is_on_floor():
+		velocity.x = move_toward(velocity.x, 0, movement_data.air_resistance * delta)
+
+#dashing 
+func _on_dash_duration_timeout():
+	doDash = false
+	dash_effect.stop()
+	particles.emitting = false
+func create_dash_effect():
+	var dogcopy = $AnimatedSprite2D.duplicate()
+	dogcopy.scale.x = 0.9
+	dogcopy.scale.y = 0.9
+	get_parent().add_child(dogcopy)
+	dogcopy.global_position = global_position
+	particles.emitting = true
+	
+	var animationTime = dash_duration.wait_time / 3
+	await get_tree().create_timer(animationTime).timeout
+	dogcopy.modulate.a = 0.4
+	await get_tree().create_timer(animationTime).timeout
+	dogcopy.modulate.a = 0.2
+	await get_tree().create_timer(animationTime).timeout
+	dogcopy.queue_free()
+
+		
+
+				#
+func attack():
+	var attackType: String = \"\"
+	if Input.is_action_just_pressed(\"attackL\") or Input.is_action_just_pressed(\"attackR\"):
+		currentAttack = true
+		if Input.is_action_just_pressed(\"attackL\") and is_on_floor():
+			attackType = \"wave\"
+		elif Input.is_action_just_pressed(\"attackR\") and is_on_floor():
+			attackType = \"bite\"
+		SetDamage(attackType)
+		HandleAttackAnimation(attackType)
+		
+
+
+func HandleAttackAnimation(attackType: String):
+	if currentAttack:
+		var animation = str(attackType,\"_attack\")
+		anim.play(animation)
+		toggle_damage_collisions(attackType)
+
+func toggle_damage_collisions(attackType: String):
+	#bitedamage and wave damage is damage range area2d
+	var damagebiteZone = BiteDamage.get_node(\"bitecollision\")
+	var wait_time: float
+	var damagewaveZone = WaveDamage.get_node(\"wavecollision\")
+	#attack effects refers to animatedsprite
+	if attackType == \"bite\":
+		bloodparticles.emitting = true
+		wait_time = 0.6 #calculated with how many frames divided by fps in this case 4 frams for bite divided by 5fps speed
+		damagebiteZone.disabled = false #on
+		await get_tree().create_timer(wait_time).timeout
+		damagebiteZone.disabled = true #off
+		bloodparticles.emitting = false
+		
+	
+	if attackType == \"wave\":
+		attack_effects.play(\"wave\")
+		attack_effects.show()
+		waveparticles.emitting = true
+		damagewaveZone.disabled = false
+		wait_time = 0.4 #havent made animation for wave type of attack	
+		await get_tree().create_timer(wait_time).timeout
+		damagewaveZone.disabled = true	
+		waveparticles.emitting = false
+		attack_effects.hide()
+	
+
+
+	
+func _on_dash_effect_timeout():
+	create_dash_effect()
+	
+func allign_to_slope():
+	if is_on_floor():
+		var normal: Vector2 = get_floor_normal()
+		self.rotation = normal.angle()
+
+		var offset: float = deg_to_rad(90)
+		self.rotation = normal.angle() + offset
+
+func landing_effect():
+	if isgrounded == false and is_on_floor() == true:
+		var instancedust = Dust.instantiate()
+		instancedust.global_position = $landeffect.global_position
+		get_parent().add_child(instancedust)
+		var tween = get_tree().create_tween()
+		tween.tween_property(anim, \"scale\", Vector2(1, 1), 0.6).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_IN_OUT)
+	
+			
+	isgrounded = is_on_floor()
+
+#unstable
+func interact_box():
+	# Loop through all collisions detected
+	if Input.is_action_pressed(\"pushbox\"):
+		for i in get_slide_collision_count():
+			var c = get_slide_collision(i)
+			if c.get_collider() is boxes: #getcollider means something that is attached to
+				c.get_collider().apply_central_impulse(-c.get_normal() * push_force)
+			
+	if Input.is_action_pressed(\"pullbox\"):
+		for i in get_slide_collision_count(): #telling how many times the body collided than change the the direction accoring it
+			var c = get_slide_collision(i) 
+			if c.get_collider() is boxes:
+				var follow_player = (self.global_position - c.get_collider().global_position).normalized()
+				c.get_collider().apply_impulse(follow_player * pull_force)
+	#for i in get_slide_collision_count():
+			#var c = get_slide_collision(i)
+			#if c.get_collider() is boxes: #getcollider means something that is attached to
+				#c.get_collider().apply_central_impulse(-c.get_normal() * push_force)
+
+
+
+
+
+
+		
+#func _on_lighton_body_entered(body):
+	#if body.is_in_group(\"dog\"):
+		#light.show()
+#
+#func _on_lighton_body_exited(body):
+	#if body.is_in_group(\"dog\"):
+		#light.hide()
+
+func _on_animated_sprite_2d_animation_finished():
+	currentAttack = false
+
+func SetDamage(attackType):
+	var currentDamagetoDeal: int
+	if attackType == \"wave\":
+		currentDamagetoDeal = 8
+	elif attackType == \"bite\":
+		currentDamagetoDeal = 16
+	Global.dogDamageAmount = currentDamagetoDeal
+
+func respawn_player():
+	# get spawn nodes
+	var spawn_points = get_tree().get_nodes_in_group(\"respawn_points\")
+	
+	# assume the first spawn node is closest
+	var nearest_spawn_point = spawn_points[0]
+
+	# look through spawn nodes to see if any are closer
+	for spawn_point in spawn_points:
+		if spawn_point.global_position.distance_to(self.global_position) < nearest_spawn_point.global_position.distance_to(self.global_position):
+			nearest_spawn_point = spawn_point
+
+	# reposition player
+	self.global_position = nearest_spawn_point.global_position
+	currentHealth = maxHealth
+	dead = false
+	Global.dogAlive = true
+
+
+
+
+
+"
+
+[sub_resource type="Theme" id="Theme_ssv0o"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vw7ha"]
+bg_color = Color(1, 0.0470588, 0.0862745, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7lcme"]
+bg_color = Color(1.44155e-05, 0.694406, 0.145446, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l3c7c"]
+atlas = ExtResource("2_2mhbe")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4re1r"]
+atlas = ExtResource("2_2mhbe")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gaw4u"]
+atlas = ExtResource("2_2mhbe")
+region = Rect2(128, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f3x7p"]
+atlas = ExtResource("3_kd2ox")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3yjtp"]
+atlas = ExtResource("3_kd2ox")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fvboy"]
+atlas = ExtResource("5_npe2q")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8bybh"]
+atlas = ExtResource("5_npe2q")
+region = Rect2(128, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uk4p5"]
+atlas = ExtResource("5_npe2q")
+region = Rect2(192, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ngdby"]
+atlas = ExtResource("5_npe2q")
+region = Rect2(256, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uu031"]
+atlas = ExtResource("5_npe2q")
+region = Rect2(320, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xudjg"]
+atlas = ExtResource("3_pftu0")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k4vk0"]
+atlas = ExtResource("3_pftu0")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7pkdd"]
+atlas = ExtResource("3_pftu0")
+region = Rect2(128, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6es7b"]
+atlas = ExtResource("5_npe2q")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y7hvt"]
+atlas = ExtResource("5_055w5")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qtjjt"]
+atlas = ExtResource("5_055w5")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qbdrp"]
+atlas = ExtResource("5_055w5")
+region = Rect2(128, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dt3r1"]
+atlas = ExtResource("5_055w5")
+region = Rect2(192, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w43b4"]
+atlas = ExtResource("5_055w5")
+region = Rect2(256, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dwry8"]
+atlas = ExtResource("5_055w5")
+region = Rect2(320, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ompmq"]
+atlas = ExtResource("5_055w5")
+region = Rect2(384, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lvy75"]
+atlas = ExtResource("2_2mhbe")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kgl6f"]
+atlas = ExtResource("2_2mhbe")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rg4bg"]
+atlas = ExtResource("2_2mhbe")
+region = Rect2(128, 0, 64, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qgewx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l3c7c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4re1r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gaw4u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gaw4u")
+}],
+"loop": false,
+"name": &"bite_attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f3x7p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f3x7p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3yjtp")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fvboy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8bybh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uk4p5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ngdby")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uu031")
+}],
+"loop": false,
+"name": &"fall",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xudjg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k4vk0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7pkdd")
+}],
+"loop": true,
+"name": &"idle2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6es7b")
+}],
+"loop": false,
+"name": &"jump",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y7hvt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qtjjt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qbdrp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dt3r1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w43b4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dwry8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ompmq")
+}],
+"loop": false,
+"name": &"run2",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lvy75")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kgl6f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rg4bg")
+}],
+"loop": false,
+"name": &"wave_attack",
+"speed": 12.0
+}]
+
+[sub_resource type="Animation" id="Animation_6w7pc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"jump"]
+}
+
+[sub_resource type="Animation" id="Animation_mpqdv"]
+resource_name = "before jump"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.703125, 1), Vector2(0.601562, 1), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8wa2a"]
+resource_name = "jump"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.3),
+"transitions": PackedFloat32Array(0.0947322, 0.25, 0.0947322),
+"update": 0,
+"values": [Vector2(1, 2), Vector2(1, 0.75), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"jump"]
+}
+
+[sub_resource type="Animation" id="Animation_8jr50"]
+resource_name = "land"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.4)]
+}
+
+[sub_resource type="Animation" id="Animation_dwu54"]
+resource_name = "run"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.307786, 1),
+"update": 0,
+"values": [Vector2(1, 0.90625), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_twjms"]
+_data = {
+"RESET": SubResource("Animation_6w7pc"),
+"before jump": SubResource("Animation_mpqdv"),
+"jump": SubResource("Animation_8wa2a"),
+"land": SubResource("Animation_8jr50"),
+"run": SubResource("Animation_dwu54")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_14p1x"]
+size = Vector2(41.9229, 52.9168)
+
+[sub_resource type="Gradient" id="Gradient_c7tph"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1e21j"]
+gradient = SubResource("Gradient_c7tph")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y7rqy"]
+particle_flag_disable_z = true
+direction = Vector3(2.08165e-12, -1, 2.08165e-12)
+initial_velocity_min = 10.0
+initial_velocity_max = 30.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+scale_max = 5.0
+color_ramp = SubResource("GradientTexture1D_1e21j")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tnaxd"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_7bk6x"]
+light_mode = 1
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wrtfk"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 56.2
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+scale_max = 3.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6xnov"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+emission_shape = 2
+emission_sphere_radius = 1.0
+spread = 67.991
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+radial_accel_max = 99.69
+scale_max = 4.0
+color = Color(1, 0, 0, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_quurk"]
+light_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uecmm"]
+atlas = ExtResource("2_layen")
+region = Rect2(0, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8y4iq"]
+atlas = ExtResource("2_layen")
+region = Rect2(96, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i44ea"]
+atlas = ExtResource("2_layen")
+region = Rect2(192, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_74m7p"]
+atlas = ExtResource("2_layen")
+region = Rect2(288, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ket87"]
+atlas = ExtResource("2_layen")
+region = Rect2(384, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0x8y"]
+atlas = ExtResource("2_layen")
+region = Rect2(480, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uvrke"]
+atlas = ExtResource("2_layen")
+region = Rect2(576, 0, 96, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vbhxc"]
+atlas = ExtResource("2_layen")
+region = Rect2(672, 0, 96, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gkhy2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uecmm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8y4iq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i44ea")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_74m7p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ket87")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t0x8y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uvrke")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vbhxc")
+}],
+"loop": false,
+"name": &"wave",
+"speed": 12.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jahpe"]
+radius = 13.461
+height = 172.917
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_esst7"]
+radius = 28.1908
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pp52c"]
+size = Vector2(104.167, 71.1537)
+
+[node name="dog" type="CharacterBody2D" groups=["dog"]]
+position = Vector2(-2.38419e-07, 0)
+collision_layer = 2
+floor_constant_speed = true
+floor_snap_length = 2.0
+script = SubResource("GDScript_8m6v6")
+movement_data = ExtResource("1_boqx8")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -29.1668
+offset_top = -48.0768
+offset_right = 30.8332
+offset_bottom = -37.0768
+grow_horizontal = 0
+size_flags_horizontal = 8
+theme = SubResource("Theme_ssv0o")
+theme_override_styles/background = SubResource("StyleBoxFlat_vw7ha")
+theme_override_styles/fill = SubResource("StyleBoxFlat_7lcme")
+value = 100.0
+show_percentage = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="aireffect" type="Marker2D" parent="."]
+position = Vector2(4.96708e-07, 21.1538)
+
+[node name="landeffect" type="Marker2D" parent="."]
+position = Vector2(-10.4167, 19.2307)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1, 7)
+sprite_frames = SubResource("SpriteFrames_qgewx")
+animation = &"jump"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_twjms")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, -1)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_14p1x")
+debug_color = Color(0.415686, 0.462745, 1, 0.419608)
+
+[node name="DashDuration" type="Timer" parent="."]
+wait_time = 0.4
+
+[node name="DashEffect" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="Coyote Jumps" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="dashparticles" type="GPUParticles2D" parent="."]
+position = Vector2(4.96708e-07, 5.76922)
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_y7rqy")
+
+[node name="walkparticles(soon)" type="GPUParticles2D" parent="."]
+position = Vector2(-29.1668, 25)
+emitting = false
+amount = 10
+process_material = SubResource("ParticleProcessMaterial_tnaxd")
+texture = ExtResource("8_k4moo")
+trail_enabled = true
+
+[node name="damagesrange" type="Area2D" parent="."]
+position = Vector2(4.96708e-07, -3.38813e-21)
+scale = Vector2(2, 2)
+collision_layer = 2
+collision_mask = 4
+
+[node name="waveparticles" type="GPUParticles2D" parent="damagesrange"]
+z_as_relative = false
+material = SubResource("CanvasItemMaterial_7bk6x")
+position = Vector2(168.751, -1.42109e-14)
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_wrtfk")
+speed_scale = 4.85
+explosiveness = 0.6
+randomness = 1.0
+
+[node name="bloodparticles" type="GPUParticles2D" parent="damagesrange"]
+z_as_relative = false
+material = SubResource("CanvasItemMaterial_7bk6x")
+position = Vector2(29.1668, -0.961537)
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_6xnov")
+speed_scale = 3.25
+explosiveness = 0.6
+randomness = 1.0
+
+[node name="attack effects" type="AnimatedSprite2D" parent="damagesrange"]
+visible = false
+material = SubResource("CanvasItemMaterial_quurk")
+position = Vector2(91.6671, 0)
+scale = Vector2(1.73698, 1)
+sprite_frames = SubResource("SpriteFrames_gkhy2")
+animation = &"wave"
+frame = 7
+frame_progress = 1.0
+
+[node name="wavecollision" type="CollisionShape2D" parent="damagesrange"]
+position = Vector2(92.7087, -7.87581e-15)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_jahpe")
+debug_color = Color(0.918206, 6.65194e-05, 0.702959, 0.42)
+
+[node name="bitecollision" type="CollisionShape2D" parent="damagesrange"]
+position = Vector2(30.2085, -0.961537)
+shape = SubResource("CircleShape2D_esst7")
+debug_color = Color(0.864585, 0.000594066, 0.864113, 0.42)
+
+[node name="dogHitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dogHitbox"]
+position = Vector2(0, 9.53674e-07)
+shape = SubResource("RectangleShape2D_pp52c")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="timeout" from="DashDuration" to="." method="_on_dash_duration_timeout"]
+[connection signal="timeout" from="DashEffect" to="." method="_on_dash_effect_timeout"]
+[connection signal="body_entered" from="dogHitbox" to="." method="_on_dog_hitbox_body_entered"]

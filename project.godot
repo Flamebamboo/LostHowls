@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="Lost Howls"
-run/main_scene="res://MainGame.tscn"
+run/main_scene="res://scene/MainGame.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://global.gd"
-Signals="*res://signals.gd"
+Global="*res://scripts/global.gd"
+Signals="*res://scripts/signals.gd"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 
@@ -46,6 +46,13 @@ window/transparent_background=false
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/dialogic/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://art/": "red",
+"res://music/": "orange"
+}
 
 [input]
 

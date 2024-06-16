@@ -1,0 +1,185 @@
+[gd_scene load_steps=20 format=3 uid="uid://dgebxxsq0f2lk"]
+
+[ext_resource type="Texture2D" uid="uid://dfxa6lg32utl" path="res://art/firecamp-Sheet.png" id="1_sv6hi"]
+[ext_resource type="Texture2D" uid="uid://ddsej4sp1dm32" path="res://art/firecampstone.png" id="3_ecjk8"]
+[ext_resource type="Script" path="res://scripts/fireplace.gd" id="3_y04lr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vp3bl"]
+atlas = ExtResource("1_sv6hi")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5blq0"]
+atlas = ExtResource("1_sv6hi")
+region = Rect2(32, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tnm14"]
+atlas = ExtResource("1_sv6hi")
+region = Rect2(96, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qmwb"]
+atlas = ExtResource("1_sv6hi")
+region = Rect2(128, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qtpqa"]
+atlas = ExtResource("1_sv6hi")
+region = Rect2(160, 0, 32, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kara4"]
+atlas = ExtResource("3_ecjk8")
+region = Rect2(0, 0, 32, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_33ups"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vp3bl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5blq0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tnm14")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qmwb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qtpqa")
+}],
+"loop": true,
+"name": &"fire",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kara4")
+}],
+"loop": false,
+"name": &"no_fire",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_r4jg8"]
+offsets = PackedFloat32Array(0.00343643, 0.477663)
+colors = PackedColorArray(1, 0.715186, 0.538369, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vnugm"]
+gradient = SubResource("Gradient_r4jg8")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mekfu"]
+blend_mode = 1
+light_mode = 2
+
+[sub_resource type="Gradient" id="Gradient_h88mc"]
+offsets = PackedFloat32Array(0, 0.54811)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_r2lg7"]
+gradient = SubResource("Gradient_h88mc")
+width = 100
+height = 100
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="Animation" id="Animation_dm77e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:width")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [100]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture:height")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [100]
+}
+
+[sub_resource type="Animation" id="Animation_s0yx4"]
+resource_name = "new_animation"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture:width")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [256, 230, 200]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture:height")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [256, 230, 200]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_564je"]
+_data = {
+"RESET": SubResource("Animation_dm77e"),
+"new_animation": SubResource("Animation_s0yx4")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3oxx6"]
+radius = 28.0596
+
+[node name="firespawnpoints" type="AnimatedSprite2D" groups=["respawn_points"]]
+top_level = true
+position = Vector2(1, -4)
+scale = Vector2(1, 1.09375)
+sprite_frames = SubResource("SpriteFrames_33ups")
+animation = &"fire"
+
+[node name="Firelight" type="PointLight2D" parent="."]
+z_index = 900
+position = Vector2(3, 10)
+energy = 1.31
+texture = SubResource("GradientTexture2D_vnugm")
+
+[node name="Sprite2D" type="Sprite2D" parent="Firelight"]
+modulate = Color(1, 0.290196, 0, 0.227451)
+material = SubResource("CanvasItemMaterial_mekfu")
+position = Vector2(-3, -10)
+texture = SubResource("GradientTexture2D_r2lg7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Firelight/Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_564je")
+}
+autoplay = "new_animation"
+
+[node name="interact" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("3_y04lr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interact"]
+position = Vector2(0, 10.9714)
+shape = SubResource("CircleShape2D_3oxx6")

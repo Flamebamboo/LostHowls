@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfx4dl7ri46i7"
-path="res://.godot/imported/testingtile2.0-Sheet.png-65db1394c890b5a3747e15d585d702c7.ctex"
+uid="uid://bf1r8g72e0e2h"
+path="res://.godot/imported/firstlevelb4.png-e396d44857e8ee2245d5c0f670b76e03.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/testingtile2.0-Sheet.png"
-dest_files=["res://.godot/imported/testingtile2.0-Sheet.png-65db1394c890b5a3747e15d585d702c7.ctex"]
+source_file="res://art/firstlevelb4.png"
+dest_files=["res://.godot/imported/firstlevelb4.png-e396d44857e8ee2245d5c0f670b76e03.ctex"]
 
 [params]
 

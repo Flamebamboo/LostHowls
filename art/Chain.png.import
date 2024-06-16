@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dfx4dl7ri46i7"
-path="res://.godot/imported/testingtile2.0-Sheet.png-65db1394c890b5a3747e15d585d702c7.ctex"
+uid="uid://dmpppiufp17vl"
+path="res://.godot/imported/Chain.png-c413ad45c90736045fbaf7af4ab3e899.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/testingtile2.0-Sheet.png"
-dest_files=["res://.godot/imported/testingtile2.0-Sheet.png-65db1394c890b5a3747e15d585d702c7.ctex"]
+source_file="res://art/Chain.png"
+dest_files=["res://.godot/imported/Chain.png-c413ad45c90736045fbaf7af4ab3e899.ctex"]
 
 [params]
 
