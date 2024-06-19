@@ -6,9 +6,11 @@ var travelled_distance = 0.0
 
 @export var speed: int =  500
 @export var range: int = 300
+@export var damage: int = 10
 
 func _ready():
 	add_to_group("bullet")
+	Global.BulletCharacter = self
 
 func _physics_process(delta):
 	position += velocity * delta
@@ -18,7 +20,7 @@ func _physics_process(delta):
 	for body in $BulletHurtbox.get_overlapping_bodies():
 				if body.is_in_group("enemies"):
 					if body.has_method("take_bullet_damage"):
-						body.take_bullet_damage()
+						body.take_bullet_damage(damage)
 						queue_free()
 						break
 

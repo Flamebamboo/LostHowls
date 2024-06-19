@@ -6,9 +6,10 @@
 #contains the behaviours and properties of an object
 #allowing for easier customization for different type of object
 extends Area2D
-
+@export var particles : GPUParticles2D
 @export var sprite : Sprite2D
 @export var object_strategy : BaseObjectStrategy:
+	
 	
 	set(val):
 		object_strategy = val
@@ -22,6 +23,7 @@ extends Area2D
 func _ready() -> void:
 	sprite.texture = object_strategy.beforedamage
 	add_to_group("breakable objects")
+	
 func _process(delta: float) -> void:
 	# This is run only when we're editing the scene
 	if Engine.is_editor_hint():
@@ -41,10 +43,13 @@ func _on_area_entered(area):
 func object_damage(damage: int):
 	var current_health = object_strategy.object_damage(damage)	
 	if current_health == 50:
-		sprite.texture = object_strategy.afterdamage  # Update texture after damage
+		sprite.texture = object_strategy.afterdamage 
+		 # Update texture after damage
 	if current_health <= 0:
 		print(str(self), "current health is ", current_health)
 		
+		particles.emitting = true
+		await get_tree().create_timer(0.6).timeout
 		queue_free() 
 	
 	

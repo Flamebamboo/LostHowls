@@ -4,6 +4,7 @@ class_name BaseObjectStrategy
 @export var beforedamage : Texture2D
 @export var afterdamage : Texture2D
 @export var health : int = 100
+
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 

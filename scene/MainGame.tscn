@@ -1,4 +1,4 @@
-[gd_scene load_steps=142 format=3 uid="uid://dxo0h0k8bfdee"]
+[gd_scene load_steps=145 format=3 uid="uid://dxo0h0k8bfdee"]
 
 [ext_resource type="Script" path="res://scripts/MainGame (2).gd" id="1_sw385"]
 [ext_resource type="Material" uid="uid://ljykvhhh40y4" path="res://shader/foliageshader.tres" id="2_dxpn6"]
@@ -876,6 +876,23 @@ emission_box_extents = Vector3(500, 1, 1)
 gravity = Vector3(2.08165e-12, -10, 2.08165e-12)
 scale_max = 3.0
 
+[sub_resource type="Curve" id="Curve_0vtxr"]
+max_value = 0.01
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.920673, 66.751), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3sf4j"]
+curve = SubResource("Curve_0vtxr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_xnsr8"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(20, 50, 1)
+gravity = Vector3(2.08165e-12, -1, 2.08165e-12)
+scale_max = 3.4
+scale_over_velocity_curve = SubResource("CurveTexture_3sf4j")
+turbulence_enabled = true
+
 [node name="world" type="Node2D"]
 position = Vector2(458, 470)
 script = ExtResource("1_sw385")
@@ -895,11 +912,11 @@ frame_progress = 0.0475171
 [node name="Player_ghost" type="Node" parent="."]
 
 [node name="dog" parent="Player_ghost" node_paths=PackedStringArray("CameraRef") instance=ExtResource("22_vkaud")]
-position = Vector2(1514, 461)
+position = Vector2(3439, 1600)
 CameraRef = NodePath("../../Camera types/Camera")
 
 [node name="spirit" parent="Player_ghost" node_paths=PackedStringArray("dog") instance=ExtResource("63_g7hrd")]
-position = Vector2(1910, 474)
+position = Vector2(1945, 565)
 dog = NodePath("../dog")
 
 [node name="Audio Manager" type="Node" parent="."]
@@ -924,19 +941,19 @@ shape = SubResource("RectangleShape2D_gavjo")
 [node name="enemy&npc" type="Node" parent="Audio Manager"]
 
 [node name="bat" parent="Audio Manager/enemy&npc" instance=ExtResource("11_kq7jp")]
-position = Vector2(2021, 412)
+position = Vector2(1973, 51)
 collision_mask = 1
 
 [node name="bat2" parent="Audio Manager/enemy&npc" instance=ExtResource("11_kq7jp")]
-position = Vector2(2164, 520)
+position = Vector2(2370, 367)
 collision_mask = 1
 
 [node name="bat3" parent="Audio Manager/enemy&npc" instance=ExtResource("11_kq7jp")]
-position = Vector2(2258, 520)
+position = Vector2(2210, 159)
 collision_mask = 1
 
 [node name="bat4" parent="Audio Manager/enemy&npc" instance=ExtResource("11_kq7jp")]
-position = Vector2(2470, 425)
+position = Vector2(2422, 64)
 collision_mask = 1
 
 [node name="Gpu particles" type="Node" parent="."]
@@ -1304,7 +1321,7 @@ position = Vector2(1593.76, 531.922)
 shape = SubResource("RectangleShape2D_yduo6")
 
 [node name="PhantomCamera2D" type="Node2D" parent="Camera types/after fallen" node_paths=PackedStringArray("follow_target")]
-position = Vector2(2931.26, -146.154)
+position = Vector2(6941.7, 2044.23)
 script = ExtResource("26_u61q3")
 follow_mode = 2
 follow_target = NodePath("../../../Player_ghost/dog")
@@ -1325,7 +1342,7 @@ position = Vector2(756.253, 2148.07)
 shape = SubResource("RectangleShape2D_ebtfp")
 
 [node name="PhantomCamera2D" type="Node2D" parent="Camera types/zoomed in" node_paths=PackedStringArray("follow_target")]
-position = Vector2(2931.26, -146.154)
+position = Vector2(6941.7, 2044.23)
 script = ExtResource("26_u61q3")
 follow_mode = 5
 follow_target = NodePath("../../../Player_ghost/dog")
@@ -1351,7 +1368,7 @@ position = Vector2(1536, -58)
 shape = SubResource("RectangleShape2D_71g07")
 
 [node name="PhantomCamera2D" type="Node2D" parent="Camera types/beginning" node_paths=PackedStringArray("follow_target")]
-position = Vector2(1407, 245)
+position = Vector2(1407, 1384)
 script = ExtResource("26_u61q3")
 follow_mode = 2
 follow_target = NodePath("../../../Player_ghost/dog")
@@ -1381,7 +1398,7 @@ position = Vector2(1330.32, 1917.3)
 shape = SubResource("RectangleShape2D_m0rrw")
 
 [node name="PhantomCamera2D" type="Node2D" parent="Camera types/obstacles cam" node_paths=PackedStringArray("follow_target")]
-position = Vector2(2850.01, -301.922)
+position = Vector2(6860.45, 1888.46)
 script = ExtResource("26_u61q3")
 follow_mode = 2
 follow_target = NodePath("../../../Player_ghost/dog")
@@ -1403,7 +1420,7 @@ position = Vector2(2841.68, -203.846)
 shape = SubResource("RectangleShape2D_0p2yr")
 
 [node name="PhantomCamera2D" type="Node2D" parent="Camera types/nothing" node_paths=PackedStringArray("follow_target")]
-position = Vector2(2850.03, -301.922)
+position = Vector2(6860.5, 1888.46)
 script = ExtResource("26_u61q3")
 follow_mode = 2
 follow_target = NodePath("../../../Player_ghost/dog")
@@ -1413,7 +1430,7 @@ follow_damping_value = Vector2(0.5, 0.1)
 draw_limits = true
 
 [node name="Camera" type="Camera2D" parent="Camera types"]
-position = Vector2(1514, 461)
+position = Vector2(3439, 1600)
 scale = Vector2(0.479998, 0.520001)
 script = ExtResource("27_wxdto")
 
@@ -1593,5 +1610,16 @@ texture = ExtResource("61_6ny7e")
 
 [node name="breakable objects" type="Node" parent="."]
 
-[node name="breakable objects" parent="breakable objects" instance=ExtResource("63_7uybn")]
-position = Vector2(2358, 559)
+[node name="breakable objects" parent="breakable objects" node_paths=PackedStringArray("particles") instance=ExtResource("63_7uybn")]
+position = Vector2(2288, 663)
+particles = NodePath("GPUParticles2D")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="breakable objects/breakable objects"]
+modulate = Color(4.35675e-06, 0.809615, 0.47557, 1)
+position = Vector2(0, -1)
+emitting = false
+amount = 30
+process_material = SubResource("ParticleProcessMaterial_xnsr8")
+one_shot = true
+speed_scale = 5.77
+explosiveness = 0.13

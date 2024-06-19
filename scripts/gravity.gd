@@ -3,7 +3,9 @@ extends Node
 @export var characterBody : CharacterBody2D
 @export var animatedSprite :  AnimatedSprite2D
 
-const gravity : int = 1000
+var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
+
 
 func _physics_process(delta):
 	if !characterBody.is_on_floor():

@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="BaseObjectStrategy" load_steps=4 format=3 uid="uid://b3h3afalbtipt"]
 
-[ext_resource type="Texture2D" uid="uid://dxjiubhqybhm7" path="res://icon.svg" id="1_mg18d"]
+[ext_resource type="Texture2D" uid="uid://csbnkrjrlxhnw" path="res://destroyableplants2.png" id="1_655m1"]
 [ext_resource type="Script" path="res://scripts/ObjectStrategy.gd" id="1_tm50c"]
-[ext_resource type="Texture2D" uid="uid://g1jq3qxsi5vp" path="res://art/crates.png" id="2_uidxx"]
+[ext_resource type="Texture2D" uid="uid://c6jgcml55ss3y" path="res://destroyableplants1.png" id="2_w83kh"]
 
 [resource]
 script = ExtResource("1_tm50c")
-beforedamage = ExtResource("2_uidxx")
-afterdamage = ExtResource("1_mg18d")
+beforedamage = ExtResource("2_w83kh")
+afterdamage = ExtResource("1_655m1")
 health = 100

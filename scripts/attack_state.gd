@@ -22,10 +22,11 @@ func _physics_process(_delta):
 			direction = -1
 		elif characterBody.global_position.x < dog.global_position.x:
 			animatedSprite.flip_h = true
-			direction = 1
+			direction = 1 
+			#Flipping
 
 		characterBody.velocity.x = direction * speed
-		characterBody.velocity.x = clamp(characterBody.velocity.x, -speed, speed)
+		characterBody.velocity.x = clampf(characterBody.velocity.x, -speed, speed)
 		characterBody.move_and_slide()
 	else:
 		# If dog is not found, switch to idle
