@@ -9,13 +9,14 @@ var SPEED = 50
 
 func enter():
 	animatedSprite.play("idle")
+	
 
 func on_process():
-	pass
-
-func _physics_process(_delta):
 	characterBody.velocity = dir * SPEED
 	characterBody.move_and_slide()
+
+
+	
 
 
 func _on_timer_timeout():
@@ -28,4 +29,5 @@ func choose(array):
 	return array.front()
 		
 func exit():
-	pass
+	characterBody.velocity = Vector2.ZERO
+	animatedSprite.stop()

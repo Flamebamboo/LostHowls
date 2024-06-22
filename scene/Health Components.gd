@@ -6,6 +6,7 @@ var health: int
 var healthMin = 0
 var takingDamage: bool
 var dead: bool
+@export var CharacterBody : CharacterBody2D
 
 signal tookDamage(amount)
 signal died()

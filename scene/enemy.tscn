@@ -1,42 +1,92 @@
-[gd_scene load_steps=25 format=3 uid="uid://bd24oc54elotu"]
+[gd_scene load_steps=28 format=3 uid="uid://bd24oc54elotu"]
 
 [ext_resource type="Script" path="res://scene/enemy.gd" id="1_ms4i7"]
-[ext_resource type="Texture2D" uid="uid://b88byidmosgvk" path="res://art/dragonwater-Sheet.png" id="2_u5o7v"]
+[ext_resource type="Texture2D" uid="uid://bimimoyypq3y6" path="res://angrybat.png" id="2_dpcnj"]
+[ext_resource type="Texture2D" uid="uid://6n18s5g4xpe5" path="res://angrybat1.png" id="2_i071o"]
 [ext_resource type="Texture2D" uid="uid://c7g1ua0jd6ccd" path="res://Bossbat-Sheet.png" id="3_2ewxv"]
 [ext_resource type="Script" path="res://enemystatemachine/StateMachine.gd" id="3_gyre8"]
 [ext_resource type="Script" path="res://scripts/Controller.gd" id="4_25j3u"]
+[ext_resource type="Texture2D" uid="uid://bppqo37bl7ki7" path="res://angrybat2.png" id="4_bv8yu"]
 [ext_resource type="Script" path="res://scene/Health Components.gd" id="4_nf50x"]
 [ext_resource type="Script" path="res://scripts/idle_state.gd" id="5_7hgmi"]
 [ext_resource type="Script" path="res://scripts/attack_state.gd" id="6_5ck6p"]
 [ext_resource type="PackedScene" uid="uid://cb2pi0l53mbpv" path="res://Bulletimpact.tscn" id="7_gqs6y"]
 [ext_resource type="Script" path="res://scene/Hurtbox Components.gd" id="9_f6m63"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qm0fr"]
-size = Vector2(117.5, 99)
+[sub_resource type="Animation" id="Animation_vsm7r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qhvnq"]
-atlas = ExtResource("2_u5o7v")
-region = Rect2(0, 0, 150, 150)
+[sub_resource type="Animation" id="Animation_vj02s"]
+resource_name = "attack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 1, 0.6), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4hmbo"]
-atlas = ExtResource("2_u5o7v")
-region = Rect2(150, 0, 150, 150)
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ircwb"]
+_data = {
+"RESET": SubResource("Animation_vsm7r"),
+"attack": SubResource("Animation_vj02s")
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_v2amo"]
-atlas = ExtResource("2_u5o7v")
-region = Rect2(300, 0, 150, 150)
+[sub_resource type="CircleShape2D" id="CircleShape2D_gpsja"]
+radius = 30.25
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xroj1"]
-atlas = ExtResource("2_u5o7v")
-region = Rect2(450, 0, 150, 150)
+[sub_resource type="AtlasTexture" id="AtlasTexture_0gh80"]
+atlas = ExtResource("2_i071o")
+region = Rect2(0, 0, 200, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5ksu3"]
-atlas = ExtResource("2_u5o7v")
-region = Rect2(600, 0, 150, 150)
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6mia"]
+atlas = ExtResource("2_dpcnj")
+region = Rect2(0, 0, 200, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wyg3j"]
-atlas = ExtResource("2_u5o7v")
-region = Rect2(750, 0, 150, 150)
+[sub_resource type="AtlasTexture" id="AtlasTexture_le5v8"]
+atlas = ExtResource("4_bv8yu")
+region = Rect2(0, 0, 200, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mcwiw"]
 atlas = ExtResource("3_2ewxv")
@@ -62,26 +112,17 @@ region = Rect2(800, 0, 200, 100)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qhvnq")
+"texture": SubResource("AtlasTexture_0gh80")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4hmbo")
+"texture": SubResource("AtlasTexture_l6mia")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_v2amo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xroj1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5ksu3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wyg3j")
+"texture": SubResource("AtlasTexture_le5v8")
 }],
 "loop": false,
 "name": &"attack",
-"speed": 10.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -104,37 +145,55 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_w7a0g"]
+radius = 167.601
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_ivd0l"]
 radius = 102.02
 
 [node name="enemy" type="CharacterBody2D" node_paths=PackedStringArray("health", "hurtbox") groups=["enemies"]]
 z_index = 250
-position = Vector2(0, 1)
-collision_layer = 5
-collision_mask = 19
+position = Vector2(-3, 21)
+collision_layer = 128
+collision_mask = 3
 script = ExtResource("1_ms4i7")
 health = NodePath("Health Components")
 hurtbox = NodePath("Hurtbox Components")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimatedSprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_ircwb")
+}
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.75, -50)
-shape = SubResource("RectangleShape2D_qm0fr")
+position = Vector2(4, -22)
+shape = SubResource("CircleShape2D_gpsja")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(6, -48)
+position = Vector2(8, -49)
 sprite_frames = SubResource("SpriteFrames_h0w82")
-animation = &"idle"
-frame = 4
-frame_progress = 0.248635
+animation = &"attack"
 
 [node name="Controller" type="Node" parent="." node_paths=PackedStringArray("node_finite_state_machine")]
 script = ExtResource("4_25j3u")
 node_finite_state_machine = NodePath("../StateMachine")
 
-[node name="Health Components" type="Node" parent="."]
+[node name="Health Components" type="Node" parent="." node_paths=PackedStringArray("CharacterBody")]
 script = ExtResource("4_nf50x")
+CharacterBody = NodePath("..")
+
+[node name="DogDetector" type="Area2D" parent="."]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DogDetector"]
+position = Vector2(2, -34)
+shape = SubResource("CircleShape2D_w7a0g")
 
 [node name="Hurtbox Components" type="Area2D" parent="." node_paths=PackedStringArray("health_components")]
+visible = false
 collision_layer = 4
 collision_mask = 19
 script = ExtResource("9_f6m63")
@@ -147,6 +206,7 @@ shape = SubResource("CircleShape2D_ivd0l")
 debug_color = Color(1, 0, 0.27451, 0.419608)
 
 [node name="Timer" type="Timer" parent="Hurtbox Components"]
+wait_time = 0.4
 autostart = true
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_node_state")]
@@ -158,12 +218,13 @@ script = ExtResource("5_7hgmi")
 characterBody = NodePath("../..")
 animatedSprite = NodePath("../../AnimatedSprite2D")
 
-[node name="attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("node_finite_state_machine", "characterBody", "animatedSprite")]
+[node name="attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("node_finite_state_machine", "characterBody", "animatedSprite", "animation")]
 script = ExtResource("6_5ck6p")
 node_finite_state_machine = NodePath("..")
 characterBody = NodePath("../..")
 animatedSprite = NodePath("../../AnimatedSprite2D")
-speed = 150
+animation = NodePath("../../AnimationPlayer")
+speed = 400
 
 [node name="Rotater" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -171,10 +232,12 @@ position = Vector2(1, -27)
 
 [node name="shoottimer" type="Timer" parent="."]
 unique_name_in_owner = true
-autostart = true
 
-[connection signal="body_entered" from="Hurtbox Components" to="Controller" method="_on_area_2d_body_entered"]
+[node name="RandomTimer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="DogDetector" to="Controller" method="_on_dog_detector_body_entered"]
+[connection signal="body_exited" from="DogDetector" to="Controller" method="_on_dog_detector_body_exited"]
 [connection signal="body_entered" from="Hurtbox Components" to="Hurtbox Components" method="on_bullet_collisions"]
-[connection signal="body_exited" from="Hurtbox Components" to="Controller" method="_on_area_2d_body_exited"]
 [connection signal="timeout" from="Hurtbox Components/Timer" to="StateMachine/idle" method="_on_timer_timeout"]
 [connection signal="timeout" from="shoottimer" to="StateMachine/attack" method="_on_shoottimer_timeout"]
+[connection signal="timeout" from="RandomTimer" to="Controller" method="_on_random_timer_timeout"]

@@ -3,6 +3,7 @@ extends NodeState
 @export var node_finite_state_machine : NodeFiniteStateMachine
 @export var characterBody: CharacterBody2D
 @export var animatedSprite: AnimatedSprite2D
+@export var animation: AnimationPlayer
 @export var speed: int
 
 @export var rotate_speed = 0
@@ -17,13 +18,39 @@ var batbullet = preload("res://batbullet.tscn")
 
 
 var dog: CharacterBody2D
-var attack: bool
+
 func enter():
 	dog = Global.dogCharacter
+	animation.play("attack")
 	animatedSprite.play("attack")
-	attack = true
+	shoottimer.stop()
+	if dog:
+		var direction: int
+		if characterBody.global_position > dog.global_position:
+			animatedSprite.flip_h = false
+			direction = -1
+		elif characterBody.global_position < dog.global_position:
+			animatedSprite.flip_h = true
+			direction = 1 
+			#Flipping
+		
+		if characterBody.global_position.y > dog.global_position.y:
+			direction = -1
+		elif characterBody.global_position.y < dog.global_position.y:
+			direction = 1
+
 	
+		var charge_direction = (dog.global_position - characterBody.global_position).normalized()
+		var charge_speed = 300  
+		characterBody.velocity = charge_direction * charge_speed
+		await get_tree().create_timer(1.5).timeout
+		node_finite_state_machine.transition_to("idle")
+	else:
+		# If dog is not found, switch to idle
+		node_finite_state_machine.transition_to("idle")
+
 func _ready():
+	#2*pi is 360 deg divided by 8 so each spawnpoint is 45deg apart
 	var step = 2 * PI / spawn_point_count
 	
 	for i in range(spawn_point_count):
@@ -31,36 +58,20 @@ func _ready():
 		var pos = Vector2(radius, 0).rotated(step * i)
 		spawn_point.rotation = pos.angle()
 		spawn_point.position = pos
-		rotater.add_child(spawn_point)
+		rotater.add_child(spawn_point) # spawn_point will add as rotater child so it will follow along with the rotatation of the rotator
 
-	shoottimer.wait_time = shooter_timer_wait_time
-	shoottimer.start()
+	
 	
 	
 func _physics_process(delta: float):
 	var new_rotation = rotater.rotation_degrees + rotate_speed * delta
 	rotater.rotation_degrees = fmod(new_rotation, 360)
-	#if dog:
-		#var direction: int
-		#if characterBody.global_position.x > dog.global_position.x:
-			#animatedSprite.flip_h = false
-			#direction = -1
-		#elif characterBody.global_position.x < dog.global_position.x:
-			#animatedSprite.flip_h = true
-			#direction = 1 
-			#Flipping
-
-		#characterBody.velocity.x = direction * speed
-		#characterBody.velocity.x = clampf(characterBody.velocity.x, -speed, speed)
-		#characterBody.move_and_slide()
-	#else:
-		# If dog is not found, switch to idle
-		#node_finite_state_machine.transition_to("idle")
+	
+	
 
 func exit():
-	characterBody.velocity = Vector2.ZERO
-	animatedSprite.stop()
-
+	shoottimer.wait_time = shooter_timer_wait_time #timing/intervals of bullet iinstance cycle
+	shoottimer.start()
 
 
 
