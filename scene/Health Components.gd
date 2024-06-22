@@ -28,6 +28,7 @@ func takedamage(amount: int):
 	if health <= 0:
 		handledeath()
 	
+	
 func handledeath():
 	dead = true
 	emit_signal("died")

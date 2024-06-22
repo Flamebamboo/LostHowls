@@ -11,4 +11,4 @@ func _ready():
 
 func _on_shake_body_entered(body):
 	if body.is_in_group("dog"):
-		CameraRef.apply_shake(2000.0, 10.0)
+		CameraRef.apply_shake(20.0, 10.0)

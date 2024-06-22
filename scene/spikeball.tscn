@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://cqfuu3blbblkk"]
 
 [ext_resource type="Script" path="res://scripts/spikeball.gd" id="1_1klch"]
+[ext_resource type="Material" uid="uid://bmgyfioow48f8" path="res://shader/unshadedlight.tres" id="1_suf6e"]
 [ext_resource type="Texture2D" uid="uid://dmpppiufp17vl" path="res://art/Chain.png" id="1_wlmbv"]
 [ext_resource type="Texture2D" uid="uid://cho5byvyax5t4" path="res://art/Spiked Ball.png" id="2_m68m5"]
-[ext_resource type="Texture2D" uid="uid://cevuqaytkl3fq" path="res://art/light.png" id="4_dersf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_inisl"]
 radius = 13.0
@@ -49,6 +49,7 @@ _data = {
 radius = 19.6469
 
 [node name="spikes" type="AnimatableBody2D"]
+material = ExtResource("1_suf6e")
 rotation = -1.309
 collision_mask = 2
 script = ExtResource("1_1klch")
@@ -87,12 +88,6 @@ shape = SubResource("CircleShape2D_inisl")
 libraries = {
 "": SubResource("AnimationLibrary_b63pc")
 }
-
-[node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(0.661321, 68.151)
-scale = Vector2(1.61301, 1.61301)
-energy = 0.24
-texture = ExtResource("4_dersf")
 
 [node name="shake" type="Area2D" parent="."]
 collision_mask = 3

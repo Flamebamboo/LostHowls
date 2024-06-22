@@ -14,15 +14,16 @@ func _ready():
 	
 	#this func will take bullet as a argument to check if classname health, health is > 0
 	#all other logic 
-func on_bullet_collisions(body):
-	if body.is_in_group("bullet"):
+func on_bullet_collisions(bullet):
+	if bullet.is_in_group("bullet"):
 		var impact = bullet_impact.instantiate()
 		if impact:
 			get_tree().root.call_deferred("add_child",impact)
-			impact.global_position = body.global_position
+			impact.global_position = bullet.global_position
+			
 	
 		if health_components.health > 0:
-			var bulletDamage = body.damage #body.damage is from the bullet damage amount
+			var bulletDamage = bullet.damage #body.damage is from the bullet damage amount
 			health_components.takedamage(bulletDamage) 
 			print(health_components.health)
 			
