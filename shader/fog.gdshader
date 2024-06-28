@@ -21,4 +21,3 @@ void fragment() {
 	// Apply the fog effect
 	COLOR.a *= fog * density;
 }
-

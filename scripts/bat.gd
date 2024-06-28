@@ -98,7 +98,7 @@ func takeDamage(damage):
 	print(str(self), "current health is ", health)
 
 func take_bullet_damage(damage):
-	health -= 10
+	health -= damage
 	takingDamage = true
 	if health <= 0:
 		health = 0

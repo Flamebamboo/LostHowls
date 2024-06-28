@@ -160,7 +160,7 @@ _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jgxqh"]
-radius = 205.002
+radius = 373.012
 
 [node name="spirit" type="CharacterBody2D" node_paths=PackedStringArray("shootingMarker")]
 collision_layer = 16
@@ -170,6 +170,7 @@ shootingMarker = NodePath("Gun/shooting")
 bulletScene = ExtResource("7_4a3nk")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 position = Vector2(-3.41061e-13, 3.41061e-13)
 energy = 0.2
 texture = ExtResource("2_l56k3")

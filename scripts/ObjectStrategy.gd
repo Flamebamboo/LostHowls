@@ -17,4 +17,3 @@ func object_damage(damage: int):
 # Strategy Relevant Code:
 # This is the base strategy that all other
 # object strategies will inherit from.
-

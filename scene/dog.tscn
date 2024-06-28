@@ -107,6 +107,7 @@ func take_damage(damage):
 		if currentHealth > 0:
 			currentHealth -= damage
 			print(\"health \", currentHealth)
+			take_damage_cooldown(2)
 		if currentHealth <= 0:
 			currentHealth = 0
 			dead = true
@@ -138,9 +139,9 @@ func dash_power(input_axis):
 		
 func apply_gravity(delta):
 	if not is_on_floor():
-		velocity.y += apply_fall_gravity(velocity) * delta
+		velocity.y += apply_fall_gravity() * delta
 
-func apply_fall_gravity(velocity: Vector2):
+func apply_fall_gravity():
 	if velocity.y < 0:
 		return gravity
 	return fallgravity
@@ -386,11 +387,6 @@ func respawn_player():
 	currentHealth = maxHealth
 	dead = false
 	Global.dogAlive = true
-
-
-
-
-
 "
 
 [sub_resource type="Theme" id="Theme_ssv0o"]

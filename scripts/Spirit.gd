@@ -54,7 +54,7 @@ func _physics_process(delta):
 		
 
 func shoot():
-	var instance = bulletScene.instantiate()
+
 	if not shootingMarker:
 		return
 	
@@ -79,7 +79,6 @@ func shoot():
 
 func launch():
 	if shootingMarker:
-		for dog in get_tree().get_nodes_in_group("dog"):
 			var new_launcher = playerlauncher.instantiate()
 			new_launcher.global_position = shootingMarker.global_position
 			var direction = (dog.global_position - shootingMarker.global_position).normalized()

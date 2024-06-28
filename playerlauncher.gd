@@ -4,7 +4,7 @@ var travelled_distance = 0.0
 @export var areabox : Areabox
 
 @export var speed: int =  500
-@export var range: int = 300
+@export var ranges: int = 300
 
 ##
 func _ready():
@@ -15,7 +15,7 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	position += velocity * delta
 	travelled_distance += velocity.length() * delta
-	if travelled_distance > range: 
+	if travelled_distance > ranges: 
 		queue_free()
 
 

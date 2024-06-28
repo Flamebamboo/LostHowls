@@ -1,6 +1,7 @@
-[gd_scene load_steps=28 format=3 uid="uid://bd24oc54elotu"]
+[gd_scene load_steps=32 format=3 uid="uid://bd24oc54elotu"]
 
 [ext_resource type="Script" path="res://scene/enemy.gd" id="1_ms4i7"]
+[ext_resource type="Material" uid="uid://bmgyfioow48f8" path="res://shader/unshadedlight.tres" id="1_xyjkw"]
 [ext_resource type="Texture2D" uid="uid://bimimoyypq3y6" path="res://angrybat.png" id="2_dpcnj"]
 [ext_resource type="Texture2D" uid="uid://6n18s5g4xpe5" path="res://angrybat1.png" id="2_i071o"]
 [ext_resource type="Texture2D" uid="uid://c7g1ua0jd6ccd" path="res://Bossbat-Sheet.png" id="3_2ewxv"]
@@ -8,10 +9,12 @@
 [ext_resource type="Script" path="res://scripts/Controller.gd" id="4_25j3u"]
 [ext_resource type="Texture2D" uid="uid://bppqo37bl7ki7" path="res://angrybat2.png" id="4_bv8yu"]
 [ext_resource type="Script" path="res://scene/Health Components.gd" id="4_nf50x"]
-[ext_resource type="Script" path="res://scripts/idle_state.gd" id="5_7hgmi"]
 [ext_resource type="Script" path="res://scripts/attack_state.gd" id="6_5ck6p"]
+[ext_resource type="Texture2D" uid="uid://nl4gavibgde8" path="res://hurtbossbat.png" id="6_iyqgw"]
 [ext_resource type="PackedScene" uid="uid://cb2pi0l53mbpv" path="res://Bulletimpact.tscn" id="7_gqs6y"]
 [ext_resource type="Script" path="res://scene/Hurtbox Components.gd" id="9_f6m63"]
+[ext_resource type="Script" path="res://scene/idle_state.gd" id="11_4jlrq"]
+[ext_resource type="Script" path="res://scripts/flying_state.gd" id="11_5hqke"]
 
 [sub_resource type="Animation" id="Animation_vsm7r"]
 length = 0.001
@@ -108,6 +111,10 @@ region = Rect2(600, 0, 200, 100)
 atlas = ExtResource("3_2ewxv")
 region = Rect2(800, 0, 200, 100)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_l3lli"]
+atlas = ExtResource("6_iyqgw")
+region = Rect2(0, 0, 200, 100)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_h0w82"]
 animations = [{
 "frames": [{
@@ -141,24 +148,39 @@ animations = [{
 "texture": SubResource("AtlasTexture_ps7al")
 }],
 "loop": true,
-"name": &"idle",
+"name": &"flying",
 "speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l3lli")
+}],
+"loop": false,
+"name": &"hurt",
+"speed": 10.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w7a0g"]
-radius = 167.601
+radius = 409.207
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ivd0l"]
-radius = 102.02
+radius = 32.0
 
-[node name="enemy" type="CharacterBody2D" node_paths=PackedStringArray("health", "hurtbox") groups=["enemies"]]
+[node name="enemy" type="CharacterBody2D" node_paths=PackedStringArray("health", "hurtbox", "animatedsprite") groups=["enemies"]]
 z_index = 250
+material = ExtResource("1_xyjkw")
 position = Vector2(-3, 21)
 collision_layer = 128
 collision_mask = 3
 script = ExtResource("1_ms4i7")
 health = NodePath("Health Components")
 hurtbox = NodePath("Hurtbox Components")
+animatedsprite = NodePath("AnimatedSprite2D")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../AnimatedSprite2D")
@@ -171,9 +193,10 @@ position = Vector2(4, -22)
 shape = SubResource("CircleShape2D_gpsja")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = ExtResource("1_xyjkw")
 position = Vector2(8, -49)
 sprite_frames = SubResource("SpriteFrames_h0w82")
-animation = &"attack"
+animation = &"hurt"
 
 [node name="Controller" type="Node" parent="." node_paths=PackedStringArray("node_finite_state_machine")]
 script = ExtResource("4_25j3u")
@@ -181,10 +204,10 @@ node_finite_state_machine = NodePath("../StateMachine")
 
 [node name="Health Components" type="Node" parent="." node_paths=PackedStringArray("CharacterBody")]
 script = ExtResource("4_nf50x")
+healthMax = 500
 CharacterBody = NodePath("..")
 
 [node name="DogDetector" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -193,7 +216,7 @@ position = Vector2(2, -34)
 shape = SubResource("CircleShape2D_w7a0g")
 
 [node name="Hurtbox Components" type="Area2D" parent="." node_paths=PackedStringArray("health_components")]
-visible = false
+unique_name_in_owner = true
 collision_layer = 4
 collision_mask = 19
 script = ExtResource("9_f6m63")
@@ -201,22 +224,24 @@ health_components = NodePath("../Health Components")
 bullet_impact = ExtResource("7_gqs6y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox Components"]
-position = Vector2(1, -37)
+position = Vector2(5, -22)
 shape = SubResource("CircleShape2D_ivd0l")
 debug_color = Color(1, 0, 0.27451, 0.419608)
-
-[node name="Timer" type="Timer" parent="Hurtbox Components"]
-wait_time = 0.4
-autostart = true
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_node_state")]
 script = ExtResource("3_gyre8")
 initial_node_state = NodePath("idle")
 
 [node name="idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("characterBody", "animatedSprite")]
-script = ExtResource("5_7hgmi")
+script = ExtResource("11_4jlrq")
 characterBody = NodePath("../..")
 animatedSprite = NodePath("../../AnimatedSprite2D")
+
+[node name="flying" type="Node" parent="StateMachine" node_paths=PackedStringArray("characterBody", "animatedSprite", "flyingtimer")]
+script = ExtResource("11_5hqke")
+characterBody = NodePath("../..")
+animatedSprite = NodePath("../../AnimatedSprite2D")
+flyingtimer = NodePath("../../flyingtimer")
 
 [node name="attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("node_finite_state_machine", "characterBody", "animatedSprite", "animation")]
 script = ExtResource("6_5ck6p")
@@ -230,14 +255,28 @@ speed = 400
 unique_name_in_owner = true
 position = Vector2(1, -27)
 
+[node name="flyingtimer" type="Timer" parent="."]
+wait_time = 0.4
+
 [node name="shoottimer" type="Timer" parent="."]
 unique_name_in_owner = true
 
 [node name="RandomTimer" type="Timer" parent="."]
 
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -41.0
+offset_top = -86.0
+offset_right = 47.0
+offset_bottom = -59.0
+max_value = 500.0
+value = 500.0
+show_percentage = false
+
+[connection signal="died" from="Health Components" to="." method="_on_health_components_died"]
+[connection signal="tookDamage" from="Health Components" to="." method="_on_health_components_took_damage"]
 [connection signal="body_entered" from="DogDetector" to="Controller" method="_on_dog_detector_body_entered"]
 [connection signal="body_exited" from="DogDetector" to="Controller" method="_on_dog_detector_body_exited"]
 [connection signal="body_entered" from="Hurtbox Components" to="Hurtbox Components" method="on_bullet_collisions"]
-[connection signal="timeout" from="Hurtbox Components/Timer" to="StateMachine/idle" method="_on_timer_timeout"]
+[connection signal="timeout" from="flyingtimer" to="StateMachine/flying" method="_on_timer_timeout"]
 [connection signal="timeout" from="shoottimer" to="StateMachine/attack" method="_on_shoottimer_timeout"]
 [connection signal="timeout" from="RandomTimer" to="Controller" method="_on_random_timer_timeout"]

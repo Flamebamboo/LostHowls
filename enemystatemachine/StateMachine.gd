@@ -16,11 +16,11 @@ func _ready():
 		current_node_state = initial_node_state
 		current_node_state.enter()
 
-func _process(_delta):
+func _process(delta):
 	if current_node_state:
 		current_node_state.on_process()
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	if current_node_state:
 		current_node_state.on_physics_process()
 	print("Current State: ", current_node_state.name.to_lower())

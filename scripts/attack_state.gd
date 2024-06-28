@@ -19,6 +19,8 @@ var batbullet = preload("res://batbullet.tscn")
 
 var dog: CharacterBody2D
 
+
+
 func enter():
 	dog = Global.dogCharacter
 	animation.play("attack")

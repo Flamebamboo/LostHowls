@@ -5,7 +5,7 @@ var travelled_distance = 0.0
 
 
 @export var speed: int =  500
-@export var range: int = 300
+@export var ranges: int = 300
 @export var damage: int = 10
 
 func _ready():
@@ -15,7 +15,7 @@ func _ready():
 func _physics_process(delta):
 	position += velocity * delta
 	travelled_distance += velocity.length() * delta
-	if travelled_distance > range: 
+	if travelled_distance > ranges: 
 		queue_free()
 	for body in $BulletHurtbox.get_overlapping_bodies():
 				if body.is_in_group("enemies"):

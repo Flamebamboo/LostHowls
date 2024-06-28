@@ -8,11 +8,13 @@ var should_shake: bool = false
 func _ready() -> void:
 	connect("area_entered", _entered_area)
 	connect("area_exited", _exited_area)
+
 	
 func _entered_area(area_2d: Area2D) -> void:
 	if area_2d.get_parent() is CharacterBody2D:
 		area_pcam.set_priority(20)
 		print("priority set 20")
+		
 		
 	if shake:
 		should_shake = true
