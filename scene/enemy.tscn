@@ -1,17 +1,16 @@
-[gd_scene load_steps=32 format=3 uid="uid://bd24oc54elotu"]
+[gd_scene load_steps=31 format=3 uid="uid://bd24oc54elotu"]
 
 [ext_resource type="Script" path="res://scene/enemy.gd" id="1_ms4i7"]
 [ext_resource type="Material" uid="uid://bmgyfioow48f8" path="res://shader/unshadedlight.tres" id="1_xyjkw"]
-[ext_resource type="Texture2D" uid="uid://bimimoyypq3y6" path="res://angrybat.png" id="2_dpcnj"]
-[ext_resource type="Texture2D" uid="uid://6n18s5g4xpe5" path="res://angrybat1.png" id="2_i071o"]
-[ext_resource type="Texture2D" uid="uid://c7g1ua0jd6ccd" path="res://Bossbat-Sheet.png" id="3_2ewxv"]
+[ext_resource type="Texture2D" uid="uid://bimimoyypq3y6" path="res://art/angrybat.png" id="2_dpcnj"]
+[ext_resource type="Texture2D" uid="uid://6n18s5g4xpe5" path="res://art/angrybat1.png" id="2_i071o"]
+[ext_resource type="Texture2D" uid="uid://c7g1ua0jd6ccd" path="res://art/Bossbat-Sheet.png" id="3_2ewxv"]
 [ext_resource type="Script" path="res://enemystatemachine/StateMachine.gd" id="3_gyre8"]
 [ext_resource type="Script" path="res://scripts/Controller.gd" id="4_25j3u"]
-[ext_resource type="Texture2D" uid="uid://bppqo37bl7ki7" path="res://angrybat2.png" id="4_bv8yu"]
+[ext_resource type="Texture2D" uid="uid://bppqo37bl7ki7" path="res://art/angrybat2.png" id="4_bv8yu"]
 [ext_resource type="Script" path="res://scene/Health Components.gd" id="4_nf50x"]
 [ext_resource type="Script" path="res://scripts/attack_state.gd" id="6_5ck6p"]
 [ext_resource type="Texture2D" uid="uid://nl4gavibgde8" path="res://hurtbossbat.png" id="6_iyqgw"]
-[ext_resource type="PackedScene" uid="uid://cb2pi0l53mbpv" path="res://Bulletimpact.tscn" id="7_gqs6y"]
 [ext_resource type="Script" path="res://scene/Hurtbox Components.gd" id="9_f6m63"]
 [ext_resource type="Script" path="res://scene/idle_state.gd" id="11_4jlrq"]
 [ext_resource type="Script" path="res://scripts/flying_state.gd" id="11_5hqke"]
@@ -204,7 +203,7 @@ node_finite_state_machine = NodePath("../StateMachine")
 
 [node name="Health Components" type="Node" parent="." node_paths=PackedStringArray("CharacterBody")]
 script = ExtResource("4_nf50x")
-healthMax = 500
+healthMax = 800
 CharacterBody = NodePath("..")
 
 [node name="DogDetector" type="Area2D" parent="."]
@@ -221,7 +220,6 @@ collision_layer = 4
 collision_mask = 19
 script = ExtResource("9_f6m63")
 health_components = NodePath("../Health Components")
-bullet_impact = ExtResource("7_gqs6y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox Components"]
 position = Vector2(5, -22)

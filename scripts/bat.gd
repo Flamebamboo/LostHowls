@@ -10,7 +10,8 @@ var healthMin = 0
 var dead = false
 var takingDamage = false
 var isRoaming: bool
-var DamagetoDeal = 1
+var DamagetoDeal = 10
+@onready var impact: GPUParticles2D = %GPUParticles2D
 func _ready():
 	batChase = true
 	add_to_group("enemies")
@@ -45,7 +46,7 @@ func move(delta):
 		else: #if not chase then roam
 			velocity += dir * SPEED * delta 
 	elif dead: #fall
-		velocity.y += 10 * delta
+		velocity.y += 30 * delta
 		velocity.x = 0
 	move_and_slide()
 	
@@ -104,3 +105,9 @@ func take_bullet_damage(damage):
 		health = 0
 		dead = true
 	print(str(self), "current health is ", health)
+	impact.emitting = true 
+	var animatedSprite = $AnimatedSprite2D
+	animatedSprite.play("hurt")
+	await get_tree().create_timer(0.5).timeout
+	impact.emitting = false
+	

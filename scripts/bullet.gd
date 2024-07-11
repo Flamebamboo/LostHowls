@@ -13,10 +13,18 @@ func _ready():
 	Global.BulletCharacter = self
 
 func _physics_process(delta):
-	position += velocity * delta
-	travelled_distance += velocity.length() * delta
-	if travelled_distance > ranges: 
-		queue_free()
+	#to be used for auto aiming
+	#position += velocity * delta
+	#travelled_distance += velocity.length() * delta
+	#if travelled_distance > ranges: 
+	var direction = Vector2.RIGHT.rotated(rotation)
+	
+	velocity = direction*speed
+	move_and_collide(velocity*delta)
+	
+	
+	
+	
 	for body in $BulletHurtbox.get_overlapping_bodies():
 				if body.is_in_group("enemies"):
 					if body.has_method("take_bullet_damage"):

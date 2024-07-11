@@ -12,7 +12,7 @@ extends NodeState
 const radius = 100
 @onready var rotater = %Rotater
 @onready var shoottimer = %shoottimer
-var batbullet = preload("res://batbullet.tscn")
+var batbullet = preload("res://scene/batbullet.tscn")
 
 
 

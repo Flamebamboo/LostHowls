@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cb2pi0l53mbpv"]
-
-[ext_resource type="Texture2D" uid="uid://d3jeuk57xel5x" path="res://art/bagpack.png" id="1_q3n6j"]
-
-[node name="Node2D" type="Node2D"]
-
-[node name="Bagpack" type="Sprite2D" parent="."]
-position = Vector2(-8, 6)
-texture = ExtResource("1_q3n6j")

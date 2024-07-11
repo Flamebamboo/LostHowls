@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bimimoyypq3y6"
-path="res://.godot/imported/angrybat.png-b4851f62d30eecc998ccd1dcdfdd514d.ctex"
+uid="uid://6n18s5g4xpe5"
+path="res://.godot/imported/angrybat1.png-8caebf58f0bef525fc557b05a9e48e9f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://angrybat.png"
-dest_files=["res://.godot/imported/angrybat.png-b4851f62d30eecc998ccd1dcdfdd514d.ctex"]
+source_file="res://art/angrybat1.png"
+dest_files=["res://.godot/imported/angrybat1.png-8caebf58f0bef525fc557b05a9e48e9f.ctex"]
 
 [params]
 

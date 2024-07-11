@@ -2,16 +2,19 @@
 
 [ext_resource type="Resource" uid="uid://bbrqxe028fk5p" path="res://DefaultMovement.tres" id="1_boqx8"]
 [ext_resource type="Texture2D" uid="uid://bwotynnxhce0s" path="res://art/dogattack-Sheet.png" id="2_2mhbe"]
+[ext_resource type="Texture2D" uid="uid://00qmhyxfxtbp" path="res://Doghealthbar.png" id="2_asx0n"]
 [ext_resource type="Texture2D" uid="uid://c65ftsu4un3e2" path="res://art/barkeffect-Sheet.png" id="2_layen"]
 [ext_resource type="Texture2D" uid="uid://byfd752ylnvxh" path="res://art/dogdeadSheet.png" id="3_kd2ox"]
 [ext_resource type="Texture2D" uid="uid://d0tvs2eft04eb" path="res://art/dogidlev2-Sheet.png" id="3_pftu0"]
+[ext_resource type="Texture2D" uid="uid://d3vgymbbynr62" path="res://Doghealthbarprogress.png" id="3_wpgw1"]
 [ext_resource type="Texture2D" uid="uid://b5po54oukvgdx" path="res://art/dogrunv2-Sheet-Sheet.png" id="5_055w5"]
 [ext_resource type="Texture2D" uid="uid://c2nqpycfu27b2" path="res://art/dogjumpv2-Sheet.png" id="5_npe2q"]
 [ext_resource type="Texture2D" uid="uid://xovc2j71k24l" path="res://art/bushtest.png" id="8_k4moo"]
 
 [sub_resource type="GDScript" id="GDScript_8m6v6"]
-script/source = "extends CharacterBody2D
-class_name dog
+script/source = "
+extends CharacterBody2D
+
 @onready var anim = $AnimatedSprite2D
 @onready var dash_effect = $DashEffect
 @onready var dash_duration = $DashDuration
@@ -70,7 +73,7 @@ func _physics_process(delta):
 		#handle_wall_jump()
 		apply_gravity(delta)
 		handle_jump()
-		allign_to_slope()
+		#allign_to_slope()
 		handle_air_acceleration(input_axis, delta )
 		apply_friction(input_axis, delta)	
 		apply_air_resistance(input_axis, delta)
@@ -113,7 +116,7 @@ func take_damage(damage):
 			dead = true
 			Global.dogAlive = false
 			respawn_player()
-		$ProgressBar.value = currentHealth
+		%ProgressBar.value = currentHealth
 		
 	
 func take_damage_cooldown(wait_time):
@@ -340,10 +343,7 @@ func interact_box():
 			if c.get_collider() is boxes:
 				var follow_player = (self.global_position - c.get_collider().global_position).normalized()
 				c.get_collider().apply_impulse(follow_player * pull_force)
-	#for i in get_slide_collision_count():
-			#var c = get_slide_collision(i)
-			#if c.get_collider() is boxes: #getcollider means something that is attached to
-				#c.get_collider().apply_central_impulse(-c.get_normal() * push_force)
+	
 
 
 
@@ -390,20 +390,6 @@ func respawn_player():
 "
 
 [sub_resource type="Theme" id="Theme_ssv0o"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vw7ha"]
-bg_color = Color(1, 0.0470588, 0.0862745, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7lcme"]
-bg_color = Color(1.44155e-05, 0.694406, 0.145446, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l3c7c"]
 atlas = ExtResource("2_2mhbe")
@@ -728,7 +714,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_14p1x"]
-size = Vector2(41.9229, 52.9168)
+size = Vector2(27.9614, 47.4584)
 
 [sub_resource type="Gradient" id="Gradient_c7tph"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
@@ -855,23 +841,18 @@ floor_snap_length = 2.0
 script = SubResource("GDScript_8m6v6")
 movement_data = ExtResource("1_boqx8")
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -29.1668
-offset_top = -48.0768
-offset_right = 30.8332
-offset_bottom = -37.0768
-grow_horizontal = 0
-size_flags_horizontal = 8
-theme = SubResource("Theme_ssv0o")
-theme_override_styles/background = SubResource("StyleBoxFlat_vw7ha")
-theme_override_styles/fill = SubResource("StyleBoxFlat_7lcme")
-value = 100.0
-show_percentage = false
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ProgressBar" type="TextureProgressBar" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_right = 200.0
+offset_bottom = 100.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = SubResource("Theme_ssv0o")
+value = 100.0
+texture_under = ExtResource("2_asx0n")
+texture_progress = ExtResource("3_wpgw1")
 
 [node name="aireffect" type="Marker2D" parent="."]
 position = Vector2(4.96708e-07, 21.1538)
@@ -891,7 +872,7 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-3, -1)
+position = Vector2(-5.72923, 5.98072)
 rotation = 1.5708
 shape = SubResource("RectangleShape2D_14p1x")
 debug_color = Color(0.415686, 0.462745, 1, 0.419608)
@@ -974,7 +955,7 @@ collision_layer = 2
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="dogHitbox"]
-position = Vector2(0, 9.53674e-07)
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_pp52c")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

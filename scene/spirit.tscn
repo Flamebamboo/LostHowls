@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://r8fwkr0ot8rp"]
+[gd_scene load_steps=31 format=3 uid="uid://r8fwkr0ot8rp"]
 
 [ext_resource type="Script" path="res://scripts/Spirit.gd" id="1_y24hh"]
 [ext_resource type="Texture2D" uid="uid://dw72i54qat4nh" path="res://art/ghostsimple-Sheet.png" id="2_0ie8h"]
@@ -6,6 +6,9 @@
 [ext_resource type="Material" uid="uid://bmgyfioow48f8" path="res://shader/unshadedlight.tres" id="2_uc4jv"]
 [ext_resource type="Script" path="res://scripts/Line2D.gd" id="3_tc1tc"]
 [ext_resource type="PackedScene" uid="uid://ep5krjvy7r02" path="res://scene/bullet.tscn" id="7_4a3nk"]
+[ext_resource type="Texture2D" uid="uid://cas5bngx1ua0i" path="res://Doglauncherwhite.png" id="7_cvbms"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_v08iw"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pcsx6"]
 blend_mode = 1
@@ -162,6 +165,60 @@ point_count = 2
 [sub_resource type="CircleShape2D" id="CircleShape2D_jgxqh"]
 radius = 373.012
 
+[sub_resource type="Animation" id="Animation_wac2v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_5nnpv"]
+resource_name = "enabled"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_twxad"]
+resource_name = "paw"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.0768358, 0.0768358, 0.0768358, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1k35l"]
+_data = {
+"RESET": SubResource("Animation_wac2v"),
+"enabled": SubResource("Animation_5nnpv"),
+"paw": SubResource("Animation_twxad")
+}
+
 [node name="spirit" type="CharacterBody2D" node_paths=PackedStringArray("shootingMarker")]
 collision_layer = 16
 collision_mask = 164
@@ -170,7 +227,7 @@ shootingMarker = NodePath("Gun/shooting")
 bulletScene = ExtResource("7_4a3nk")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-visible = false
+material = SubResource("CanvasItemMaterial_v08iw")
 position = Vector2(-3.41061e-13, 3.41061e-13)
 energy = 0.2
 texture = ExtResource("2_l56k3")
@@ -217,6 +274,21 @@ unique_name_in_owner = true
 
 [node name="Bullet" parent="Gun/shooting" instance=ExtResource("7_4a3nk")]
 visible = false
+
+[node name="launcher" type="Timer" parent="."]
+process_callback = 0
+wait_time = 5.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="launcher"]
+
+[node name="Sprite2D" type="Sprite2D" parent="launcher/CanvasLayer"]
+position = Vector2(101, 48)
+texture = ExtResource("7_cvbms")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="launcher/CanvasLayer"]
+libraries = {
+"": SubResource("AnimationLibrary_1k35l")
+}
 
 [connection signal="area_entered" from="Gun" to="." method="_on_gun_area_entered"]
 [connection signal="timeout" from="Gun/Timer" to="Gun" method="_on_timer_timeout"]

@@ -2,7 +2,7 @@ extends Node
 class_name Health
 
 var health: int
-@export var healthMax = 200
+@export var healthMax = 1
 
 var healthMin = 0
 var takingDamage: bool

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c1g1g6mffopnk"
-path="res://.godot/imported/Bossbat-Sheet.png-c76824af59c75ee2f6f4046d6bb27732.ctex"
+uid="uid://canecay3wgcc"
+path="res://.godot/imported/particlesvfx.png-25861712debee1499038ee76bd25f4fc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scripts/Bossbat-Sheet.png"
-dest_files=["res://.godot/imported/Bossbat-Sheet.png-c76824af59c75ee2f6f4046d6bb27732.ctex"]
+source_file="res://scene/particlesvfx.png"
+dest_files=["res://.godot/imported/particlesvfx.png-25861712debee1499038ee76bd25f4fc.ctex"]
 
 [params]
 

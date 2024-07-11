@@ -1,10 +1,11 @@
-[gd_scene load_steps=31 format=3 uid="uid://0drrtr1rw0n1"]
+[gd_scene load_steps=32 format=3 uid="uid://0drrtr1rw0n1"]
 
 [ext_resource type="Script" path="res://scripts/bat.gd" id="1_g0myn"]
 [ext_resource type="Texture2D" uid="uid://pr8p3h0dkd52" path="res://art/BatFire_Attack.png" id="2_g0vxg"]
 [ext_resource type="Texture2D" uid="uid://qsrkfmtxuxoa" path="res://art/BatFire_Death.png" id="3_4vgkr"]
 [ext_resource type="Texture2D" uid="uid://blr81oaden4b3" path="res://art/BatFire_Flying.png" id="4_fp1y4"]
 [ext_resource type="Texture2D" uid="uid://b2e4477ngdotj" path="res://art/BatFire_Hurt.png" id="5_proka"]
+[ext_resource type="PackedScene" uid="uid://bed2y3ht665e5" path="res://particlesbullet.tscn" id="6_pxw3d"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fsgoc"]
 radius = 13.0384
@@ -215,6 +216,9 @@ collision_mask = 18
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DealDamageArea"]
 shape = SubResource("CircleShape2D_trqen")
+
+[node name="GPUParticles2D" parent="DealDamageArea" instance=ExtResource("6_pxw3d")]
+unique_name_in_owner = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="area_entered" from="BatHitbox" to="." method="_on_bat_hitbox_area_entered"]

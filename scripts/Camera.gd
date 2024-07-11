@@ -9,6 +9,9 @@ var rng = RandomNumberGenerator.new()
 var shake_strength: float = 0.0
 var shake_fade: float = 0.0
 
+@export var target : CharacterBody2D
+@export var sensitivity := 0.1
+
 # This function will be called with different shake parameters
 
 	
@@ -26,5 +29,9 @@ func _process(delta):
 			shake_active = false
 			offset = Vector2.ZERO  # Reset offset when shake is done
 
+
 func random_offset() -> Vector2:
 	return Vector2(rng.randf_range(-shake_strength, shake_strength), rng.randf_range(-shake_strength, shake_strength))
+
+
+

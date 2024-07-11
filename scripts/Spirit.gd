@@ -11,13 +11,11 @@ class_name spirit
 @export var DECEL_SPEED = 0.01 #if the spirit distance is greater than 100 then this slower speed
 var can_launch: bool
 var can_shoot: bool
-
 var playerlauncher : PackedScene = preload("res://playerlauncher.tscn")
 func _ready():
 	can_launch = true
 	can_shoot = true
-	
-	
+
 func _physics_process(delta):
 	if dog:
 		var target_position = dog.global_position
@@ -47,35 +45,44 @@ func _physics_process(delta):
 		if can_launch:
 			if Input.is_action_just_pressed("attackR"):
 				launch()
+				$launcher/CanvasLayer/AnimationPlayer.play("paw")
 				can_launch = false
 				await get_tree().create_timer(5).timeout
+				$launcher/CanvasLayer/AnimationPlayer.play("enabled")
 				can_launch = true
 				
-		
+				
 
+#func shootclosest():
+#
+	#if not shootingMarker:
+		#return
+	#
+	#var closestEntity = null
+	#var closestDistance = INF
+	#var groups =  ["enemies", "breakable objects"]
+	#for group in groups:
+		#for entity in get_tree().get_nodes_in_group(group):
+			#var distance = shootingMarker.global_position.distance_to(entity.global_position)
+			#if distance < closestDistance:
+				#closestDistance = distance
+				#closestEntity = entity
+#
+	##closesnt entity then create a instance
+	#if closestEntity:
+		#var new_bullet = bulletScene.instantiate()
+		#new_bullet.global_position = shootingMarker.global_position
+		#var direction = (closestEntity.global_position - shootingMarker.global_position).normalized()
+		#new_bullet.velocity = direction * new_bullet.speed
+#
+		#get_tree().root.call_deferred("add_child", new_bullet)
 func shoot():
-
-	if not shootingMarker:
-		return
-	
-	var closestEntity = null
-	var closestDistance = INF
-	var groups =  ["enemies", "breakable objects"]
-	for group in groups:
-		for entity in get_tree().get_nodes_in_group(group):
-			var distance = shootingMarker.global_position.distance_to(entity.global_position)
-			if distance < closestDistance:
-				closestDistance = distance
-				closestEntity = entity
-
-	#closesnt entity then create a instance
-	if closestEntity:
-		var new_bullet = bulletScene.instantiate()
-		new_bullet.global_position = shootingMarker.global_position
-		var direction = (closestEntity.global_position - shootingMarker.global_position).normalized()
-		new_bullet.velocity = direction * new_bullet.speed
-
-		get_tree().root.call_deferred("add_child", new_bullet)
+	var spawned_bullet := bulletScene.instantiate()
+	var mouse_direction := get_global_mouse_position() - shootingMarker.global_position
+	get_tree().root.call_deferred("add_child", spawned_bullet)
+	spawned_bullet.global_position = shootingMarker.global_position
+	spawned_bullet.rotation = mouse_direction.angle()
+	spawned_bullet.velocity = mouse_direction * spawned_bullet.speed
 
 func launch():
 	if shootingMarker:

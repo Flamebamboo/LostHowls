@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bppqo37bl7ki7"
-path="res://.godot/imported/angrybat2.png-68cbaac2fcc75145a2f8cbcb385169e9.ctex"
+uid="uid://00qmhyxfxtbp"
+path="res://.godot/imported/Doghealthbar.png-530955136ab58eeb0c6b99b6addc73ae.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://angrybat2.png"
-dest_files=["res://.godot/imported/angrybat2.png-68cbaac2fcc75145a2f8cbcb385169e9.ctex"]
+source_file="res://Doghealthbar.png"
+dest_files=["res://.godot/imported/Doghealthbar.png-530955136ab58eeb0c6b99b6addc73ae.ctex"]
 
 [params]
 
