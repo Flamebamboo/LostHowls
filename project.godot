@@ -11,23 +11,22 @@ config_version=5
 [application]
 
 config/name="Lost Howls"
-run/main_scene="res://scene/MainGame.tscn"
+run/main_scene="res://Scenes/MainGame.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
-config/icon="res://icon.svg"
 
 [autoload]
 
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
-Global="*res://scripts/global.gd"
+Global="*res://Script/global.gd"
 
 [dialogic]
 
 directories/dch_directory={
-"Ghostedtree": "res://Ghostedtree.dch"
+"Ghostedtree": "res://art/DialogueFiles/Ghostedtree.dch"
 }
 directories/dtl_directory={
-"Ghostedtree": "res://Ghostedtree.dtl"
+"Ghostedtree": "res://art/DialogueFiles/Ghostedtree.dtl"
 }
 
 [display]
@@ -37,7 +36,7 @@ window/size/viewport_height=270
 window/size/window_width_override=1920
 window/size/window_height_override=1080
 window/stretch/mode="canvas_items"
-mouse_cursor/custom_image="res://art/crosshair.png"
+mouse_cursor/custom_image="res://art/Interface Elements/crosshair.png"
 
 [editor_plugins]
 
