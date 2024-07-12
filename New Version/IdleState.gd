@@ -9,5 +9,5 @@ func s_activate():
 func s_physics_process(_delta):
 	var direction = Input.get_axis("moveleft", "moveright")
 	
-	#if !direction != 0:
-		#machine.transition_to(machine.states["RunState"])
+	if direction != 0:
+		machine.transition_to(machine.states["RunState"])

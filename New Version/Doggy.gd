@@ -14,7 +14,7 @@ func _physics_process(_delta):
 	var direction = Input.get_axis("moveleft", "moveright")
 	if direction == 1:
 		anim.flip_h = false
-	else:
+	elif direction == -1:
 		anim.flip_h = true
 		
 	velocity.y = min(velocity.y, terminal_velocity)

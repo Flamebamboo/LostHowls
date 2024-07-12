@@ -1,19 +1,15 @@
-[gd_scene load_steps=112 format=3 uid="uid://dxo0h0k8bfdee"]
+[gd_scene load_steps=107 format=3 uid="uid://dxo0h0k8bfdee"]
 
 [ext_resource type="Script" path="res://scripts/MainGame (2).gd" id="1_sw385"]
-[ext_resource type="AudioStream" uid="uid://bfbwnj6wmsxnl" path="res://music/Regenerator.mp3" id="2_k5tl1"]
 [ext_resource type="Texture2D" uid="uid://dpqru6htgukk2" path="res://art/keycaps-Sheet.png" id="2_kni8x"]
 [ext_resource type="PackedScene" uid="uid://b02f7hngfq2lt" path="res://scene/onewayplatforms.tscn" id="2_natgb"]
-[ext_resource type="AudioStream" uid="uid://c560puximnihv" path="res://music/Void_Entry.mp3" id="2_vla7x"]
 [ext_resource type="PackedScene" uid="uid://coe2bigkbj883" path="res://scene/boxes.tscn" id="2_yv6nv"]
 [ext_resource type="Texture2D" uid="uid://bpy27duv6rniw" path="res://art/tree.png" id="4_7m8hg"]
-[ext_resource type="Script" path="res://scripts/Audio Switcher.gd" id="6_fvq80"]
 [ext_resource type="Texture2D" uid="uid://dfx4dl7ri46i7" path="res://art/testingtile2.0-Sheet.png" id="6_g8k8m"]
 [ext_resource type="Texture2D" uid="uid://c3f3n6rtd7im8" path="res://art/tilese2t.png" id="7_3p3uf"]
 [ext_resource type="Texture2D" uid="uid://42e3dhkoudfi" path="res://art/wireframe.png" id="9_m6vbv"]
 [ext_resource type="Texture2D" uid="uid://dcg17xo4mwhk2" path="res://art/stonetiles-Sheet.png" id="10_epgtp"]
 [ext_resource type="Shader" path="res://shader/fog.gdshader" id="10_nn7nr"]
-[ext_resource type="PackedScene" uid="uid://0drrtr1rw0n1" path="res://scene/bat.tscn" id="11_kq7jp"]
 [ext_resource type="PackedScene" uid="uid://dgebxxsq0f2lk" path="res://scene/fireplace.tscn" id="16_yvpib"]
 [ext_resource type="Texture2D" uid="uid://dxydd83uy4nug" path="res://art/tent.png" id="17_p61ve"]
 [ext_resource type="PackedScene" uid="uid://cqfuu3blbblkk" path="res://scene/spikeball.tscn" id="22_kqo1w"]
@@ -227,9 +223,6 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gavjo"]
-size = Vector2(192, 97)
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yf53e"]
 blend_mode = 1
@@ -550,71 +543,6 @@ frame_progress = 0.0475171
 [node name="spirit" parent="Player_ghost" instance=ExtResource("63_g7hrd")]
 position = Vector2(1363, 16)
 
-[node name="Audio Manager" type="Node" parent="."]
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Audio Manager"]
-position = Vector2(1511, 81)
-scale = Vector2(0.479998, 0.520001)
-stream = ExtResource("2_k5tl1")
-
-[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="Audio Manager"]
-position = Vector2(-596, 647)
-stream = ExtResource("2_vla7x")
-
-[node name="Area2D" type="Area2D" parent="Audio Manager"]
-position = Vector2(0, 166)
-script = ExtResource("6_fvq80")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Audio Manager/Area2D"]
-position = Vector2(1739, 1169)
-shape = SubResource("RectangleShape2D_gavjo")
-
-[node name="enemy&npc" type="Node" parent="Audio Manager"]
-
-[node name="bat" parent="Audio Manager/enemy&npc" instance=ExtResource("11_kq7jp")]
-position = Vector2(1641, 412)
-collision_mask = 1
-
-[node name="bat2" parent="Audio Manager/enemy&npc" instance=ExtResource("11_kq7jp")]
-position = Vector2(1456, 400)
-collision_mask = 1
-
-[node name="bat3" parent="Audio Manager/enemy&npc" instance=ExtResource("11_kq7jp")]
-position = Vector2(259, 470)
-collision_mask = 1
-
-[node name="bat4" parent="Audio Manager/enemy&npc" instance=ExtResource("11_kq7jp")]
-position = Vector2(471, 375)
-collision_mask = 1
-
-[node name="bat5" parent="Audio Manager/enemy&npc" instance=ExtResource("11_kq7jp")]
-position = Vector2(471, 375)
-collision_mask = 1
-
-[node name="bat6" parent="Audio Manager/enemy&npc" instance=ExtResource("11_kq7jp")]
-position = Vector2(471, 375)
-collision_mask = 1
-
-[node name="bat7" parent="Audio Manager/enemy&npc" instance=ExtResource("11_kq7jp")]
-position = Vector2(471, 375)
-collision_mask = 1
-
-[node name="bat8" parent="Audio Manager/enemy&npc" instance=ExtResource("11_kq7jp")]
-position = Vector2(471, 375)
-collision_mask = 1
-
-[node name="bat9" parent="Audio Manager/enemy&npc" instance=ExtResource("11_kq7jp")]
-position = Vector2(471, 375)
-collision_mask = 1
-
-[node name="bat10" parent="Audio Manager/enemy&npc" instance=ExtResource("11_kq7jp")]
-position = Vector2(471, 375)
-collision_mask = 1
-
-[node name="bat11" parent="Audio Manager/enemy&npc" instance=ExtResource("11_kq7jp")]
-position = Vector2(471, 375)
-collision_mask = 1
-
 [node name="Gpu particles" type="Node" parent="."]
 
 [node name="Insect Particles" type="GPUParticles2D" parent="Gpu particles"]
@@ -809,7 +737,7 @@ CameraRef = NodePath("../Camera2D")
 area_pcam = NodePath("PhantomCamera2D")
 
 [node name="PhantomCamera2D" type="Node2D" parent="Camera types/cam_1" node_paths=PackedStringArray("follow_target")]
-position = Vector2(240, -378.75)
+position = Vector2(242, -378.75)
 script = ExtResource("29_t58t4")
 follow_mode = 2
 follow_target = NodePath("../../../CharacterBody2D")
@@ -886,8 +814,12 @@ position = Vector2(1640, 1023.38)
 shape = SubResource("RectangleShape2D_l0ew3")
 
 [node name="Camera2D" type="Camera2D" parent="Camera types" node_paths=PackedStringArray("target")]
-position = Vector2(698, 91.25)
+position = Vector2(700, 91.25)
 zoom = Vector2(0.8, 0.8)
+limit_left = -78
+limit_top = -236
+limit_right = 1746
+limit_bottom = 260
 script = ExtResource("29_racka")
 target = NodePath("../../Player_ghost/spirit")
 
@@ -1120,4 +1052,4 @@ position = Vector2(-436, 41)
 texture = ExtResource("51_g2s0r")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("50_w0dsa")]
-position = Vector2(240, -307)
+position = Vector2(242, -347)

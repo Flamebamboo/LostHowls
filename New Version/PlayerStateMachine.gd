@@ -9,5 +9,5 @@ func _ready():
 		state.machine = self
 		state.player = player
 
-	active_state = states["IdleState"]
+	active_state = states["AirState"]
 	active_state.s_activate()
