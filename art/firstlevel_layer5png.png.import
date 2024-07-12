@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cas5bngx1ua0i"
-path="res://.godot/imported/Doglauncherwhite.png-9c36d3f6629b26397afdb724491ec1c8.ctex"
+uid="uid://blrep37yqsm6d"
+path="res://.godot/imported/firstlevel_layer5png.png-47cb409bd6b7d5c932b7b0deb14e78c9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Doglauncherwhite.png"
-dest_files=["res://.godot/imported/Doglauncherwhite.png-9c36d3f6629b26397afdb724491ec1c8.ctex"]
+source_file="res://art/firstlevel_layer5png.png"
+dest_files=["res://.godot/imported/firstlevel_layer5png.png-47cb409bd6b7d5c932b7b0deb14e78c9.ctex"]
 
 [params]
 

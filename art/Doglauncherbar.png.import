@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cosec00nl68yv"
-path="res://.godot/imported/firstlevel_layer3.png-a9a03148b3f2f40a65338af70595214b.ctex"
+uid="uid://b45yr44i3kmgd"
+path="res://.godot/imported/Doglauncherbar.png-c29d24dc607e36671c8743815ab79977.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://firstlevel_layer3.png"
-dest_files=["res://.godot/imported/firstlevel_layer3.png-a9a03148b3f2f40a65338af70595214b.ctex"]
+source_file="res://art/Doglauncherbar.png"
+dest_files=["res://.godot/imported/Doglauncherbar.png-c29d24dc607e36671c8743815ab79977.ctex"]
 
 [params]
 

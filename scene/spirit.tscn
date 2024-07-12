@@ -6,7 +6,7 @@
 [ext_resource type="Material" uid="uid://bmgyfioow48f8" path="res://shader/unshadedlight.tres" id="2_uc4jv"]
 [ext_resource type="Script" path="res://scripts/Line2D.gd" id="3_tc1tc"]
 [ext_resource type="PackedScene" uid="uid://ep5krjvy7r02" path="res://scene/bullet.tscn" id="7_4a3nk"]
-[ext_resource type="Texture2D" uid="uid://cas5bngx1ua0i" path="res://Doglauncherwhite.png" id="7_cvbms"]
+[ext_resource type="Texture2D" uid="uid://cas5bngx1ua0i" path="res://art/Doglauncherwhite.png" id="7_cvbms"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_v08iw"]
 
@@ -229,11 +229,12 @@ bulletScene = ExtResource("7_4a3nk")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 material = SubResource("CanvasItemMaterial_v08iw")
 position = Vector2(-3.41061e-13, 3.41061e-13)
-energy = 0.2
+energy = 0.0
+blend_mode = 1
 texture = ExtResource("2_l56k3")
 
 [node name="Sprite2D2" type="Sprite2D" parent="PointLight2D"]
-modulate = Color(6.76619e-06, 0.685272, 0.453574, 0.227451)
+modulate = Color(0, 0.686275, 0.454902, 0.137255)
 material = SubResource("CanvasItemMaterial_pcsx6")
 texture = SubResource("GradientTexture2D_t5gjl")
 

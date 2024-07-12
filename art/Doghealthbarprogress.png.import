@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csbnkrjrlxhnw"
-path="res://.godot/imported/destroyableplants2.png-408404784900f57dad08e67b7664ef11.ctex"
+uid="uid://d3vgymbbynr62"
+path="res://.godot/imported/Doghealthbarprogress.png-9d7682c3e23a1ba734836f6abd7d37b1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://destroyableplants2.png"
-dest_files=["res://.godot/imported/destroyableplants2.png-408404784900f57dad08e67b7664ef11.ctex"]
+source_file="res://art/Doghealthbarprogress.png"
+dest_files=["res://.godot/imported/Doghealthbarprogress.png-9d7682c3e23a1ba734836f6abd7d37b1.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3vgymbbynr62"
-path="res://.godot/imported/Doghealthbarprogress.png-26392f2d6b62f4cc5530a76234aa6466.ctex"
+uid="uid://00qmhyxfxtbp"
+path="res://.godot/imported/Doghealthbar.png-9efe7a21fcecb44f50c963fddfffe777.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Doghealthbarprogress.png"
-dest_files=["res://.godot/imported/Doghealthbarprogress.png-26392f2d6b62f4cc5530a76234aa6466.ctex"]
+source_file="res://art/Doghealthbar.png"
+dest_files=["res://.godot/imported/Doghealthbar.png-9efe7a21fcecb44f50c963fddfffe777.ctex"]
 
 [params]
 
