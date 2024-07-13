@@ -19,9 +19,6 @@ func s_activate():
 	dog = Global.dogCharacter
 	animation.play("attack")
 	animatedSprite.play("attack")
-	
-	
-func s_process(_delta):
 	#2*pi is 360 deg divided by 8 so each spawnpoint is 45deg apart
 	var step = 2 * PI / spawn_point_count
 	
@@ -34,6 +31,9 @@ func s_process(_delta):
 
 	
 	
+	
+func s_process(_delta):
+	pass
 	
 func s_physics_process(delta):
 	shoottimer.wait_time = shooter_timer_wait_time #timing/intervals of bullet iinstance cycle
@@ -63,8 +63,8 @@ func s_physics_process(delta):
 		await get_tree().create_timer(1.5).timeout
 		machine.transition_to(machine.states["FlyingState"])
 	else:
-		# If dog is not found, switch to idle
-		machine.transition_to(machine.states["IdleState"])
+		# If dog is not found, switch to flying
+		machine.transition_to(machine.states["FlyingState"])
 		shoottimer.stop()
 func s_deactivate():
 	pass

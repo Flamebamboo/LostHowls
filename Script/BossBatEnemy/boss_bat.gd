@@ -8,7 +8,7 @@ class_name BossBat
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
-	animatedsprite.play("idle")
+	animatedsprite.play("flying")
 	
 	
 func _physics_process(_delta):
