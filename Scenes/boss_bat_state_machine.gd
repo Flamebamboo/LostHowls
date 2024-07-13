@@ -7,7 +7,7 @@ func _ready():
 	for state in get_children():
 		states[state.get_name()] = state
 		state.machine = self
-		state.BossBat = bossbat
+		state.bossbat = bossbat
 
-	active_state = states["AirState"]
+	active_state = states["FlyingState"]
 	active_state.s_activate()

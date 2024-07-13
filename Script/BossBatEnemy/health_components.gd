@@ -16,7 +16,7 @@ func _ready():
 	health = healthMax
 	
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if health <= 0:
 		handledeath()
 		

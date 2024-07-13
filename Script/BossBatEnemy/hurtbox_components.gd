@@ -9,7 +9,7 @@ class_name Hurtbox
 func _ready():
 	pass
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	for body in %"Hurtbox Components".get_overlapping_bodies():
 		if body.is_in_group("dog"):
 			if body.has_method("take_damage"):

@@ -3,7 +3,7 @@ class_name BossBat
 @export var health : Health 
 @export var hurtbox: Hurtbox
 @export var animatedsprite : AnimatedSprite2D
-
+@onready var machine = %BossBatFSM
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -11,15 +11,9 @@ func _ready():
 	animatedsprite.play("idle")
 	
 	
-func _physics_process(delta):
-	
-	#apply_gravity(delta)
-	
+func _physics_process(_delta):
 	move_and_slide()
 	
-#func apply_gravity(delta):
-	#if not is_on_floor():
-		#velocity.y += gravity * 30 * delta
 
 
 func _on_health_components_took_damage():

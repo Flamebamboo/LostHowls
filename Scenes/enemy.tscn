@@ -7,13 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://c7g1ua0jd6ccd" path="res://art/Enemies/Bossbat-Sheet.png" id="3_2ewxv"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/bat_state_controller.gd" id="4_25j3u"]
 [ext_resource type="Texture2D" uid="uid://bppqo37bl7ki7" path="res://art/Enemies/angrybat2.png" id="4_bv8yu"]
-[ext_resource type="Script" path="res://Script/BossBatEnemy/attack_state.gd" id="6_5ck6p"]
 [ext_resource type="Texture2D" uid="uid://nl4gavibgde8" path="res://art/Enemies/hurtbossbat.png" id="6_iyqgw"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/health_components.gd" id="9_cumit"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/hurtbox_components.gd" id="10_8h1lu"]
 [ext_resource type="Script" path="res://Scenes/boss_bat_state_machine.gd" id="11_0chcn"]
-[ext_resource type="Script" path="res://Script/BossBatEnemy/idle_state.gd" id="11_4jlrq"]
-[ext_resource type="Script" path="res://Script/BossBatEnemy/flying_state.gd" id="11_5hqke"]
+[ext_resource type="Script" path="res://Script/BossBatEnemy/IdleState.gd" id="12_f8g8u"]
+[ext_resource type="Script" path="res://Script/BossBatEnemy/FlyingState.gd" id="13_31c35"]
+[ext_resource type="Script" path="res://Script/BossBatEnemy/AttackState.gd" id="14_8x6gf"]
 
 [sub_resource type="Animation" id="Animation_vsm7r"]
 length = 0.001
@@ -195,11 +195,11 @@ shape = SubResource("CircleShape2D_gpsja")
 material = ExtResource("1_xyjkw")
 position = Vector2(8, -49)
 sprite_frames = SubResource("SpriteFrames_h0w82")
-animation = &"hurt"
+animation = &"attack"
 
-[node name="Controller" type="Node" parent="." node_paths=PackedStringArray("node_finite_state_machine")]
+[node name="Controller" type="Node" parent="." node_paths=PackedStringArray("machine")]
 script = ExtResource("4_25j3u")
-node_finite_state_machine = NodePath("../BossBatFSM")
+machine = NodePath("../BossBatFSM")
 
 [node name="Health Components" type="Node" parent="." node_paths=PackedStringArray("CharacterBody")]
 script = ExtResource("9_cumit")
@@ -207,7 +207,6 @@ healthMax = 800
 CharacterBody = NodePath("..")
 
 [node name="DogDetector" type="Area2D" parent="."]
-collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DogDetector"]
@@ -226,27 +225,25 @@ position = Vector2(5, -22)
 shape = SubResource("CircleShape2D_ivd0l")
 debug_color = Color(1, 0, 0.27451, 0.419608)
 
-[node name="BossBatFSM" type="Node" parent="."]
+[node name="BossBatFSM" type="Node" parent="." node_paths=PackedStringArray("bossbat")]
+unique_name_in_owner = true
 script = ExtResource("11_0chcn")
+bossbat = NodePath("..")
 
-[node name="idle" type="Node" parent="BossBatFSM" node_paths=PackedStringArray("characterBody", "animatedSprite")]
-script = ExtResource("11_4jlrq")
-characterBody = NodePath("../..")
+[node name="IdleState" type="Node" parent="BossBatFSM" node_paths=PackedStringArray("animatedSprite")]
+script = ExtResource("12_f8g8u")
 animatedSprite = NodePath("../../AnimatedSprite2D")
 
-[node name="flying" type="Node" parent="BossBatFSM" node_paths=PackedStringArray("characterBody", "animatedSprite", "flyingtimer")]
-script = ExtResource("11_5hqke")
-characterBody = NodePath("../..")
+[node name="FlyingState" type="Node" parent="BossBatFSM" node_paths=PackedStringArray("animatedSprite", "flyingtimer")]
+script = ExtResource("13_31c35")
 animatedSprite = NodePath("../../AnimatedSprite2D")
 flyingtimer = NodePath("../../flyingtimer")
 
-[node name="attack" type="Node" parent="BossBatFSM" node_paths=PackedStringArray("node_finite_state_machine", "characterBody", "animatedSprite", "animation")]
-script = ExtResource("6_5ck6p")
-speed = 400
-node_finite_state_machine = NodePath("..")
-characterBody = NodePath("../..")
+[node name="AttackState" type="Node" parent="BossBatFSM" node_paths=PackedStringArray("animatedSprite", "animation")]
+script = ExtResource("14_8x6gf")
 animatedSprite = NodePath("../../AnimatedSprite2D")
 animation = NodePath("../../AnimationPlayer")
+speed = 400
 
 [node name="Rotater" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -274,6 +271,6 @@ show_percentage = false
 [connection signal="body_entered" from="DogDetector" to="Controller" method="_on_dog_detector_body_entered"]
 [connection signal="body_exited" from="DogDetector" to="Controller" method="_on_dog_detector_body_exited"]
 [connection signal="body_entered" from="Hurtbox Components" to="Hurtbox Components" method="on_bullet_collisions"]
-[connection signal="timeout" from="flyingtimer" to="BossBatFSM/flying" method="_on_timer_timeout"]
-[connection signal="timeout" from="shoottimer" to="BossBatFSM/attack" method="_on_shoottimer_timeout"]
+[connection signal="timeout" from="flyingtimer" to="BossBatFSM/FlyingState" method="_on_timer_timeout"]
+[connection signal="timeout" from="shoottimer" to="BossBatFSM/AttackState" method="_on_shoottimer_timeout"]
 [connection signal="timeout" from="RandomTimer" to="Controller" method="_on_random_timer_timeout"]

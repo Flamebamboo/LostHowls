@@ -1,5 +1,4 @@
 extends PlayerState
-class_name JumpState
 
 func _unhandled_input(event):
 	if player.is_on_floor():

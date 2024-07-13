@@ -11,7 +11,7 @@ class_name spirit
 @export var DECEL_SPEED = 0.01 #if the spirit distance is greater than 100 then this slower speed
 var can_launch: bool
 var can_shoot: bool
-var playerlauncher : PackedScene = preload("res://playerlauncher.tscn")
+var playerlauncher : PackedScene = preload("res://Scenes/playerlauncher.tscn")
 func _ready():
 	can_launch = true
 	can_shoot = true
@@ -26,7 +26,7 @@ func _physics_process(delta):
 			global_position += direction * SPEED * delta
 		#if distance to player is greater than stop distance it move with slow speed towards dog
 		elif distance_to_player > STOP_DISTANCE:
-			# Smooth follow using lerp
+			# Smooth follow using linear interpolation 
 			global_position = global_position.lerp(target_position, DECEL_SPEED)
 
 		
@@ -51,31 +51,6 @@ func _physics_process(delta):
 				$launcher/CanvasLayer/AnimationPlayer.play("enabled")
 				can_launch = true
 				
-				
-
-#func shootclosest():
-#
-	#if not shootingMarker:
-		#return
-	#
-	#var closestEntity = null
-	#var closestDistance = INF
-	#var groups =  ["enemies", "breakable objects"]
-	#for group in groups:
-		#for entity in get_tree().get_nodes_in_group(group):
-			#var distance = shootingMarker.global_position.distance_to(entity.global_position)
-			#if distance < closestDistance:
-				#closestDistance = distance
-				#closestEntity = entity
-#
-	##closesnt entity then create a instance
-	#if closestEntity:
-		#var new_bullet = bulletScene.instantiate()
-		#new_bullet.global_position = shootingMarker.global_position
-		#var direction = (closestEntity.global_position - shootingMarker.global_position).normalized()
-		#new_bullet.velocity = direction * new_bullet.speed
-#
-		#get_tree().root.call_deferred("add_child", new_bullet)
 func shoot():
 	var spawned_bullet := bulletScene.instantiate()
 	var mouse_direction := get_global_mouse_position() - shootingMarker.global_position
@@ -85,7 +60,7 @@ func shoot():
 	spawned_bullet.velocity = mouse_direction * spawned_bullet.speed
 
 func launch():
-	if shootingMarker:
+	if shootingMarker and dog:
 			var new_launcher = playerlauncher.instantiate()
 			new_launcher.global_position = shootingMarker.global_position
 			var direction = (dog.global_position - shootingMarker.global_position).normalized()

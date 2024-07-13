@@ -1,6 +1,5 @@
 extends Node
-
-@export var node_finite_state_machine : NodeFiniteStateMachine
+@export var machine : StateMachine
 
 @onready var random_timer : Timer = $"../RandomTimer"
 
@@ -19,7 +18,7 @@ func start_random_timer():
 
 
 func _on_dog_detector_body_entered(body):
-	if body.name == "dog":
+	if body.is_in_group("player"):
 		print("detectbody")
 		start_random_timer()
 
@@ -29,9 +28,9 @@ func _on_random_timer_timeout():
 	# Randomly decide whether to transition to "attack" or "idle"
 	var should_attack = randi_range(0, 1)
 	if should_attack:
-		node_finite_state_machine.transition_to("attack")
+		machine.transition_to(machine.states["FlyingState"])
 	else:
-		node_finite_state_machine.transition_to("flying")
-	
+		machine.transition_to(machine.states["AttackState"])
+		
 	# Restart the timer with a new random interval
 	start_random_timer()

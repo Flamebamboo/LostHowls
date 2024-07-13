@@ -1,5 +1,4 @@
 extends PlayerState
-class_name AirStrafeState
 
 
 func s_physics_process(_delta):

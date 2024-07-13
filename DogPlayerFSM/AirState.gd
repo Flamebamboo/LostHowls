@@ -1,5 +1,4 @@
 extends PlayerState
-class_name AirState
 func s_physics_process(_delta):
 
 	var direction = Input.get_axis("moveleft", "moveright")

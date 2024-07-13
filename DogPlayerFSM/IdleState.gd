@@ -1,6 +1,4 @@
 extends PlayerState
-class_name IdleState
-
 func s_activate():
 	player.velocity = Vector2(0,0)
 	can_jump = true

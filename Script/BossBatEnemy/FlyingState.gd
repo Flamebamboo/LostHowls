@@ -1,18 +1,16 @@
-extends 
-
-@export var characterBody: CharacterBody2D
+extends BossBatState
 @export var animatedSprite: AnimatedSprite2D
 var dir: Vector2
 var SPEED = 50
 @export var flyingtimer: Timer
 
-func enter():
+func s_activate():
 	animatedSprite.play("flying")
 	flyingtimer.start()
 
-func on_process():
-	characterBody.velocity = dir * SPEED
-	characterBody.move_and_slide()
+func s_physics_process(_delta):
+	bossbat.velocity = dir * SPEED
+	bossbat.move_and_slide()
 	
 
 	
@@ -27,6 +25,6 @@ func choose(array):
 	array.shuffle()
 	return array.front()
 		
-func exit():
-	characterBody.velocity = Vector2.ZERO
+func s_deactivate():
+	bossbat.velocity = Vector2.ZERO
 	animatedSprite.stop()

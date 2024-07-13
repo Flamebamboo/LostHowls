@@ -18,7 +18,7 @@ config/features=PackedStringArray("4.2", "Mobile")
 
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
-Global="*res://Script/global.gd"
+Global="*res://global.gd"
 
 [dialogic]
 

@@ -1,28 +1,31 @@
 extends Area2D
+
 @export var CameraRef: Camera2D
 @export var area_pcam: PhantomCamera2D
 @export var shake: bool = false
 var should_shake: bool = false
 
-
-func _ready() -> void:
-	connect("area_entered", _entered_area)
-	connect("area_exited", _exited_area)
-
-	
-func _entered_area(area_2d: Area2D) -> void:
-	if area_2d.get_parent() is CharacterBody2D:
+# Called when a body enters the area
+func _on_body_entered(body):
+	# Check if the entering body is in the "player" group
+	if body.is_in_group("player"):
+		# Set the priority of the Phantom Camera
 		area_pcam.set_priority(20)
-		print("priority set 20")
-		
-		
+		print("sup")
+	
+	# Check if shaking is enabled
 	if shake:
 		should_shake = true
-		#CameraRef.apply_shake()
-		pass
-		
-func _exited_area(area_2d: Area2D) -> void:
-	if area_2d.get_parent() is CharacterBody2D:
+		# Apply a shake effect to the CameraRef
+		CameraRef.apply_shake(20.0, 10.0)
+
+# Called when a body exits the area
+func _on_body_exited(body):
+	# Check if the exiting body is in the "player" group
+	if body.is_in_group("player"):
+		# Reset the priority of the Phantom Camera
 		area_pcam.set_priority(0)
-	if should_shake:
-		should_shake = false
+
+
+
+
