@@ -6,7 +6,6 @@ extends BossBatState
 @export var speed: int
 
 @export var rotate_speed = 0
-@export var shooter_timer_wait_time = 3
 @export var spawn_point_count = 8
 const radius = 100
 @onready var rotater = %Rotater
@@ -28,16 +27,16 @@ func s_activate():
 		spawn_point.rotation = pos.angle()
 		spawn_point.position = pos
 		rotater.add_child(spawn_point) # spawn_point will add as rotater child so it will follow along with the rotatation of the rotator
-
 	
 	
+	for s in rotater.get_children():
+		var bullet = batbullet.instantiate()
+		get_tree().root.add_child(bullet)
+		bullet.global_position = s.global_position
+		bullet.rotation = s.global_rotation
 	
-func s_process(_delta):
-	pass
 	
 func s_physics_process(delta):
-	shoottimer.wait_time = shooter_timer_wait_time #timing/intervals of bullet iinstance cycle
-	shoottimer.start()
 	var new_rotation = rotater.rotation_degrees + rotate_speed * delta
 	rotater.rotation_degrees = fmod(new_rotation, 360)
 	
@@ -66,14 +65,4 @@ func s_physics_process(delta):
 		# If dog is not found, switch to flying
 		machine.transition_to(machine.states["FlyingState"])
 		shoottimer.stop()
-func s_deactivate():
-	pass
 
-
-
-func _on_shoottimer_timeout():
-	for s in rotater.get_children():
-		var bullet = batbullet.instantiate()
-		get_tree().root.add_child(bullet)
-		bullet.global_position = s.global_position
-		bullet.rotation = s.global_rotation
