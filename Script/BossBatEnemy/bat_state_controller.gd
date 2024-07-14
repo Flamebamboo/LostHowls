@@ -17,12 +17,6 @@ func start_random_timer():
 
 
 
-func _on_dog_detector_body_entered(body):
-	if body.is_in_group("player"):
-		print("detectbody")
-		start_random_timer()
-
-
 
 func _on_random_timer_timeout():
 	# Randomly decide whether to transition to "attack" or "idle"
@@ -34,3 +28,9 @@ func _on_random_timer_timeout():
 		
 	# Restart the timer with a new random interval
 	start_random_timer()
+
+
+func _on_entity_detector_body_entered(body):
+	if body.is_in_group("player"):
+		print("detectbody")
+		start_random_timer()

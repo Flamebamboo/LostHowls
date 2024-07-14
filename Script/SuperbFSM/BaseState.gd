@@ -3,16 +3,16 @@ class_name BaseState
 
 var machine: StateMachine
 func s_activate():
-	pass
+	return null
 	
 func s_deactivate():
-	pass
+	return null
 
 func s_process(_delta):
-	pass
+	return null
 
 func s_physics_process(_delta):
-	pass
+	return null
 
-
-	
+func _input(_event: InputEvent):
+	return null

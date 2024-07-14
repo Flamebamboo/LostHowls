@@ -1,19 +1,19 @@
 extends Node
-class_name Health
+class_name BaseHealth
 
 var health: int
-@export var healthMax = 1
+@export var health_max = 1
 
-var healthMin = 0
-var takingDamage: bool
+var health_min = 0
+var taking_damage: bool
 var dead: bool
 @export var CharacterBody : CharacterBody2D
 
-signal tookDamage()#hitflash, sound play
+signal took_damage()#hitflash, sound play
 signal died() #send to play death animations 
 
 func _ready():
-	health = healthMax
+	health = health_max
 	
 
 func _physics_process(_delta):
@@ -24,10 +24,10 @@ func takedamage(amount: int):
 	if dead:
 		return
 	health -= amount
-	if health < healthMin:
-		health = healthMin
+	if health < health_min:
+		health = health_min
 		
-	emit_signal("tookDamage")
+	emit_signal("took_damage")
 	if health <= 0:
 		handledeath()
 	

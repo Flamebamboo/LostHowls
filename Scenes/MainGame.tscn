@@ -22,7 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://cy6u0dprwre7m" path="res://Scenes/notes.tscn" id="33_unu8y"]
 [ext_resource type="PackedScene" uid="uid://dyts0n16u8h8n" path="res://Scenes/radiotape.tscn" id="34_hrose"]
 [ext_resource type="Texture2D" uid="uid://k8vo7syeuslr" path="res://art/Props/Interactables/skeleton.png" id="42_uy14o"]
-[ext_resource type="PackedScene" uid="uid://bd24oc54elotu" path="res://Scenes/enemy.tscn" id="44_6xdtf"]
+[ext_resource type="PackedScene" uid="uid://bd24oc54elotu" path="res://Scenes/BossBat.tscn" id="44_6xdtf"]
 [ext_resource type="Shader" path="res://shader/waterfall.gdshader" id="45_busmy"]
 [ext_resource type="Texture2D" uid="uid://eg4wgqmbl5fe" path="res://art/VFX/waterfallparticles.png" id="46_14lyo"]
 [ext_resource type="PackedScene" uid="uid://d24wjreyddt1s" path="res://Script/BossBatEnemy/Interactables/rock_3.tscn" id="48_3gk76"]
@@ -434,12 +434,6 @@ script = ExtResource("1_sw385")
 metadata/_edit_vertical_guides_ = [384.0]
 metadata/_edit_horizontal_guides_ = [-352.0, -22.0]
 
-[node name="DogPlayer" parent="." groups=["player"] instance=ExtResource("50_w0dsa")]
-z_index = 10
-position = Vector2(1924, 197)
-collision_layer = 2
-collision_mask = 13311
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1051, -386)
 sprite_frames = SubResource("SpriteFrames_g5yu2")
@@ -666,7 +660,7 @@ area_pcam = NodePath("PhantomCamera2D")
 position = Vector2(988, -378.75)
 script = ExtResource("29_t58t4")
 follow_mode = 2
-follow_target = NodePath("../../../DogPlayer")
+follow_target = NodePath("../../../CharacterBody2D")
 zoom = Vector2(0.8, 0.8)
 tween_resource = SubResource("Resource_v2a0e")
 follow_damping = true
@@ -689,7 +683,7 @@ area_pcam = NodePath("PhantomCamera2D")
 position = Vector2(854.143, 31.1429)
 script = ExtResource("29_t58t4")
 follow_mode = 2
-follow_target = NodePath("../../../DogPlayer")
+follow_target = NodePath("../../../CharacterBody2D")
 zoom = Vector2(0.7, 0.7)
 tween_resource = SubResource("Resource_v2a0e")
 follow_offset = Vector2(100, 2.08165e-12)
@@ -708,10 +702,10 @@ CameraRef = NodePath("../Camera2D")
 area_pcam = NodePath("PhantomCamera2D")
 
 [node name="PhantomCamera2D" type="Node2D" parent="Camera types/cam_3 Fight" node_paths=PackedStringArray("follow_target")]
-position = Vector2(1856, 134)
+position = Vector2(1803, 134)
 script = ExtResource("29_t58t4")
 follow_mode = 1
-follow_target = NodePath("../../../DogPlayer")
+follow_target = NodePath("../../../CharacterBody2D")
 zoom = Vector2(0.5, 0.5)
 tween_resource = SubResource("Resource_v2a0e")
 limit_target = NodePath("../Limit")
@@ -729,10 +723,10 @@ CameraRef = NodePath("../Camera2D")
 area_pcam = NodePath("PhantomCamera2D")
 
 [node name="PhantomCamera2D" type="Node2D" parent="Camera types/cam_3 proceed" node_paths=PackedStringArray("follow_target")]
-position = Vector2(1929, 651)
+position = Vector2(1808, 651)
 script = ExtResource("29_t58t4")
 follow_mode = 2
-follow_target = NodePath("../../../DogPlayer")
+follow_target = NodePath("../../../CharacterBody2D")
 tween_resource = SubResource("Resource_v2a0e")
 limit_target = NodePath("../Limit")
 
@@ -743,10 +737,6 @@ shape = SubResource("RectangleShape2D_l0ew3")
 [node name="Camera2D" type="Camera2D" parent="Camera types" node_paths=PackedStringArray("target")]
 position = Vector2(1446, 91.25)
 zoom = Vector2(0.8, 0.8)
-limit_left = -78
-limit_top = -236
-limit_right = 1746
-limit_bottom = 260
 script = ExtResource("29_racka")
 target = NodePath("../../Player_ghost/spirit")
 
@@ -775,11 +765,6 @@ flip_h = true
 [node name="Skeleton" type="Sprite2D" parent="."]
 position = Vector2(1740, 988)
 texture = ExtResource("42_uy14o")
-
-[node name="enemy" parent="." instance=ExtResource("44_6xdtf")]
-material = null
-position = Vector2(1883, -59)
-collision_mask = 131
 
 [node name="waterfall" type="TextureRect" parent="."]
 visible = false
@@ -951,7 +936,15 @@ texture = ExtResource("4_7m8hg")
 
 [node name="spirit" parent="." node_paths=PackedStringArray("dog") instance=ExtResource("63_g7hrd")]
 position = Vector2(1699, 161)
-dog = NodePath("../DogPlayer")
+dog = NodePath("../CharacterBody2D")
+
+[node name="enemy" parent="." instance=ExtResource("44_6xdtf")]
+position = Vector2(1731, 4)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("50_w0dsa")]
+position = Vector2(1803, 264)
+collision_layer = 2
+collision_mask = 1
 
 [connection signal="body_entered" from="Camera types/cam_1" to="Camera types/cam_1" method="_on_body_entered"]
 [connection signal="body_exited" from="Camera types/cam_1" to="Camera types/cam_1" method="_on_body_exited"]

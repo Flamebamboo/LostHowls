@@ -34,7 +34,7 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("attackL"):
 			for body in $Gun.get_overlapping_bodies():
 				print(body)
-				if body.is_in_group("enemies") or body.is_in_group("breakable objects"):
+				if body.is_in_group("Enemy") or body.is_in_group("breakable objects"):
 					shoot()
 					await get_tree().create_timer(0.3).timeout
 					shoot()

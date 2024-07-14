@@ -4,8 +4,8 @@
 [ext_resource type="Script" path="res://Script/BossBatEnemy/boss_bat.gd" id="2_ympke"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/bat_state_controller.gd" id="4_25j3u"]
 [ext_resource type="Texture2D" uid="uid://boijh8vbuie55" path="res://Bossbat-Sheet.png" id="6_8r4q4"]
+[ext_resource type="Script" path="res://Scenes/EnemyHealth.gd" id="6_im028"]
 [ext_resource type="Texture2D" uid="uid://nl4gavibgde8" path="res://art/Enemies/hurtbossbat.png" id="6_iyqgw"]
-[ext_resource type="Script" path="res://Script/BossBatEnemy/health_components.gd" id="9_cumit"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/hurtbox_components.gd" id="10_8h1lu"]
 [ext_resource type="Script" path="res://Scenes/boss_bat_state_machine.gd" id="11_0chcn"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/FlyingState.gd" id="13_31c35"]
@@ -72,7 +72,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gpsja"]
-radius = 30.25
+radius = 46.0109
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ljwux"]
 atlas = ExtResource("6_8r4q4")
@@ -147,14 +147,14 @@ radius = 409.207
 [sub_resource type="CircleShape2D" id="CircleShape2D_ivd0l"]
 radius = 68.0
 
-[node name="enemy" type="CharacterBody2D" node_paths=PackedStringArray("health", "hurtbox", "animatedsprite") groups=["enemies"]]
+[node name="enemy" type="CharacterBody2D" node_paths=PackedStringArray("health_component", "hurtbox_component", "animatedsprite") groups=["Enemy"]]
 z_index = 250
 material = ExtResource("1_xyjkw")
 collision_layer = 128
-collision_mask = 3
+collision_mask = 131
 script = ExtResource("2_ympke")
-health = NodePath("Health Components")
-hurtbox = NodePath("Hurtbox Components")
+health_component = NodePath("Health Components")
+hurtbox_component = NodePath("Hurtbox Components")
 animatedsprite = NodePath("AnimatedSprite2D")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -176,15 +176,16 @@ script = ExtResource("4_25j3u")
 machine = NodePath("../BossBatFSM")
 
 [node name="Health Components" type="Node" parent="." node_paths=PackedStringArray("CharacterBody")]
-script = ExtResource("9_cumit")
-healthMax = 800
+script = ExtResource("6_im028")
+health_max = 500
 CharacterBody = NodePath("..")
 
-[node name="DogDetector" type="Area2D" parent="."]
+[node name="Entity Detector" type="Area2D" parent="."]
 visible = false
+collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DogDetector"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entity Detector"]
 position = Vector2(2, -34)
 shape = SubResource("CircleShape2D_w7a0g")
 
@@ -194,6 +195,7 @@ collision_layer = 4
 collision_mask = 19
 script = ExtResource("10_8h1lu")
 health_components = NodePath("../Health Components")
+damage = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox Components"]
 shape = SubResource("CircleShape2D_ivd0l")
@@ -236,10 +238,9 @@ value = 500.0
 show_percentage = false
 
 [connection signal="died" from="Health Components" to="." method="_on_health_components_died"]
-[connection signal="tookDamage" from="Health Components" to="." method="_on_health_components_took_damage"]
-[connection signal="body_entered" from="DogDetector" to="Controller" method="_on_dog_detector_body_entered"]
-[connection signal="body_exited" from="DogDetector" to="Controller" method="_on_dog_detector_body_exited"]
-[connection signal="body_entered" from="Hurtbox Components" to="Hurtbox Components" method="on_bullet_collisions"]
+[connection signal="took_damage" from="Health Components" to="." method="_on_health_components_took_damage"]
+[connection signal="body_entered" from="Entity Detector" to="Controller" method="_on_entity_detector_body_entered"]
+[connection signal="body_entered" from="Hurtbox Components" to="Hurtbox Components" method="_on_body_entered"]
 [connection signal="timeout" from="flyingtimer" to="BossBatFSM/FlyingState" method="_on_timer_timeout"]
 [connection signal="timeout" from="shoottimer" to="BossBatFSM/AttackState" method="_on_shoottimer_timeout"]
 [connection signal="timeout" from="RandomTimer" to="Controller" method="_on_random_timer_timeout"]
