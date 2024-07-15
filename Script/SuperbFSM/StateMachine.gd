@@ -1,6 +1,7 @@
 extends Node
 class_name StateMachine
 
+
 var states := {}
 var active_state: BaseState
 var previous_active_state: BaseState
@@ -13,7 +14,7 @@ func _ready():
 		state.machine = self
 
 func transition_to(state: BaseState):
-	#print (str("State switch: ", active_state.get_name(), " to ", state.get_name()))
+	print (str("State switch: ", active_state.get_name(), " to ", state.get_name()))
 	active_state.s_deactivate()
 	previous_active_state = active_state
 	active_state = state

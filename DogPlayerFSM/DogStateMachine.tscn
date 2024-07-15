@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://cb46co0m8f53s"]
+[gd_scene load_steps=44 format=3 uid="uid://cb46co0m8f53s"]
 
 [ext_resource type="Script" path="res://DogPlayerFSM/Doggy.gd" id="1_njf21"]
 [ext_resource type="Texture2D" uid="uid://bwotynnxhce0s" path="res://art/Player/dogattack-Sheet.png" id="2_dx8ja"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://00qmhyxfxtbp" path="res://art/Interface Elements/Doghealthbar.png" id="8_0s17w"]
 [ext_resource type="Script" path="res://DogPlayerFSM/AirStrafeState.gd" id="8_hmtvs"]
 [ext_resource type="Script" path="res://DogPlayerFSM/PlayerHealth.gd" id="9_hr7x4"]
+[ext_resource type="Script" path="res://DogPlayerFSM/Physics Components.gd" id="9_jumxf"]
 [ext_resource type="Texture2D" uid="uid://d3vgymbbynr62" path="res://art/Interface Elements/Doghealthbarprogress.png" id="9_xy2ls"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/hurtbox_components.gd" id="14_w4005"]
 
@@ -215,10 +216,11 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_q66eg"]
 radius = 24.0
 
-[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("anim", "health_component", "hurtbox_component") groups=["player"]]
+[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("anim", "physics_component", "health_component", "hurtbox_component") groups=["player"]]
 collision_mask = 0
 script = ExtResource("1_njf21")
 anim = NodePath("AnimatedSprite2D")
+physics_component = NodePath("Physics Components")
 health_component = NodePath("Health Components")
 hurtbox_component = NodePath("Hurtbox Components")
 
@@ -247,27 +249,34 @@ animation = &"bite_attack"
 script = ExtResource("3_ai8m0")
 player = NodePath("..")
 
+[node name="Physics Components" type="Node" parent="." node_paths=PackedStringArray("player")]
+unique_name_in_owner = true
+script = ExtResource("9_jumxf")
+player = NodePath("..")
+
 [node name="Health Components" type="Node" parent="." node_paths=PackedStringArray("CharacterBody")]
 script = ExtResource("9_hr7x4")
 health_max = 100
 CharacterBody = NodePath("..")
 
-[node name="PlayerStateMachine" type="Node" parent="." node_paths=PackedStringArray("player")]
+[node name="PlayerStateMachine" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("3_bn38j")
-player = NodePath("..")
 
 [node name="IdleState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("4_bagpv")
 
-[node name="RunState" type="Node" parent="PlayerStateMachine"]
+[node name="RunState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("5_2emg4")
+player = NodePath("../..")
 
-[node name="AirState" type="Node" parent="PlayerStateMachine"]
+[node name="AirState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("6_byrm8")
+player = NodePath("../..")
 
-[node name="JumpState" type="Node" parent="PlayerStateMachine"]
+[node name="JumpState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("6_xn3d4")
+player = NodePath("../..")
 
 [node name="AirStrafeState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("8_hmtvs")

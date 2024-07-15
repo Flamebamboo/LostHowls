@@ -2,11 +2,8 @@ extends CharacterBody2D
 class_name Player
 @export var anim: AnimatedSprite2D
 @onready var machine = %PlayerStateMachine
-@export var gravity = 30
-@export var terminal_velocity = 1000
-@export var jump_velocity = 600
-@export var air_resistance = 0.15
-@export var run_speed = 300
+
+@export var physics_component : PhysicsComponent
 @export var health_component : PlayerHealth
 @export var hurtbox_component: Hurtbox
 func _ready():
@@ -19,11 +16,9 @@ func _physics_process(_delta):
 	elif direction == -1:
 		anim.flip_h = true
 
-	velocity.y = min(velocity.y, terminal_velocity)
-	velocity.y += gravity
-	move_and_slide()
 
 
+		
 func _on_health_components_took_damage():
 	%ProgressBar.value = health_component.health
 

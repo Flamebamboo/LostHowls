@@ -1,4 +1,4 @@
-[gd_scene load_steps=95 format=3 uid="uid://dxo0h0k8bfdee"]
+[gd_scene load_steps=94 format=3 uid="uid://dxo0h0k8bfdee"]
 
 [ext_resource type="Script" path="res://Script/Level_1/MainGame.gd" id="1_sw385"]
 [ext_resource type="Texture2D" uid="uid://dpqru6htgukk2" path="res://art/LevelDesign/TutorialKeys/keycaps-Sheet.png" id="2_kni8x"]
@@ -22,7 +22,6 @@
 [ext_resource type="PackedScene" uid="uid://cy6u0dprwre7m" path="res://Scenes/notes.tscn" id="33_unu8y"]
 [ext_resource type="PackedScene" uid="uid://dyts0n16u8h8n" path="res://Scenes/radiotape.tscn" id="34_hrose"]
 [ext_resource type="Texture2D" uid="uid://k8vo7syeuslr" path="res://art/Props/Interactables/skeleton.png" id="42_uy14o"]
-[ext_resource type="PackedScene" uid="uid://bd24oc54elotu" path="res://Scenes/BossBat.tscn" id="44_6xdtf"]
 [ext_resource type="Shader" path="res://shader/waterfall.gdshader" id="45_busmy"]
 [ext_resource type="Texture2D" uid="uid://eg4wgqmbl5fe" path="res://art/VFX/waterfallparticles.png" id="46_14lyo"]
 [ext_resource type="PackedScene" uid="uid://d24wjreyddt1s" path="res://Script/BossBatEnemy/Interactables/rock_3.tscn" id="48_3gk76"]
@@ -702,7 +701,7 @@ CameraRef = NodePath("../Camera2D")
 area_pcam = NodePath("PhantomCamera2D")
 
 [node name="PhantomCamera2D" type="Node2D" parent="Camera types/cam_3 Fight" node_paths=PackedStringArray("follow_target")]
-position = Vector2(1803, 134)
+position = Vector2(1856, 107)
 script = ExtResource("29_t58t4")
 follow_mode = 1
 follow_target = NodePath("../../../CharacterBody2D")
@@ -723,7 +722,7 @@ CameraRef = NodePath("../Camera2D")
 area_pcam = NodePath("PhantomCamera2D")
 
 [node name="PhantomCamera2D" type="Node2D" parent="Camera types/cam_3 proceed" node_paths=PackedStringArray("follow_target")]
-position = Vector2(1808, 651)
+position = Vector2(1927, 651)
 script = ExtResource("29_t58t4")
 follow_mode = 2
 follow_target = NodePath("../../../CharacterBody2D")
@@ -737,6 +736,10 @@ shape = SubResource("RectangleShape2D_l0ew3")
 [node name="Camera2D" type="Camera2D" parent="Camera types" node_paths=PackedStringArray("target")]
 position = Vector2(1446, 91.25)
 zoom = Vector2(0.8, 0.8)
+limit_left = -78
+limit_top = -236
+limit_right = 1746
+limit_bottom = 260
 script = ExtResource("29_racka")
 target = NodePath("../../Player_ghost/spirit")
 
@@ -938,11 +941,8 @@ texture = ExtResource("4_7m8hg")
 position = Vector2(1699, 161)
 dog = NodePath("../CharacterBody2D")
 
-[node name="enemy" parent="." instance=ExtResource("44_6xdtf")]
-position = Vector2(1731, 4)
-
 [node name="CharacterBody2D" parent="." instance=ExtResource("50_w0dsa")]
-position = Vector2(1803, 264)
+position = Vector2(1922, 107)
 collision_layer = 2
 collision_mask = 1
 

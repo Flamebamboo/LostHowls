@@ -1,6 +1,7 @@
 extends StateMachine
 
-@export var player : Player
+
+var player : Player
 
 func _ready():
 	

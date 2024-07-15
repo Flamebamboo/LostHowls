@@ -1,6 +1,7 @@
 extends PlayerState
+
 func s_activate():
-	player.velocity = Vector2(0,0)
+	physics.velocity = Vector2(0,0)
 	can_jump = true
 	can_run = true
 	
