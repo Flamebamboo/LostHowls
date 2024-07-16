@@ -17,6 +17,7 @@ func s_physics_process(_delta):
 				return	
 	
 			physics.ground_accel(_delta)
+			
 		else:
 			machine.transition_to(machine.states["IdleState"])
 			

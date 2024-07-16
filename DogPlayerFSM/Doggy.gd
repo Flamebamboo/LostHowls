@@ -16,10 +16,10 @@ func _physics_process(_delta):
 	elif direction == -1:
 		anim.flip_h = true
 	
-	if machine.active_state.can_fall:
-		physics.velocity.y = min(physics.velocity.y, physics.terminal_velocity)
-		physics.velocity.y += physics.gravity
-
+	#if machine.active_state.can_fall:
+		#physics.velocity.y = min(physics.velocity.y, physics.terminal_velocity)
+		#physics.velocity.y += physics.gravity
+	physics.apply_gravity(_delta)
 
 		
 func _on_health_components_took_damage():
