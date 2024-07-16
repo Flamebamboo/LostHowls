@@ -14,7 +14,9 @@ extends Node
 @onready var fall_gravity: float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_fall)) * -1.0
 
 
-@export var air_resistance = 0.15
+@export var air_resistance = 10
+
+
 
 var velocity = Vector2(0,0)
 
@@ -56,6 +58,13 @@ func ground_accel(delta: float = get_physics_process_delta_time()):
 func ground_decel(delta: float = get_physics_process_delta_time()):
 	velocity.x = move_toward(velocity.x, 0, friction * delta)
 	
+func horizontal_air_resistance(delta: float = get_physics_process_delta_time()):
+	if !owner.is_on_floor() && !owner.is_on_wall():
+		velocity.x  = move_toward(velocity.x, 0, air_resistance * delta)
+		
+func vertical_air_resistance(delta: float = get_physics_process_delta_time()):
+	if !owner.is_on_floor() && !owner.is_on_wall():
+		velocity.y = move_toward(velocity.y, 0, air_resistance * delta)
 	
 	
 func jump():

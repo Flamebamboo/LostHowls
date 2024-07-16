@@ -10,13 +10,13 @@ func s_physics_process(_delta):
 
 	# Get input for left and right movement
 	var direction = Input.get_axis("moveleft", "moveright")
-	
+	physics.horizontal_air_resistance()
 	# Change state to AirState if there is no directional input
 	if direction == 0:
 		machine.transition_to(machine.states["AirState"])
 		return
 		
-	# Update the player's horizontal velocity based on the run speed and direction
+		
 	
 
 
