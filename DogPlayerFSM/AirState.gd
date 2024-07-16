@@ -2,11 +2,11 @@ extends PlayerState
 
 func s_physics_process(_delta):
 	var direction = Input.get_axis("moveleft", "moveright")
-	#physics.apply_gravity()
+
 	if direction != 0:
 		machine.transition_to(machine.states["AirStrafeState"])
 		return
-
+	
 	# Apply air resistance to the player's horizontal velocity
 	physics.velocity.x = (physics.velocity.x - (physics.velocity.x * physics.air_resistance))
 	

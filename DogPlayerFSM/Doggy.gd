@@ -3,7 +3,7 @@ class_name Player
 @export var anim: AnimatedSprite2D
 @onready var machine = %PlayerStateMachine
 
-@export var physics_component : PhysicsComponent
+@export var physics : PhysicsComponent
 @export var health_component : PlayerHealth
 @export var hurtbox_component: Hurtbox
 func _ready():
@@ -15,7 +15,10 @@ func _physics_process(_delta):
 		anim.flip_h = false
 	elif direction == -1:
 		anim.flip_h = true
-
+	
+	if machine.active_state.can_fall:
+		physics.velocity.y = min(physics.velocity.y, physics.terminal_velocity)
+		physics.velocity.y += physics.gravity
 
 
 		
