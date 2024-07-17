@@ -7,8 +7,11 @@ func _unhandled_input(event):
 			# Check for jump action and player's ability to jump
 			if event.is_action_pressed("moveup"):
 				physics.jumps()
+			
+				
 				machine.transition_to(machine.states["JumpState"])  # Change state to JumpState
 				machine.transition_to(machine.states["AirState"])  # Change state to AirState
 
 
-	
+func jump_effects():
+	pass	

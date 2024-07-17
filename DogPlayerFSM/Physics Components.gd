@@ -28,7 +28,7 @@ var input_axis = Input.get_axis("moveleft", "moveright")
 @export var friction: float 
 @export var max_speed: float 
 
-var air_accel = 200
+@export var air_accel = 200
 	
 	
 func _physics_process(_delta):
@@ -65,7 +65,7 @@ func ground_decel(delta: float = get_physics_process_delta_time()):
 func horizontal_air_strafe(delta: float = get_physics_process_delta_time()):
 	var input_axis = Input.get_axis("moveleft", "moveright")
 	if !owner.is_on_floor() && !owner.is_on_wall():
-		velocity.x = move_toward(velocity.x, 0 * input_axis, air_resistance * delta)
+		velocity.x = move_toward(velocity.x, air_accel * input_axis, air_resistance * delta)
 
 
 func vertical_air_resistance(delta: float = get_physics_process_delta_time()):

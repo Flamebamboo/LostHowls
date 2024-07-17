@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://cb46co0m8f53s"]
+[gd_scene load_steps=43 format=3 uid="uid://cb46co0m8f53s"]
 
 [ext_resource type="Script" path="res://DogPlayerFSM/Doggy.gd" id="1_njf21"]
 [ext_resource type="Texture2D" uid="uid://bwotynnxhce0s" path="res://art/Player/dogattack-Sheet.png" id="2_dx8ja"]
@@ -12,7 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://b5po54oukvgdx" path="res://art/Player/dogrunv2-Sheet-Sheet.png" id="6_tnkgg"]
 [ext_resource type="Script" path="res://DogPlayerFSM/JumpState.gd" id="6_xn3d4"]
 [ext_resource type="Texture2D" uid="uid://00qmhyxfxtbp" path="res://art/Interface Elements/Doghealthbar.png" id="8_0s17w"]
-[ext_resource type="Script" path="res://DogPlayerFSM/AirStrafeState.gd" id="8_hmtvs"]
 [ext_resource type="Script" path="res://DogPlayerFSM/PlayerHealth.gd" id="9_hr7x4"]
 [ext_resource type="Script" path="res://DogPlayerFSM/Physics Components.gd" id="9_jumxf"]
 [ext_resource type="Texture2D" uid="uid://d3vgymbbynr62" path="res://art/Interface Elements/Doghealthbarprogress.png" id="9_xy2ls"]
@@ -253,7 +252,7 @@ player = NodePath("..")
 unique_name_in_owner = true
 script = ExtResource("9_jumxf")
 player = NodePath("..")
-jump_height = 80.0
+jump_height = 85.0
 jump_time_to_peak = 0.3
 jump_time_to_fall = 0.2
 acceleration = 500.0
@@ -283,9 +282,6 @@ player = NodePath("../..")
 [node name="JumpState" type="Node" parent="PlayerStateMachine" node_paths=PackedStringArray("player")]
 script = ExtResource("6_xn3d4")
 player = NodePath("../..")
-
-[node name="AirStrafeState" type="Node" parent="PlayerStateMachine"]
-script = ExtResource("8_hmtvs")
 
 [node name="Hurtbox Components" type="Area2D" parent="." node_paths=PackedStringArray("health_components")]
 unique_name_in_owner = true

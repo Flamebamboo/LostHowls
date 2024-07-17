@@ -17,7 +17,7 @@ func _physics_process(_delta):
 		anim.flip_h = true
 	
 	
-	physics.apply_gravity(_delta)
+	
 
 		
 func _on_health_components_took_damage():
