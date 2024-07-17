@@ -7,12 +7,6 @@ func s_activate():
 	physics.velocity.y = 1
 	
 	
-	if machine.active_state.can_fall:
-		owner.velocity = Vector2(0, 0)  # Reset if fall
-	
-	can_jump = true
-	can_run = true
-	
 func s_physics_process(_delta):
 	
 	physics.ground_decel(_delta)

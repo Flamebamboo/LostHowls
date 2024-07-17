@@ -1,15 +1,20 @@
 extends PlayerState
 
+
+	
 func s_physics_process(_delta):
 	var direction = Input.get_axis("moveleft", "moveright")
 	
-	physics.vertical_air_resistance()
+	if physics.can_jump() and Input.is_action_just_pressed("moveup"):
+		physics.jumps()
+		
+	physics.vertical_air_resistance(_delta)
 		
 	if direction != 0:
 		machine.transition_to(machine.states["AirStrafeState"])
 		return
 	
-	# Apply air resistance to the player's horizontal velocity
+	
 
 	
 	# Check if player is on the floor to transition to IdleState

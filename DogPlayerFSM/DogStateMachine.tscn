@@ -254,11 +254,11 @@ unique_name_in_owner = true
 script = ExtResource("9_jumxf")
 player = NodePath("..")
 jump_height = 80.0
-jump_time_to_peak = 0.25
-jump_time_to_fall = 0.15
-acceleration = 400.0
-friction = 1500.0
-max_speed = 200.0
+jump_time_to_peak = 0.3
+jump_time_to_fall = 0.2
+acceleration = 500.0
+friction = 2000.0
+max_speed = 250.0
 
 [node name="Health Components" type="Node" parent="." node_paths=PackedStringArray("CharacterBody")]
 script = ExtResource("9_hr7x4")
