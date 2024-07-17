@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://c6tbngs83yq2f"]
+
+[ext_resource type="Texture2D" uid="uid://2fd1moekd0f0" path="res://art/VFX/dustjumpeffect-Sheet.png" id="1_ho21d"]
+[ext_resource type="Script" path="res://landing_effect.gd" id="2_mdaff"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r2lhc"]
+atlas = ExtResource("1_ho21d")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_plxhq"]
+atlas = ExtResource("1_ho21d")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_owbeq"]
+atlas = ExtResource("1_ho21d")
+region = Rect2(64, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0teo2"]
+atlas = ExtResource("1_ho21d")
+region = Rect2(96, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bv5sx"]
+atlas = ExtResource("1_ho21d")
+region = Rect2(128, 0, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7bgak"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r2lhc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_plxhq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_owbeq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0teo2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bv5sx")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="landing_effect" type="AnimatedSprite2D"]
+unique_name_in_owner = true
+top_level = true
+z_index = 110
+texture_filter = 1
+position = Vector2(-1.19209e-07, 5.96046e-08)
+scale = Vector2(1.375, 1.375)
+sprite_frames = SubResource("SpriteFrames_7bgak")
+autoplay = "default"
+script = ExtResource("2_mdaff")
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

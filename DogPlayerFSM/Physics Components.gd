@@ -80,6 +80,8 @@ func can_jump():
 
 func jumps():
 	if can_jump:
+		var tween = create_tween()
+		tween.tween_property(%AnimatedSprite2D, "scale:x", 1.0, 0.4).from(0.85).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BOUNCE)
 		velocity.y = jump_velocity
 		jump_count.append(Vector2())
 		if owner.is_on_floor():

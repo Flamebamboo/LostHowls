@@ -1,0 +1,115 @@
+[gd_scene load_steps=15 format=3 uid="uid://cw44dgyxf2qio"]
+
+[ext_resource type="Script" path="res://Script/dissapear_effect.gd" id="1_oda6r"]
+[ext_resource type="Texture2D" uid="uid://2fd1moekd0f0" path="res://art/VFX/dustjumpeffect-Sheet.png" id="2_to7je"]
+[ext_resource type="Texture2D" uid="uid://b6r8dr5hwp0ss" path="res://art/VFX/doublejump-Sheet.png" id="3_4xnj1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r2lhc"]
+atlas = ExtResource("2_to7je")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_plxhq"]
+atlas = ExtResource("2_to7je")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_owbeq"]
+atlas = ExtResource("2_to7je")
+region = Rect2(64, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0teo2"]
+atlas = ExtResource("2_to7je")
+region = Rect2(96, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bv5sx"]
+atlas = ExtResource("2_to7je")
+region = Rect2(128, 0, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1ts2n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r2lhc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_plxhq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_owbeq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0teo2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bv5sx")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8fo8"]
+atlas = ExtResource("3_4xnj1")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v5348"]
+atlas = ExtResource("3_4xnj1")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pvsoy"]
+atlas = ExtResource("3_4xnj1")
+region = Rect2(128, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yrjc0"]
+atlas = ExtResource("3_4xnj1")
+region = Rect2(192, 0, 64, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kt04b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q8fo8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v5348")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pvsoy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yrjc0")
+}],
+"loop": false,
+"name": &"default",
+"speed": 20.0
+}]
+
+[node name="vfx" type="Node2D"]
+modulate = Color(1, 0.407843, 1, 1)
+script = ExtResource("1_oda6r")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+
+[node name="landing_effect" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0.207843)
+top_level = true
+z_index = 110
+texture_filter = 1
+position = Vector2(-1.19209e-07, 5.96046e-08)
+scale = Vector2(1.375, 1.375)
+sprite_frames = SubResource("SpriteFrames_1ts2n")
+autoplay = "default"
+frame = 3
+
+[node name="double_effect" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 0.407843, 1, 1)
+top_level = true
+z_index = 990
+sprite_frames = SubResource("SpriteFrames_kt04b")
+autoplay = "default"
+frame = 3
+
+[connection signal="animation_finished" from="landing_effect" to="." method="_on_landing_effect_animation_finished"]
+[connection signal="animation_finished" from="double_effect" to="." method="_on_double_effect_animation_finished"]

@@ -1,26 +1,26 @@
 [gd_scene load_steps=12 format=3 uid="uid://uy16c27g5iga"]
 
-[ext_resource type="Texture2D" uid="uid://2fd1moekd0f0" path="res://art/VFX/dustjumpeffect-Sheet.png" id="1_ei4ao"]
-[ext_resource type="Script" path="res://Script/dust.gd" id="2_r3gjx"]
+[ext_resource type="Texture2D" uid="uid://2fd1moekd0f0" path="res://art/VFX/dustjumpeffect-Sheet.png" id="1_658ta"]
+[ext_resource type="Script" path="res://Script/dissapear_effect.gd" id="2_ldrtd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r2lhc"]
-atlas = ExtResource("1_ei4ao")
+atlas = ExtResource("1_658ta")
 region = Rect2(0, 0, 32, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_plxhq"]
-atlas = ExtResource("1_ei4ao")
+atlas = ExtResource("1_658ta")
 region = Rect2(32, 0, 32, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_owbeq"]
-atlas = ExtResource("1_ei4ao")
+atlas = ExtResource("1_658ta")
 region = Rect2(64, 0, 32, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0teo2"]
-atlas = ExtResource("1_ei4ao")
+atlas = ExtResource("1_658ta")
 region = Rect2(96, 0, 32, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bv5sx"]
-atlas = ExtResource("1_ei4ao")
+atlas = ExtResource("1_658ta")
 region = Rect2(128, 0, 32, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1ts2n"]
@@ -93,7 +93,7 @@ sprite_frames = SubResource("SpriteFrames_1ts2n")
 autoplay = "default"
 frame = 4
 frame_progress = 1.0
-script = ExtResource("2_r3gjx")
+script = ExtResource("2_ldrtd")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

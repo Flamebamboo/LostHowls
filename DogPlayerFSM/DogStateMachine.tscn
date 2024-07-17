@@ -240,13 +240,8 @@ texture_progress = ExtResource("9_xy2ls")
 position = Vector2(0, -15)
 shape = SubResource("RectangleShape2D_q2f71")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player")]
+[node name="landeffect" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(4, -16)
-sprite_frames = SubResource("SpriteFrames_i2mux")
-animation = &"bite_attack"
-script = ExtResource("3_ai8m0")
-player = NodePath("..")
 
 [node name="Physics Components" type="Node" parent="." node_paths=PackedStringArray("player")]
 unique_name_in_owner = true
@@ -263,6 +258,14 @@ max_speed = 250.0
 script = ExtResource("9_hr7x4")
 health_max = 100
 CharacterBody = NodePath("..")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player")]
+unique_name_in_owner = true
+position = Vector2(4, -16)
+sprite_frames = SubResource("SpriteFrames_i2mux")
+animation = &"bite_attack"
+script = ExtResource("3_ai8m0")
+player = NodePath("..")
 
 [node name="PlayerStateMachine" type="Node" parent="."]
 unique_name_in_owner = true
