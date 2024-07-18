@@ -22,6 +22,7 @@ Global="*res://global.gd"
 PlayerStats="*res://singletons/player_stats.gd"
 ObjectPooling="*res://singletons/object_pooling.gd"
 CheckpointManager="*res://singletons/checkpoint_manager.gd"
+FrameFreeze="*res://singletons/frame_freeze.gd"
 
 [dialogic]
 

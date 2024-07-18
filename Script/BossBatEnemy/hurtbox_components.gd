@@ -36,7 +36,7 @@ func apply_enemy_damage(body):
 			if health_components.health > 0:
 				var enemy_damage = %"Hurtbox Components".damage 
 				health_components.take_damage(enemy_damage)
-	
+				FrameFreeze.hit_freeze()
 	
 	##this is honestly not scalable
 	#The hurting shouldn't know what it is

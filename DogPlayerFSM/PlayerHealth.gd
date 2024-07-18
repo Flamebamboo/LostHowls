@@ -1,6 +1,6 @@
 extends BaseHealth
 class_name PlayerHealth
-@onready var player : Player
+@export var player : Player
 
 
 func _ready():
@@ -8,7 +8,7 @@ func _ready():
 
 func _on_took_damage():
 	%ProgressBar.value = health
-	
+	player.sprite_flash()
 
 func _on_respawn_manager_player_alive():
 	health = health_max
