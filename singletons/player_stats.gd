@@ -1,8 +1,8 @@
 extends Node
 
-var health_max: int = 100
-var health: int = 100
-var health_min: int = 0
+var health_max: int
+var health: int
+var health_min: int
 var dead: bool = false
 
 

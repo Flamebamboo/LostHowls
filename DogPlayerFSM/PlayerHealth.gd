@@ -1,21 +1,15 @@
 extends BaseHealth
 class_name PlayerHealth
 @onready var player : Player
+
+
 func _ready():
-	health = PlayerStats.health
+	health = health_max
 
-func take_damage(amount: int):
-	if dead:
-		return
-	health -= amount
-	PlayerStats.health = health
-	if health < health_min:
-		health = health_min
-	emit_signal("took_damage")
-	if health <= 0:
-		handle_death()
+func _on_took_damage():
+	%ProgressBar.value = health
+	
 
-func handle_death():
-	dead = true
-	PlayerStats.dead = true
-	emit_signal("died")
+func _on_respawn_manager_player_alive():
+	health = health_max
+	%ProgressBar.value = health_max

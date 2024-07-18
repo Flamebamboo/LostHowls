@@ -4,7 +4,7 @@ class_name BossBat
 @export var hurtbox_component: Hurtbox
 @export var animatedsprite : AnimatedSprite2D
 @onready var machine = %BossBatFSM
-@export var damage: int = 50
+
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var is_player : bool = true
 func _ready():

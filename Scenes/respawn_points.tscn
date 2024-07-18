@@ -147,10 +147,11 @@ _data = {
 "new_animation": SubResource("Animation_s0yx4")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_3oxx6"]
-radius = 28.0596
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tfarc"]
+size = Vector2(20, 283.429)
 
-[node name="firespawnpoints" type="AnimatedSprite2D" groups=["respawn_points"]]
+[node name="firecamp" type="AnimatedSprite2D"]
+unique_name_in_owner = true
 top_level = true
 position = Vector2(1, -4)
 scale = Vector2(1, 1.09375)
@@ -175,11 +176,15 @@ libraries = {
 }
 autoplay = "new_animation"
 
-[node name="interact" type="Area2D" parent="."]
+[node name="respawn_points" type="Area2D" parent="." node_paths=PackedStringArray("light", "firecamp") groups=["respawn_points"]]
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("3_y04lr")
+light = NodePath("../Firelight")
+firecamp = NodePath("..")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="interact"]
-position = Vector2(0, 10.9714)
-shape = SubResource("CircleShape2D_3oxx6")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="respawn_points"]
+position = Vector2(0, -108.8)
+shape = SubResource("RectangleShape2D_tfarc")
+
+[connection signal="body_entered" from="respawn_points" to="respawn_points" method="_on_body_entered"]

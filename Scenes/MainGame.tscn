@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bpy27duv6rniw" path="res://art/Props/Plants/tree.png" id="4_7m8hg"]
 [ext_resource type="Texture2D" uid="uid://42e3dhkoudfi" path="res://art/LevelDesign/wireframe.png" id="9_m6vbv"]
 [ext_resource type="Shader" path="res://shader/fog.gdshader" id="10_nn7nr"]
-[ext_resource type="PackedScene" uid="uid://dgebxxsq0f2lk" path="res://Scenes/fireplace.tscn" id="16_yvpib"]
+[ext_resource type="PackedScene" uid="uid://dgebxxsq0f2lk" path="res://Scenes/respawn_points.tscn" id="16_yvpib"]
 [ext_resource type="Texture2D" uid="uid://dxydd83uy4nug" path="res://art/Props/tent.png" id="17_p61ve"]
 [ext_resource type="PackedScene" uid="uid://cqfuu3blbblkk" path="res://Scenes/spikeball.tscn" id="22_kqo1w"]
 [ext_resource type="FontFile" uid="uid://bnf2p438dv3b5" path="res://Fonts/Pixellari.ttf" id="24_kaot5"]
@@ -446,10 +446,6 @@ texture = SubResource("GradientTexture2D_hdp4r")
 
 [node name="ARTS" type="Node" parent="."]
 
-[node name="fire" parent="ARTS" instance=ExtResource("16_yvpib")]
-z_index = 5
-position = Vector2(370, 201)
-
 [node name="Tent" type="Sprite2D" parent="ARTS"]
 z_index = 5
 position = Vector2(469, 186.045)
@@ -862,11 +858,13 @@ texture = ExtResource("4_7m8hg")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("50_w0dsa")]
 position = Vector2(819, -481)
-collision_layer = 2
-collision_mask = 1
 
 [node name="enemy" parent="." instance=ExtResource("39_auycg")]
-position = Vector2(1819, 82)
+position = Vector2(115, -383)
+
+[node name="respawn_points_1" parent="." instance=ExtResource("16_yvpib")]
+unique_name_in_owner = false
+position = Vector2(297, 196)
 
 [connection signal="body_entered" from="Camera types/cam_1" to="Camera types/cam_1" method="_on_body_entered"]
 [connection signal="body_exited" from="Camera types/cam_1" to="Camera types/cam_1" method="_on_body_exited"]

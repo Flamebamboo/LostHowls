@@ -20,9 +20,5 @@ func _physics_process(_delta):
 	 
 
 		
-func _on_health_components_took_damage():
-	%ProgressBar.value = health_component.health
 
 
-func _on_health_components_died():
-	self.queue_free()

@@ -1,28 +1,13 @@
 extends Area2D
-var dog
-
-func _ready() -> void:
-	$"..".play("no_fire")
-	$"../Firelight/Sprite2D".visible = false
-	connect("area_entered", _entered_area)
-	connect("area_exited", _exited_area)
+@export var light: PointLight2D
+@export var firecamp: AnimatedSprite2D 
+func _ready():
+	firecamp.play("no_fire")
+	light.hide()
 	
-	#dog = Global.dogCharacter
-
-func _entered_area(area_2d: Area2D) -> void:
-	if area_2d.get_parent() is CharacterBody2D:
-		$"..".play("fire")
-		$"../Firelight/Sprite2D".visible = true
-		
-		#if not self in dog.activated_spawn_points:
-			#dog.activated_spawn_points.append(self)
-			
-func _exited_area(area_2d: Area2D) -> void:
-	if area_2d.get_parent() is CharacterBody2D:
-		pass
-
-
-
-		
-		
+func _on_body_entered(body):
+	if body is Player:
+		firecamp.play("fire")
+		light.show()
+		CheckpointManager.add_checkpoint(global_position)
 		

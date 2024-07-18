@@ -21,6 +21,7 @@ PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_came
 Global="*res://global.gd"
 PlayerStats="*res://singletons/player_stats.gd"
 ObjectPooling="*res://singletons/object_pooling.gd"
+CheckpointManager="*res://singletons/checkpoint_manager.gd"
 
 [dialogic]
 
@@ -104,6 +105,12 @@ dash={
 2d_render/layer_5="Bullet"
 2d_render/layer_7="Spirit"
 2d_render/layer_8="BossBat and BatOnly Collision"
+2d_physics/layer_1="Collision/tiles"
+2d_physics/layer_2="Player"
+2d_physics/layer_4="Mini Bats"
+2d_physics/layer_5="Bullet"
+2d_physics/layer_7="Spirit"
+2d_physics/layer_8="BossBat & BatCollisions"
 
 [rendering]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://cb46co0m8f53s"]
+[gd_scene load_steps=42 format=3 uid="uid://cb46co0m8f53s"]
 
 [ext_resource type="Script" path="res://DogPlayerFSM/Doggy.gd" id="1_njf21"]
 [ext_resource type="Texture2D" uid="uid://bwotynnxhce0s" path="res://art/Player/dogattack-Sheet.png" id="2_dx8ja"]
@@ -11,11 +11,10 @@
 [ext_resource type="Script" path="res://DogPlayerFSM/AirState.gd" id="6_byrm8"]
 [ext_resource type="Texture2D" uid="uid://b5po54oukvgdx" path="res://art/Player/dogrunv2-Sheet-Sheet.png" id="6_tnkgg"]
 [ext_resource type="Script" path="res://DogPlayerFSM/JumpState.gd" id="6_xn3d4"]
-[ext_resource type="Texture2D" uid="uid://00qmhyxfxtbp" path="res://art/Interface Elements/Doghealthbar.png" id="8_0s17w"]
 [ext_resource type="Script" path="res://DogPlayerFSM/PlayerHealth.gd" id="9_hr7x4"]
 [ext_resource type="Script" path="res://DogPlayerFSM/Physics Components.gd" id="9_jumxf"]
-[ext_resource type="Texture2D" uid="uid://d3vgymbbynr62" path="res://art/Interface Elements/Doghealthbarprogress.png" id="9_xy2ls"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/hurtbox_components.gd" id="14_w4005"]
+[ext_resource type="Script" path="res://respawn_manager.gd" id="17_tsk50"]
 
 [sub_resource type="Theme" id="Theme_f4cmb"]
 
@@ -213,10 +212,10 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_q66eg"]
-radius = 24.0
+radius = 29.0172
 
 [node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("anim", "physics", "health_component", "hurtbox_component") groups=["player"]]
-collision_mask = 0
+collision_layer = 2
 script = ExtResource("1_njf21")
 anim = NodePath("AnimatedSprite2D")
 physics = NodePath("Physics Components")
@@ -225,16 +224,16 @@ hurtbox_component = NodePath("Hurtbox Components")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="ProgressBar" type="TextureProgressBar" parent="UI"]
+[node name="ProgressBar" type="ProgressBar" parent="UI"]
 unique_name_in_owner = true
-offset_right = 200.0
-offset_bottom = 100.0
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 201.0
+offset_bottom = 102.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = SubResource("Theme_f4cmb")
 value = 100.0
-texture_under = ExtResource("8_0s17w")
-texture_progress = ExtResource("9_xy2ls")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -15)
@@ -256,7 +255,6 @@ max_speed = 250.0
 
 [node name="Health Components" type="Node" parent="." node_paths=PackedStringArray("CharacterBody")]
 script = ExtResource("9_hr7x4")
-health_max = 100
 CharacterBody = NodePath("..")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player")]
@@ -289,16 +287,21 @@ player = NodePath("../..")
 [node name="Hurtbox Components" type="Area2D" parent="." node_paths=PackedStringArray("health_components")]
 unique_name_in_owner = true
 collision_layer = 2
-collision_mask = 144
+collision_mask = 146
 script = ExtResource("14_w4005")
 health_components = NodePath("../Health Components")
-damage = 50
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox Components"]
 position = Vector2(0, -15)
 shape = SubResource("CircleShape2D_q66eg")
 
-[connection signal="died" from="Health Components" to="." method="_on_health_components_died"]
-[connection signal="took_damage" from="Health Components" to="." method="_on_health_components_took_damage"]
+[node name="Respawn Manager" type="Node" parent="." node_paths=PackedStringArray("health_components", "player")]
+script = ExtResource("17_tsk50")
+health_components = NodePath("../Health Components")
+player = NodePath("..")
+
+[connection signal="died" from="Health Components" to="Respawn Manager" method="_on_health_components_died"]
+[connection signal="took_damage" from="Health Components" to="Health Components" method="_on_took_damage"]
 [connection signal="state_changed" from="PlayerStateMachine" to="AnimatedSprite2D" method="_on_player_state_machine_state_changed"]
 [connection signal="body_entered" from="Hurtbox Components" to="Hurtbox Components" method="_on_body_entered"]
+[connection signal="PlayerAlive" from="Respawn Manager" to="Health Components" method="_on_respawn_manager_player_alive"]
