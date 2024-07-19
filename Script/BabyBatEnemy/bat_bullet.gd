@@ -6,7 +6,7 @@ func _physics_process(delta):
 	position += transform.x * speed * delta
 	for body in $BulletHurtbox.get_overlapping_bodies():
 		queue_free()
-		if body.is_in_group("dog"):
+		if body is Player:
 			if body.has_method("take_damage"):
 				body.take_damage(damage)
 				queue_free()

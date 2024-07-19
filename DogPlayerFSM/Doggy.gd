@@ -19,8 +19,5 @@ func _physics_process(_delta):
 func sprite_flash():
 	var tween: Tween = create_tween()
 	tween.tween_property(%AnimatedSprite2D, "modulate:v", 1, 0.25).from(15)
-	 
-
-		
-
+	
 
