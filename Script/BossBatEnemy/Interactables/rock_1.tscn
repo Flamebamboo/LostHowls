@@ -1,16 +1,15 @@
 [gd_scene load_steps=5 format=3 uid="uid://q1gikw5ihgkr"]
 
-[ext_resource type="Script" path="res://Script/Interactables Script/rock_1.gd" id="1_ncxlc"]
+[ext_resource type="Script" path="res://Script/Interactables Script/bouncyrock.gd" id="1_cryym"]
 [ext_resource type="Texture2D" uid="uid://7yy7levfkju8" path="res://art/Props/Rocks/rock1.png" id="1_pwbe4"]
 [ext_resource type="Material" uid="uid://bmgyfioow48f8" path="res://shader/unshadedlight.tres" id="2_ldc7f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_58ahj"]
 size = Vector2(54, 20)
 
-[node name="Rock 1" type="RigidBody2D" groups=["asteroids"]]
+[node name="Rock 1" type="AnimatableBody2D" groups=["asteroids"]]
 collision_mask = 2
-gravity_scale = 1.66533e-16
-script = ExtResource("1_ncxlc")
+script = ExtResource("1_cryym")
 
 [node name="Rock1" type="Sprite2D" parent="."]
 self_modulate = Color(0.898039, 0.678431, 0.670588, 1)

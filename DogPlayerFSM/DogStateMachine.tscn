@@ -304,5 +304,6 @@ player = NodePath("..")
 [connection signal="died" from="Health Components" to="Respawn Manager" method="_on_health_components_died"]
 [connection signal="took_damage" from="Health Components" to="Health Components" method="_on_took_damage"]
 [connection signal="state_changed" from="PlayerStateMachine" to="AnimatedSprite2D" method="_on_player_state_machine_state_changed"]
+[connection signal="NotActive" from="PlayerStateMachine/AirState" to="." method="_on_air_state_not_active"]
 [connection signal="body_entered" from="Hurtbox Components" to="Hurtbox Components" method="_on_body_entered"]
 [connection signal="PlayerAlive" from="Respawn Manager" to="Health Components" method="_on_respawn_manager_player_alive"]
