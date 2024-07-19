@@ -5,10 +5,9 @@ extends Node2D
 func _physics_process(delta):
 	position += transform.x * speed * delta
 	for body in $BulletHurtbox.get_overlapping_bodies():
-		queue_free()
 		if body is Player:
-			if body.has_method("take_damage"):
-				body.take_damage(damage)
+			if body.has_method("bullet_damage"):
+				body.bullet_damage(damage)
 				queue_free()
 				break
 	

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bu3631ymfqxi3"
-path="res://.godot/imported/neutral.png-b67f36561d5798f6bdf0e487c71053f7.ctex"
+uid="uid://bl553dd6krael"
+path="res://.godot/imported/BatBullet.png-1d3dc395e3afbb7cee198b29e94a624c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/dialogic/Example Assets/portraits/Princess/neutral.png"
-dest_files=["res://.godot/imported/neutral.png-b67f36561d5798f6bdf0e487c71053f7.ctex"]
+source_file="res://BatBullet.png"
+dest_files=["res://.godot/imported/BatBullet.png-1d3dc395e3afbb7cee198b29e94a624c.ctex"]
 
 [params]
 

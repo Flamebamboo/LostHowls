@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b63htybecwy5g"]
 
 [ext_resource type="Script" path="res://Script/BabyBatEnemy/bat_bullet.gd" id="1_uryag"]
-[ext_resource type="Texture2D" uid="uid://canecay3wgcc" path="res://art/VFX/particlesvfx.png" id="2_aux6y"]
+[ext_resource type="Texture2D" uid="uid://bl553dd6krael" path="res://BatBullet.png" id="2_wruuo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qae2c"]
 radius = 73.3333
@@ -13,8 +13,8 @@ script = ExtResource("1_uryag")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(7.62939e-06, -10)
-scale = Vector2(7.65104, 4.60417)
-texture = ExtResource("2_aux6y")
+scale = Vector2(5, 5)
+texture = ExtResource("2_wruuo")
 
 [node name="Timer" type="Timer" parent="Sprite2D"]
 wait_time = 3.0

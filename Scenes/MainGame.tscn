@@ -1,4 +1,4 @@
-[gd_scene load_steps=97 format=3 uid="uid://dxo0h0k8bfdee"]
+[gd_scene load_steps=98 format=3 uid="uid://dxo0h0k8bfdee"]
 
 [ext_resource type="Script" path="res://Script/Level_1/MainGame.gd" id="1_sw385"]
 [ext_resource type="Texture2D" uid="uid://dpqru6htgukk2" path="res://art/LevelDesign/TutorialKeys/keycaps-Sheet.png" id="2_kni8x"]
@@ -186,6 +186,45 @@ fill_from = Vector2(0.507722, 0.42471)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7xy0v"]
 size = Vector2(519, 75)
 
+[sub_resource type="Animation" id="Animation_6p5vx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="Animation" id="Animation_6qo2a"]
 resource_name = "hit_flashes"
 length = 0.3
@@ -221,45 +260,6 @@ tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0.3),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_6p5vx"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Sprite2D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../Sprite2D:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
@@ -324,11 +324,14 @@ animations = [{
 [sub_resource type="Resource" id="Resource_v2a0e"]
 script = ExtResource("30_jkmql")
 duration = 1.0
-transition = 7
+transition = 5
 ease = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ts6d3"]
-size = Vector2(1824, 495)
+size = Vector2(1865, 495)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pawfy"]
+size = Vector2(372, 238)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tmsgx"]
 size = Vector2(1741.75, 433)
@@ -540,7 +543,7 @@ dog = NodePath("../../CharacterBody2D")
 [node name="Insect Particles" type="GPUParticles2D" parent="Gpu particles"]
 z_index = 10
 material = SubResource("CanvasItemMaterial_yf53e")
-position = Vector2(-1043, 658)
+position = Vector2(123, 139)
 amount = 7
 process_material = SubResource("ParticleProcessMaterial_mpwso")
 
@@ -569,16 +572,16 @@ color = Color(0.79349, 0.481939, 0.477349, 1)
 [node name="fog" type="ColorRect" parent="effects"]
 z_index = 20
 material = SubResource("ShaderMaterial_727yb")
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -23.0
-offset_top = -204.0
-offset_right = 1825.0
-offset_bottom = 1476.0
+anchors_preset = -1
+anchor_top = -2.84815
+anchor_right = 0.110417
+anchor_bottom = -2.84815
+offset_left = -137.0
+offset_top = -640.0
+offset_right = 1711.0
+offset_bottom = 1040.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 metadata/_edit_use_anchors_ = true
 
 [node name="light" type="PointLight2D" parent="effects"]
@@ -685,6 +688,7 @@ position = Vector2(2284, 538)
 texture = ExtResource("2_ocfpx")
 
 [node name="ColorRect" type="ColorRect" parent="UI/hitflashes"]
+visible = false
 z_index = 100
 anchors_preset = 15
 anchor_right = 1.0
@@ -732,7 +736,6 @@ text = "goodluck
 metadata/_edit_use_anchors_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="UI"]
-visible = false
 
 [node name="Label" type="Label" parent="UI/CanvasLayer"]
 anchors_preset = 8
@@ -740,15 +743,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -80.0
-offset_top = -11.5
-offset_right = 80.0
-offset_bottom = 11.5
+offset_left = -246.0
+offset_top = -31.0
+offset_right = 246.0
+offset_bottom = 31.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("24_kaot5")
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 50
 text = "-FIND YOUR OWNER-"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/CanvasLayer/Label"]
@@ -774,7 +778,7 @@ CameraRef = NodePath("../Camera2D")
 area_pcam = NodePath("PhantomCamera2D")
 
 [node name="PhantomCamera2D" type="Node2D" parent="Camera types/cam_1" node_paths=PackedStringArray("follow_target")]
-position = Vector2(988, -409)
+position = Vector2(988, -378.75)
 script = ExtResource("29_t58t4")
 follow_mode = 2
 follow_target = NodePath("../../../CharacterBody2D")
@@ -782,11 +786,37 @@ zoom = Vector2(0.8, 0.8)
 tween_resource = SubResource("Resource_v2a0e")
 follow_damping = true
 follow_damping_value = Vector2(0.5, 0.1)
+draw_limits = true
 limit_target = NodePath("../Limit")
 
 [node name="Limit" type="CollisionShape2D" parent="Camera types/cam_1"]
-position = Vector2(376, -458)
+position = Vector2(355.5, -458)
 shape = SubResource("RectangleShape2D_ts6d3")
+
+[node name="cam_zoom" type="Area2D" parent="Camera types" node_paths=PackedStringArray("CameraRef", "area_pcam")]
+position = Vector2(458, 470)
+collision_layer = 0
+collision_mask = 2
+priority = 50
+script = ExtResource("29_ku8ay")
+CameraRef = NodePath("../Camera2D")
+area_pcam = NodePath("PhantomCamera2D")
+
+[node name="PhantomCamera2D" type="Node2D" parent="Camera types/cam_zoom" node_paths=PackedStringArray("follow_target")]
+position = Vector2(-348.176, -290.412)
+script = ExtResource("29_t58t4")
+follow_mode = 2
+follow_target = NodePath("../../../interactions/Notes")
+zoom = Vector2(1.7, 1.7)
+tween_resource = SubResource("Resource_v2a0e")
+follow_damping = true
+follow_damping_value = Vector2(0.5, 0.1)
+draw_limits = true
+limit_target = NodePath("../Limit")
+
+[node name="Limit" type="CollisionShape2D" parent="Camera types/cam_zoom"]
+position = Vector2(-393, -330)
+shape = SubResource("RectangleShape2D_pawfy")
 
 [node name="cam_2" type="Area2D" parent="Camera types" node_paths=PackedStringArray("CameraRef", "area_pcam")]
 position = Vector2(458, 470)
@@ -797,13 +827,14 @@ CameraRef = NodePath("../Camera2D")
 area_pcam = NodePath("PhantomCamera2D")
 
 [node name="PhantomCamera2D" type="Node2D" parent="Camera types/cam_2" node_paths=PackedStringArray("follow_target")]
-position = Vector2(854.143, -16.1429)
+position = Vector2(854.143, 31.1429)
 script = ExtResource("29_t58t4")
 follow_mode = 2
 follow_target = NodePath("../../../CharacterBody2D")
 zoom = Vector2(0.7, 0.7)
 tween_resource = SubResource("Resource_v2a0e")
 follow_offset = Vector2(100, 2.08165e-12)
+draw_limits = true
 limit_target = NodePath("../Limit")
 
 [node name="Limit" type="CollisionShape2D" parent="Camera types/cam_2"]
@@ -819,12 +850,13 @@ CameraRef = NodePath("../Camera2D")
 area_pcam = NodePath("PhantomCamera2D")
 
 [node name="PhantomCamera2D" type="Node2D" parent="Camera types/cam_3 Fight" node_paths=PackedStringArray("follow_target")]
-position = Vector2(1678, 15)
+position = Vector2(1824, 134)
 script = ExtResource("29_t58t4")
 follow_mode = 1
 follow_target = NodePath("../../../CharacterBody2D")
 zoom = Vector2(0.5, 0.5)
 tween_resource = SubResource("Resource_v2a0e")
+draw_limits = true
 limit_target = NodePath("../Limit")
 
 [node name="Limit" type="CollisionShape2D" parent="Camera types/cam_3 Fight"]
@@ -840,11 +872,12 @@ CameraRef = NodePath("../Camera2D")
 area_pcam = NodePath("PhantomCamera2D")
 
 [node name="PhantomCamera2D" type="Node2D" parent="Camera types/cam_3 proceed" node_paths=PackedStringArray("follow_target")]
-position = Vector2(1063, 651)
+position = Vector2(1829, 651)
 script = ExtResource("29_t58t4")
 follow_mode = 2
 follow_target = NodePath("../../../CharacterBody2D")
 tween_resource = SubResource("Resource_v2a0e")
+draw_limits = true
 limit_target = NodePath("../Limit")
 
 [node name="Limit" type="CollisionShape2D" parent="Camera types/cam_3 proceed"]
@@ -852,9 +885,9 @@ position = Vector2(1640, 1023.38)
 shape = SubResource("RectangleShape2D_l0ew3")
 
 [node name="Camera2D" type="Camera2D" parent="Camera types" node_paths=PackedStringArray("target")]
-position = Vector2(1446, 61)
+position = Vector2(1446, 91.25)
 zoom = Vector2(0.8, 0.8)
-limit_left = -78
+limit_left = -119
 limit_top = -236
 limit_right = 1746
 limit_bottom = 260
@@ -874,10 +907,10 @@ scale = Vector2(1.04258, 1.00071)
 texture = ExtResource("4_7m8hg")
 
 [node name="Notes" parent="interactions" instance=ExtResource("33_unu8y")]
-position = Vector2(-984, 732)
+position = Vector2(182, 213)
 
 [node name="Radiotape" parent="interactions" instance=ExtResource("34_hrose")]
-position = Vector2(-741, 577)
+position = Vector2(187, 544)
 
 [node name="pushable" parent="interactions" instance=ExtResource("2_yv6nv")]
 material = SubResource("CanvasItemMaterial_1mig0")
@@ -886,18 +919,17 @@ collision_mask = 3
 mass = 5.0
 
 [node name="Bagpack" type="Sprite2D" parent="interactions"]
-position = Vector2(-1014, 734)
+position = Vector2(152, 215)
 texture = ExtResource("32_2vokd")
 flip_h = true
 
 [node name="waterfall" type="TextureRect" parent="."]
-visible = false
 z_index = 160
 material = SubResource("CanvasItemMaterial_qluw3")
-offset_left = 797.0
-offset_top = -99.0
-offset_right = 1052.0
-offset_bottom = 176.0
+offset_left = 319.0
+offset_top = -207.0
+offset_right = 574.0
+offset_bottom = 109.14
 texture = SubResource("GradientTexture2D_s52s0")
 metadata/_edit_use_anchors_ = true
 
@@ -946,6 +978,7 @@ sink_speed = 100.0
 
 [node name="rock 2" parent="Rock" instance=ExtResource("51_p52q7")]
 position = Vector2(1430, 141)
+float_height = 30.0
 sink_speed = 100.0
 
 [node name="Rock 3" parent="Rock" instance=ExtResource("51_6tydm")]
@@ -983,7 +1016,7 @@ position = Vector2(1840, 81)
 texture = ExtResource("57_xueas")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("50_w0dsa")]
-position = Vector2(1058, -409)
+position = Vector2(1824, 184)
 
 [node name="Enitys" type="Node" parent="."]
 
@@ -996,7 +1029,7 @@ hitflashing = NodePath("../../UI/hitflashes")
 
 [node name="respawn_points_1" parent="Respawn" instance=ExtResource("16_yvpib")]
 unique_name_in_owner = false
-position = Vector2(297, 196)
+position = Vector2(336, 195)
 
 [node name="respawn_points_2" parent="Respawn" instance=ExtResource("16_yvpib")]
 unique_name_in_owner = false
@@ -1004,6 +1037,8 @@ position = Vector2(1485, 548)
 
 [connection signal="body_entered" from="Camera types/cam_1" to="Camera types/cam_1" method="_on_body_entered"]
 [connection signal="body_exited" from="Camera types/cam_1" to="Camera types/cam_1" method="_on_body_exited"]
+[connection signal="body_entered" from="Camera types/cam_zoom" to="Camera types/cam_zoom" method="_on_body_entered"]
+[connection signal="body_exited" from="Camera types/cam_zoom" to="Camera types/cam_zoom" method="_on_body_exited"]
 [connection signal="body_entered" from="Camera types/cam_2" to="Camera types/cam_2" method="_on_body_entered"]
 [connection signal="body_exited" from="Camera types/cam_2" to="Camera types/cam_2" method="_on_body_exited"]
 [connection signal="body_entered" from="Camera types/cam_3 Fight" to="Camera types/cam_3 Fight" method="_on_body_entered"]
