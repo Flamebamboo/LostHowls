@@ -44,6 +44,8 @@ func display_jump_effects():
 		get_tree().root.add_child(jump_dust_effect)
 			
 
+func die():
+	$"Respawn Manager".respawn_player()
 
 
 func _on_air_state_floor():
