@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://c6tbngs83yq2f"]
+[gd_scene load_steps=9 format=3 uid="uid://ob2mmrywscmm"]
 
 [ext_resource type="Texture2D" uid="uid://2fd1moekd0f0" path="res://art/VFX/dustjumpeffect-Sheet.png" id="1_ho21d"]
-[ext_resource type="Script" path="res://landing_effect.gd" id="2_mdaff"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r2lhc"]
 atlas = ExtResource("1_ho21d")
@@ -46,6 +45,14 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="GDScript" id="GDScript_k7ucc"]
+script/source = "extends AnimatedSprite2D
+
+
+func _on_animation_finished():
+	self.queue_free()
+"
+
 [node name="landing_effect" type="AnimatedSprite2D"]
 unique_name_in_owner = true
 top_level = true
@@ -55,6 +62,6 @@ position = Vector2(-1.19209e-07, 5.96046e-08)
 scale = Vector2(1.375, 1.375)
 sprite_frames = SubResource("SpriteFrames_7bgak")
 autoplay = "default"
-script = ExtResource("2_mdaff")
+script = SubResource("GDScript_k7ucc")
 
 [connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

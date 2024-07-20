@@ -827,7 +827,7 @@ CameraRef = NodePath("../Camera2D")
 area_pcam = NodePath("PhantomCamera2D")
 
 [node name="PhantomCamera2D" type="Node2D" parent="Camera types/cam_2" node_paths=PackedStringArray("follow_target")]
-position = Vector2(854.143, 31.1429)
+position = Vector2(854.143, -16.1429)
 script = ExtResource("29_t58t4")
 follow_mode = 2
 follow_target = NodePath("../../../CharacterBody2D")
@@ -850,7 +850,7 @@ CameraRef = NodePath("../Camera2D")
 area_pcam = NodePath("PhantomCamera2D")
 
 [node name="PhantomCamera2D" type="Node2D" parent="Camera types/cam_3 Fight" node_paths=PackedStringArray("follow_target")]
-position = Vector2(1824, 134)
+position = Vector2(1678, 15)
 script = ExtResource("29_t58t4")
 follow_mode = 1
 follow_target = NodePath("../../../CharacterBody2D")
@@ -872,7 +872,7 @@ CameraRef = NodePath("../Camera2D")
 area_pcam = NodePath("PhantomCamera2D")
 
 [node name="PhantomCamera2D" type="Node2D" parent="Camera types/cam_3 proceed" node_paths=PackedStringArray("follow_target")]
-position = Vector2(1829, 651)
+position = Vector2(1068, 651)
 script = ExtResource("29_t58t4")
 follow_mode = 2
 follow_target = NodePath("../../../CharacterBody2D")
@@ -1016,7 +1016,7 @@ position = Vector2(1840, 81)
 texture = ExtResource("57_xueas")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("50_w0dsa")]
-position = Vector2(1824, 184)
+position = Vector2(1063, -312)
 
 [node name="Enitys" type="Node" parent="."]
 

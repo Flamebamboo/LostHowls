@@ -13,7 +13,6 @@ script = ExtResource("1_uryag")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(7.62939e-06, -10)
-scale = Vector2(5, 5)
 texture = ExtResource("2_wruuo")
 
 [node name="Timer" type="Timer" parent="Sprite2D"]
