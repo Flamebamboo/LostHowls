@@ -302,6 +302,15 @@ script = ExtResource("17_tsk50")
 health_components = NodePath("../Health Components")
 player = NodePath("..")
 
+[node name="Coyote Time" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = -19.0
+offset_top = -71.0
+offset_right = 21.0
+offset_bottom = -48.0
+
 [connection signal="died" from="Health Components" to="Respawn Manager" method="_on_health_components_died"]
 [connection signal="took_damage" from="Health Components" to="Health Components" method="_on_took_damage"]
 [connection signal="state_changed" from="PlayerStateMachine" to="AnimatedSprite2D" method="_on_player_state_machine_state_changed"]

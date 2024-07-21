@@ -11,7 +11,7 @@ func _on_body_entered(body):
 	if body.is_in_group("player"):
 		# Set the priority of the Phantom Camera
 		area_pcam.set_priority(20)
-		print("sup")
+		
 	
 	# Check if shaking is enabled
 	if shake:

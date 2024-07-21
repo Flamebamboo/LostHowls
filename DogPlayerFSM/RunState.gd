@@ -19,3 +19,9 @@ func s_physics_process(_delta):
 		else:
 			machine.transition_to(machine.states["IdleState"])
 			
+func input(event : InputEvent):
+	if event.is_action_pressed("jump"):
+		machine.transition_to(machine.states["JumpState"])
+	
+	elif physics.direction == 0  && owner.is_on_floor():
+		machine.transition_to(machine.states["IdleState"])

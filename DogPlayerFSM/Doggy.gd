@@ -8,6 +8,9 @@ class_name Player
 @export var physics : PhysicsComponent
 @export var health_component : PlayerHealth
 @export var hurtbox_component: Hurtbox
+
+
+
 func _ready():
 	Global.dogCharacter = self
 
@@ -18,11 +21,15 @@ func _physics_process(_delta):
 	elif direction == -1:
 		anim.flip_h = true
 		
-	
+
+
+
 	
 func sprite_flash():
 	var tween: Tween = create_tween()
 	tween.tween_property(%AnimatedSprite2D, "modulate:v", 1, 0.25).from(15)
+
+
 
 #passing from bossbat because i dont know how to get_child of this root node to access health component directly there
 func bullet_damage(damage: int):
@@ -46,6 +53,7 @@ func display_jump_effects():
 
 func die():
 	$"Respawn Manager".respawn_player()
+
 
 
 func _on_air_state_floor():

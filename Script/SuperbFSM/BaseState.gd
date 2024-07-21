@@ -16,4 +16,3 @@ func s_physics_process(_delta):
 
 func _input(_event: InputEvent):
 	return null
-

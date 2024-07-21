@@ -12,7 +12,10 @@ extends Node
 @onready var fall_gravity: float = ((-2.0 * jump_height) / (jump_time_to_peak * jump_time_to_fall)) * -1.0
 @export var allowed_jump: int = 2
 
-var jump_count: Array[Vector2] = []
+
+@onready var label = $"../Label"
+
+var jump_count: int = 0
 
 
 @export var air_resistance = 1000
@@ -35,7 +38,12 @@ func _physics_process(_delta):
 	player.velocity = velocity
 	player.move_and_slide()
 	
-
+	if owner.is_on_floor():
+		jump_count = 0
+		#label.text = "is on floor"
+	#else:
+		#label.text = "is not on floor"
+	
 func apply_gravity(delta: float = get_physics_process_delta_time()):
 	if velocity.y < 0:
 		velocity.y += jump_gravity * delta
@@ -77,17 +85,19 @@ func vertical_air_resistance(delta: float = get_physics_process_delta_time()):
 		velocity.y = move_toward(velocity.y, 0, air_resistance * delta)
 	
 
-func can_jump():
-	var available_jump: bool = jump_count.size() < allowed_jump
+func can_double_jump() -> bool:
+	var available_jump: bool = jump_count < allowed_jump
 	return available_jump	
 
 ##coyote time next
 func jumps():
-	if can_jump:
-		var tween = create_tween()
-		tween.tween_property(%AnimatedSprite2D, "scale:x", 1.0, 0.4).from(0.85).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BOUNCE)
-		velocity.y = jump_velocity
-		jump_count.append(Vector2())
-		if owner.is_on_floor():
-			jump_count.clear()
+	print("Performing jump")
+	var tween = create_tween()
+	tween.tween_property(%AnimatedSprite2D, "scale:x", 1.0, 0.4).from(0.85).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BOUNCE)
+	velocity.y = jump_velocity
+	jump_count += 1
 	
+	
+func double_jump():
+	velocity.y = jump_velocity/2
+	jump_count += 1

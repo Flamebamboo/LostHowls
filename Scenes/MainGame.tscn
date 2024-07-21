@@ -1,4 +1,4 @@
-[gd_scene load_steps=102 format=3 uid="uid://dxo0h0k8bfdee"]
+[gd_scene load_steps=101 format=3 uid="uid://dxo0h0k8bfdee"]
 
 [ext_resource type="Script" path="res://Script/Level_1/MainGame.gd" id="1_sw385"]
 [ext_resource type="Texture2D" uid="uid://dpqru6htgukk2" path="res://art/LevelDesign/TutorialKeys/keycaps-Sheet.png" id="2_kni8x"]
@@ -22,7 +22,6 @@
 [ext_resource type="Texture2D" uid="uid://d3jeuk57xel5x" path="res://art/Props/Interactables/bagpack.png" id="32_2vokd"]
 [ext_resource type="PackedScene" uid="uid://cy6u0dprwre7m" path="res://Scenes/notes.tscn" id="33_unu8y"]
 [ext_resource type="PackedScene" uid="uid://dyts0n16u8h8n" path="res://Scenes/radiotape.tscn" id="34_hrose"]
-[ext_resource type="PackedScene" uid="uid://bd24oc54elotu" path="res://Scenes/BossBat.tscn" id="39_auycg"]
 [ext_resource type="Texture2D" uid="uid://k8vo7syeuslr" path="res://art/Props/Interactables/skeleton.png" id="42_uy14o"]
 [ext_resource type="Script" path="res://Scenes/boundriesTemporary.gd" id="42_vreic"]
 [ext_resource type="Shader" path="res://shader/waterfall.gdshader" id="45_busmy"]
@@ -1121,11 +1120,6 @@ speed_scale = 5.77
 explosiveness = 0.13
 
 [node name="Enitys" type="Node" parent="."]
-
-[node name="BossBat" parent="Enitys" node_paths=PackedStringArray("camera", "hitflashing") instance=ExtResource("39_auycg")]
-position = Vector2(2286, 496)
-camera = NodePath("../../Camera types/Camera2D")
-hitflashing = NodePath("../../UI/hitflashes")
 
 [node name="CharacterBody2D" parent="Enitys" instance=ExtResource("50_w0dsa")]
 position = Vector2(1460, 470)

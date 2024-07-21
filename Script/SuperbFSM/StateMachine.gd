@@ -14,7 +14,7 @@ func _ready():
 		state.machine = self
 
 func transition_to(state: BaseState):
-	#print (str("State switch: ", active_state.get_name(), " to ", state.get_name()))
+	print (str("State switch: ", active_state.get_name(), " to ", state.get_name()))
 	active_state.s_deactivate()
 	previous_active_state = active_state
 	active_state = state
@@ -23,7 +23,8 @@ func transition_to(state: BaseState):
 	
 func _process(delta):
 	active_state.s_process(delta) #ensuring that child states that uses s_process runs every frame
-
+	
 	
 func _physics_process(delta):
 	active_state.s_physics_process(delta)
+	
