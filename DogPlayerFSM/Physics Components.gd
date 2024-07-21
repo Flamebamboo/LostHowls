@@ -43,31 +43,35 @@ func apply_gravity(delta: float = get_physics_process_delta_time()):
 		velocity.y += fall_gravity * delta
 		velocity.y = min(velocity.y, fall_gravity * jump_time_to_fall)
 	
-		
-	
+	#depending on the player velocity if its going up then we apply jump_gravity 
+	#else we use fall gravity also make sure it doesnt exceed the limit by using min
 	
 
-func gravity_direction():
-	return jump_gravity if velocity.y < 0.0 else fall_gravity
 
 func ground_accel(delta: float = get_physics_process_delta_time()):
 	var input_axis = Input.get_axis("moveleft", "moveright")
 	velocity.x = lerp(velocity.x, input_axis * max_speed,(acceleration/ 100) * delta)
+	
 	#lerp(a, b, t) = a + (b - a) * t
+	#lerp will return a value inbetween the first parameter and the second parameter.
+	#lerp is like saying the the first value (velocity.x) and add the third paramaeter acceleration until it reaches second
+	#eg first parameter is 5 and the second is 10 the last parameter is 0.5
+	#lerp will return 7.5
 	#acceleration/100 times delta is interpolation factor
 
 	
 
 func ground_decel(delta: float = get_physics_process_delta_time()):
 	velocity.x = move_toward(velocity.x, 0, friction * delta)
-
+	#move_toward is like saying current velocity to the second parameter (in this case i want it to stop so "0") 
+	#in the speed of friction * delta
 
 func horizontal_air_strafe(delta: float = get_physics_process_delta_time()):
 	var input_axis = Input.get_axis("moveleft", "moveright")
 	if !owner.is_on_floor() && !owner.is_on_wall():
 		velocity.x = move_toward(velocity.x, air_accel * input_axis, air_resistance * delta)
-
-
+	
+	
 func vertical_air_resistance(delta: float = get_physics_process_delta_time()):
 	if !owner.is_on_floor() && !owner.is_on_wall():
 		velocity.y = move_toward(velocity.y, 0, air_resistance * delta)
@@ -77,7 +81,7 @@ func can_jump():
 	var available_jump: bool = jump_count.size() < allowed_jump
 	return available_jump	
 
-
+##coyote time next
 func jumps():
 	if can_jump:
 		var tween = create_tween()

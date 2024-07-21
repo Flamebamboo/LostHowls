@@ -1,15 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://bglfopvpqk35y"]
+[gd_scene load_steps=2 format=3 uid="uid://bglfopvpqk35y"]
 
-[ext_resource type="Script" path="res://Script/water_spring.gd" id="1_56uh3"]
-[ext_resource type="Texture2D" uid="uid://canecay3wgcc" path="res://art/VFX/particlesvfx.png" id="2_ukvqu"]
 [ext_resource type="Script" path="res://water_body.gd" id="3_bdm7l"]
 
 [node name="WaterBody" type="Node2D"]
+position = Vector2(224, 92)
 script = ExtResource("3_bdm7l")
+distance_between_springs = 10
+spring_number = 100
 
-[node name="WaterSpring" type="Node2D" parent="."]
-script = ExtResource("1_56uh3")
+[node name="Polygon2D" type="Polygon2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="WaterSpring"]
-position = Vector2(100, 73)
-texture = ExtResource("2_ukvqu")
+[node name="Line2D" type="Line2D" parent="."]
+default_color = Color(0, 0, 0, 1)

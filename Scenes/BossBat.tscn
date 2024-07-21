@@ -1,11 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://bd24oc54elotu"]
+[gd_scene load_steps=23 format=3 uid="uid://bd24oc54elotu"]
 
 [ext_resource type="Material" uid="uid://bmgyfioow48f8" path="res://shader/unshadedlight.tres" id="1_xyjkw"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/boss_bat.gd" id="2_ympke"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/bat_state_controller.gd" id="4_25j3u"]
-[ext_resource type="Texture2D" uid="uid://boijh8vbuie55" path="res://Bossbat-Sheet.png" id="6_8r4q4"]
+[ext_resource type="Texture2D" uid="uid://c7g1ua0jd6ccd" path="res://art/Enemies/Bossbat-Sheet.png" id="6_8r4q4"]
 [ext_resource type="Script" path="res://Scenes/EnemyHealth.gd" id="6_im028"]
-[ext_resource type="Texture2D" uid="uid://nl4gavibgde8" path="res://art/Enemies/hurtbossbat.png" id="6_iyqgw"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/hurtbox_components.gd" id="10_8h1lu"]
 [ext_resource type="Script" path="res://Scenes/boss_bat_state_machine.gd" id="11_0chcn"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/FlyingState.gd" id="13_31c35"]
@@ -98,10 +97,6 @@ region = Rect2(600, 0, 200, 200)
 atlas = ExtResource("6_8r4q4")
 region = Rect2(800, 0, 200, 200)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_l3lli"]
-atlas = ExtResource("6_iyqgw")
-region = Rect2(0, 0, 200, 100)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_h0w82"]
 animations = [{
 "frames": [{
@@ -131,14 +126,6 @@ animations = [{
 "loop": true,
 "name": &"flying",
 "speed": 12.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_l3lli")
-}],
-"loop": false,
-"name": &"hurt",
-"speed": 10.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w7a0g"]
@@ -169,7 +156,7 @@ shape = SubResource("CircleShape2D_gpsja")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = ExtResource("1_xyjkw")
 sprite_frames = SubResource("SpriteFrames_h0w82")
-animation = &"flying"
+animation = &"attack"
 
 [node name="Controller" type="Node" parent="." node_paths=PackedStringArray("machine")]
 script = ExtResource("4_25j3u")

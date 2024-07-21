@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bgyl3e5aqej70"
-path="res://.godot/imported/Rock_Cavern_2.png-f382751cf7f30455a8da722fc6d9492d.ctex"
+uid="uid://bkpgeo8muli7a"
+path="res://.godot/imported/Rocks_spread_sheet.png-a0cb3df904dec4b9758740562bf2e867.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/Props/Rocks/Rock_Cavern_2.png"
-dest_files=["res://.godot/imported/Rock_Cavern_2.png-f382751cf7f30455a8da722fc6d9492d.ctex"]
+source_file="res://art/Props/Rocks_spread_sheet.png"
+dest_files=["res://.godot/imported/Rocks_spread_sheet.png-a0cb3df904dec4b9758740562bf2e867.ctex"]
 
 [params]
 

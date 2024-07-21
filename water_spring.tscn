@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbgb2ycxe6mbh"]
+
+[ext_resource type="Script" path="res://Script/water_spring.gd" id="1_60ynk"]
+[ext_resource type="Texture2D" uid="uid://canecay3wgcc" path="res://art/VFX/particlesvfx.png" id="2_1nbmk"]
+
+[node name="WaterSpring" type="Node2D"]
+script = ExtResource("1_60ynk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 0)
+texture = ExtResource("2_1nbmk")
