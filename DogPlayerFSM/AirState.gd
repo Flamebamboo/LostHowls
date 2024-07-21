@@ -16,9 +16,6 @@ func s_physics_process(_delta):
 	
 	physics.apply_gravity()
 	
-
-			
-	
 	physics.vertical_air_resistance(_delta)
 	physics.horizontal_air_strafe(_delta)	
 	

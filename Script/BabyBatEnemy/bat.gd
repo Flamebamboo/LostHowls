@@ -17,8 +17,7 @@ func _ready():
 	add_to_group("enemies")
 	
 func _process(delta):
-	Global.batDamageAmount = DamagetoDeal
-	Global.batDamageZone = $DealDamageArea
+	
 	if is_on_floor() and dead:
 		await get_tree().create_timer(3.0).timeout
 		self.queue_free()
@@ -77,26 +76,7 @@ func handle_animation():
 		isRoaming = false
 		animatedSprite.play("death")
 	
-	
 
-
-
-	
-
-# if the dog area of damage is turned on and overlapped with this bat hitbox then the bat will take damage
-func _on_bat_hitbox_area_entered(area):
-	if area == Global.dogDamageZone:
-		var damage = Global.dogDamageAmount
-		takeDamage(damage)
-	
-
-func takeDamage(damage):
-	health -= damage
-	takingDamage = true
-	if health <= 0:
-		health = 0 
-		dead = true
-	print(str(self), "current health is ", health)
 
 func take_bullet_damage(damage):
 	health -= damage

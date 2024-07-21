@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=3 uid="uid://dxo0h0k8bfdee"]
+[gd_scene load_steps=103 format=3 uid="uid://dxo0h0k8bfdee"]
 
 [ext_resource type="Script" path="res://Script/Level_1/MainGame.gd" id="1_sw385"]
 [ext_resource type="Texture2D" uid="uid://dpqru6htgukk2" path="res://art/LevelDesign/TutorialKeys/keycaps-Sheet.png" id="2_kni8x"]
@@ -22,8 +22,10 @@
 [ext_resource type="Texture2D" uid="uid://d3jeuk57xel5x" path="res://art/Props/Interactables/bagpack.png" id="32_2vokd"]
 [ext_resource type="PackedScene" uid="uid://cy6u0dprwre7m" path="res://Scenes/notes.tscn" id="33_unu8y"]
 [ext_resource type="PackedScene" uid="uid://dyts0n16u8h8n" path="res://Scenes/radiotape.tscn" id="34_hrose"]
+[ext_resource type="PackedScene" uid="uid://bd24oc54elotu" path="res://Scenes/BossBat.tscn" id="39_auycg"]
 [ext_resource type="Texture2D" uid="uid://k8vo7syeuslr" path="res://art/Props/Interactables/skeleton.png" id="42_uy14o"]
 [ext_resource type="Script" path="res://Scenes/boundriesTemporary.gd" id="42_vreic"]
+[ext_resource type="PackedScene" uid="uid://0drrtr1rw0n1" path="res://Scenes/bat.tscn" id="44_latig"]
 [ext_resource type="Shader" path="res://shader/waterfall.gdshader" id="45_busmy"]
 [ext_resource type="Texture2D" uid="uid://eg4wgqmbl5fe" path="res://art/VFX/waterfallparticles.png" id="46_14lyo"]
 [ext_resource type="PackedScene" uid="uid://d24wjreyddt1s" path="res://Script/BossBatEnemy/Interactables/rock_3.tscn" id="48_3gk76"]
@@ -631,7 +633,6 @@ texture = ExtResource("54_7lyj5")
 [node name="tilemaps" type="Node" parent="."]
 
 [node name="Tilemaps" type="TileMap" parent="tilemaps"]
-z_index = 10
 position = Vector2(-472, 198)
 tile_set = SubResource("TileSet_w0gf8")
 rendering_quadrant_size = 32
@@ -942,7 +943,7 @@ area_pcam = NodePath("PhantomCamera2D")
 position = Vector2(988, -378.75)
 script = ExtResource("29_t58t4")
 follow_mode = 2
-follow_target = NodePath("../../../Enitys/CharacterBody2D")
+follow_target = NodePath("../../../Enitys/Dog")
 zoom = Vector2(0.8, 0.8)
 tween_resource = SubResource("Resource_v2a0e")
 follow_damping = true
@@ -988,10 +989,10 @@ CameraRef = NodePath("../Camera2D")
 area_pcam = NodePath("PhantomCamera2D")
 
 [node name="PhantomCamera2D" type="Node2D" parent="Camera types/cam_2" node_paths=PackedStringArray("follow_target")]
-position = Vector2(854.143, 0)
+position = Vector2(854.143, -16.1429)
 script = ExtResource("29_t58t4")
 follow_mode = 2
-follow_target = NodePath("../../../Enitys/CharacterBody2D")
+follow_target = NodePath("../../../Enitys/Dog")
 zoom = Vector2(0.7, 0.7)
 tween_resource = SubResource("Resource_v2a0e")
 follow_offset = Vector2(100, 2.08165e-12)
@@ -1014,7 +1015,7 @@ area_pcam = NodePath("PhantomCamera2D")
 position = Vector2(1678, 15)
 script = ExtResource("29_t58t4")
 follow_mode = 1
-follow_target = NodePath("../../../Enitys/CharacterBody2D")
+follow_target = NodePath("../../../Enitys/Dog")
 zoom = Vector2(0.5, 0.5)
 tween_resource = SubResource("Resource_v2a0e")
 draw_limits = true
@@ -1033,10 +1034,10 @@ CameraRef = NodePath("../Camera2D")
 area_pcam = NodePath("PhantomCamera2D")
 
 [node name="PhantomCamera2D" type="Node2D" parent="Camera types/cam_3 proceed" node_paths=PackedStringArray("follow_target")]
-position = Vector2(1007, 651)
+position = Vector2(1060, 651)
 script = ExtResource("29_t58t4")
 follow_mode = 2
-follow_target = NodePath("../../../Enitys/CharacterBody2D")
+follow_target = NodePath("../../../Enitys/Dog")
 tween_resource = SubResource("Resource_v2a0e")
 draw_limits = true
 limit_target = NodePath("../Limit")
@@ -1121,12 +1122,15 @@ explosiveness = 0.13
 
 [node name="Enitys" type="Node" parent="."]
 
-[node name="CharacterBody2D" parent="Enitys" instance=ExtResource("50_w0dsa")]
-position = Vector2(1460, 470)
+[node name="Dog" parent="Enitys" instance=ExtResource("50_w0dsa")]
+position = Vector2(1513, 191)
 
 [node name="spirit" parent="Enitys" node_paths=PackedStringArray("dog") instance=ExtResource("63_g7hrd")]
 position = Vector2(1363, 16)
-dog = NodePath("../CharacterBody2D")
+dog = NodePath("../Dog")
+
+[node name="BossBat" parent="Enitys" instance=ExtResource("39_auycg")]
+position = Vector2(2282, 618)
 
 [node name="Respawn" type="Node" parent="."]
 
@@ -1141,11 +1145,23 @@ position = Vector2(1485, 548)
 [node name="boundries" type="Area2D" parent="Respawn" node_paths=PackedStringArray("player")]
 collision_mask = 2
 script = ExtResource("42_vreic")
-player = NodePath("../../Enitys/CharacterBody2D")
+player = NodePath("../../Enitys/Dog")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Respawn/boundries"]
 position = Vector2(2291.25, 888)
 shape = SubResource("RectangleShape2D_uqwb7")
+
+[node name="minibat_1" parent="." instance=ExtResource("44_latig")]
+position = Vector2(-301, -38)
+
+[node name="minibat_2" parent="." instance=ExtResource("44_latig")]
+position = Vector2(-109, -378)
+
+[node name="minibat_3" parent="." instance=ExtResource("44_latig")]
+position = Vector2(183, -378)
+
+[node name="minibat_4" parent="." instance=ExtResource("44_latig")]
+position = Vector2(322, -83)
 
 [connection signal="body_entered" from="Camera types/cam_1" to="Camera types/cam_1" method="_on_body_entered"]
 [connection signal="body_exited" from="Camera types/cam_1" to="Camera types/cam_1" method="_on_body_exited"]

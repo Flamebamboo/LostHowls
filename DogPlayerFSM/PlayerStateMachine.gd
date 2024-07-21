@@ -11,5 +11,4 @@ func _ready():
 	active_state = states["AirState"]
 	active_state.s_activate()
 
-func _process(delta):
-	$"../Label".text = active_state.get_name()
+	

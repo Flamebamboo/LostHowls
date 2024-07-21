@@ -74,6 +74,8 @@ func ground_decel(delta: float = get_physics_process_delta_time()):
 	#move_toward is like saying current velocity to the second parameter (in this case i want it to stop so "0") 
 	#in the speed of friction * delta
 
+
+###AIR STATE 
 func horizontal_air_strafe(delta: float = get_physics_process_delta_time()):
 	var input_axis = Input.get_axis("moveleft", "moveright")
 	if !owner.is_on_floor() && !owner.is_on_wall():
@@ -89,9 +91,8 @@ func can_double_jump() -> bool:
 	var available_jump: bool = jump_count < allowed_jump
 	return available_jump	
 
-##coyote time next
+##JUMP STATE
 func jumps():
-	print("Performing jump")
 	var tween = create_tween()
 	tween.tween_property(%AnimatedSprite2D, "scale:x", 1.0, 0.4).from(0.85).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BOUNCE)
 	velocity.y = jump_velocity
