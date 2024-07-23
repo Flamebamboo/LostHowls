@@ -8,7 +8,7 @@ func s_activate(): #Called every time the state is entered.
 	super()
 	can_jump = true
 	can_run = true
-	
+	Global.current_idle = true
 	
 	
 func s_physics_process(_delta):
@@ -25,6 +25,7 @@ func input(event : InputEvent):
 	if event.is_action_pressed("moveup") && machine.active_state.can_jump:
 		machine.transition_to(machine.states["JumpState"])
 		
-	
+func s_deactivate():
+	Global.current_idle = false	
 
 		

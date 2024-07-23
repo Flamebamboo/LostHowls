@@ -11,7 +11,7 @@ class_name spirit
 #@onready var player_launcher : PackedScene = preload("res://Scenes/playerlauncher.tscn")
 
 @export var speed = 300.0 #normal speed of spirit to follow dog
-@export var follow_distance = 200.0  #this var is the distance between the spirit and the player
+@export var follow_distance = 50.0  #this var is the distance between the spirit and the player
 @export var stop_distance = 100.0  #this var is used to check if the spirit distance is greater than 100 
 @export var decel_speed = 0.01 #if the spirit distance is greater than 100 then this slower speed
 var can_launch: bool
@@ -22,25 +22,41 @@ func _ready():
 	can_shoot = true
 
 func _physics_process(delta):
-	if dog:
-		var target_position = dog.global_position
-		var distance_to_player = global_position.distance_to(target_position)
-		#if distance to player is greater than 200 than it starts to follow
-		if distance_to_player > follow_distance:
-			var direction = (target_position - global_position).normalized()
-			global_position += direction * speed * delta
-		#if distance to player is greater than stop distance it move with slow speed towards dog
-		elif distance_to_player > stop_distance:
-			# smooth follow using linear interpolation 
-			global_position = global_position.lerp(target_position, decel_speed)
-
-		
 	if can_shoot:
 		if Input.is_action_just_pressed("attackL"):
 			shoot()
 			can_shoot = false
 			await get_tree().create_timer(0.1).timeout
 			can_shoot = true 
+			
+	if Global.current_idle:
+		spirit_idle()
+	elif Global.current_run:
+		spirit_run(delta)
+	
+
+func spirit_idle():
+	global_position = dog.global_position + Vector2(0, -follow_distance)
+
+func spirit_run(delta):
+	var target_position = dog.global_position + Vector2(0, -follow_distance)
+	var distance_to_player = global_position.distance_to(target_position)
+	#if distance to player is greater than 200 than it starts to follow
+	if distance_to_player > follow_distance:
+		var direction = (target_position - global_position).normalized()
+		global_position += direction * speed * delta
+		#if distance to player is greater than stop distance it move with slow speed towards dog
+	elif distance_to_player > stop_distance:
+			# smooth follow using linear interpolation 
+		global_position = global_position.lerp(target_position, decel_speed)
+	
+	
+	
+	
+	
+
+		
+	
 			
 		#if can_launch:
 			#if Input.is_action_just_pressed("attackr"):

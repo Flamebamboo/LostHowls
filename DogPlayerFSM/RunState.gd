@@ -1,8 +1,9 @@
 extends PlayerState
-class_name RunState
+
 
 func s_activate():
 	super()
+	Global.current_run = true
 
 func s_process(_delta):
 	pass
@@ -25,3 +26,6 @@ func input(event : InputEvent):
 	
 	elif physics.direction == 0  && owner.is_on_floor():
 		machine.transition_to(machine.states["IdleState"])
+
+func s_deactivate():
+	Global.current_run = false

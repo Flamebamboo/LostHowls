@@ -12,7 +12,9 @@ func s_activate():
 	super()
 	can_jump = true
 	can_idle = true
-		
+	Global.current_air = true
+	
+	
 func s_physics_process(_delta):
 	var direction = Input.get_axis("moveleft", "moveright")
 	
@@ -27,7 +29,7 @@ func s_physics_process(_delta):
 
 
 func s_deactivate():
-	pass
+	Global.current_air = false
 
 func _input(event : InputEvent):
 	if event.is_action_pressed("moveup") && coyote_time.time_left > 0 && physics.can_double_jump() && machine.active_state.can_jump:
