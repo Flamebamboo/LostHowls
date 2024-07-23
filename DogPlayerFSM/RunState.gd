@@ -1,8 +1,8 @@
 extends PlayerState
 class_name RunState
 
-func s_deactivate():
-	pass
+func s_activate():
+	super()
 
 func s_process(_delta):
 	pass
@@ -20,7 +20,7 @@ func s_physics_process(_delta):
 			machine.transition_to(machine.states["IdleState"])
 			
 func input(event : InputEvent):
-	if event.is_action_pressed("jump"):
+	if event.is_action_pressed("moveup") && machine.active_state.can_jump:
 		machine.transition_to(machine.states["JumpState"])
 	
 	elif physics.direction == 0  && owner.is_on_floor():

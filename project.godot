@@ -18,11 +18,9 @@ config/features=PackedStringArray("4.2", "Mobile")
 
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
-Global="*res://global.gd"
-PlayerStats="*res://singletons/player_stats.gd"
-ObjectPooling="*res://singletons/object_pooling.gd"
 CheckpointManager="*res://singletons/checkpoint_manager.gd"
 FrameFreeze="*res://singletons/frame_freeze.gd"
+Global="*res://singletons/global.gd"
 
 [dialogic]
 

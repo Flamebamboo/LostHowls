@@ -12,7 +12,6 @@ func respawn_player():
 	
 
 	emit_signal("PlayerAlive")
-	PlayerStats.dead = false
 	Global.dogAlive = true
 func _on_health_components_died():
 	respawn_player()
