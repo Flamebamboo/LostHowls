@@ -10,7 +10,7 @@ extends BossBatState
 const radius = 100
 @onready var rotater = %Rotater
 @onready var shoottimer = %shoottimer
-var batbullet = preload("res://Scenes/batbullet.tscn")
+var batbullet = preload("res://Scenes/bat_bullet.tscn")
 
 var dog: Player
 

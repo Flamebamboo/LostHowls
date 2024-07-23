@@ -13,6 +13,7 @@ class_name Player
 
 func _ready():
 	Global.dogCharacter = self
+	Global.dogAlive = true
 func _physics_process(_delta):
 	var direction = Input.get_axis("moveleft", "moveright")
 	if direction == 1:

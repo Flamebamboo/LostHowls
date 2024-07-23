@@ -1,12 +1,13 @@
-[gd_scene load_steps=31 format=3 uid="uid://r8fwkr0ot8rp"]
+[gd_scene load_steps=29 format=3 uid="uid://r8fwkr0ot8rp"]
 
 [ext_resource type="Script" path="res://Script/Player/spirit_green.gd" id="1_y24hh"]
 [ext_resource type="Texture2D" uid="uid://dw72i54qat4nh" path="res://art/Player/ghostsimple-Sheet.png" id="2_0ie8h"]
 [ext_resource type="Texture2D" uid="uid://b1xdhcppfx53v" path="res://art/VFX/light2.png" id="2_l56k3"]
 [ext_resource type="Material" uid="uid://bmgyfioow48f8" path="res://shader/unshadedlight.tres" id="2_uc4jv"]
 [ext_resource type="Script" path="res://Script/Player/spirit_trail.gd" id="3_tc1tc"]
-[ext_resource type="PackedScene" uid="uid://ep5krjvy7r02" path="res://Scenes/bullet.tscn" id="7_4a3nk"]
 [ext_resource type="Texture2D" uid="uid://cas5bngx1ua0i" path="res://art/Interface Elements/Doglauncherwhite.png" id="7_cvbms"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8sp57"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_v08iw"]
 
@@ -87,8 +88,6 @@ _data = {
 "new_animation": SubResource("Animation_s0yx4")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8sp57"]
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_fvds8"]
 atlas = ExtResource("2_0ie8h")
 region = Rect2(0, 0, 32, 32)
@@ -162,9 +161,6 @@ animations = [{
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_jgxqh"]
-radius = 373.012
-
 [sub_resource type="Animation" id="Animation_wac2v"]
 length = 0.001
 tracks/0/type = "value"
@@ -219,12 +215,14 @@ _data = {
 "paw": SubResource("Animation_twxad")
 }
 
-[node name="spirit" type="CharacterBody2D" node_paths=PackedStringArray("shootingMarker")]
+[node name="spirit" type="CharacterBody2D" node_paths=PackedStringArray("shooting_marker")]
 collision_layer = 64
 collision_mask = 0
 script = ExtResource("1_y24hh")
-shootingMarker = NodePath("Gun/shooting")
-bulletScene = ExtResource("7_4a3nk")
+shooting_marker = NodePath("shooting")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8sp57")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 material = SubResource("CanvasItemMaterial_v08iw")
@@ -244,9 +242,6 @@ libraries = {
 }
 autoplay = "new_animation"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_8sp57")
-
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 material = ExtResource("2_uc4jv")
 position = Vector2(9.53674e-07, -9.53674e-07)
@@ -260,30 +255,18 @@ show_behind_parent = true
 width_curve = SubResource("Curve_dpxfj")
 script = ExtResource("3_tc1tc")
 
-[node name="Gun" type="Area2D" parent="."]
-collision_layer = 16
-collision_mask = 164
-
-[node name="Timer" type="Timer" parent="Gun"]
-autostart = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Gun"]
-shape = SubResource("CircleShape2D_jgxqh")
-
-[node name="shooting" type="Marker2D" parent="Gun"]
+[node name="shooting" type="Marker2D" parent="."]
 unique_name_in_owner = true
-
-[node name="Bullet" parent="Gun/shooting" instance=ExtResource("7_4a3nk")]
-unique_name_in_owner = true
-visible = false
 
 [node name="launcher" type="Timer" parent="."]
 process_callback = 0
 wait_time = 5.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="launcher"]
+visible = false
 
 [node name="Sprite2D" type="Sprite2D" parent="launcher/CanvasLayer"]
+visible = false
 position = Vector2(101, 48)
 texture = ExtResource("7_cvbms")
 
@@ -291,6 +274,3 @@ texture = ExtResource("7_cvbms")
 libraries = {
 "": SubResource("AnimationLibrary_1k35l")
 }
-
-[connection signal="area_entered" from="Gun" to="." method="_on_gun_area_entered"]
-[connection signal="timeout" from="Gun/Timer" to="Gun" method="_on_timer_timeout"]

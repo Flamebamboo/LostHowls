@@ -14,7 +14,7 @@ var DamagetoDeal = 10
 @onready var impact: GPUParticles2D = %GPUParticles2D
 func _ready():
 	batChase = true
-	add_to_group("enemies")
+	
 	
 func _process(delta):
 	
@@ -28,9 +28,10 @@ func _process(delta):
 		
 	elif !Global.dogAlive:
 		batChase = false
+		
 #bat logic
 func move(delta):
-	dog = Global.dogCharacter
+	var dog : CharacterBody2D
 	if !dead:
 		isRoaming = true
 		if !takingDamage and batChase and Global.dogAlive: 
