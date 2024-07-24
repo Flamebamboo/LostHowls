@@ -498,7 +498,7 @@ size = Vector2(1741.75, 433)
 size = Vector2(1138, 659)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l0ew3"]
-size = Vector2(5096, 3004)
+size = Vector2(1116, 473)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_44wwv"]
 
@@ -903,7 +903,7 @@ CameraRef = NodePath("../Camera2D")
 area_pcam = NodePath("PhantomCamera2D")
 
 [node name="PhantomCamera2D" type="Node2D" parent="Camera types/cam_1" node_paths=PackedStringArray("follow_target")]
-position = Vector2(988, -378.75)
+position = Vector2(988, -425)
 script = ExtResource("29_t58t4")
 follow_mode = 2
 follow_target = NodePath("../../../Enitys/Dog")
@@ -975,7 +975,7 @@ CameraRef = NodePath("../Camera2D")
 area_pcam = NodePath("PhantomCamera2D")
 
 [node name="PhantomCamera2D" type="Node2D" parent="Camera types/cam_3 Fight" node_paths=PackedStringArray("follow_target")]
-position = Vector2(1678, 134)
+position = Vector2(1678, 66)
 script = ExtResource("29_t58t4")
 follow_mode = 1
 follow_target = NodePath("../../../Enitys/Dog")
@@ -997,21 +997,20 @@ CameraRef = NodePath("../Camera2D")
 area_pcam = NodePath("PhantomCamera2D")
 
 [node name="PhantomCamera2D" type="Node2D" parent="Camera types/cam_3 proceed" node_paths=PackedStringArray("follow_target")]
-position = Vector2(1578, -377)
+position = Vector2(1443, -325)
 script = ExtResource("29_t58t4")
 follow_mode = 2
 follow_target = NodePath("../../../Enitys/Dog")
-zoom = Vector2(0.1, 0.1)
 tween_resource = SubResource("Resource_v2a0e")
 draw_limits = true
 limit_target = NodePath("../Limit")
 
 [node name="Limit" type="CollisionShape2D" parent="Camera types/cam_3 proceed"]
-position = Vector2(1430, -529)
+position = Vector2(1761, -223.5)
 shape = SubResource("RectangleShape2D_l0ew3")
 
 [node name="Camera2D" type="Camera2D" parent="Camera types" node_paths=PackedStringArray("target")]
-position = Vector2(1446, 91.25)
+position = Vector2(1446, 45)
 zoom = Vector2(0.8, 0.8)
 limit_left = -119
 limit_top = -236
@@ -1087,7 +1086,7 @@ explosiveness = 0.13
 [node name="Enitys" type="Node" parent="."]
 
 [node name="Dog" parent="Enitys" instance=ExtResource("50_w0dsa")]
-position = Vector2(2141, 367)
+position = Vector2(1550, 45)
 
 [node name="spirit" parent="Enitys" instance=ExtResource("63_g7hrd")]
 position = Vector2(2235, 407)
