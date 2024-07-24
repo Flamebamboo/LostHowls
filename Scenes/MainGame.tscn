@@ -498,7 +498,7 @@ size = Vector2(1741.75, 433)
 size = Vector2(1138, 659)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l0ew3"]
-size = Vector2(1150.5, 525.688)
+size = Vector2(5096, 3004)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_44wwv"]
 
@@ -997,16 +997,17 @@ CameraRef = NodePath("../Camera2D")
 area_pcam = NodePath("PhantomCamera2D")
 
 [node name="PhantomCamera2D" type="Node2D" parent="Camera types/cam_3 proceed" node_paths=PackedStringArray("follow_target")]
-position = Vector2(1688, -207)
+position = Vector2(1578, -377)
 script = ExtResource("29_t58t4")
 follow_mode = 2
 follow_target = NodePath("../../../Enitys/Dog")
+zoom = Vector2(0.1, 0.1)
 tween_resource = SubResource("Resource_v2a0e")
 draw_limits = true
 limit_target = NodePath("../Limit")
 
 [node name="Limit" type="CollisionShape2D" parent="Camera types/cam_3 proceed"]
-position = Vector2(1775.75, -216.156)
+position = Vector2(1430, -529)
 shape = SubResource("RectangleShape2D_l0ew3")
 
 [node name="Camera2D" type="Camera2D" parent="Camera types" node_paths=PackedStringArray("target")]
@@ -1088,9 +1089,8 @@ explosiveness = 0.13
 [node name="Dog" parent="Enitys" instance=ExtResource("50_w0dsa")]
 position = Vector2(2141, 367)
 
-[node name="spirit" parent="Enitys" node_paths=PackedStringArray("dog") instance=ExtResource("63_g7hrd")]
-position = Vector2(1363, 16)
-dog = NodePath("../Dog")
+[node name="spirit" parent="Enitys" instance=ExtResource("63_g7hrd")]
+position = Vector2(2235, 407)
 
 [node name="BossBat" parent="Enitys" node_paths=PackedStringArray("camera", "hitflashing") instance=ExtResource("39_auycg")]
 position = Vector2(3396, 91)
