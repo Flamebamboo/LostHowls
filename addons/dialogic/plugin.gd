@@ -11,6 +11,10 @@ const PLUGIN_ICON_PATH := "res://addons/dialogic/Editor/Images/plugin-icon.svg"
 var editor_view: Control  # the root of the dialogic editor
 
 
+## Signal emitted if godot wants us to save
+signal dialogic_save
+
+
 ## Initialization
 func _init() -> void:
 	self.name = "DialogicPlugin"
@@ -38,9 +42,8 @@ func _enter_tree() -> void:
 
 	# Auto-update the singleton path for alpha users
 	# TODO remove at some point during beta or later
-	if not "Core" in ProjectSettings.get_setting("autoload/"+PLUGIN_NAME, null):
-		remove_autoload_singleton(PLUGIN_NAME)
-		add_autoload_singleton(PLUGIN_NAME, PLUGIN_HANDLER_PATH)
+	remove_autoload_singleton(PLUGIN_NAME)
+	add_autoload_singleton(PLUGIN_NAME, PLUGIN_HANDLER_PATH)
 
 
 func _exit_tree() -> void:

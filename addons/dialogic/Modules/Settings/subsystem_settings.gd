@@ -1,15 +1,12 @@
 extends DialogicSubsystem
+
 ## Subsystem that allows setting and getting settings that are automatically saved slot independent.
-##
 ## All settings that are stored in the project settings dialogic/settings section are supported.
 ## For example the text_speed setting is stored there.
-## How to access this subsystem via code:
-##    ```gd
-##        Dialogic.Settings.text_speed = 0.05
-##    ```
+## Thus it can be acessed like this:
+##    Dialogic.Settings.text_speed = 0.05
 ##
 ## Settings stored there can also be changed with the Settings event.
-
 
 var settings := {}
 var _connections := {}
@@ -62,12 +59,11 @@ func _setting_changed(property:StringName, value:Variant) -> void:
 #region HANDY METHODS
 ####################################################################################################
 
-## Get a setting named `property`, if it does not exist, falls back to `default`.
-func get_setting(property: StringName, default: Variant) -> Variant:
+func get_setting(property:StringName, default:Variant) -> Variant:
 	return _get(property) if _get(property) != null else default
 
-## Whether a setting has been set/stored before.
-func has_setting(property: StringName) -> bool:
+
+func has_setting(property:StringName) -> bool:
 	return property in settings
 
 
@@ -76,7 +72,7 @@ func reset_all() -> void:
 		reset_setting(setting)
 
 
-func reset_setting(property: StringName) -> void:
+func reset_setting(property:StringName) -> void:
 	if ProjectSettings.has_setting('dialogic/settings/'+property):
 		settings[property] = ProjectSettings.get_setting('dialogic/settings/'+property)
 		_setting_changed(property, settings[property])
@@ -84,10 +80,10 @@ func reset_setting(property: StringName) -> void:
 		settings.erase(property)
 		_setting_changed(property, null)
 
-## If a setting named `property` changes its value, this will emit `Callable`.
-func connect_to_change(property: StringName, callable: Callable) -> void:
-	if not property in _connections:
-		_connections[property] = []
-	_connections[property].append(callable)
+
+func connect_to_change(setting:StringName, callable:Callable) -> void:
+	if !setting in _connections:
+		_connections[setting] = []
+	_connections[setting].append(callable)
 
 #endregion

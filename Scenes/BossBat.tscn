@@ -3,7 +3,7 @@
 [ext_resource type="Material" uid="uid://bmgyfioow48f8" path="res://shader/unshadedlight.tres" id="1_xyjkw"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/boss_bat.gd" id="2_ympke"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/bat_state_controller.gd" id="4_25j3u"]
-[ext_resource type="Texture2D" uid="uid://c7g1ua0jd6ccd" path="res://art/Enemies/Bossbat-Sheet.png" id="6_8r4q4"]
+[ext_resource type="Texture2D" uid="uid://boijh8vbuie55" path="res://art/Enemies/Bossbat-Sheet.png" id="6_8r4q4"]
 [ext_resource type="Script" path="res://Scenes/EnemyHealth.gd" id="6_im028"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/hurtbox_components.gd" id="10_8h1lu"]
 [ext_resource type="Script" path="res://Scenes/boss_bat_state_machine.gd" id="11_0chcn"]

@@ -35,8 +35,11 @@ var input_axis = Input.get_axis("moveleft", "moveright")
 	
 	
 func _physics_process(_delta):
-	player.velocity = velocity
-	player.move_and_slide()
+	if Global.dogFreeze:
+		player.velocity = Vector2.ZERO
+	else:
+		player.velocity = velocity
+		player.move_and_slide()
 	
 	if owner.is_on_floor():
 		jump_count = 0

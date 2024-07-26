@@ -2,7 +2,7 @@ extends Node
 
 var dogAlive: bool
 var dogCharacter: CharacterBody2D
-
+var dogFreeze: bool = false
 
 #current active state
 

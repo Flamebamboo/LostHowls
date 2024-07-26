@@ -35,6 +35,8 @@ func _set(property: StringName, what: Variant) -> bool:
 		return true
 	return false
 
+	return false
+
 
 func _ready() -> void:
 	# add to necessary

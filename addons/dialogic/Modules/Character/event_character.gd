@@ -117,14 +117,12 @@ func _execute() -> void:
 				)
 
 		Actions.UPDATE:
-			if character == null or not dialogic.Portraits.is_character_joined(character):
+			if !character or !dialogic.Portraits.is_character_joined(character):
 				finish()
 				return
 
-			dialogic.Portraits.change_character_extradata(character, extra_data)
-
 			if set_portrait:
-				dialogic.Portraits.change_character_portrait(character, portrait)
+				dialogic.Portraits.change_character_portrait(character, portrait, false)
 
 			if set_mirrored:
 				dialogic.Portraits.change_character_mirror(character, mirrored)
@@ -141,50 +139,26 @@ func _execute() -> void:
 
 				dialogic.Portraits.move_character(character, position, final_position_move_time)
 
-			if animation_name.is_empty() and not portrait.is_empty():
-				animation_name = ProjectSettings.get_setting("dialogic/animations/cross_fade_default", "Fade In Out")
-				animation_length = ProjectSettings.get_setting("dialogic/animations/cross_fade_default_length", 0.5)
-				animation_wait = ProjectSettings.get_setting("dialogic/animations/cross_fade_default_wait", false)
-
-
 			if animation_name:
-				var animation_name_lowercase := animation_name.to_lower()
-
-				# TODO: Streamline the process to identify whether an animation
-				# is an action or transition (in/out) animation.
-				#
-				# If this is a transition animation, we want to check if its
-				# targeting the same portrait scene, then discard the
-				# animation.
-				if animation_name_lowercase.ends_with(" in out"):
-					var current_portrait: DialogicPortrait = dialogic.Portraits.get_character_portrait(character)
-					var current_portrait_name := current_portrait.portrait
-					var is_same_portrait := current_portrait_name == portrait
-
-					if is_same_portrait:
-						finish()
-						return
-
 				var final_animation_length: float = animation_length
-				var final_animation_repetitions: int = animation_repeats
+				var final_animation_repitions: int = animation_repeats
 
 				if dialogic.Inputs.auto_skip.enabled:
 					var time_per_event: float = dialogic.Inputs.auto_skip.time_per_event
-					var time_for_repetitions: float = time_per_event / animation_repeats
-					final_animation_length = time_for_repetitions
+					var time_for_repitions: float = time_per_event / animation_repeats
+					final_animation_length = time_for_repitions
 
-				var animation := dialogic.Portraits.animate_character(
+				var anim: DialogicAnimation = dialogic.Portraits.animate_character(
 					character,
 					animation_name,
 					final_animation_length,
-					final_animation_repetitions,
+					final_animation_repitions
 				)
 
 				if animation_wait:
 					dialogic.current_state = DialogicGameHandler.States.ANIMATING
-					await animation.finished
+					await anim.finished
 					dialogic.current_state = DialogicGameHandler.States.IDLE
-
 
 	finish()
 
@@ -218,18 +192,13 @@ func to_text() -> String:
 	var default_values := DialogicUtil.get_custom_event_defaults(event_name)
 
 	if character or character_identifier == '--All--':
-
 		if action == Actions.LEAVE and character_identifier == '--All--':
 			result_string += "--All--"
-
 		else:
 			var name := DialogicResourceUtil.get_unique_identifier(character.resource_path)
-
 			if name.count(" ") > 0:
 				name = '"' + name + '"'
-
 			result_string += name
-
 			if portrait.strip_edges() != default_values.get('portrait', '') and action != Actions.LEAVE and (action != Actions.UPDATE or set_portrait):
 				result_string+= " ("+portrait+")"
 
@@ -285,7 +254,6 @@ func from_text(string:String) -> void:
 			action = Actions.UPDATE
 
 	if result.get_string('name').strip_edges():
-
 		if action == Actions.LEAVE and result.get_string('name').strip_edges() == "--All--":
 			character_identifier = '--All--'
 		else:
@@ -302,18 +270,16 @@ func from_text(string:String) -> void:
 		set_position = true
 
 	if result.get_string('shortcode'):
-		var shortcode_params := parse_shortcode_parameters(result.get_string('shortcode'))
+		var shortcode_params = parse_shortcode_parameters(result.get_string('shortcode'))
 		animation_name = shortcode_params.get('animation', '')
 
-		var animLength: float = shortcode_params.get('length', '0.5').to_float()
-
+		var animLength = shortcode_params.get('length', '0.5').to_float()
 		if typeof(animLength) == TYPE_FLOAT:
 			animation_length = animLength
 		else:
-			animation_length = animLength
+			animation_length = animLength.to_float()
 
-		var wait_for_animation: String = shortcode_params.get('wait', 'false')
-		animation_wait = DialogicUtil.str_to_bool(wait_for_animation)
+		animation_wait = DialogicUtil.str_to_bool(shortcode_params.get('wait', 'false'))
 
 		#repeat is supported on Update, the other two should not be checking this
 		if action == Actions.UPDATE:
@@ -536,19 +502,14 @@ func _get_code_completion(CodeCompletionHelper:Node, TextNode:TextEdit, line:Str
 	if '[' in line:
 		if CodeCompletionHelper.get_line_untill_caret(line).ends_with('animation="'):
 			var animations := []
-
 			if line.begins_with('join'):
 				animations = DialogicUtil.get_portrait_animation_scripts(DialogicUtil.AnimationType.IN)
-
 			if line.begins_with('update'):
 				animations = DialogicUtil.get_portrait_animation_scripts(DialogicUtil.AnimationType.ACTION)
-
 			if line.begins_with('leave'):
 				animations = DialogicUtil.get_portrait_animation_scripts(DialogicUtil.AnimationType.OUT)
-
-			for script: String  in animations:
+			for script in animations:
 				TextNode.add_code_completion_option(CodeEdit.KIND_MEMBER, DialogicUtil.pretty_name(script), DialogicUtil.pretty_name(script)+'" ', TextNode.syntax_highlighter.normal_color)
-
 		elif CodeCompletionHelper.get_line_untill_caret(line).ends_with('wait="') or CodeCompletionHelper.get_line_untill_caret(line).ends_with('mirrored="'):
 			CodeCompletionHelper.suggest_bool(TextNode, TextNode.syntax_highlighter.normal_color)
 

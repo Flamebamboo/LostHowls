@@ -75,7 +75,7 @@ func load_game_state(load_flag:=LoadFlags.FULL_LOAD) -> void:
 
 func post_install():
 	dialogic.Settings.connect_to_change('text_speed', _update_user_speed)
-
+	
 	collect_character_names()
 	collect_text_effects()
 	collect_text_modifiers()
@@ -259,16 +259,13 @@ func is_text_voice_synced() -> bool:
 
 
 ## Sets how fast text will be revealed.
-## [br][br]
-## [param letter_speed] is the speed a single text character takes to appear 
-## on the textbox.
-## [br][br]
-## [param absolute] will force text to display at the given speed, regardless
+##
+## [param absolute] will force test to display at the given speed, regardless
 ## of the user's text speed setting.
-## [br][br]
+##
 ## [param _speed_multiplier] adjusts the speed of the text, if set to -1,
 ## the value won't be updated and the current value will persist.
-## [br][br]
+##
 ## [param _user_speed] adjusts the speed of the text, if set to -1, the
 ## project setting 'text_speed' will be used.operator
 func update_text_speed(letter_speed: float = -1,

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://boijh8vbuie55"
-path="res://.godot/imported/Bossbat-Sheet.png-b850a36f26018369d267ad2e9bdeb9fc.ctex"
+path="res://.godot/imported/Bossbat-Sheet.png-063f0ac90fcd7a63f8bc25bfe67eb5d5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Bossbat-Sheet.png"
-dest_files=["res://.godot/imported/Bossbat-Sheet.png-b850a36f26018369d267ad2e9bdeb9fc.ctex"]
+source_file="res://art/Enemies/Bossbat-Sheet.png"
+dest_files=["res://.godot/imported/Bossbat-Sheet.png-063f0ac90fcd7a63f8bc25bfe67eb5d5.ctex"]
 
 [params]
 

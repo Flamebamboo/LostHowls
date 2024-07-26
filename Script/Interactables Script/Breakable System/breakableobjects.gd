@@ -13,7 +13,7 @@ extends Area2D
 	
 	set(val):
 		object_strategy = val
-		#needs_update = true
+		needs_update = true
 
 # Used when editing to denote that the sprite has changed and needs updating
 @export var needs_update := false

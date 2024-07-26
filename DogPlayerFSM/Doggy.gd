@@ -14,12 +14,14 @@ class_name Player
 func _ready():
 	Global.dogCharacter = self
 	Global.dogAlive = true
+	Global.dogFreeze = false
 func _physics_process(_delta):
 	var direction = Input.get_axis("moveleft", "moveright")
 	if direction == 1:
 		anim.flip_h = false
 	elif direction == -1:
 		anim.flip_h = true
+	
 	
 	var state_name = machine.active_state.get_name()
 	$Label.text = state_name
