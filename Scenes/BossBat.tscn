@@ -1,15 +1,18 @@
-[gd_scene load_steps=24 format=3 uid="uid://bd24oc54elotu"]
+[gd_scene load_steps=27 format=3 uid="uid://bd24oc54elotu"]
 
 [ext_resource type="Material" uid="uid://bmgyfioow48f8" path="res://shader/unshadedlight.tres" id="1_xyjkw"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/boss_bat.gd" id="2_ympke"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/bat_state_controller.gd" id="4_25j3u"]
 [ext_resource type="Texture2D" uid="uid://boijh8vbuie55" path="res://art/Enemies/Bossbat-Sheet.png" id="6_8r4q4"]
 [ext_resource type="Script" path="res://Scenes/EnemyHealth.gd" id="6_im028"]
+[ext_resource type="FontFile" uid="uid://bnf2p438dv3b5" path="res://Fonts/Pixellari.ttf" id="7_pkbwp"]
+[ext_resource type="Script" path="res://Scenes/ChargeState.gd" id="8_qkxlu"]
 [ext_resource type="Script" path="res://Scenes/SleepState.gd" id="10_5kyio"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/hurtbox_components.gd" id="10_8h1lu"]
+[ext_resource type="Script" path="res://Script/BossBatEnemy/ShootState.gd" id="10_sxcg1"]
 [ext_resource type="Script" path="res://Scenes/boss_bat_state_machine.gd" id="11_0chcn"]
+[ext_resource type="Script" path="res://Scenes/Velocity Component.gd" id="12_2wgx0"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/FlyingState.gd" id="13_31c35"]
-[ext_resource type="Script" path="res://Script/BossBatEnemy/AttackState.gd" id="14_8x6gf"]
 
 [sub_resource type="Animation" id="Animation_vsm7r"]
 length = 0.001
@@ -159,10 +162,6 @@ material = ExtResource("1_xyjkw")
 sprite_frames = SubResource("SpriteFrames_h0w82")
 animation = &"attack"
 
-[node name="Controller" type="Node" parent="." node_paths=PackedStringArray("machine")]
-script = ExtResource("4_25j3u")
-machine = NodePath("../BossBatFSM")
-
 [node name="Health Components" type="Node" parent="." node_paths=PackedStringArray("CharacterBody")]
 script = ExtResource("6_im028")
 health_max = 500
@@ -187,19 +186,37 @@ health_components = NodePath("../Health Components")
 shape = SubResource("CircleShape2D_ivd0l")
 debug_color = Color(1, 0, 0.27451, 0.419608)
 
+[node name="StateController" type="Node" parent="." node_paths=PackedStringArray("machine", "raycast")]
+script = ExtResource("4_25j3u")
+machine = NodePath("../BossBatFSM")
+raycast = NodePath("../raycast")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -47.0
+offset_top = 42.0
+offset_right = 38.0
+offset_bottom = 84.0
+theme_override_fonts/font = ExtResource("7_pkbwp")
+theme_override_font_sizes/font_size = 41
+text = "hello"
+
 [node name="BossBatFSM" type="Node" parent="." node_paths=PackedStringArray("bossbat")]
 unique_name_in_owner = true
 script = ExtResource("11_0chcn")
 bossbat = NodePath("..")
+
+[node name="ChargeState" type="Node" parent="BossBatFSM" node_paths=PackedStringArray("animator", "velocity_component")]
+script = ExtResource("8_qkxlu")
+animator = NodePath("../../AnimatedSprite2D")
+velocity_component = NodePath("../../Velocity Component")
 
 [node name="FlyingState" type="Node" parent="BossBatFSM" node_paths=PackedStringArray("animatedSprite", "flyingtimer")]
 script = ExtResource("13_31c35")
 animatedSprite = NodePath("../../AnimatedSprite2D")
 flyingtimer = NodePath("../../flyingtimer")
 
-[node name="AttackState" type="Node" parent="BossBatFSM" node_paths=PackedStringArray("animatedSprite", "animation")]
-script = ExtResource("14_8x6gf")
-speed = 400
+[node name="ShootState" type="Node" parent="BossBatFSM" node_paths=PackedStringArray("animatedSprite", "animation")]
+script = ExtResource("10_sxcg1")
 animatedSprite = NodePath("../../AnimatedSprite2D")
 animation = NodePath("../../AnimationPlayer")
 
@@ -227,10 +244,19 @@ value = 500.0
 show_percentage = false
 metadata/_edit_use_anchors_ = true
 
+[node name="raycast" type="RayCast2D" parent="."]
+collision_mask = 2
+
+[node name="Velocity Component" type="Node" parent="."]
+script = ExtResource("12_2wgx0")
+max_speed = 100.0
+speed = 80.0
+acceleration = 50.0
+
 [connection signal="died" from="Health Components" to="." method="_on_health_components_died"]
 [connection signal="took_damage" from="Health Components" to="." method="_on_health_components_took_damage"]
-[connection signal="body_entered" from="Entity Detector" to="Controller" method="_on_entity_detector_body_entered"]
+[connection signal="body_entered" from="Entity Detector" to="StateController" method="_on_entity_detector_body_entered"]
 [connection signal="body_entered" from="Hurtbox Components" to="Hurtbox Components" method="_on_body_entered"]
 [connection signal="timeout" from="flyingtimer" to="BossBatFSM/FlyingState" method="_on_timer_timeout"]
-[connection signal="timeout" from="shoottimer" to="BossBatFSM/AttackState" method="_on_shoottimer_timeout"]
-[connection signal="timeout" from="RandomTimer" to="Controller" method="_on_random_timer_timeout"]
+[connection signal="timeout" from="shoottimer" to="BossBatFSM/ShootState" method="_on_shoottimer_timeout"]
+[connection signal="timeout" from="RandomTimer" to="StateController" method="_on_random_timer_timeout"]

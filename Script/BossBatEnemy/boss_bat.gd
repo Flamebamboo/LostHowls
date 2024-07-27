@@ -20,7 +20,8 @@ func _physics_process(_delta):
 	if !Global.dogAlive:
 		machine.transition_to(machine.states["SleepState"])
 		print("Transitioning to SleepState")
-		
+	var state_name = machine.active_state.get_name()
+	$Label.text = state_name	
 
 func _on_health_components_took_damage():
 	$ProgressBar.value = health_component.health

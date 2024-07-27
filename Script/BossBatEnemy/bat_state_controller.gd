@@ -1,20 +1,15 @@
 extends Node
 @export var machine : StateMachine
-
+@export var raycast: RayCast2D
 @onready var random_timer : Timer = $"../RandomTimer"
 
-# Variable to store the state change interval
-var state_change_interval_range = Vector2(1, 3)  # Min and max interval in seconds
+var target: Player
 
-func _ready():
-	pass
-
-func start_random_timer():
-	var interval = randi_range(state_change_interval_range.x, state_change_interval_range.y)
-	random_timer.wait_time = interval
-	random_timer.start()
-
-
+func _physics_process(delta):
+	if raycast.is_colliding():
+		if raycast.get_collider() is Player:
+			target = raycast.get_collider()
+			print(target)
 
 
 
@@ -27,15 +22,10 @@ func _on_random_timer_timeout():
 		else:
 			machine.transition_to(machine.states["AttackState"])
 			
-		# Restart the timer with a new random interval
-		start_random_timer()
-	else:
-		machine.transition_to(machine.states["SleepState"])
-	
 		
 
 
 func _on_entity_detector_body_entered(body):
 	if body.is_in_group("player"):
-		print("detectbody")
-		start_random_timer()
+		machine.transition_to(machine.states["ChargeState"])
+	
