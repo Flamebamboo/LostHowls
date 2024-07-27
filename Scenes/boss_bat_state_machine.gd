@@ -1,7 +1,5 @@
 extends StateMachine
-
 @export var bossbat : BossBat
-
 func _ready():
 	
 	for state in get_children():
@@ -9,5 +7,7 @@ func _ready():
 		state.machine = self
 		state.bossbat = bossbat
 
-	active_state = states["FlyingState"]
+	active_state = states["SleepState"]
 	active_state.s_activate()
+	
+

@@ -13,3 +13,5 @@ func _on_took_damage():
 func _on_respawn_manager_player_alive():
 	health = health_max
 	%ProgressBar.value = health_max
+	await get_tree().create_timer(2).timeout
+	Global.dogAlive = true

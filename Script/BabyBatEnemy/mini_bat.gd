@@ -3,21 +3,18 @@ class_name BatEnemy
 @export var SPEED = 30
 var dir: Vector2
 var batChase: bool
-var dog: CharacterBody2D
-var health = 50
-var healthMax = 50
-var healthMin = 0
 var dead = false
 var takingDamage = false
 var isRoaming: bool
 var DamagetoDeal = 10
+@export var dog: CharacterBody2D
 @onready var impact: GPUParticles2D = %GPUParticles2D
 func _ready():
 	batChase = true
 	
 	
 func _process(delta):
-	
+
 	if is_on_floor() and dead:
 		await get_tree().create_timer(3.0).timeout
 		self.queue_free()
@@ -31,7 +28,6 @@ func _process(delta):
 		
 #bat logic
 func move(delta):
-	var dog : CharacterBody2D
 	if !dead:
 		isRoaming = true
 		if !takingDamage and batChase and Global.dogAlive: 
@@ -79,16 +75,5 @@ func handle_animation():
 	
 
 
-func take_bullet_damage(damage):
-	health -= damage
-	takingDamage = true
-	if health <= 0:
-		health = 0
-		dead = true
-	print(str(self), "current health is ", health)
-	impact.emitting = true 
-	var animatedSprite = $AnimatedSprite2D
-	animatedSprite.play("hurt")
-	await get_tree().create_timer(0.5).timeout
-	impact.emitting = false
+
 	

@@ -2,7 +2,6 @@ extends PlayerState
 
 
 func s_activate():
-	print("jump state")
 	physics.jumps()
 	super()
 	can_air = true

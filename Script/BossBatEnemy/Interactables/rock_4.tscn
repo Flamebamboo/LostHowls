@@ -8,27 +8,27 @@
 size = Vector2(184, 20)
 
 [node name="rock_4" type="AnimatableBody2D" groups=["asteroids"]]
-position = Vector2(578, 1984)
 collision_mask = 2
 script = ExtResource("1_07tgp")
 sink_speed = 40.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(-738, -1411)
+position = Vector2(-500.3, 386.8)
 polygon = PackedVector2Array(608, -451, 395, -447, 389, -426, 392, -419, 386, -409, 385, -399, 389, -394, 403, -383, 409, -362, 413, -350, 422, -349, 422, -343, 427, -322, 436, -313, 455, -289, 476, -266, 493, -265, 510, -265, 535, -269, 546, -278, 552, -290, 562, -296, 567, -308, 572, -319, 578, -324, 578, -334, 578, -352, 577, -362, 581, -369, 590, -377, 606, -385, 608, -395, 608, -404, 608, -416, 608, -425, 614, -439, 612, -449)
 
 [node name="Bigrock" type="Sprite2D" parent="."]
 self_modulate = Color(0.896751, 0.678833, 0.671088, 1)
 material = ExtResource("2_ilas2")
-position = Vector2(-239, -1783)
+position = Vector2(-1.29999, 14.8)
 texture = ExtResource("2_mwvef")
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-0.299988, 0.799988)
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-237, -1870)
+position = Vector2(-0.700012, -67.8)
 shape = SubResource("RectangleShape2D_23ayd")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

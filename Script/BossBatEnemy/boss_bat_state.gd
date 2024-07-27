@@ -1,4 +1,5 @@
 extends BaseState
 class_name BossBatState
 
-var bossbat : BossBat
+@export var bossbat: BossBat
+

@@ -19,15 +19,20 @@ func start_random_timer():
 
 
 func _on_random_timer_timeout():
-	# Randomly decide whether to transition to "attack" or "idle"
-	var should_attack = randi_range(0, 1)
-	if should_attack:
-		machine.transition_to(machine.states["FlyingState"])
+	if Global.dogAlive:
+		# Randomly decide whether to transition to "attack" or "flying"
+		var should_attack = randi_range(0, 1)
+		if should_attack:
+			machine.transition_to(machine.states["FlyingState"])
+		else:
+			machine.transition_to(machine.states["AttackState"])
+			
+		# Restart the timer with a new random interval
+		start_random_timer()
 	else:
-		machine.transition_to(machine.states["AttackState"])
+		machine.transition_to(machine.states["SleepState"])
+	
 		
-	# Restart the timer with a new random interval
-	start_random_timer()
 
 
 func _on_entity_detector_body_entered(body):

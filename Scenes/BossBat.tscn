@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://bd24oc54elotu"]
+[gd_scene load_steps=24 format=3 uid="uid://bd24oc54elotu"]
 
 [ext_resource type="Material" uid="uid://bmgyfioow48f8" path="res://shader/unshadedlight.tres" id="1_xyjkw"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/boss_bat.gd" id="2_ympke"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/bat_state_controller.gd" id="4_25j3u"]
 [ext_resource type="Texture2D" uid="uid://boijh8vbuie55" path="res://art/Enemies/Bossbat-Sheet.png" id="6_8r4q4"]
 [ext_resource type="Script" path="res://Scenes/EnemyHealth.gd" id="6_im028"]
+[ext_resource type="Script" path="res://Scenes/SleepState.gd" id="10_5kyio"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/hurtbox_components.gd" id="10_8h1lu"]
 [ext_resource type="Script" path="res://Scenes/boss_bat_state_machine.gd" id="11_0chcn"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/FlyingState.gd" id="13_31c35"]
@@ -168,7 +169,6 @@ health_max = 500
 CharacterBody = NodePath("..")
 
 [node name="Entity Detector" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -199,9 +199,12 @@ flyingtimer = NodePath("../../flyingtimer")
 
 [node name="AttackState" type="Node" parent="BossBatFSM" node_paths=PackedStringArray("animatedSprite", "animation")]
 script = ExtResource("14_8x6gf")
+speed = 400
 animatedSprite = NodePath("../../AnimatedSprite2D")
 animation = NodePath("../../AnimationPlayer")
-speed = 400
+
+[node name="SleepState" type="Node" parent="BossBatFSM"]
+script = ExtResource("10_5kyio")
 
 [node name="Rotater" type="Node2D" parent="."]
 unique_name_in_owner = true

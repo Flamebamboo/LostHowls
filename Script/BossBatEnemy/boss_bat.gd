@@ -17,8 +17,10 @@ func _ready():
 	
 func _physics_process(_delta):
 	move_and_slide()
-
-
+	if !Global.dogAlive:
+		machine.transition_to(machine.states["SleepState"])
+		print("Transitioning to SleepState")
+		
 
 func _on_health_components_took_damage():
 	$ProgressBar.value = health_component.health

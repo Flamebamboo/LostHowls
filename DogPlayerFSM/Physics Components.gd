@@ -105,3 +105,5 @@ func jumps():
 func double_jump():
 	velocity.y = jump_velocity/2
 	jump_count += 1
+
+

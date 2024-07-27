@@ -55,8 +55,10 @@ func display_jump_effects():
 		get_tree().root.add_child(jump_dust_effect)
 			
 
-func die():
-	$"Respawn Manager".respawn_player()
+func instantdeath():
+	health_component.health = health_component.health_min
+	Global.dogAlive = false
+	
 
 
 
