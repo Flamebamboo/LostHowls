@@ -1,31 +1,31 @@
 extends Node
 @export var machine : StateMachine
-@export var raycast: RayCast2D
+
 @onready var random_timer : Timer = $"../RandomTimer"
 
-var target: Player
+var triggered: bool = false
 
 func _physics_process(delta):
-	if raycast.is_colliding():
-		if raycast.get_collider() is Player:
-			target = raycast.get_collider()
-			print(target)
+	if !Global.dogAlive:
+		triggered = false
 
 
 
 func _on_random_timer_timeout():
-	if Global.dogAlive:
-		# Randomly decide whether to transition to "attack" or "flying"
-		var should_attack = randi_range(0, 1)
-		if should_attack:
-			machine.transition_to(machine.states["FlyingState"])
+	if Global.dogAlive && machine.active_state.name == "FlyingState":
+		# Randomly decide whether to transition to "charge" or "shoot"
+		var attack_types = randi_range(0, 1)
+		if attack_types:
+			machine.transition_to(machine.states["ShootState"])
 		else:
-			machine.transition_to(machine.states["AttackState"])
+			machine.transition_to(machine.states["ChargeState"])
 			
-		
+	
 
 
 func _on_entity_detector_body_entered(body):
-	if body.is_in_group("player"):
-		machine.transition_to(machine.states["ChargeState"])
-	
+	if body.is_in_group("player") && !triggered:
+		triggered = true
+		print("trigger")
+		machine.transition_to(machine.states["FlyingState"])
+		$"../RandomTimer".start()

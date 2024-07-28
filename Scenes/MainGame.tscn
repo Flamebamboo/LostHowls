@@ -607,11 +607,11 @@ size = Vector2(1798.22, 433)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l0ew3"]
 size = Vector2(1118, 791.75)
 
-[sub_resource type="Resource" id="Resource_nqeql"]
+[sub_resource type="Resource" id="Resource_bphrm"]
 script = ExtResource("30_jkmql")
-duration = 2.0
-transition = 5
-ease = 0
+duration = 1.0
+transition = 0
+ease = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u7sl4"]
 size = Vector2(995, 659)
@@ -875,7 +875,7 @@ position = Vector2(-554, -14)
 polygon = PackedVector2Array(6, 1, 17, 0, 41, -2, 65, -2, 83, -2, 103, 1, 110, 6, 113, 11, 121, 11, 139, 6, 154, 8, 183, 8, 218, 7, 249, 8, 266, 13, 283, 13, 297, 18, 310, 18, 338, 19, 350, 22, 379, 21, 388, 23, 398, 24, 426, 24, 443, 24, 454, 30, 465, 37, 489, 41, 507, 45, 527, 31, 545, 33, 527, 31, 544, 33, 562, 34, 579, 36, 592, 41, 603, 45, 616, 45, 626, 51, 641, 51, 673, 52, 689, 52, 710, 45, 734, 43, 749, 44, 756, 32, 766, 27, 776, 23, 786, 15, 790, 15, 800, 16, 800, 20, 800, 26, 803, 31, 803, 31, 804, 37, 807, 42, 812, 64, 815, 83, 817, 87, 819, 92, 822, 96, 827, 98, 832, 98, 841, 95, 842, 90, 860, 70, 873, 54, 873, 51, 878, 52, 886, 51, 887, 54, 893, 54, 915, 55, 919, 56, 923, 57, 930, 58, 934, 58, 938, 59, 941, 61, 947, 61, 949, 61, 952, 63, 957, 63, 961, 63, 968, 67, 981, 67, 986, 71, 988, 69, 995, 69, 998, 72, 1003, 73, 1009, 73, 1016, 73, 1034, 78, 1039, 78, 1048, 79, 1104, 78, 1136, 68, 1163, 65, 1217, 52, 1251, 48, 1253, 40, 1282, 36, 1334, 40, 1359, 39, 1382, 41, 1403, 45, 1435, 46, 1456, 45, 1491, 35, 1570, 40, 1599, 40, 1621, 40, 1627, 41, 1630, 42, 1627, -55, 5, -48, -2, 0)
 
 [node name="BossBatOnlyCollisions" type="StaticBody2D" parent="Collisions"]
-visible = false
+position = Vector2(1130, -524)
 collision_layer = 128
 collision_mask = 128
 
@@ -1169,7 +1169,7 @@ script = ExtResource("29_t58t4")
 follow_mode = 1
 follow_target = NodePath("../../../Enitys/Dog")
 zoom = Vector2(0.5, 0.5)
-tween_resource = SubResource("Resource_nqeql")
+tween_resource = SubResource("Resource_bphrm")
 draw_limits = true
 limit_target = NodePath("../Limit")
 

@@ -15,8 +15,10 @@ func _on_body_entered(body):
 	if body.is_in_group("bullet"):
 		apply_bullet_damage(body)
 	
-	elif body.is_in_group("Enemy"):
-		apply_enemy_damage(body)
+
+func _on_area_entered(area):
+	if area.is_in_group("EnemyHurtbox"):
+		apply_player_damage(area)
 	
 
 
@@ -31,7 +33,7 @@ func apply_bullet_damage(body):
 					impact_show.global_position = body.global_position
 					get_parent().add_child(impact_show)
 
-func apply_enemy_damage(body):
+func apply_player_damage(area):
 	if self.get_parent() is Player:
 			if health_components.health > 0:
 				var enemy_damage = %"Hurtbox Components".damage 
@@ -54,5 +56,7 @@ func apply_enemy_damage(body):
 	#instance bullet impact scene here
 
 	
+
+
 
 

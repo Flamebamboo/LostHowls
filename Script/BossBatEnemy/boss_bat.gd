@@ -19,7 +19,6 @@ func _physics_process(_delta):
 	move_and_slide()
 	if !Global.dogAlive:
 		machine.transition_to(machine.states["SleepState"])
-		print("Transitioning to SleepState")
 	var state_name = machine.active_state.get_name()
 	$Label.text = state_name	
 

@@ -5,11 +5,11 @@ extends BossBatState
 @export var animation: AnimationPlayer
 
 
-@export var rotate_speed = 0
-@export var spawn_point_count = 8
-const radius = 100
-@onready var rotater = %Rotater
-@onready var shoottimer = %shoottimer
+@export var rotate_speed: int = 0
+@export var spawn_point_count: int = 8
+const radius: int = 100
+@onready var rotater := %Rotater
+@onready var shoottimer := %shoottimer
 var batbullet = preload("res://Scenes/bat_bullet.tscn")
 
 var dog: Player
@@ -35,9 +35,10 @@ func s_activate():
 		bullet.global_position = s.global_position
 		bullet.rotation = s.global_rotation
 	
+	
 	#if we want to rotate bullets as for the moment no
 func s_physics_process(delta):
-	
+	machine.transition_to(machine.states["FlyingState"])
 	var new_rotation = rotater.rotation_degrees + rotate_speed * delta
 	rotater.rotation_degrees = fmod(new_rotation, 360)
 	
