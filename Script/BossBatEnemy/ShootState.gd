@@ -35,10 +35,10 @@ func s_activate():
 		bullet.global_position = s.global_position
 		bullet.rotation = s.global_rotation
 	
-	
-	#if we want to rotate bullets as for the moment no
-func s_physics_process(delta):
+	await get_tree().create_timer(1).timeout
 	machine.transition_to(machine.states["FlyingState"])
+	
+func s_physics_process(delta):#if we want to rotate bullets as for the moment no
 	var new_rotation = rotater.rotation_degrees + rotate_speed * delta
 	rotater.rotation_degrees = fmod(new_rotation, 360)
 	

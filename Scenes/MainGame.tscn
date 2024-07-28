@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=3 uid="uid://dxo0h0k8bfdee"]
+[gd_scene load_steps=114 format=3 uid="uid://dxo0h0k8bfdee"]
 
 [ext_resource type="Script" path="res://Script/Level_1/MainGame.gd" id="1_sw385"]
 [ext_resource type="Texture2D" uid="uid://dpqru6htgukk2" path="res://art/LevelDesign/TutorialKeys/keycaps-Sheet.png" id="2_kni8x"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bfqpyyljhd6gr" path="res://hitflash_1.png" id="2_ocfpx"]
 [ext_resource type="PackedScene" uid="uid://coe2bigkbj883" path="res://Script/BossBatEnemy/Interactables/pushable_rock.tscn" id="2_yv6nv"]
 [ext_resource type="Script" path="res://Scenes/hitflashes.gd" id="3_ncedx"]
+[ext_resource type="Texture2D" uid="uid://dc1nnhabm24nk" path="res://art/Enemies/Batcavev2.png" id="3_r0vtf"]
 [ext_resource type="Texture2D" uid="uid://bpy27duv6rniw" path="res://art/Props/Plants/tree.png" id="4_7m8hg"]
 [ext_resource type="Texture2D" uid="uid://42e3dhkoudfi" path="res://art/LevelDesign/wireframe.png" id="9_m6vbv"]
 [ext_resource type="Shader" path="res://shader/fog.gdshader" id="10_nn7nr"]
@@ -47,11 +48,31 @@
 [ext_resource type="Script" path="res://Scenes/Gate.gd" id="52_uhp4x"]
 [ext_resource type="Texture2D" uid="uid://blrep37yqsm6d" path="res://art/LevelDesign/firstlevel_layer5png.png" id="53_g3qpm"]
 [ext_resource type="Texture2D" uid="uid://vi67r3mjmx0e" path="res://art/LevelDesign/firstlevel_layer1.png" id="54_7lyj5"]
-[ext_resource type="Texture2D" uid="uid://ci4h58mniaitu" path="res://art/LevelDesign/Batcave.png" id="57_xueas"]
 [ext_resource type="Shader" path="res://shader/toplevel.gdshader" id="60_vtuxo"]
 [ext_resource type="Material" uid="uid://bmgyfioow48f8" path="res://shader/unshadedlight.tres" id="61_i5ehh"]
 [ext_resource type="PackedScene" uid="uid://brassfdvs0w1m" path="res://Scenes/breakable.tscn" id="63_7uybn"]
 [ext_resource type="PackedScene" uid="uid://r8fwkr0ot8rp" path="res://Scenes/spirit.tscn" id="63_g7hrd"]
+
+[sub_resource type="Gradient" id="Gradient_iiy2g"]
+colors = PackedColorArray(1, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_r4c8p"]
+gradient = SubResource("Gradient_iiy2g")
+fill = 1
+fill_from = Vector2(0.482906, 0.495726)
+fill_to = Vector2(0.884615, 0.145299)
+
+[sub_resource type="Gradient" id="Gradient_eovpv"]
+offsets = PackedFloat32Array(0, 0.986339)
+colors = PackedColorArray(1, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yrwf6"]
+noise_type = 5
+frequency = 0.0051
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cnffn"]
+color_ramp = SubResource("Gradient_eovpv")
+noise = SubResource("FastNoiseLite_yrwf6")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1dgi1"]
 shader = ExtResource("60_vtuxo")
@@ -659,7 +680,18 @@ metadata/_edit_horizontal_guides_ = [-352.0, -22.0]
 [node name="Batcave" type="Sprite2D" parent="BossRoom"]
 material = ExtResource("61_i5ehh")
 position = Vector2(3416, 63)
-texture = ExtResource("57_xueas")
+texture = ExtResource("3_r0vtf")
+
+[node name="PointLight2D2" type="PointLight2D" parent="BossRoom/Batcave"]
+visible = false
+position = Vector2(-15.9999, 213)
+scale = Vector2(12.3369, 12.0889)
+texture = SubResource("GradientTexture2D_r4c8p")
+
+[node name="PointLight2D" type="PointLight2D" parent="BossRoom/Batcave"]
+position = Vector2(-2145.5, 525)
+scale = Vector2(5.67773, 1.07031)
+texture = SubResource("NoiseTexture2D_cnffn")
 
 [node name="BossBatcave" type="StaticBody2D" parent="BossRoom"]
 position = Vector2(1118, -488)
@@ -1065,7 +1097,7 @@ CameraRef = NodePath("../Camera2D")
 area_pcam = NodePath("PhantomCamera2D")
 
 [node name="PhantomCamera2D" type="Node2D" parent="Camera types/cam_1" node_paths=PackedStringArray("follow_target")]
-position = Vector2(988, -347)
+position = Vector2(988, -388)
 script = ExtResource("29_t58t4")
 follow_mode = 2
 follow_target = NodePath("../../../Enitys/Dog")
@@ -1179,7 +1211,7 @@ shape = SubResource("RectangleShape2D_u7sl4")
 
 [node name="Camera2D" type="Camera2D" parent="Camera types" node_paths=PackedStringArray("target")]
 visible = false
-position = Vector2(1446, 123)
+position = Vector2(1446, 82)
 zoom = Vector2(0.8, 0.8)
 limit_left = -119
 limit_top = -236
@@ -1261,8 +1293,9 @@ explosiveness = 0.13
 
 [node name="Enitys" type="Node" parent="."]
 
-[node name="Dog" parent="Enitys" instance=ExtResource("50_w0dsa")]
-position = Vector2(2927, 223)
+[node name="Dog" parent="Enitys" node_paths=PackedStringArray("camera") instance=ExtResource("50_w0dsa")]
+position = Vector2(2923, 182)
+camera = NodePath("../../Camera types/Camera2D")
 
 [node name="spirit" parent="Enitys" instance=ExtResource("63_g7hrd")]
 position = Vector2(2235, 407)

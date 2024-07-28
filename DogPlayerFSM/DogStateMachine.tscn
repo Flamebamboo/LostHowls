@@ -290,6 +290,7 @@ collision_layer = 2
 collision_mask = 146
 script = ExtResource("14_w4005")
 health_components = NodePath("../Health Components")
+damage = 30
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox Components"]
 position = Vector2(0, -15)

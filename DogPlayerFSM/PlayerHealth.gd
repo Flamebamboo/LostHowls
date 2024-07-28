@@ -9,6 +9,8 @@ func _ready():
 func _on_took_damage():
 	%ProgressBar.value = health
 	player.sprite_flash()
+	owner.camera.apply_shake(40.0, 10.0)
+	
 	
 func _on_respawn_manager_player_alive():
 	health = health_max

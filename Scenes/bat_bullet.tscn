@@ -1,29 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://b63htybecwy5g"]
+[gd_scene load_steps=5 format=3 uid="uid://b63htybecwy5g"]
 
 [ext_resource type="Script" path="res://Script/BabyBatEnemy/bat_bullet.gd" id="1_uryag"]
 [ext_resource type="Texture2D" uid="uid://bl553dd6krael" path="res://art/Enemies/BatBullet.png" id="2_wruuo"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_1v13y"]
+radius = 36.6667
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_qae2c"]
 radius = 40.0
 
-[node name="Node2D" type="Node2D"]
+[node name="character" type="CharacterBody2D"]
 position = Vector2(1, 0)
 scale = Vector2(0.3, 0.3)
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_uryag")
+damage = 30
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1v13y")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-3.33333, 0)
 texture = ExtResource("2_wruuo")
 
-[node name="Timer" type="Timer" parent="Sprite2D"]
-wait_time = 3.0
-autostart = true
-
 [node name="BulletHurtbox" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BulletHurtbox"]
 shape = SubResource("CircleShape2D_qae2c")
-
-[connection signal="timeout" from="Sprite2D/Timer" to="." method="_on_timer_timeout"]

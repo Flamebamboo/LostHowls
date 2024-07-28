@@ -4,6 +4,7 @@ class_name Hurtbox
 
 @export var damage = 50
 
+##TO DO MAKE IMPACT SCENE AND INSTANCE IT HERE ALSO CREATE PUT SHAKE
 
 @export var bullet_impact: PackedScene
 
@@ -15,10 +16,12 @@ func _on_body_entered(body):
 	if body.is_in_group("bullet"):
 		apply_bullet_damage(body)
 	
+	
 
 func _on_area_entered(area):
 	if area.is_in_group("EnemyHurtbox"):
 		apply_player_damage(area)
+		
 	
 
 
@@ -39,7 +42,7 @@ func apply_player_damage(area):
 				var enemy_damage = %"Hurtbox Components".damage 
 				health_components.take_damage(enemy_damage)
 				FrameFreeze.hit_freeze()
-	
+			
 	##this is honestly not scalable
 	#The hurting shouldn't know what it is
 	#The hurting should just see an entity to hurt

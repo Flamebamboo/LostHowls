@@ -9,6 +9,7 @@ class_name Player
 @export var health_component : PlayerHealth
 @export var hurtbox_component: Hurtbox
 
+@export var camera: Camera2D
 
 
 func _ready():
@@ -64,3 +65,6 @@ func instantdeath():
 
 func _on_air_state_floor():
 	display_jump_effects()
+
+
+

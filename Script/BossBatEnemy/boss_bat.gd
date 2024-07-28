@@ -28,7 +28,7 @@ func _on_health_components_took_damage():
 	tween.tween_property(animatedsprite, "modulate:v", 1, 0.25).from(15)
 	await get_tree().create_timer(0.1).timeout
 	animatedsprite.play("flying")
-	
+	camera.apply_shake(20.0, 10.0)
 	
 	
 
@@ -39,3 +39,5 @@ func _on_health_components_died():
 	hitflashing.blue_flash()
 	queue_free()
 	
+
+
