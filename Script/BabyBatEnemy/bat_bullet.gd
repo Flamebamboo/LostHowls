@@ -1,5 +1,5 @@
 extends CharacterBody2D
-@export var speed = 650
+@export var speed = 1000
 var max_distance : float = 5000.0
 var travelled_distance = 0.0
 

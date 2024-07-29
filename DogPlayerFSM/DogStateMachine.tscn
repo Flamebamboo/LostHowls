@@ -257,6 +257,7 @@ max_speed = 250.0
 [node name="Health Components" type="Node" parent="." node_paths=PackedStringArray("player", "CharacterBody")]
 script = ExtResource("9_hr7x4")
 player = NodePath("..")
+health_max = 5000
 CharacterBody = NodePath("..")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player")]

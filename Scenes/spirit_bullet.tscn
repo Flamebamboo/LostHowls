@@ -22,7 +22,7 @@ shape = SubResource("CircleShape2D_pyjb1")
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 16
-collision_mask = 138
+collision_mask = 136
 script = ExtResource("3_2ggmt")
 damage = 5
 is_bullet = true

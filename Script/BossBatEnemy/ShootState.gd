@@ -19,6 +19,10 @@ func s_activate():
 	#2*pi is 360 deg divided by 8 so each spawnpoint is 45deg apart
 	var step = 2 * PI / spawn_point_count
 	
+	for child in rotater.get_children():
+		rotater.remove_child(child)
+		child.queue_free() # Free the node if it should no longer exist
+	
 	for i in range(spawn_point_count):
 		var spawn_point = Node2D.new()
 		var pos = Vector2(radius, 0).rotated(step * i)
@@ -29,7 +33,7 @@ func s_activate():
 	
 	for s in rotater.get_children():
 		var bullet = batbullet.instantiate()
-		get_tree().root.add_child(bullet)
+		get_tree().root.call_deferred("add_child", bullet)
 		bullet.global_position = s.global_position
 		bullet.rotation = s.global_rotation
 	

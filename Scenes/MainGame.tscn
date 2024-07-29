@@ -1301,7 +1301,7 @@ camera = NodePath("../../Camera types/Camera2D")
 position = Vector2(2235, 407)
 
 [node name="BossBat" parent="Enitys" node_paths=PackedStringArray("camera", "hitflashing") instance=ExtResource("39_auycg")]
-position = Vector2(3407, -113)
+position = Vector2(2198, 401)
 camera = NodePath("../../Camera types/Camera2D")
 hitflashing = NodePath("../../UI/hitflashes")
 

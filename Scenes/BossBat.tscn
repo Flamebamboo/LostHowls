@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bd24oc54elotu"]
+[gd_scene load_steps=30 format=3 uid="uid://bd24oc54elotu"]
 
 [ext_resource type="Material" uid="uid://bmgyfioow48f8" path="res://shader/unshadedlight.tres" id="1_xyjkw"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/boss_bat.gd" id="2_ympke"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://Scenes/boss_bat_state_machine.gd" id="11_0chcn"]
 [ext_resource type="Script" path="res://Scenes/Velocity Component.gd" id="12_2wgx0"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/FlyingState.gd" id="13_31c35"]
+[ext_resource type="Script" path="res://object_pooling.gd" id="15_xvxpb"]
 
 [sub_resource type="Animation" id="Animation_vsm7r"]
 length = 0.001
@@ -271,6 +272,9 @@ script = ExtResource("12_2wgx0")
 max_speed = 100.0
 speed = 80.0
 acceleration = 50.0
+
+[node name="Object Pool" type="Node" parent="."]
+script = ExtResource("15_xvxpb")
 
 [connection signal="died" from="Health Components" to="." method="_on_health_components_died"]
 [connection signal="took_damage" from="Health Components" to="." method="_on_health_components_took_damage"]
