@@ -213,7 +213,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_byipc"]
-size = Vector2(58, 36)
+size = Vector2(48, 32)
 
 [node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("anim", "physics", "health_component", "hurtbox_component") groups=["player"]]
 collision_layer = 2
@@ -234,7 +234,6 @@ offset_bottom = 33.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = SubResource("Theme_f4cmb")
-value = 100.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -15)
@@ -287,10 +286,9 @@ script = ExtResource("6_xn3d4")
 [node name="Hurtbox Components" type="Area2D" parent="." node_paths=PackedStringArray("health_components")]
 unique_name_in_owner = true
 collision_layer = 2
-collision_mask = 146
+collision_mask = 128
 script = ExtResource("14_w4005")
 health_components = NodePath("../Health Components")
-damage = 30
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox Components"]
 position = Vector2(0, -15)
@@ -316,6 +314,4 @@ text = "hello"
 [connection signal="took_damage" from="Health Components" to="Health Components" method="_on_took_damage"]
 [connection signal="state_changed" from="PlayerStateMachine" to="AnimatedSprite2D" method="_on_player_state_machine_state_changed"]
 [connection signal="floor" from="PlayerStateMachine/AirState" to="." method="_on_air_state_floor"]
-[connection signal="area_entered" from="Hurtbox Components" to="Hurtbox Components" method="_on_area_entered"]
-[connection signal="body_entered" from="Hurtbox Components" to="Hurtbox Components" method="_on_body_entered"]
 [connection signal="PlayerAlive" from="Respawn Manager" to="Health Components" method="_on_respawn_manager_player_alive"]

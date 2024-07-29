@@ -1,8 +1,9 @@
-[gd_scene load_steps=27 format=3 uid="uid://bd24oc54elotu"]
+[gd_scene load_steps=29 format=3 uid="uid://bd24oc54elotu"]
 
 [ext_resource type="Material" uid="uid://bmgyfioow48f8" path="res://shader/unshadedlight.tres" id="1_xyjkw"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/boss_bat.gd" id="2_ympke"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/bat_state_controller.gd" id="4_25j3u"]
+[ext_resource type="Script" path="res://Scenes/Hitbox Component.gd" id="5_s5xi1"]
 [ext_resource type="Texture2D" uid="uid://boijh8vbuie55" path="res://art/Enemies/Bossbat-Sheet.png" id="6_8r4q4"]
 [ext_resource type="Script" path="res://Scenes/EnemyHealth.gd" id="6_im028"]
 [ext_resource type="FontFile" uid="uid://bnf2p438dv3b5" path="res://Fonts/Pixellari.ttf" id="7_pkbwp"]
@@ -135,6 +136,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_w7a0g"]
 radius = 409.207
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ye3w1"]
+radius = 72.0
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_ivd0l"]
 radius = 71.0
 
@@ -168,6 +172,7 @@ health_max = 500
 CharacterBody = NodePath("..")
 
 [node name="Entity Detector" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -175,10 +180,21 @@ collision_mask = 2
 position = Vector2(2, -34)
 shape = SubResource("CircleShape2D_w7a0g")
 
-[node name="Hurtbox Components" type="Area2D" parent="." node_paths=PackedStringArray("health_components") groups=["EnemyHurtbox"]]
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 2
+script = ExtResource("5_s5xi1")
+damage = 50
+is_entity = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_ye3w1")
+debug_color = Color(7.78936e-08, 0.622474, 0.545783, 0.42)
+
+[node name="Hurtbox Components" type="Area2D" parent="." node_paths=PackedStringArray("health_components")]
 unique_name_in_owner = true
 collision_layer = 128
-collision_mask = 146
+collision_mask = 16
 script = ExtResource("10_8h1lu")
 health_components = NodePath("../Health Components")
 
@@ -235,6 +251,7 @@ unique_name_in_owner = true
 process_callback = 0
 
 [node name="RandomTimer" type="Timer" parent="."]
+wait_time = 2.5
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 offset_left = -44.0
@@ -258,7 +275,6 @@ acceleration = 50.0
 [connection signal="died" from="Health Components" to="." method="_on_health_components_died"]
 [connection signal="took_damage" from="Health Components" to="." method="_on_health_components_took_damage"]
 [connection signal="body_entered" from="Entity Detector" to="StateController" method="_on_entity_detector_body_entered"]
-[connection signal="body_entered" from="Hurtbox Components" to="Hurtbox Components" method="_on_body_entered"]
 [connection signal="timeout" from="flyingtimer" to="BossBatFSM/FlyingState" method="_on_timer_timeout"]
 [connection signal="timeout" from="shoottimer" to="BossBatFSM/ShootState" method="_on_shoottimer_timeout"]
 [connection signal="timeout" from="RandomTimer" to="StateController" method="_on_random_timer_timeout"]

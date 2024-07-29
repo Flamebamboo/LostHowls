@@ -1,17 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://ep5krjvy7r02"]
+[gd_scene load_steps=6 format=3 uid="uid://ep5krjvy7r02"]
 
 [ext_resource type="Script" path="res://Script/Player/spirit_bullet.gd" id="1_q1rox"]
 [ext_resource type="Texture2D" uid="uid://boap3oh8ed4t" path="res://art/Player/fallparticle.png" id="2_nbq8d"]
+[ext_resource type="Script" path="res://Scenes/Hitbox Component.gd" id="3_2ggmt"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pyjb1"]
 radius = 9.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_es6a7"]
-radius = 9.0
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 16
-collision_mask = 169
+collision_mask = 137
 script = ExtResource("1_q1rox")
 
 [node name="Fallparticle" type="Sprite2D" parent="."]
@@ -20,12 +20,12 @@ texture = ExtResource("2_nbq8d")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_pyjb1")
 
-[node name="BulletHurtbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 16
-collision_mask = 184
+collision_mask = 138
+script = ExtResource("3_2ggmt")
+damage = 5
+is_bullet = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BulletHurtbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_es6a7")
-
-[connection signal="area_entered" from="BulletHurtbox" to="." method="_on_bullet_hurtbox_area_entered"]
-[connection signal="body_entered" from="BulletHurtbox" to="." method="_on_bullet_hurtbox_body_entered"]

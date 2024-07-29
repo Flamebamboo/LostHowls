@@ -35,14 +35,6 @@ func sprite_flash():
 	tween.tween_property(%AnimatedSprite2D, "modulate:v", 1, 0.25).from(15)
 
 
-
-#passing from bossbat because i dont know how to get_child of this root node to access health component directly there
-func bullet_damage(damage: int):
-	health_component.take_damage(damage)
-
-
-
-
 func display_jump_effects():
 	if jump_dust_effect_scene:
 		var jump_dust_effect = jump_dust_effect_scene.instantiate()

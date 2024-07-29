@@ -1,5 +1,5 @@
 extends BossBatState
-
+#sleep only activate when start
 func s_activate():
 	owner.global_position = Vector2(3407, -113)
 	

@@ -117,9 +117,9 @@ interact={
 2d_render/layer_7="Spirit"
 2d_render/layer_8="BossBat and BatOnly Collision"
 2d_physics/layer_1="Collision/tiles"
-2d_physics/layer_2="Player"
+2d_physics/layer_2="Dog"
 2d_physics/layer_4="Mini Bats"
-2d_physics/layer_5="Bullet"
+2d_physics/layer_5="Spirit"
 2d_physics/layer_7="Spirit"
 2d_physics/layer_8="BossBat & BatCollisions"
 

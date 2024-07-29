@@ -4,8 +4,6 @@ extends BossBatState
 @export var animatedSprite: AnimatedSprite2D
 @export var animation: AnimationPlayer
 
-
-@export var rotate_speed: int = 0
 @export var spawn_point_count: int = 8
 const radius: int = 100
 @onready var rotater := %Rotater
@@ -38,8 +36,6 @@ func s_activate():
 	await get_tree().create_timer(1).timeout
 	machine.transition_to(machine.states["FlyingState"])
 	
-func s_physics_process(delta):#if we want to rotate bullets as for the moment no
-	var new_rotation = rotater.rotation_degrees + rotate_speed * delta
-	rotater.rotation_degrees = fmod(new_rotation, 360)
+
 	
 	
