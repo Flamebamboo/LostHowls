@@ -22,7 +22,7 @@ func s_physics_process(delta):
 		is_seeing = true
 		if is_seeing:
 			owner.velocity = owner.velocity.move_toward(raycast.target_position * velocity_component.charge_speed, velocity_component.charge_acceleration * delta)
-			animator.scale.x = -sign(bossbat.velocity.x)
+			animator.scale.x = -sign(owner.velocity.x)
 			if animator.scale.x == 0: animator.scale.x = 1
 			await get_tree().create_timer(1.0).timeout
 			machine.transition_to(machine.states["FlyingState"])

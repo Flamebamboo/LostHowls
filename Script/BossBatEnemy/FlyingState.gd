@@ -10,8 +10,8 @@ func s_activate():
 	flyingtimer.start()
 
 func s_physics_process(_delta):
-	bossbat.velocity = dir * SPEED
-	bossbat.move_and_slide()
+	owner.velocity = dir * SPEED
+	owner.move_and_slide()
 	
 
 	
@@ -34,5 +34,5 @@ func choose(array):
 	return array.front()
 		
 func s_deactivate():
-	bossbat.velocity = Vector2.ZERO
+	owner.velocity = Vector2.ZERO
 	animatedSprite.stop()

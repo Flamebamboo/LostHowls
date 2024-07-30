@@ -1,4 +1,4 @@
-[gd_scene load_steps=114 format=3 uid="uid://dxo0h0k8bfdee"]
+[gd_scene load_steps=113 format=3 uid="uid://dxo0h0k8bfdee"]
 
 [ext_resource type="Script" path="res://Script/Level_1/MainGame.gd" id="1_sw385"]
 [ext_resource type="Texture2D" uid="uid://dpqru6htgukk2" path="res://art/LevelDesign/TutorialKeys/keycaps-Sheet.png" id="2_kni8x"]
@@ -32,7 +32,6 @@
 [ext_resource type="Resource" path="res://art/DialogueFiles/SpiritTimeline.dtl" id="46_0d1ym"]
 [ext_resource type="Texture2D" uid="uid://eg4wgqmbl5fe" path="res://art/VFX/waterfallparticles.png" id="46_14lyo"]
 [ext_resource type="Shader" path="res://shader/water.gdshader" id="46_75cln"]
-[ext_resource type="PackedScene" uid="uid://0drrtr1rw0n1" path="res://Scenes/mini_bat.tscn" id="46_uqtdb"]
 [ext_resource type="PackedScene" uid="uid://d24wjreyddt1s" path="res://Script/BossBatEnemy/Interactables/rock_3.tscn" id="48_3gk76"]
 [ext_resource type="Texture2D" uid="uid://b234lak5x3mra" path="res://overlay_1.png" id="48_o7q3d"]
 [ext_resource type="Texture2D" uid="uid://c7v24o1v6yksl" path="res://art/LevelDesign/firstlevel_bg.png" id="49_pja2y"]
@@ -843,7 +842,7 @@ speed_scale = 0.5
 light_mask = 0
 visibility_layer = 0
 position = Vector2(-15, 527)
-color = Color(0.419813, 0.419813, 0.419813, 1)
+color = Color(0.515208, 0.515208, 0.515208, 1)
 
 [node name="fog" type="ColorRect" parent="effects"]
 z_index = 20
@@ -913,7 +912,7 @@ collision_mask = 128
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Collisions/BossBatOnlyCollisions"]
 position = Vector2(1857, 449)
-polygon = PackedVector2Array(-27, 81, -49, 209, 0, 389, 128, 385, 816, 384, 939, 88, 937, 421, 794, 469, -82, 485, -182, 388, -196, 229, -12, -126, 107, -180)
+polygon = PackedVector2Array(-27, 81, -49, 209, -1, 335, 130, 345, 793, 344, 899, 298, 939, 88, 937, 421, 794, 469, -82, 485, -182, 388, -196, 229, -12, -126, 107, -180)
 
 [node name="UI" type="Node" parent="."]
 
@@ -1097,7 +1096,7 @@ CameraRef = NodePath("../Camera2D")
 area_pcam = NodePath("PhantomCamera2D")
 
 [node name="PhantomCamera2D" type="Node2D" parent="Camera types/cam_1" node_paths=PackedStringArray("follow_target")]
-position = Vector2(988, -359)
+position = Vector2(988, -389)
 script = ExtResource("29_t58t4")
 follow_mode = 2
 follow_target = NodePath("../../../Enitys/Dog")
@@ -1211,7 +1210,7 @@ shape = SubResource("RectangleShape2D_u7sl4")
 
 [node name="Camera2D" type="Camera2D" parent="Camera types" node_paths=PackedStringArray("target")]
 visible = false
-position = Vector2(1446, 111)
+position = Vector2(1446, 81)
 zoom = Vector2(0.8, 0.8)
 limit_left = -119
 limit_top = -236
@@ -1294,14 +1293,14 @@ explosiveness = 0.13
 [node name="Enitys" type="Node" parent="."]
 
 [node name="Dog" parent="Enitys" node_paths=PackedStringArray("camera") instance=ExtResource("50_w0dsa")]
-position = Vector2(2920, 211)
+position = Vector2(3333, 181)
 camera = NodePath("../../Camera types/Camera2D")
 
 [node name="spirit" parent="Enitys" instance=ExtResource("63_g7hrd")]
 position = Vector2(2235, 407)
 
 [node name="BossBat" parent="Enitys" node_paths=PackedStringArray("camera", "hitflashing") instance=ExtResource("39_auycg")]
-position = Vector2(2198, 401)
+position = Vector2(3423, 96)
 camera = NodePath("../../Camera types/Camera2D")
 hitflashing = NodePath("../../UI/hitflashes")
 
@@ -1329,10 +1328,6 @@ shape = SubResource("RectangleShape2D_uqwb7")
 [node name="dialogue_1" parent="." instance=ExtResource("45_fdxb2")]
 position = Vector2(922, -455)
 timeline = ExtResource("46_0d1ym")
-
-[node name="CharacterBody2D" parent="." node_paths=PackedStringArray("dog") instance=ExtResource("46_uqtdb")]
-position = Vector2(1431, -93)
-dog = NodePath("../Enitys/Dog")
 
 [node name="Level2Bg" type="Sprite2D" parent="."]
 modulate = Color(0.323009, 0.596166, 0.794404, 1)

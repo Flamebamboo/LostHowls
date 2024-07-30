@@ -21,7 +21,7 @@ func s_activate():
 	
 	for child in rotater.get_children():
 		rotater.remove_child(child)
-		child.queue_free() # Free the node if it should no longer exist
+		child.queue_free() # got help from chatgpt to debug my code this chunk got rid of multiple damage per hit
 	
 	for i in range(spawn_point_count):
 		var spawn_point = Node2D.new()

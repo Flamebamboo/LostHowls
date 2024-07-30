@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dss6r5npcu8oq"]
 
-[ext_resource type="Script" path="res://circular_motion_test.gd" id="1_c4e86"]
+[ext_resource type="Script" path="res://Testing/circular_motion_test.gd" id="1_c4e86"]
 [ext_resource type="Texture2D" uid="uid://boap3oh8ed4t" path="res://art/Player/fallparticle.png" id="2_wcvf2"]
 
 [node name="Node2D" type="Node2D"]

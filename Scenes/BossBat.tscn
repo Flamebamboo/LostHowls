@@ -14,7 +14,7 @@
 [ext_resource type="Script" path="res://Scenes/boss_bat_state_machine.gd" id="11_0chcn"]
 [ext_resource type="Script" path="res://Scenes/Velocity Component.gd" id="12_2wgx0"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/FlyingState.gd" id="13_31c35"]
-[ext_resource type="Script" path="res://object_pooling.gd" id="15_xvxpb"]
+[ext_resource type="Script" path="res://Script/object_pooling.gd" id="15_p2d7w"]
 
 [sub_resource type="Animation" id="Animation_vsm7r"]
 length = 0.001
@@ -185,7 +185,7 @@ shape = SubResource("CircleShape2D_w7a0g")
 collision_layer = 128
 collision_mask = 2
 script = ExtResource("5_s5xi1")
-damage = 50
+damage = 40
 is_entity = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
@@ -216,10 +216,9 @@ theme_override_fonts/font = ExtResource("7_pkbwp")
 theme_override_font_sizes/font_size = 41
 text = "hello"
 
-[node name="BossBatFSM" type="Node" parent="." node_paths=PackedStringArray("bossbat")]
+[node name="BossBatFSM" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("11_0chcn")
-bossbat = NodePath("..")
 
 [node name="ChargeState" type="Node" parent="BossBatFSM" node_paths=PackedStringArray("animator", "animation", "velocity_component", "raycast")]
 script = ExtResource("8_qkxlu")
@@ -274,7 +273,7 @@ speed = 80.0
 acceleration = 50.0
 
 [node name="Object Pool" type="Node" parent="."]
-script = ExtResource("15_xvxpb")
+script = ExtResource("15_p2d7w")
 
 [connection signal="died" from="Health Components" to="." method="_on_health_components_died"]
 [connection signal="took_damage" from="Health Components" to="." method="_on_health_components_took_damage"]

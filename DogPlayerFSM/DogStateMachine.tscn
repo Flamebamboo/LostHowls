@@ -14,8 +14,8 @@
 [ext_resource type="Script" path="res://DogPlayerFSM/PlayerHealth.gd" id="9_hr7x4"]
 [ext_resource type="Script" path="res://DogPlayerFSM/Physics Components.gd" id="9_jumxf"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/hurtbox_components.gd" id="14_w4005"]
+[ext_resource type="Script" path="res://Script/respawn_manager.gd" id="15_1bl7q"]
 [ext_resource type="FontFile" uid="uid://bnf2p438dv3b5" path="res://Fonts/Pixellari.ttf" id="16_qt5yi"]
-[ext_resource type="Script" path="res://respawn_manager.gd" id="17_tsk50"]
 
 [sub_resource type="Theme" id="Theme_f4cmb"]
 
@@ -234,10 +234,19 @@ offset_bottom = 33.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = SubResource("Theme_f4cmb")
+value = 100.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -15)
 shape = SubResource("RectangleShape2D_q2f71")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player")]
+unique_name_in_owner = true
+position = Vector2(4, -16)
+sprite_frames = SubResource("SpriteFrames_i2mux")
+animation = &"bite_attack"
+script = ExtResource("3_ai8m0")
+player = NodePath("..")
 
 [node name="landeffect" type="Marker2D" parent="."]
 unique_name_in_owner = true
@@ -257,16 +266,7 @@ max_speed = 250.0
 [node name="Health Components" type="Node" parent="." node_paths=PackedStringArray("player", "CharacterBody")]
 script = ExtResource("9_hr7x4")
 player = NodePath("..")
-health_max = 5000
 CharacterBody = NodePath("..")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player")]
-unique_name_in_owner = true
-position = Vector2(4, -16)
-sprite_frames = SubResource("SpriteFrames_i2mux")
-animation = &"bite_attack"
-script = ExtResource("3_ai8m0")
-player = NodePath("..")
 
 [node name="PlayerStateMachine" type="Node" parent="."]
 unique_name_in_owner = true
@@ -296,7 +296,7 @@ position = Vector2(0, -15)
 shape = SubResource("RectangleShape2D_byipc")
 
 [node name="Respawn Manager" type="Node" parent="." node_paths=PackedStringArray("health_components", "player")]
-script = ExtResource("17_tsk50")
+script = ExtResource("15_1bl7q")
 health_components = NodePath("../Health Components")
 player = NodePath("..")
 

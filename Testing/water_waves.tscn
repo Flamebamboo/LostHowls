@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bglfopvpqk35y"]
 
-[ext_resource type="Script" path="res://water_body.gd" id="3_bdm7l"]
+[ext_resource type="Script" path="res://Testing/water_body.gd" id="3_bdm7l"]
 
 [node name="WaterBody" type="Node2D"]
 position = Vector2(224, 92)
