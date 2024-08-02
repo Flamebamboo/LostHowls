@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://bxoegi06c2upq"]
+[gd_scene load_steps=4 format=3 uid="uid://bxoegi06c2upq"]
 
 [ext_resource type="Script" path="res://SoundManager.gd" id="1_xqc4i"]
+[ext_resource type="Script" path="res://Sound Pool.gd" id="2_uki20"]
+[ext_resource type="PackedScene" uid="uid://cgd7k8aumtng" path="res://SoundQueue.tscn" id="3_10pe8"]
 
-[node name="Node" type="Node"]
+[node name="Sound Manager" type="Node"]
 script = ExtResource("1_xqc4i")
+
+[node name="Sound Pool" type="Node" parent="."]
+script = ExtResource("2_uki20")
+
+[node name="Sound Queue" parent="." instance=ExtResource("3_10pe8")]

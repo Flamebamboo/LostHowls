@@ -1353,7 +1353,7 @@ position = Vector2(2536, -284.5)
 shape = SubResource("RectangleShape2D_drt6e")
 
 [node name="CharacterBody2D" parent="." node_paths=PackedStringArray("camera", "hitflashing") instance=ExtResource("52_vummx")]
-position = Vector2(761, -435)
+position = Vector2(800, -510)
 camera = NodePath("../Camera types/Camera2D")
 hitflashing = NodePath("../UI/hitflashes")
 

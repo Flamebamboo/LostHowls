@@ -4,13 +4,14 @@ extends MiniBatState
 @export var line: Line2D
 @onready var dog: Player = Global.dogCharacter
 @export var anim: AnimationPlayer
+@export var sound_queue: SoundQueue
 
 
 func s_activate():
 	anim.play("laser")
 	owner.velocity = Vector2.ZERO
 	owner.move_and_slide()
-	
+	sound_queue.play_sound()
 func s_deactivate():
 	anim.play("off")
 
