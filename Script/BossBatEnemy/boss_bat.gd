@@ -9,8 +9,9 @@ class_name BossBat
 
 
 
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-var is_player : bool = true
+
+
+
 func _ready():
 	animatedsprite.play("flying")
 	
@@ -31,6 +32,7 @@ func _on_health_components_took_damage():
 	camera.apply_shake(20.0, 10.0)
 	
 	
+	
 
 
 func _on_health_components_died():
@@ -38,6 +40,7 @@ func _on_health_components_died():
 	await get_tree().create_timer(1).timeout
 	hitflashing.blue_flash()
 	queue_free()
+
 	
 
 

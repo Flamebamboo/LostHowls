@@ -6,5 +6,5 @@ func _ready():
 		states[state.get_name()] = state
 		state.machine = self
 		state.mini_bat = mini_bat
-	active_state = states["Wandering State"]
+	active_state = states["WanderingState"]
 	active_state.s_activate()

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blr81oaden4b3"
-path="res://.godot/imported/BatFire_Flying.png-9908b10a962bbb1fe2dc9bcae31b4eea.ctex"
+uid="uid://g4up3wdwp1xg"
+path="res://.godot/imported/BossBatCaveV2.png-949527450c3ce2dbd83a245ce9b15b88.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/Enemies/BatFire_Flying.png"
-dest_files=["res://.godot/imported/BatFire_Flying.png-9908b10a962bbb1fe2dc9bcae31b4eea.ctex"]
+source_file="res://BossBatCaveV2.png"
+dest_files=["res://.godot/imported/BossBatCaveV2.png-949527450c3ce2dbd83a245ce9b15b88.ctex"]
 
 [params]
 

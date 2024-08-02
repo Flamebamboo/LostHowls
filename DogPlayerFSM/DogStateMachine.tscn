@@ -266,6 +266,7 @@ max_speed = 250.0
 [node name="Health Components" type="Node" parent="." node_paths=PackedStringArray("player", "CharacterBody")]
 script = ExtResource("9_hr7x4")
 player = NodePath("..")
+health_max = 200
 CharacterBody = NodePath("..")
 
 [node name="PlayerStateMachine" type="Node" parent="."]

@@ -169,7 +169,7 @@ animation = &"attack"
 
 [node name="Health Components" type="Node" parent="." node_paths=PackedStringArray("CharacterBody")]
 script = ExtResource("6_im028")
-health_max = 500
+health_max = 450
 CharacterBody = NodePath("..")
 
 [node name="Entity Detector" type="Area2D" parent="."]
