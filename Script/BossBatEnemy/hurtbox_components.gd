@@ -12,7 +12,7 @@ func apply_damage(damage):
 	print(damage, "damage amount")
 	if health_components.health > 0: #if both of this conditions are met damage will be applied to health components
 		health_components.take_damage(damage) 
-			
+		
 			
 			
 			#if bullet_impact:

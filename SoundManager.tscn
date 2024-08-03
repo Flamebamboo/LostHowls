@@ -1,14 +1,36 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxoegi06c2upq"]
+[gd_scene load_steps=7 format=3 uid="uid://bxoegi06c2upq"]
 
 [ext_resource type="Script" path="res://SoundManager.gd" id="1_xqc4i"]
+[ext_resource type="AudioStream" uid="uid://bfbwnj6wmsxnl" path="res://music/Regenerator.mp3" id="2_7kjd7"]
 [ext_resource type="Script" path="res://Sound Queue.gd" id="2_j1s2b"]
-[ext_resource type="AudioStream" uid="uid://dq8b14hq7x764" path="res://music/sfx/boomerang-128276.mp3" id="3_410s2"]
+[ext_resource type="AudioStream" uid="uid://bwkul2lmvjan8" path="res://music/sfx/laser-03-39231.mp3" id="3_lcmqw"]
+[ext_resource type="AudioStream" uid="uid://d10pwinfu5o2e" path="res://music/Spirit_Shoot_SFX.wav" id="4_oqskh"]
+[ext_resource type="AudioStream" uid="uid://c2kutx72kxlpo" path="res://music/sfx/hit-sound-effect-12445.mp3" id="6_qchve"]
 
 [node name="Sound Manager" type="Node"]
 script = ExtResource("1_xqc4i")
 
-[node name="SoundQueue" type="Node" parent="."]
-script = ExtResource("2_j1s2b")
+[node name="Main" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_7kjd7")
+volume_db = -2.239
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="SoundQueue"]
-stream = ExtResource("3_410s2")
+[node name="LaserSoundQueue" type="Node" parent="."]
+script = ExtResource("2_j1s2b")
+Count = 5
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LaserSoundQueue"]
+stream = ExtResource("3_lcmqw")
+
+[node name="ShootSoundQueue" type="Node" parent="."]
+script = ExtResource("2_j1s2b")
+Count = 50
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ShootSoundQueue"]
+stream = ExtResource("4_oqskh")
+
+[node name="ImpactSoundQueue" type="Node" parent="."]
+script = ExtResource("2_j1s2b")
+Count = 10
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ImpactSoundQueue"]
+stream = ExtResource("6_qchve")

@@ -19,5 +19,5 @@ func _on_area_entered(area: Area2D):
 			queue_free()
 		if is_entity:
 			area.apply_damage(damage)
-		
+			
 		
