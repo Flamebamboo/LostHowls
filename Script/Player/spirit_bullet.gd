@@ -11,6 +11,7 @@ func _ready():
 	var mouse_position = get_global_mouse_position()
 	direction = (mouse_position - self.global_position).normalized()
 	#max_distance = global_position.distance_to(mouse_position)
+	
 func _physics_process(delta):
 	var velocity = direction * speed * delta
 	var collision := move_and_collide(velocity)

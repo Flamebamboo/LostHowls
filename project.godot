@@ -20,8 +20,8 @@ CheckpointManager="*res://singletons/checkpoint_manager.gd"
 FrameFreeze="*res://singletons/frame_freeze.gd"
 Global="*res://singletons/global.gd"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
-Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 SoundManager="*res://SoundManager.gd"
+Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 [dialogic]
 

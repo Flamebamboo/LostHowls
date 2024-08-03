@@ -1,13 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://bxoegi06c2upq"]
 
 [ext_resource type="Script" path="res://SoundManager.gd" id="1_xqc4i"]
-[ext_resource type="Script" path="res://Sound Pool.gd" id="2_uki20"]
-[ext_resource type="PackedScene" uid="uid://cgd7k8aumtng" path="res://SoundQueue.tscn" id="3_10pe8"]
+[ext_resource type="Script" path="res://Sound Queue.gd" id="2_j1s2b"]
+[ext_resource type="AudioStream" uid="uid://dq8b14hq7x764" path="res://music/sfx/boomerang-128276.mp3" id="3_410s2"]
 
 [node name="Sound Manager" type="Node"]
 script = ExtResource("1_xqc4i")
 
-[node name="Sound Pool" type="Node" parent="."]
-script = ExtResource("2_uki20")
+[node name="SoundQueue" type="Node" parent="."]
+script = ExtResource("2_j1s2b")
 
-[node name="Sound Queue" parent="." instance=ExtResource("3_10pe8")]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="SoundQueue"]
+stream = ExtResource("3_410s2")

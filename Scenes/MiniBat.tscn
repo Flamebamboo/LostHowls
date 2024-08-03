@@ -1,9 +1,7 @@
-[gd_scene load_steps=25 format=3 uid="uid://0drrtr1rw0n1"]
+[gd_scene load_steps=23 format=3 uid="uid://0drrtr1rw0n1"]
 
 [ext_resource type="Script" path="res://Script/Mini Bat/mini_bat.gd" id="1_pulgo"]
-[ext_resource type="Script" path="res://Sound Queue.gd" id="2_5gkxg"]
 [ext_resource type="Script" path="res://Scenes/Velocity Component.gd" id="2_a3so0"]
-[ext_resource type="AudioStream" uid="uid://dq8b14hq7x764" path="res://music/sfx/boomerang-128276.mp3" id="2_gyxmd"]
 [ext_resource type="Texture2D" uid="uid://qxey0hadkc6l" path="res://art/Enemies/mini_bat-Sheet.png" id="5_aijwg"]
 [ext_resource type="Script" path="res://Script/Mini Bat/mini_bat_controller.gd" id="6_5l8mv"]
 [ext_resource type="Script" path="res://Scenes/Hitbox Component.gd" id="7_n8hwc"]
@@ -210,12 +208,11 @@ machine = NodePath("../MiniBatFSM")
 [node name="MiniBatFSM" type="Node" parent="."]
 script = ExtResource("9_vs084")
 
-[node name="LaserState" type="Node" parent="MiniBatFSM" node_paths=PackedStringArray("raycast", "line", "anim", "sound_queue")]
+[node name="LaserState" type="Node" parent="MiniBatFSM" node_paths=PackedStringArray("raycast", "line", "anim")]
 script = ExtResource("10_m1j8f")
 raycast = NodePath("../../RayCast2D")
 line = NodePath("../../RayCast2D/Line2D")
 anim = NodePath("../../AnimationPlayer")
-sound_queue = NodePath("../../SoundQueue")
 
 [node name="WanderingState" type="Node" parent="MiniBatFSM" node_paths=PackedStringArray("flyingtimer")]
 script = ExtResource("11_y1rkr")
@@ -226,13 +223,6 @@ flyingtimer = NodePath("../../flyingtimer")
 [node name="BaseHealth" type="Node" parent="." node_paths=PackedStringArray("CharacterBody")]
 script = ExtResource("10_6fwdm")
 CharacterBody = NodePath("..")
-
-[node name="SoundQueue" type="Node" parent="."]
-script = ExtResource("2_5gkxg")
-Count = 5
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="SoundQueue"]
-stream = ExtResource("2_gyxmd")
 
 [connection signal="body_entered" from="Entity Detector" to="State Controller" method="_on_entity_detector_body_entered"]
 [connection signal="timeout" from="flyingtimer" to="MiniBatFSM/WanderingState" method="_on_flyingtimer_timeout"]

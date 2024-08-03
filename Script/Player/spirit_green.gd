@@ -112,7 +112,8 @@ func shoot():
 	spawned_bullet.global_position = shooting_marker.global_position
 	spawned_bullet.rotation = mouse_direction.angle()
 	spawned_bullet.velocity = mouse_direction * spawned_bullet.speed
-
+	
+	
 ##still in development 
 #func launch():
 	#if shooting_marker and dog:
