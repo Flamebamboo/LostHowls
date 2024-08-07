@@ -9,12 +9,12 @@ func respawn_player():
 	var last_checkpoints = CheckpointManager.get_checkpoint()
 	
 	if last_checkpoints:
-		player.global_position = last_checkpoints + Vector2(0, -50)
+		player.global_position = last_checkpoints + Vector2(0, 30)
 	
 
 	emit_signal("PlayerAlive")
 func _on_health_components_died():
 	Global.dogAlive = false
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(1).timeout
 	respawn_player()
 	

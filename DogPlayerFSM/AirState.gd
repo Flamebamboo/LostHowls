@@ -12,18 +12,19 @@ func s_activate():
 	super()
 	#can_jump = true
 	can_idle = true
+	can_glide = false
 	if !Global.BossBatAlive:
 		can_glide = true
 	Global.current_air = true
 	
 	
-func s_physics_process(_delta):
+func s_physics_process(delta):
 	var direction = Input.get_axis("moveleft", "moveright")
 	
 	physics.apply_gravity()
 	
-	physics.vertical_air_resistance(_delta)
-	physics.horizontal_air_strafe(_delta)	
+	physics.vertical_air_resistance(delta)
+	physics.horizontal_air_strafe(delta)	
 	
 	if owner.is_on_floor() && machine.active_state.can_idle: # IDLE CONDITION
 		machine.transition_to(machine.states["IdleState"])
@@ -34,8 +35,8 @@ func s_physics_process(_delta):
 		emit_signal('floor')
 		
 	if Input.is_action_just_pressed("glide") && machine.active_state.can_glide:
-		#machine.transition_to(machine.states["GlidingState"])
-		pass #gliding mechanic to be implemented
+		machine.transition_to(machine.states["GlidingState"])
+		
 	
 	if !Global.dogAlive:
 		machine.transition_to(machine.states["DeadState"])

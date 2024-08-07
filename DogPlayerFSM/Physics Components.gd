@@ -94,7 +94,7 @@ func vertical_air_resistance(delta: float = get_physics_process_delta_time()):
 func can_double_jump() -> bool:
 	var available_jump: bool = jump_count < allowed_jump
 	return available_jump	
-	
+
 ##JUMP STATE
 func jumps():
 	var tween = create_tween()
@@ -107,5 +107,3 @@ func jumps():
 	#velocity.y = jump_velocity/2
 	#jump_count += 1
 	#print("yo")
-
-

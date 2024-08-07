@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bxoegi06c2upq"]
+[gd_scene load_steps=8 format=3 uid="uid://bxoegi06c2upq"]
 
 [ext_resource type="Script" path="res://SoundManager.gd" id="1_xqc4i"]
+[ext_resource type="AudioStream" uid="uid://c560puximnihv" path="res://music/Void_Entry.mp3" id="2_d1pv4"]
 [ext_resource type="Script" path="res://Sound Queue.gd" id="2_j1s2b"]
 [ext_resource type="AudioStream" uid="uid://tnohss5vshud" path="res://music/laseraim.wav" id="4_mbago"]
 [ext_resource type="AudioStream" uid="uid://d10pwinfu5o2e" path="res://music/Spirit_Shoot_SFX.wav" id="4_oqskh"]
@@ -11,6 +12,7 @@
 script = ExtResource("1_xqc4i")
 
 [node name="Main" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_d1pv4")
 volume_db = -8.04
 
 [node name="LaserSoundQueue" type="Node" parent="."]
