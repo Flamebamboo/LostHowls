@@ -8,10 +8,12 @@ signal floor
 func s_activate():
 	var just_left_edge = !owner.is_on_floor() and owner.velocity.y >= 0 #going downward check >=
 	if just_left_edge:
-		coyote_time.start()	
+		coyote_time.start()		
 	super()
-	can_jump = true
+	#can_jump = true
 	can_idle = true
+	if !Global.BossBatAlive:
+		can_glide = true
 	Global.current_air = true
 	
 	
@@ -26,12 +28,20 @@ func s_physics_process(_delta):
 	if owner.is_on_floor() && machine.active_state.can_idle: # IDLE CONDITION
 		machine.transition_to(machine.states["IdleState"])
 		return
-
-
+	
+	if Input.is_action_just_pressed("moveup") && coyote_time.time_left > 0 && physics.can_double_jump():
+		machine.transition_to(machine.states["JumpState"])
+		emit_signal('floor')
+		
+	if Input.is_action_just_pressed("glide") && machine.active_state.can_glide:
+		#machine.transition_to(machine.states["GlidingState"])
+		pass #gliding mechanic to be implemented
+	
+	if !Global.dogAlive:
+		machine.transition_to(machine.states["DeadState"])
+		
 func s_deactivate():
 	Global.current_air = false
 
-func _input(event : InputEvent):
-	if event.is_action_pressed("moveup") && coyote_time.time_left > 0 && physics.can_double_jump() && machine.active_state.can_jump:
-		machine.transition_to(machine.states["JumpState"])
-		emit_signal('floor')
+
+	

@@ -1,25 +1,24 @@
 [gd_scene load_steps=7 format=3 uid="uid://bxoegi06c2upq"]
 
 [ext_resource type="Script" path="res://SoundManager.gd" id="1_xqc4i"]
-[ext_resource type="AudioStream" uid="uid://bfbwnj6wmsxnl" path="res://music/Regenerator.mp3" id="2_7kjd7"]
 [ext_resource type="Script" path="res://Sound Queue.gd" id="2_j1s2b"]
-[ext_resource type="AudioStream" uid="uid://bwkul2lmvjan8" path="res://music/sfx/laser-03-39231.mp3" id="3_lcmqw"]
+[ext_resource type="AudioStream" uid="uid://tnohss5vshud" path="res://music/laseraim.wav" id="4_mbago"]
 [ext_resource type="AudioStream" uid="uid://d10pwinfu5o2e" path="res://music/Spirit_Shoot_SFX.wav" id="4_oqskh"]
 [ext_resource type="AudioStream" uid="uid://c2kutx72kxlpo" path="res://music/sfx/hit-sound-effect-12445.mp3" id="6_qchve"]
+[ext_resource type="AudioStream" uid="uid://dle21yv173oum" path="res://music/BatBossCharge.wav" id="7_osxef"]
 
 [node name="Sound Manager" type="Node"]
 script = ExtResource("1_xqc4i")
 
 [node name="Main" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_7kjd7")
-volume_db = -2.239
+volume_db = -8.04
 
 [node name="LaserSoundQueue" type="Node" parent="."]
 script = ExtResource("2_j1s2b")
-Count = 5
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LaserSoundQueue"]
-stream = ExtResource("3_lcmqw")
+stream = ExtResource("4_mbago")
+pitch_scale = 2.35
 
 [node name="ShootSoundQueue" type="Node" parent="."]
 script = ExtResource("2_j1s2b")
@@ -34,3 +33,10 @@ Count = 10
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ImpactSoundQueue"]
 stream = ExtResource("6_qchve")
+volume_db = -3.259
+
+[node name="ChargeSoundQueue" type="Node" parent="."]
+script = ExtResource("2_j1s2b")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ChargeSoundQueue"]
+stream = ExtResource("7_osxef")

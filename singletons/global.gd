@@ -2,8 +2,9 @@ extends Node
 
 var dogAlive: bool
 var dogCharacter: CharacterBody2D
-var dogFreeze: bool = false
+var dogFreeze: bool 
 
+var BossBatAlive: bool
 #current active state
 
 var current_idle : bool

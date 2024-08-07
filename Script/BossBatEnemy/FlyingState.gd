@@ -2,15 +2,15 @@ extends BossBatState
 #flying
 @export var animatedSprite: AnimatedSprite2D
 var dir: Vector2
-var SPEED = 50
+@onready var velocity_component = %"Velocity Component"
 @export var flyingtimer: Timer
 
 func s_activate():
 	animatedSprite.play("flying")
 	flyingtimer.start()
 
-func s_physics_process(_delta):
-	owner.velocity = dir * SPEED
+func s_physics_process(delta):
+	owner.velocity = dir * velocity_component.speed * delta
 	owner.move_and_slide()
 	
 

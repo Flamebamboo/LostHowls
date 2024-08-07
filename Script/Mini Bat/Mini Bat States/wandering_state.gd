@@ -5,11 +5,10 @@ var SPEED = 50
 @export var flyingtimer: Timer
 
 func s_activate():
-	flyingtimer.start()
+	pass
 
 func s_physics_process(_delta):
-	owner.velocity = dir * SPEED
-	owner.move_and_slide()
+	pass
 	
 
 	

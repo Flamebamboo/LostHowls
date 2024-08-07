@@ -1,7 +1,7 @@
 extends BaseHealth
 class_name EnemyHealth
 
-@onready var bossbat: BossBat
+@onready var Enemy: CharacterBody2D
 
 func _ready():
 	health = health_max

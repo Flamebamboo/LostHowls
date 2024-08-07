@@ -12,6 +12,7 @@ func _physics_process(delta):
 
 
 func _on_random_timer_timeout():
+	$"../AudioStreamPlayer".play()
 	if Global.dogAlive && machine.active_state.name == "FlyingState":
 		# Randomly decide whether to transition to "charge" or "shoot"
 		var attack_types = randi_range(0, 1)
@@ -29,3 +30,4 @@ func _on_entity_detector_body_entered(body):
 		print("trigger")
 		machine.transition_to(machine.states["FlyingState"])
 		$"../RandomTimer".start()
+		$"../AudioStreamPlayer2".play()

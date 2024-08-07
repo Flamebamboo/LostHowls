@@ -14,7 +14,7 @@ class_name BossBat
 
 func _ready():
 	animatedsprite.play("flying")
-	
+	Global.BossBatAlive = true
 	
 func _physics_process(_delta):
 	move_and_slide()
@@ -39,6 +39,7 @@ func _on_health_components_died():
 	camera.apply_shake(200.0, 100.0)
 	await get_tree().create_timer(1).timeout
 	hitflashing.blue_flash()
+	Global.BossBatAlive = false
 	queue_free()
 
 	

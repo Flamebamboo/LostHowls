@@ -34,9 +34,10 @@ var input_axis = Input.get_axis("moveleft", "moveright")
 @export var air_accel = 200
 	
 	
-func _physics_process(_delta):
+func _physics_process(_delta):	
 	if Global.dogFreeze:
 		player.velocity = Vector2.ZERO
+
 	else:
 		player.velocity = velocity
 		player.move_and_slide()
@@ -93,7 +94,7 @@ func vertical_air_resistance(delta: float = get_physics_process_delta_time()):
 func can_double_jump() -> bool:
 	var available_jump: bool = jump_count < allowed_jump
 	return available_jump	
-
+	
 ##JUMP STATE
 func jumps():
 	var tween = create_tween()
@@ -102,8 +103,9 @@ func jumps():
 	jump_count += 1
 	
 	
-func double_jump():
-	velocity.y = jump_velocity/2
-	jump_count += 1
+#func double_jump():
+	#velocity.y = jump_velocity/2
+	#jump_count += 1
+	#print("yo")
 
 

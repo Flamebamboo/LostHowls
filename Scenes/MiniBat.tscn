@@ -7,9 +7,12 @@
 [ext_resource type="Script" path="res://Scenes/Hitbox Component.gd" id="7_n8hwc"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/hurtbox_components.gd" id="8_wndaj"]
 [ext_resource type="Script" path="res://Script/Mini Bat/mini_bat_statemachine.gd" id="9_vs084"]
-[ext_resource type="Script" path="res://Script/BossBatEnemy/BaseHealthClass.gd" id="10_6fwdm"]
 [ext_resource type="Script" path="res://Script/Mini Bat/Mini Bat States/laser_state.gd" id="10_m1j8f"]
+[ext_resource type="Script" path="res://Scenes/EnemyHealth.gd" id="10_ut1yg"]
 [ext_resource type="Script" path="res://Script/Mini Bat/Mini Bat States/wandering_state.gd" id="11_y1rkr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fsgoc"]
+radius = 13.0384
 
 [sub_resource type="Animation" id="Animation_wgr8j"]
 length = 0.001
@@ -36,6 +39,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [10.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RayCast2D/Line2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_85ph8"]
@@ -65,6 +80,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [2.0, 10.0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RayCast2D/Line2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_cmu61"]
 resource_name = "off"
@@ -92,6 +119,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(1, 0, 0, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RayCast2D/Line2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qq0eo"]
 _data = {
@@ -99,9 +138,6 @@ _data = {
 "laser": SubResource("Animation_85ph8"),
 "off": SubResource("Animation_cmu61")
 }
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_fsgoc"]
-radius = 13.0384
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5iod1"]
 atlas = ExtResource("5_aijwg")
@@ -133,21 +169,24 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xe57u"]
-radius = 14.0357
+radius = 15.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pubmf"]
 radius = 175.046
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xuj0o"]
-radius = 13.0
+radius = 25.02
 
-[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("health_component", "hurtbox_component", "animatedsprite") groups=["Enemy"]]
+[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("hurtbox_component", "animatedsprite") groups=["Enemy"]]
 collision_layer = 128
-collision_mask = 16
+collision_mask = 17
 script = ExtResource("1_pulgo")
-health_component = NodePath("BaseHealth")
 hurtbox_component = NodePath("Hurtbox")
 animatedsprite = NodePath("AnimatedSprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -2)
+shape = SubResource("CircleShape2D_fsgoc")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -157,16 +196,18 @@ libraries = {
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(250, 2.08165e-12)
 collision_mask = 2
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
 
 [node name="Line2D" type="Line2D" parent="RayCast2D"]
+z_index = 240
+position = Vector2(-1, -6)
 points = PackedVector2Array(2.08165e-12, 2.08165e-12, 150, 2.08165e-12)
 default_color = Color(1, 0, 0, 1)
 
 [node name="VelocityComponents" type="Node" parent="."]
 script = ExtResource("2_a3so0")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_fsgoc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(3, -1)
@@ -178,13 +219,16 @@ autoplay = "flying"
 collision_layer = 128
 collision_mask = 2
 script = ExtResource("7_n8hwc")
+damage = 20
 is_entity = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_xe57u")
 debug_color = Color(0.318081, 0.620382, 0.230128, 0.42)
 
 [node name="Entity Detector" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2
 
@@ -195,9 +239,10 @@ shape = SubResource("CircleShape2D_pubmf")
 collision_layer = 128
 collision_mask = 16
 script = ExtResource("8_wndaj")
-health_components = NodePath("../BaseHealth")
+health_components = NodePath("../Health Components")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+modulate = Color(1, 0, 0, 1)
 shape = SubResource("CircleShape2D_xuj0o")
 debug_color = Color(0.941755, 8.18916e-06, 0.609187, 0.42)
 
@@ -220,11 +265,11 @@ flyingtimer = NodePath("../../flyingtimer")
 
 [node name="flyingtimer" type="Timer" parent="."]
 
-[node name="BaseHealth" type="Node" parent="." node_paths=PackedStringArray("CharacterBody")]
-script = ExtResource("10_6fwdm")
+[node name="Health Components" type="Node" parent="." node_paths=PackedStringArray("CharacterBody")]
+script = ExtResource("10_ut1yg")
 CharacterBody = NodePath("..")
 
 [connection signal="body_entered" from="Entity Detector" to="State Controller" method="_on_entity_detector_body_entered"]
 [connection signal="timeout" from="flyingtimer" to="MiniBatFSM/WanderingState" method="_on_flyingtimer_timeout"]
-[connection signal="died" from="BaseHealth" to="." method="_on_base_health_died"]
-[connection signal="took_damage" from="BaseHealth" to="." method="_on_base_health_took_damage"]
+[connection signal="died" from="Health Components" to="." method="_on_health_components_died"]
+[connection signal="took_damage" from="Health Components" to="." method="_on_health_components_took_damage"]

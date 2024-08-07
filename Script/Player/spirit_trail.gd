@@ -3,7 +3,7 @@ extends Line2D
 @export var length = 10
 var point = Vector2()
 
-func _process(delta):
+func _process(_delta):
 	global_position = Vector2(0,0)
 	global_rotation = 0
 	point = get_parent().global_position

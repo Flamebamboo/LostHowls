@@ -13,12 +13,12 @@ func _ready():
 	#max_distance = global_position.distance_to(mouse_position)
 	
 func _physics_process(delta):
-	var velocity = direction * speed * delta
-	var collision := move_and_collide(velocity)
+	var move = direction * speed * delta
+	var collision := move_and_collide(move)
 	if collision:
 		queue_free()
 		return
-	travelled_distance += velocity.length()
+	travelled_distance += move.length()
 	if travelled_distance >= max_distance:
 		queue_free()
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bd24oc54elotu"]
+[gd_scene load_steps=32 format=3 uid="uid://bd24oc54elotu"]
 
 [ext_resource type="Material" uid="uid://bmgyfioow48f8" path="res://shader/unshadedlight.tres" id="1_xyjkw"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/boss_bat.gd" id="2_ympke"]
@@ -7,7 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://boijh8vbuie55" path="res://art/Enemies/Bossbat-Sheet.png" id="6_8r4q4"]
 [ext_resource type="Script" path="res://Scenes/EnemyHealth.gd" id="6_im028"]
 [ext_resource type="FontFile" uid="uid://bnf2p438dv3b5" path="res://Fonts/Pixellari.ttf" id="7_pkbwp"]
+[ext_resource type="AudioStream" uid="uid://kupcp0jcvv8" path="res://music/sfx/BossBatROAR.mp3" id="8_oufed"]
 [ext_resource type="Script" path="res://Scenes/ChargeState.gd" id="8_qkxlu"]
+[ext_resource type="AudioStream" uid="uid://c4lodblowvhwe" path="res://music/zombiesound-171653.mp3" id="9_o5t5g"]
 [ext_resource type="Script" path="res://Scenes/SleepState.gd" id="10_5kyio"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/hurtbox_components.gd" id="10_8h1lu"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/ShootState.gd" id="10_sxcg1"]
@@ -207,6 +209,12 @@ debug_color = Color(1, 0, 0.27451, 0.419608)
 script = ExtResource("4_25j3u")
 machine = NodePath("../BossBatFSM")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_oufed")
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_o5t5g")
+
 [node name="Label" type="Label" parent="."]
 offset_left = -47.0
 offset_top = 42.0
@@ -267,9 +275,10 @@ metadata/_edit_use_anchors_ = true
 collision_mask = 3
 
 [node name="Velocity Component" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("12_2wgx0")
 max_speed = 100.0
-speed = 80.0
+speed = 2000.0
 acceleration = 50.0
 
 [node name="Object Pool" type="Node" parent="."]

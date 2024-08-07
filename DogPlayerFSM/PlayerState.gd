@@ -3,16 +3,19 @@ class_name PlayerState
 
 
 
-@export var player: Player
-@onready var physics = %"Physics Components"
+@onready var player := Player
+@onready var physics := %"Physics Components"
 #FLAGS SOON: eg can_dash, and in states machine.active_state.can_dash.
 
-#Player states 
-var can_idle = true
-var can_jump = true
-var can_air = true
-var can_run = true
+#Player defaults states 
+var can_idle: bool  = true
+var can_jump: bool  = true
+var can_air: bool  = true
+var can_run: bool  = true
 
+#player can obtain state
+
+var can_glide: bool = false
 
 
 
