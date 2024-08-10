@@ -1,14 +1,15 @@
 extends MiniBatState
 
 var dir: Vector2
-var SPEED = 50
+var SPEED = 5000
 @export var flyingtimer: Timer
-
+@onready var velocity_component := %VelocityComponents
 func s_activate():
-	pass
+	flyingtimer.start()
 
-func s_physics_process(_delta):
-	pass
+func s_physics_process(delta):
+	owner.velocity = dir * SPEED * delta
+	owner.move_and_slide()
 	
 
 	

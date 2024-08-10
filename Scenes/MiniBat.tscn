@@ -207,6 +207,7 @@ points = PackedVector2Array(2.08165e-12, 2.08165e-12, 150, 2.08165e-12)
 default_color = Color(1, 0, 0, 1)
 
 [node name="VelocityComponents" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("2_a3so0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -250,7 +251,12 @@ debug_color = Color(0.941755, 8.18916e-06, 0.609187, 0.42)
 script = ExtResource("6_5l8mv")
 machine = NodePath("../MiniBatFSM")
 
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
 [node name="MiniBatFSM" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("9_vs084")
 
 [node name="LaserState" type="Node" parent="MiniBatFSM" node_paths=PackedStringArray("raycast", "line", "anim")]
@@ -264,6 +270,7 @@ script = ExtResource("11_y1rkr")
 flyingtimer = NodePath("../../flyingtimer")
 
 [node name="flyingtimer" type="Timer" parent="."]
+autostart = true
 
 [node name="Health Components" type="Node" parent="." node_paths=PackedStringArray("CharacterBody")]
 script = ExtResource("10_ut1yg")

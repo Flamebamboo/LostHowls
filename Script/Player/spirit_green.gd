@@ -53,7 +53,7 @@ func _ready():
 func _physics_process(delta):
 
 	if can_shoot:
-		if Input.is_action_just_pressed("attackL"):
+		if Input.is_action_pressed("attackL"):
 			shoot()
 			can_shoot = false
 			await get_tree().create_timer(0.1).timeout
