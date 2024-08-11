@@ -1,6 +1,6 @@
 extends PlayerState
 
-var gravity :int = 5
+var gravity :int = 50
 func s_activate():
 	super()
 	can_glide = true
@@ -10,8 +10,8 @@ func s_physics_process(delta):
 	
 	if Input.is_action_just_released("glide"):
 		machine.transition_to(machine.states["AirState"])
-	physics.velocity.y += gravity
-	
+	if owner.velocity.y < 0:
+		physics.velocity.y += gravity
 	physics.horizontal_air_strafe(delta)	
 	
 	
