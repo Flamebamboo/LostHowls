@@ -14,7 +14,7 @@ class_name BossBat
 
 func _ready():
 	animatedsprite.play("flying")
-	Global.BossBatAlive = true
+	Global.BossBatAlive = false
 	
 func _physics_process(_delta):
 	move_and_slide()
