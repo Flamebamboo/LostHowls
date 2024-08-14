@@ -11,3 +11,4 @@ var current_idle : bool
 var current_jump: bool
 var current_air: bool
 var current_run: bool
+var current_glide: bool

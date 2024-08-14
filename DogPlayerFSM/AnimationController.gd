@@ -15,3 +15,5 @@ func _on_player_state_machine_state_changed(active_state, previous_active_state)
 			play("jump")
 		"DeadState":
 			play("idle")
+		"GlidingState":
+			play("glide")

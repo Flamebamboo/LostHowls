@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dw72i54qat4nh"
-path="res://.godot/imported/ghostsimple-Sheet.png-a79177f307779ebafe6233233e61e93d.ctex"
+uid="uid://dhjg2rjsjwocp"
+path="res://.godot/imported/spirit_dimple-Sheet.png-6df811a56e16452ed723a1ed330978d3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/Player/ghostsimple-Sheet.png"
-dest_files=["res://.godot/imported/ghostsimple-Sheet.png-a79177f307779ebafe6233233e61e93d.ctex"]
+source_file="res://art/spirit_dimple-Sheet.png"
+dest_files=["res://.godot/imported/spirit_dimple-Sheet.png-6df811a56e16452ed723a1ed330978d3.ctex"]
 
 [params]
 

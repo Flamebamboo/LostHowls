@@ -6,9 +6,11 @@ class_name spirit
 #Player launcher im not sure if its a great addition to the game, avoid scope creep 
 
 
+
 @onready var bullet_scene: PackedScene = preload("res://Scenes/spirit_bullet.tscn")
 #@onready var player_launcher : PackedScene = preload("res://Scenes/playerlauncher.tscn")
 
+@export var anim: AnimatedSprite2D
 @export var speed: float = 300.0 
 @export var follow_distance: float = 100.0  
 @export var stop_distance: float = 50.0  
@@ -61,8 +63,15 @@ func _physics_process(delta):
 			
 	if Global.current_idle:
 		spirit_idle(delta)
+		anim.play("idle")
+		
 	elif Global.current_run || Global.current_air:
 		spirit_move(delta)
+		anim.play("move")
+	elif Global.current_glide:
+		anim.play("glide")
+		spirit_glide(delta)
+		
 	
 
 func spirit_idle(delta):
@@ -87,9 +96,14 @@ func spirit_move(delta):
 	elif distance_to_player > stop_distance: #slow speed starts
 		global_position = global_position.lerp(target_position, decel_speed) # smooth follow using linear interpolation 
 		
-	
-	
-	
+
+func spirit_glide(delta):
+	var target_position = dog.global_position + Vector2(0, -50) #same as top
+	var distance_to_player = global_position.distance_to(target_position) #same as top
+	var direction = (target_position - global_position).normalized() #normalizing the vector and making the spirit go to the target by substracting
+	if distance_to_player:
+		global_position += direction * speed * delta
+		
 	
 
 		
