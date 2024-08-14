@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cga8qf3mlguo3"
-path="res://.godot/imported/dogglide.png-684c79829da2fec6f04f3b30262296b7.ctex"
+uid="uid://da4xvjvcy2fq5"
+path="res://.godot/imported/dogglide-Sheet.png-938a80c1b746374747b5844de40e0aa3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/dogglide.png"
-dest_files=["res://.godot/imported/dogglide.png-684c79829da2fec6f04f3b30262296b7.ctex"]
+source_file="res://art/dogglide-Sheet.png"
+dest_files=["res://.godot/imported/dogglide-Sheet.png-938a80c1b746374747b5844de40e0aa3.ctex"]
 
 [params]
 

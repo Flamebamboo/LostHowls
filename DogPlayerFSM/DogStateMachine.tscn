@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://cb46co0m8f53s"]
+[gd_scene load_steps=46 format=3 uid="uid://cb46co0m8f53s"]
 
 [ext_resource type="Script" path="res://DogPlayerFSM/Doggy.gd" id="1_njf21"]
 [ext_resource type="Texture2D" uid="uid://bwotynnxhce0s" path="res://art/Player/dogattack-Sheet.png" id="2_dx8ja"]
@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://DogPlayerFSM/AnimationController.gd" id="3_ai8m0"]
 [ext_resource type="Script" path="res://DogPlayerFSM/PlayerStateMachine.gd" id="3_bn38j"]
 [ext_resource type="Script" path="res://DogPlayerFSM/IdleState.gd" id="4_bagpv"]
-[ext_resource type="Texture2D" uid="uid://cga8qf3mlguo3" path="res://art/dogglide.png" id="4_pj3jb"]
+[ext_resource type="Texture2D" uid="uid://da4xvjvcy2fq5" path="res://art/dogglide-Sheet.png" id="4_kee2m"]
 [ext_resource type="Texture2D" uid="uid://c2nqpycfu27b2" path="res://art/Player/dogjumpv2-Sheet.png" id="4_rgvto"]
 [ext_resource type="Script" path="res://DogPlayerFSM/RunState.gd" id="5_2emg4"]
 [ext_resource type="Texture2D" uid="uid://b5po54oukvgdx" path="res://art/Player/dogrunv2-Sheet-Sheet.png" id="5_v2q1q"]
@@ -57,9 +57,17 @@ region = Rect2(256, 0, 64, 32)
 atlas = ExtResource("4_rgvto")
 region = Rect2(320, 0, 64, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qspvn"]
-atlas = ExtResource("4_pj3jb")
+[sub_resource type="AtlasTexture" id="AtlasTexture_a0n1m"]
+atlas = ExtResource("4_kee2m")
 region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fobva"]
+atlas = ExtResource("4_kee2m")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q7rmc"]
+atlas = ExtResource("4_kee2m")
+region = Rect2(200, 0, 100, 100)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xudjg"]
 atlas = ExtResource("2_lkn1a")
@@ -146,9 +154,15 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qspvn")
+"texture": SubResource("AtlasTexture_a0n1m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fobva")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q7rmc")
 }],
-"loop": true,
+"loop": false,
 "name": &"glide",
 "speed": 5.0
 }, {
@@ -234,6 +248,8 @@ unique_name_in_owner = true
 position = Vector2(4, -16)
 sprite_frames = SubResource("SpriteFrames_i2mux")
 animation = &"glide"
+frame = 2
+frame_progress = 1.0
 script = ExtResource("3_ai8m0")
 player = NodePath("..")
 

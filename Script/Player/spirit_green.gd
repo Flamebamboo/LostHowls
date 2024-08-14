@@ -15,8 +15,15 @@ class_name spirit
 @export var follow_distance: float = 100.0  
 @export var stop_distance: float = 50.0  
 @export var decel_speed: float = 0.01 
+
+const tel_speed: int = 600
 var can_launch: bool
 var can_shoot: bool
+
+
+
+@export var line:Line2D
+@export var length = 10
 
 ###logical explanations 
 #Basically say if the spirit distance relative to the player is further than the follow distance 
@@ -51,9 +58,20 @@ func _ready():
 	can_shoot = true
 	dog = Global.dogCharacter
 	
+var point = Vector2()
+
+func _process(_delta):
+	line.global_position = Vector2(0,0)
+	line.global_rotation = 0
+	point = self.global_position
+	
+	line.add_point(point)
+	while line.get_point_count() > length:
+		line.remove_point(0)
 	
 func _physics_process(delta):
 
+		
 	if can_shoot:
 		if Input.is_action_pressed("attackL"):
 			shoot()
@@ -64,13 +82,20 @@ func _physics_process(delta):
 	if Global.current_idle:
 		spirit_idle(delta)
 		anim.play("idle")
-		
+		anim.visible = true
+		line.visible = true
 	elif Global.current_run || Global.current_air:
 		spirit_move(delta)
 		anim.play("move")
+		anim.visible = true
+		line.visible = true
 	elif Global.current_glide:
 		anim.play("glide")
+		await anim.animation_finished
+		anim.visible = false
 		spirit_glide(delta)
+		line.visible = false
+		
 		
 	
 
@@ -102,7 +127,7 @@ func spirit_glide(delta):
 	var distance_to_player = global_position.distance_to(target_position) #same as top
 	var direction = (target_position - global_position).normalized() #normalizing the vector and making the spirit go to the target by substracting
 	if distance_to_player:
-		global_position += direction * speed * delta
+		global_position += direction * tel_speed * delta
 		
 	
 
