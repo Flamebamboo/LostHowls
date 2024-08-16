@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://g4up3wdwp1xg"
-path="res://.godot/imported/BossBatCaveV2.png-949527450c3ce2dbd83a245ce9b15b88.ctex"
+uid="uid://bfqpyyljhd6gr"
+path="res://.godot/imported/hitflash_1.png-5742f1b3a8d1b58bb5772353d07f5066.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://BossBatCaveV2.png"
-dest_files=["res://.godot/imported/BossBatCaveV2.png-949527450c3ce2dbd83a245ce9b15b88.ctex"]
+source_file="res://art/hitflash_1.png"
+dest_files=["res://.godot/imported/hitflash_1.png-5742f1b3a8d1b58bb5772353d07f5066.ctex"]
 
 [params]
 

@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://b63htybecwy5g"]
+[gd_scene load_steps=9 format=3 uid="uid://b63htybecwy5g"]
 
 [ext_resource type="Script" path="res://Script/bat_bullet.gd" id="1_uryag"]
-[ext_resource type="Texture2D" uid="uid://bl553dd6krael" path="res://art/Enemies/BatBullet.png" id="2_wruuo"]
+[ext_resource type="Texture2D" uid="uid://bcrdypc2aw3jf" path="res://art/Enemies/BatBullet.png" id="2_wruuo"]
 [ext_resource type="Script" path="res://Scenes/Hitbox Component.gd" id="3_e4wul"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1v13y"]
@@ -9,6 +9,22 @@ radius = 36.6667
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4k6oc"]
 radius = 36.6667
+
+[sub_resource type="Gradient" id="Gradient_c7q2k"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.305882, 0.12549, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_thslt"]
+gradient = SubResource("Gradient_c7q2k")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_063rf"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 20.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+radial_accel_max = 50.9
+scale_min = 0.0
+scale_max = 5.0
+color_ramp = SubResource("GradientTexture1D_thslt")
 
 [node name="character" type="CharacterBody2D"]
 position = Vector2(1, 0)
@@ -32,3 +48,7 @@ is_bullet = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_4k6oc")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_063rf")

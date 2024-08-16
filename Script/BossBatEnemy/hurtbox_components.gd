@@ -2,6 +2,7 @@ extends Area2D
 class_name Hurtbox
 @export var health_components: BaseHealth
 ##TO DO MAKE IMPACT SCENE AND INSTANCE IT HERE ALSO CREATE PUT SHAKE
+@export var gpu_particles_2d: GPUParticles2D
 
 @export var bullet_impact: PackedScene
 
@@ -12,13 +13,15 @@ func apply_damage(damage):
 	print(damage, "damage amount")
 	if health_components.health > 0: #if both of this conditions are met damage will be applied to health components
 		health_components.take_damage(damage) 
-		
+	
+	if gpu_particles_2d:	
+		gpu_particles_2d.restart()
+		gpu_particles_2d.emitting = true
 			
-			
-			#if bullet_impact:
-				#var impact_show = bullet_impact.instantiate()
-				#impact_show.global_position = body.global_position
-				#get_parent().add_child(impact_show)
+	#if bullet_impact:
+		#var impact_show = bullet_impact.instantiate()
+		#impact_show.global_position = owner.global_position
+		#get_parent().add_child(impact_show)
 			
 	##this is honestly not scalable
 	#The hurting shouldn't know what it is

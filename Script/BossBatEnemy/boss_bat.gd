@@ -7,7 +7,7 @@ class_name BossBat
 @export var animatedsprite : AnimatedSprite2D
 @onready var machine = %BossBatFSM
 
-
+signal BossBatDeath
 
 
 
@@ -40,6 +40,7 @@ func _on_health_components_died():
 	await get_tree().create_timer(1).timeout
 	hitflashing.blue_flash()
 	Global.BossBatAlive = false
+	emit_signal("BossBatDeath")
 	queue_free()
 
 	

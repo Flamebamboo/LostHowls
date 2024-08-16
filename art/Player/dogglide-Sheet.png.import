@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bfr0cx2jbakrc"
-path="res://.godot/imported/water_animation.png-634221a8eb2f53052d35ff3bb9971b78.ctex"
+uid="uid://bmtgwgtq35lwk"
+path="res://.godot/imported/dogglide-Sheet.png-f5bd1d807735fcda5a1bd9c723a15e4e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://water_animation.png"
-dest_files=["res://.godot/imported/water_animation.png-634221a8eb2f53052d35ff3bb9971b78.ctex"]
+source_file="res://art/Player/dogglide-Sheet.png"
+dest_files=["res://.godot/imported/dogglide-Sheet.png-f5bd1d807735fcda5a1bd9c723a15e4e.ctex"]
 
 [params]
 

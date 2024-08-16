@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bd24oc54elotu"]
+[gd_scene load_steps=36 format=3 uid="uid://bd24oc54elotu"]
 
 [ext_resource type="Material" uid="uid://bmgyfioow48f8" path="res://shader/unshadedlight.tres" id="1_xyjkw"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/boss_bat.gd" id="2_ympke"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://boijh8vbuie55" path="res://art/Enemies/Bossbat-Sheet.png" id="6_8r4q4"]
 [ext_resource type="Script" path="res://Scenes/EnemyHealth.gd" id="6_im028"]
 [ext_resource type="FontFile" uid="uid://bnf2p438dv3b5" path="res://Fonts/Pixellari.ttf" id="7_pkbwp"]
+[ext_resource type="PackedScene" uid="uid://k8iap101dkcp" path="res://Scenes/bullet_impact.tscn" id="7_q5vug"]
 [ext_resource type="AudioStream" uid="uid://kupcp0jcvv8" path="res://music/sfx/BossBatROAR.mp3" id="8_oufed"]
 [ext_resource type="Script" path="res://Scenes/ChargeState.gd" id="8_qkxlu"]
 [ext_resource type="AudioStream" uid="uid://c4lodblowvhwe" path="res://music/zombiesound-171653.mp3" id="9_o5t5g"]
@@ -145,6 +146,22 @@ radius = 72.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_ivd0l"]
 radius = 71.0
 
+[sub_resource type="Gradient" id="Gradient_dxp58"]
+offsets = PackedFloat32Array(0.00359066, 1)
+colors = PackedColorArray(0, 1, 0, 1, 0.313726, 0.639216, 0.0666667, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0iiwp"]
+gradient = SubResource("Gradient_dxp58")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dbuit"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 200.0
+initial_velocity_max = 600.0
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+scale_max = 6.0
+color_ramp = SubResource("GradientTexture1D_0iiwp")
+
 [node name="enemy" type="CharacterBody2D" node_paths=PackedStringArray("health_component", "hurtbox_component", "animatedsprite") groups=["Enemy"]]
 z_index = 250
 material = ExtResource("1_xyjkw")
@@ -171,7 +188,7 @@ animation = &"attack"
 
 [node name="Health Components" type="Node" parent="." node_paths=PackedStringArray("CharacterBody")]
 script = ExtResource("6_im028")
-health_max = 450
+health_max = 1
 CharacterBody = NodePath("..")
 
 [node name="Entity Detector" type="Area2D" parent="."]
@@ -194,16 +211,28 @@ is_entity = true
 shape = SubResource("CircleShape2D_ye3w1")
 debug_color = Color(7.78936e-08, 0.622474, 0.545783, 0.42)
 
-[node name="Hurtbox Components" type="Area2D" parent="." node_paths=PackedStringArray("health_components")]
+[node name="Hurtbox Components" type="Area2D" parent="." node_paths=PackedStringArray("health_components", "gpu_particles_2d")]
 unique_name_in_owner = true
 collision_layer = 128
 collision_mask = 16
 script = ExtResource("10_8h1lu")
 health_components = NodePath("../Health Components")
+gpu_particles_2d = NodePath("GPUParticles2D")
+bullet_impact = ExtResource("7_q5vug")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox Components"]
 shape = SubResource("CircleShape2D_ivd0l")
 debug_color = Color(1, 0, 0.27451, 0.419608)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Hurtbox Components"]
+position = Vector2(0, -15)
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_dbuit")
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
 
 [node name="StateController" type="Node" parent="." node_paths=PackedStringArray("machine")]
 script = ExtResource("4_25j3u")

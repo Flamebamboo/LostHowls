@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxlejjvf5lgiu"
-path="res://.godot/imported/level_2_bg.png-fd4b94adfbf67f4ec8a7f19848cdd012.ctex"
+uid="uid://b234lak5x3mra"
+path="res://.godot/imported/overlay_1.png-8f61d1a9d8b3a49df52f45e2fd7fc2bd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://level_2_bg.png"
-dest_files=["res://.godot/imported/level_2_bg.png-fd4b94adfbf67f4ec8a7f19848cdd012.ctex"]
+source_file="res://art/LevelDesign/overlay_1.png"
+dest_files=["res://.godot/imported/overlay_1.png-8f61d1a9d8b3a49df52f45e2fd7fc2bd.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://da4xvjvcy2fq5"
-path="res://.godot/imported/dogglide-Sheet.png-938a80c1b746374747b5844de40e0aa3.ctex"
+uid="uid://dw1225r4bi7ia"
+path="res://.godot/imported/spirit_dimple-Sheet.png-a4e773a3de178649122c32acc05447b0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/dogglide-Sheet.png"
-dest_files=["res://.godot/imported/dogglide-Sheet.png-938a80c1b746374747b5844de40e0aa3.ctex"]
+source_file="res://art/Player/spirit_dimple-Sheet.png"
+dest_files=["res://.godot/imported/spirit_dimple-Sheet.png-a4e773a3de178649122c32acc05447b0.ctex"]
 
 [params]
 

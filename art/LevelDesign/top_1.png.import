@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cnauhjtmrc18q"
-path="res://.godot/imported/dogquicktest.png-4d2c3860ec1c575e8c7b55fd6266ead4.ctex"
+uid="uid://bkidbr66lfqyc"
+path="res://.godot/imported/top_1.png-c09d1b677a04d36647fa04f4f89fc696.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://dogquicktest.png"
-dest_files=["res://.godot/imported/dogquicktest.png-4d2c3860ec1c575e8c7b55fd6266ead4.ctex"]
+source_file="res://art/LevelDesign/top_1.png"
+dest_files=["res://.godot/imported/top_1.png-c09d1b677a04d36647fa04f4f89fc696.ctex"]
 
 [params]
 

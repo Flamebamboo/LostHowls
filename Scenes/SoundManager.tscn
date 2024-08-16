@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bxoegi06c2upq"]
 
-[ext_resource type="Script" path="res://SoundManager.gd" id="1_xqc4i"]
-[ext_resource type="Script" path="res://Sound Queue.gd" id="2_j1s2b"]
+[ext_resource type="Script" path="res://Script/SoundManager.gd" id="1_xqc4i"]
+[ext_resource type="Script" path="res://Script/Sound Queue.gd" id="2_j1s2b"]
 [ext_resource type="AudioStream" uid="uid://tnohss5vshud" path="res://music/laseraim.wav" id="4_mbago"]
 [ext_resource type="AudioStream" uid="uid://d10pwinfu5o2e" path="res://music/Spirit_Shoot_SFX.wav" id="4_oqskh"]
 [ext_resource type="AudioStream" uid="uid://c2kutx72kxlpo" path="res://music/sfx/hit-sound-effect-12445.mp3" id="6_qchve"]

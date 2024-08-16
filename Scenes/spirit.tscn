@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Script/Player/spirit_green.gd" id="1_y24hh"]
 [ext_resource type="Material" uid="uid://bmgyfioow48f8" path="res://shader/unshadedlight.tres" id="2_uc4jv"]
-[ext_resource type="Texture2D" uid="uid://dhjg2rjsjwocp" path="res://art/spirit_dimple-Sheet.png" id="3_ojv0g"]
+[ext_resource type="Texture2D" uid="uid://dw1225r4bi7ia" path="res://art/Player/spirit_dimple-Sheet.png" id="3_ojv0g"]
 [ext_resource type="Texture2D" uid="uid://cas5bngx1ua0i" path="res://art/Interface Elements/Doglauncherwhite.png" id="7_cvbms"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8sp57"]

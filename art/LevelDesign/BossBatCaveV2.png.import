@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dhjg2rjsjwocp"
-path="res://.godot/imported/spirit_dimple-Sheet.png-6df811a56e16452ed723a1ed330978d3.ctex"
+uid="uid://g4up3wdwp1xg"
+path="res://.godot/imported/BossBatCaveV2.png-9d52736d6cbebe94d0ecbd9f5066970d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/spirit_dimple-Sheet.png"
-dest_files=["res://.godot/imported/spirit_dimple-Sheet.png-6df811a56e16452ed723a1ed330978d3.ctex"]
+source_file="res://art/LevelDesign/BossBatCaveV2.png"
+dest_files=["res://.godot/imported/BossBatCaveV2.png-9d52736d6cbebe94d0ecbd9f5066970d.ctex"]
 
 [params]
 

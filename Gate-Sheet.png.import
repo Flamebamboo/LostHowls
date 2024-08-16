@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crol81yrh8orl"
-path="res://.godot/imported/DogV3-Sheet.png-661696a3eac857c1770c5a8d0a0625fa.ctex"
+uid="uid://bxe76i26lvnyw"
+path="res://.godot/imported/Gate-Sheet.png-8c370e942379a49cf0206da9f57b75a6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/DogV3-Sheet.png"
-dest_files=["res://.godot/imported/DogV3-Sheet.png-661696a3eac857c1770c5a8d0a0625fa.ctex"]
+source_file="res://Gate-Sheet.png"
+dest_files=["res://.godot/imported/Gate-Sheet.png-8c370e942379a49cf0206da9f57b75a6.ctex"]
 
 [params]
 
