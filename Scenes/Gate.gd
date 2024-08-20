@@ -10,6 +10,7 @@ var gate_is_open: bool  = true #debugging purposes ;/ my brain isnt braining why
 func _ready():
 	collision_disabled(true)
 	$Gate/AnimatedSprite2D2.play("open")
+	$Gate/AnimatedSprite2D.play("open")
 	gate_is_open = true
 	
 func _process(delta):
@@ -18,6 +19,7 @@ func _on_body_entered(body):
 	if body is Player && !boss_defeated:
 		collision_disabled(false)
 		$Gate/AnimatedSprite2D2.play("close")
+		$Gate/AnimatedSprite2D.play("close")
 		gate_is_open = false
 
 func collision_disabled(disabled: bool):
@@ -30,10 +32,12 @@ func _on_body_exited(body):
 	if body is Player && !boss_defeated:
 		collision_disabled(true)
 		$Gate/AnimatedSprite2D2.play("open")
+		$Gate/AnimatedSprite2D.play("open")
 		gate_is_open = true
 
 func _on_boss_bat_boss_bat_death():
 	collision_disabled(true)
 	$Gate/AnimatedSprite2D2.play("open")
+	$Gate/AnimatedSprite2D.play("open")
 	gate_is_open = true
 	boss_defeated = true

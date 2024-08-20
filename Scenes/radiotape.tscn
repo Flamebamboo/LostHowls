@@ -8,23 +8,23 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_11wey"]
 radius = 31.0644
 
-[node name="Radiotape" type="Sprite2D"]
-texture = ExtResource("1_1swwa")
-
-[node name="Area2D" type="Area2D" parent="." node_paths=PackedStringArray("radio_tape")]
+[node name="RadioTape" type="Area2D" node_paths=PackedStringArray("radio_tape")]
 collision_mask = 2
 script = ExtResource("2_wjbjp")
 radio_tape = NodePath("AudioStreamPlayer2D")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Area2D"]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(-43, -54)
 stream = ExtResource("3_x8aq8")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_11wey")
 
-[node name="Label" type="Label" parent="."]
+[node name="Radiotape" type="Sprite2D" parent="."]
+texture = ExtResource("1_1swwa")
+
+[node name="Label" type="Label" parent="Radiotape"]
 texture_filter = 1
 offset_left = -43.0
 offset_top = -54.0
@@ -34,5 +34,5 @@ theme_override_fonts/font = ExtResource("3_2ae5x")
 text = "E to interact
 "
 
-[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
-[connection signal="finished" from="Area2D/AudioStreamPlayer2D" to="Area2D" method="_on_audio_stream_player_2d_finished"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="finished" from="AudioStreamPlayer2D" to="." method="_on_audio_stream_player_2d_finished"]
