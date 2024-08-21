@@ -14,7 +14,7 @@ extends Node
 #load_threaded_request(next_scene_path)
 #3 while the scene is loading in the background we can use the function..
 #load_threaded_get_status(scene_name,progress)
-#to check how much of the new string has been loaded to update the progress value in the loading screen
+#to check how much of the new scene has been loaded to update the progress value in the loading screen
 
 #refering to the the doccumentations ThreadLoadStatus returns a enum value the value 1 means its still loading
 #the value of 2 is failed and 3 is finised
@@ -32,11 +32,15 @@ var progress: Array = []
 
 var use_sub_threads: bool = true
 
-func load_scene(load_scene_path: String):
+func load_scene(load_scene_path: String, anim_type: String):
 	scene_path = load_scene_path
 	
 	var new_loading_screen = load_screen.instantiate()
 	get_tree().get_root().add_child(new_loading_screen)
+	
+	new_loading_screen.play_animation(anim_type) #tryna pass the animation type
+	
+	
 	
 	self.progress_changed.connect(new_loading_screen.update_progress_bar)
 	self.load_done.connect(new_loading_screen.start_outro_animation)

@@ -22,5 +22,5 @@ func _ready():
 
 func _on_next_level_body_entered(body):
 	if body is Player:
-		LoadManager.load_scene("res://Scenes/Second Level.tscn")
+		LoadManager.load_scene("res://Scenes/LevelTwo.tscn", "fade_from_black")
 		
