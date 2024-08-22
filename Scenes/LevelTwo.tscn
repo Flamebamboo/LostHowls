@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://cp5opm5cnrywh"]
+[gd_scene load_steps=15 format=3 uid="uid://cp5opm5cnrywh"]
 
 [ext_resource type="Script" path="res://Script/Camera System/CameraMode.gd" id="1_cd30k"]
+[ext_resource type="Script" path="res://Scenes/LevelTwo.gd" id="1_nomkj"]
 [ext_resource type="TileSet" uid="uid://byvgusw8ywfl2" path="res://Scenes/Tilemaps.tres" id="1_ogv62"]
 [ext_resource type="Material" uid="uid://ck8aj0g48jchc" path="res://shader/MossesMove.tres" id="2_b0de2"]
 [ext_resource type="TileSet" uid="uid://duvywr0e4alq6" path="res://Scenes/Mosses.tres" id="2_gp0sw"]
@@ -8,6 +9,7 @@
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="3_7q5yo"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="5_a75qp"]
 [ext_resource type="PackedScene" uid="uid://cb46co0m8f53s" path="res://DogPlayerFSM/DogStateMachine.tscn" id="7_efhlf"]
+[ext_resource type="PackedScene" uid="uid://r8fwkr0ot8rp" path="res://Scenes/spirit.tscn" id="9_8b6j2"]
 
 [sub_resource type="Resource" id="Resource_3a6gt"]
 script = ExtResource("3_7q5yo")
@@ -18,10 +20,17 @@ ease = 0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_00s85"]
 size = Vector2(2246, 958)
 
+[sub_resource type="Resource" id="Resource_v68pu"]
+script = ExtResource("3_7q5yo")
+duration = 1.0
+transition = 1
+ease = 0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0v8rk"]
 size = Vector2(669, 2545)
 
 [node name="World2" type="Node2D"]
+script = ExtResource("1_nomkj")
 
 [node name="CameraSystem" type="Node" parent="."]
 
@@ -68,13 +77,13 @@ CameraRef = NodePath("../Camera2D")
 area_pcam = NodePath("PhantomCamera2D")
 
 [node name="PhantomCamera2D" type="Node2D" parent="CameraSystem/cam_2" node_paths=PackedStringArray("follow_target")]
-position = Vector2(2123, 39)
+position = Vector2(2123, 189)
 script = ExtResource("2_q0863")
 follow_mode = 2
 follow_target = NodePath("../../../CharacterBody2D")
 zoom = Vector2(0.8, 0.8)
-tween_resource = SubResource("Resource_3a6gt")
-follow_offset = Vector2(2.08165e-12, -50)
+tween_resource = SubResource("Resource_v68pu")
+follow_offset = Vector2(2.08165e-12, 100)
 draw_limits = true
 limit_target = NodePath("../Limit")
 
@@ -108,6 +117,9 @@ layer_0/tile_data = PackedInt32Array(196644, 786436, 0, 262180, 786436, 1, 32771
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("7_efhlf")]
 position = Vector2(121, 559)
+
+[node name="spirit" parent="." instance=ExtResource("9_8b6j2")]
+position = Vector2(256, 484)
 
 [connection signal="body_entered" from="CameraSystem/cam_1" to="CameraSystem/cam_1" method="_on_body_entered"]
 [connection signal="body_exited" from="CameraSystem/cam_1" to="CameraSystem/cam_1" method="_on_body_exited"]

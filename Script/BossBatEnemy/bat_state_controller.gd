@@ -5,7 +5,7 @@ extends Node
 
 var triggered: bool = false
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if !Global.dogAlive:
 		triggered = false
 

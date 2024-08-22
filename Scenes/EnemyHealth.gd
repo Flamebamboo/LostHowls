@@ -6,7 +6,7 @@ class_name EnemyHealth
 func _ready():
 	health = health_max
 
-func _process(delta):
+func _process(_delta):
 	if !Global.dogAlive:
 		health = health_max
 		

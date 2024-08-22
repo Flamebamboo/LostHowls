@@ -12,7 +12,7 @@ func _ready():
 
 func _on_area_entered(area: Area2D):
 	if area is Hurtbox: #(Hurtbox is class type area2d that is children to player or other enemy)
-		var hurtbox: Hurtbox = area
+		var _hurtbox: Hurtbox = area
 		if is_bullet && !is_shot:
 			area.apply_damage(damage)
 			is_shot = true

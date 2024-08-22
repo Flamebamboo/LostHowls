@@ -19,8 +19,7 @@ func s_activate():
 	
 	
 func s_physics_process(delta):
-	var direction = Input.get_axis("moveleft", "moveright")
-	
+
 	physics.apply_gravity()
 	
 	physics.vertical_air_resistance(delta)

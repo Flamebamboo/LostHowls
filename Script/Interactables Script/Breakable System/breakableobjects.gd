@@ -24,7 +24,7 @@ func _ready() -> void:
 	sprite.texture = object_strategy.beforedamage
 	add_to_group("breakable objects")
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	# This is run only when we're editing the scene
 	if Engine.is_editor_hint():
 		if needs_update:

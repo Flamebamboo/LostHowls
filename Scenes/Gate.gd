@@ -13,8 +13,6 @@ func _ready():
 	$Gate/AnimatedSprite2D.play("open")
 	gate_is_open = true
 	
-func _process(delta):
-	print(gate_is_open)
 func _on_body_entered(body):
 	if body is Player && !boss_defeated:
 		collision_disabled(false)

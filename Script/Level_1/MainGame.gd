@@ -1,7 +1,7 @@
 extends Node2D
 func _ready():
 	RenderingServer.set_default_clear_color(Color.BLACK)
-
+	ScreenGui.play_animation("findyourowner")
 
 
 	
@@ -19,6 +19,7 @@ func _ready():
 #func change_scene():
 	#get_tree().change_scene_to_packed(next_level)
 
+	
 
 func _on_next_level_body_entered(body):
 	if body is Player:

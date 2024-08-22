@@ -4,7 +4,7 @@ class_name Hurtbox
 ##TO DO MAKE IMPACT SCENE AND INSTANCE IT HERE ALSO CREATE PUT SHAKE
 @export var gpu_particles_2d: GPUParticles2D
 
-@export var bullet_impact: PackedScene
+
 
 	
 	

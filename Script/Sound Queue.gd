@@ -17,9 +17,9 @@ func _ready():
 		audioStreamPlayers.append(child) #we add into the audioStreamPlayers if the child is audio
 
 		for i in range(Count):  #looping through where counts is a variable to duplicate how much
-			var duplicate = child.duplicate()
-			add_child(duplicate)
-			audioStreamPlayers.append(duplicate)
+			var duplicating = child.duplicate()
+			add_child(duplicating)
+			audioStreamPlayers.append(duplicating)
 
 func play_sound():
 	if audioStreamPlayers[next].is_playing() == false:

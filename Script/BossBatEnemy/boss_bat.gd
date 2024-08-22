@@ -1,7 +1,6 @@
 extends CharacterBody2D
 class_name BossBat
 @export var camera: Camera2D
-@export var hitflashing: AnimationPlayer
 @export var health_component : EnemyHealth
 @export var hurtbox_component: Hurtbox
 @export var animatedsprite : AnimatedSprite2D
@@ -38,7 +37,6 @@ func _on_health_components_took_damage():
 func _on_health_components_died():
 	camera.apply_shake(200.0, 100.0)
 	await get_tree().create_timer(1).timeout
-	hitflashing.blue_flash()
 	Global.BossBatAlive = false
 	emit_signal("BossBatDeath")
 	queue_free()

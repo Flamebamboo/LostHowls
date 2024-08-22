@@ -60,6 +60,7 @@ func _process(_delta):
 		0,2: #? THREAD_LOAD_INVALID_RESOURCE, THREAD_LOAD_FAILED
 			set_process(false)
 			return
+			print("sigma fail")
 		1: #? THREAD_LOAD_IN_PROGRESS
 			emit_signal("progress_changed", progress[0])
 		3: #? THREAD_LOAD_LOADED

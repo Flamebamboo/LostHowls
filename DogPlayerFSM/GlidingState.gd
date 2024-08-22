@@ -9,7 +9,6 @@ func s_activate():
 	print("glide entered")
 	Global.current_glide = true
 func s_physics_process(delta):
-	var direction = Input.get_axis("moveleft", "moveright")
 	
 	if Input.is_action_just_released("glide"):
 		machine.transition_to(machine.states["AirState"])

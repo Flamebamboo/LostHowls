@@ -19,7 +19,7 @@ func transition_to(state: BaseState):
 	previous_active_state = active_state
 	active_state = state
 	active_state.s_activate()
-	state_changed.emit(active_state, previous_active_state)
+	state_changed.emit(active_state)
 	
 func _process(delta):
 	active_state.s_process(delta) #ensuring that child states that uses s_process runs every frame
