@@ -15,6 +15,6 @@ func respawn_player():
 	emit_signal("PlayerAlive")
 func _on_health_components_died():
 	Global.dogAlive = false
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.5).timeout
 	respawn_player()
 	

@@ -1,4 +1,4 @@
 extends Node2D
 
 func _ready():
-	ScreenGui.play_animation("findyourowner")
+	RenderingServer.set_default_clear_color(Color.BLACK)

@@ -12,6 +12,7 @@ var can_idle: bool  = true
 var can_jump: bool  = true
 var can_air: bool  = true
 var can_run: bool  = true
+var can_push: bool = true
 
 #player can obtain state
 

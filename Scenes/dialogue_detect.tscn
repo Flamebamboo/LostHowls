@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://art/DialogueFiles/dialogue_detecter.gd" id="1_swnyd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ylgi"]
-radius = 27.0185
+radius = 16.7631
 
 [node name="dialogue_1" type="Area2D"]
 collision_layer = 0

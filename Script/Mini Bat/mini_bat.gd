@@ -2,7 +2,6 @@ extends CharacterBody2D
 class_name MiniBat
 
 @export var camera: Camera2D
-@export var hitflashing: AnimationPlayer
 @export var health_component := BaseHealth
 @export var hurtbox_component:= Hurtbox
 @onready var machine := %MiniBatFSM
@@ -20,7 +19,7 @@ func _on_health_components_took_damage():
 	await get_tree().create_timer(0.1).timeout
 	animatedsprite.play("flying")
 	camera.apply_shake(20.0, 10.0)
-
+	
 
 func _on_health_components_died():
 	camera.apply_shake(20.0, 10.0)

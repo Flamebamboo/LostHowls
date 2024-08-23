@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://cb46co0m8f53s"]
+[gd_scene load_steps=48 format=3 uid="uid://cb46co0m8f53s"]
 
 [ext_resource type="Script" path="res://DogPlayerFSM/Doggy.gd" id="1_njf21"]
 [ext_resource type="Texture2D" uid="uid://bwotynnxhce0s" path="res://art/Player/dogattack-Sheet.png" id="2_dx8ja"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" path="res://Script/BossBatEnemy/hurtbox_components.gd" id="14_w4005"]
 [ext_resource type="Script" path="res://Script/respawn_manager.gd" id="15_1bl7q"]
 [ext_resource type="FontFile" uid="uid://bnf2p438dv3b5" path="res://Fonts/Pixellari.ttf" id="16_qt5yi"]
+[ext_resource type="Script" path="res://DogPlayerFSM/PushingState.gd" id="17_h6uys"]
 
 [sub_resource type="Theme" id="Theme_f4cmb"]
 
@@ -281,7 +282,6 @@ max_speed = 280.0
 [node name="Health Components" type="Node" parent="." node_paths=PackedStringArray("player", "CharacterBody")]
 script = ExtResource("9_hr7x4")
 player = NodePath("..")
-health_max = 200
 CharacterBody = NodePath("..")
 
 [node name="PlayerStateMachine" type="Node" parent="."]
@@ -305,6 +305,9 @@ script = ExtResource("14_vj8r3")
 
 [node name="JumpState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("6_xn3d4")
+
+[node name="PushingState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("17_h6uys")
 
 [node name="Hurtbox Components" type="Area2D" parent="." node_paths=PackedStringArray("health_components", "gpu_particles_2d")]
 unique_name_in_owner = true

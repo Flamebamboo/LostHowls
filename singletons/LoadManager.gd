@@ -24,7 +24,7 @@ extends Node
 signal progress_changed(progress)
 signal load_done
 
-var load_screen_path : String = "res://LevelTransition.tscn"
+var load_screen_path : String = "res://Scenes/LevelTransition.tscn"
 var load_screen = load(load_screen_path)
 var loaded_resource: PackedScene
 var scene_path: String

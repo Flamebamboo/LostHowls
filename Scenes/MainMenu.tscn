@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://markjj64l73a"]
 
-[ext_resource type="Script" path="res://MainMenu.gd" id="1_88yg1"]
+[ext_resource type="Script" path="res://Script/MainMenu.gd" id="1_88yg1"]
 [ext_resource type="FontFile" uid="uid://hufexn2nqr30" path="res://Fonts/KarenFat.ttf" id="2_a21yi"]
-[ext_resource type="Texture2D" uid="uid://c88ydtv6coj3a" path="res://MainMenu-Sheet.png" id="3_xr0n7"]
+[ext_resource type="Texture2D" uid="uid://c88ydtv6coj3a" path="res://art/LevelDesign/MainMenu-Sheet.png" id="3_xr0n7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5e7xa"]
 bg_color = Color(0.6, 0.6, 0.6, 0)

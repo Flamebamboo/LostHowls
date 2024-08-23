@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c88ydtv6coj3a"
-path="res://.godot/imported/MainMenu-Sheet.png-99796a31062ea3376cfc52019dc2fd4e.ctex"
+uid="uid://cemf18thtmb43"
+path="res://.godot/imported/redwireframe.png-88dd3c6e0ef5c815f05ff8d1f72e224b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://MainMenu-Sheet.png"
-dest_files=["res://.godot/imported/MainMenu-Sheet.png-99796a31062ea3376cfc52019dc2fd4e.ctex"]
+source_file="res://art/Obstacles/redwireframe.png"
+dest_files=["res://.godot/imported/redwireframe.png-88dd3c6e0ef5c815f05ff8d1f72e224b.ctex"]
 
 [params]
 

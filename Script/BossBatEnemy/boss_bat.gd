@@ -13,7 +13,7 @@ signal BossBatDeath
 
 func _ready():
 	animatedsprite.play("flying")
-	Global.BossBatAlive = false
+	Global.BossBatAlive = true
 	
 func _physics_process(_delta):
 	move_and_slide()

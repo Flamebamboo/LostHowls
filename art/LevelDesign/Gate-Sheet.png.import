@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bxe76i26lvnyw"
-path="res://.godot/imported/Gate-Sheet.png-8c370e942379a49cf0206da9f57b75a6.ctex"
+path="res://.godot/imported/Gate-Sheet.png-40cb8fffb0cff692f76916401ddb2417.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Gate-Sheet.png"
-dest_files=["res://.godot/imported/Gate-Sheet.png-8c370e942379a49cf0206da9f57b75a6.ctex"]
+source_file="res://art/LevelDesign/Gate-Sheet.png"
+dest_files=["res://.godot/imported/Gate-Sheet.png-40cb8fffb0cff692f76916401ddb2417.ctex"]
 
 [params]
 

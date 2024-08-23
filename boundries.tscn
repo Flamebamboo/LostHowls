@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://d345nf765bh7d"]
+
+[ext_resource type="Script" path="res://Scenes/boundriesTemporary.gd" id="1_uixm5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uqwb7"]
+size = Vector2(1888, 228)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ft3nx"]
+size = Vector2(974.5, 153)
+
+[node name="boundries" type="Area2D" node_paths=PackedStringArray("player")]
+position = Vector2(-2, 176)
+collision_mask = 2
+script = ExtResource("1_uixm5")
+player = NodePath("")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1690, 641)
+shape = SubResource("RectangleShape2D_uqwb7")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(3418.75, 288.5)
+shape = SubResource("RectangleShape2D_ft3nx")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
