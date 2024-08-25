@@ -468,10 +468,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nyisc"]
-size = Vector2(46, 162)
+size = Vector2(54, 162)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b6h4f"]
-size = Vector2(46, 202)
+size = Vector2(50, 202)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ji7l"]
 size = Vector2(20, 208.5)
@@ -1120,13 +1120,11 @@ frame = 10
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D/Gate"]
-visible = false
-position = Vector2(2544, -286)
+position = Vector2(2548, -286)
 shape = SubResource("RectangleShape2D_nyisc")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D/Gate"]
-visible = false
-position = Vector2(3499, -293)
+position = Vector2(3497, -293)
 shape = SubResource("RectangleShape2D_b6h4f")
 
 [node name="Next Level" type="Area2D" parent="."]

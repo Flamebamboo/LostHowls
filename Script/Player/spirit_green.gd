@@ -146,11 +146,8 @@ func spirit_glide(delta):
 					
 func shoot():
 	var spawned_bullet := bullet_scene.instantiate()
-	var mouse_direction := get_global_mouse_position() - shooting_marker.global_position
 	get_tree().root.call_deferred("add_child", spawned_bullet)
 	spawned_bullet.global_position = shooting_marker.global_position
-	spawned_bullet.rotation = mouse_direction.angle()
-	spawned_bullet.velocity = mouse_direction * spawned_bullet.speed
 	SoundManager.PlayShootSound()
 	
 ##still in development 
