@@ -4,6 +4,11 @@ extends CanvasLayer
 @onready var anim_player = $AnimationPlayer
 
 
+#show fps
+@onready var fps_label := $FPSlabel
+
+func _process(delta):
+	fps_label.text = str("FPS ", Engine.get_frames_per_second())
 
 
 func play_animation(animation_type: String):

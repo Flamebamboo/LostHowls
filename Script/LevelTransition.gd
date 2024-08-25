@@ -5,7 +5,7 @@ extends CanvasLayer
 #game_intro 
 
 #next thing to implement (if have time)
-#randomize label text displayed on load maybe some tips?
+#randomize label text displayed on load maybe some tips appear?
 #might need to readjust the delay for this becuz if the loaded scene is quick users cant read the tips 
 
 signal loading_screen_has_full_coverage
