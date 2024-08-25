@@ -1,13 +1,16 @@
-[gd_scene load_steps=48 format=3 uid="uid://cb46co0m8f53s"]
+[gd_scene load_steps=51 format=3 uid="uid://cb46co0m8f53s"]
 
 [ext_resource type="Script" path="res://DogPlayerFSM/Doggy.gd" id="1_njf21"]
 [ext_resource type="Texture2D" uid="uid://bwotynnxhce0s" path="res://art/Player/dogattack-Sheet.png" id="2_dx8ja"]
+[ext_resource type="Texture2D" uid="uid://dlhssgmjexua2" path="res://Doghealthbar.png" id="2_hitdm"]
 [ext_resource type="Texture2D" uid="uid://d0tvs2eft04eb" path="res://art/Player/dogidlev2-Sheet.png" id="2_lkn1a"]
 [ext_resource type="Script" path="res://DogPlayerFSM/AnimationController.gd" id="3_ai8m0"]
 [ext_resource type="Script" path="res://DogPlayerFSM/PlayerStateMachine.gd" id="3_bn38j"]
+[ext_resource type="Texture2D" uid="uid://botu82rr8ja4" path="res://Doghealthbarover2.png" id="3_by805"]
 [ext_resource type="Script" path="res://DogPlayerFSM/IdleState.gd" id="4_bagpv"]
 [ext_resource type="Texture2D" uid="uid://bmtgwgtq35lwk" path="res://art/Player/dogglide-Sheet.png" id="4_kee2m"]
 [ext_resource type="Texture2D" uid="uid://c2nqpycfu27b2" path="res://art/Player/dogjumpv2-Sheet.png" id="4_rgvto"]
+[ext_resource type="Texture2D" uid="uid://d0j8fah8kwycl" path="res://ProgressTextureBar.png" id="4_xa1wg"]
 [ext_resource type="Script" path="res://DogPlayerFSM/RunState.gd" id="5_2emg4"]
 [ext_resource type="Texture2D" uid="uid://b5po54oukvgdx" path="res://art/Player/dogrunv2-Sheet-Sheet.png" id="5_v2q1q"]
 [ext_resource type="Script" path="res://DogPlayerFSM/AirState.gd" id="6_byrm8"]
@@ -24,7 +27,7 @@
 [sub_resource type="Theme" id="Theme_f4cmb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q2f71"]
-size = Vector2(45, 29)
+size = Vector2(33, 25)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l3c7c"]
 atlas = ExtResource("2_dx8ja")
@@ -238,28 +241,29 @@ hurtbox_component = NodePath("Hurtbox Components")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="ProgressBar" type="ProgressBar" parent="UI"]
+[node name="ProgressBar" type="TextureProgressBar" parent="UI"]
 unique_name_in_owner = true
-offset_left = 1.0
-offset_top = 2.0
-offset_right = 126.0
-offset_bottom = 33.0
+offset_left = -36.0
+offset_right = 164.0
+offset_bottom = 100.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = SubResource("Theme_f4cmb")
 value = 100.0
+texture_under = ExtResource("2_hitdm")
+texture_over = ExtResource("3_by805")
+texture_progress = ExtResource("4_xa1wg")
+texture_progress_offset = Vector2(84, 36)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -15)
+position = Vector2(4.5, -12.5)
 shape = SubResource("RectangleShape2D_q2f71")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player")]
 unique_name_in_owner = true
 position = Vector2(4, -16)
 sprite_frames = SubResource("SpriteFrames_i2mux")
-animation = &"glide"
-frame = 1
-frame_progress = 1.0
+animation = &"idle"
 script = ExtResource("3_ai8m0")
 player = NodePath("..")
 
@@ -311,6 +315,7 @@ script = ExtResource("17_h6uys")
 
 [node name="Hurtbox Components" type="Area2D" parent="." node_paths=PackedStringArray("health_components", "gpu_particles_2d")]
 unique_name_in_owner = true
+visible = false
 collision_layer = 2
 collision_mask = 128
 script = ExtResource("14_w4005")

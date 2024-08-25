@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csbyalrcuan77"
-path="res://.godot/imported/tilesetv3.png-638c6202524a4a58623fdfcf40d158bf.ctex"
+uid="uid://b0bxyperdusfp"
+path="res://.godot/imported/caverntilemap.png-f905ae2ebb63c6a7b5d80532130efff6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/LevelDesign/tilesetv3.png"
-dest_files=["res://.godot/imported/tilesetv3.png-638c6202524a4a58623fdfcf40d158bf.ctex"]
+source_file="res://Scenes/caverntilemap.png"
+dest_files=["res://.godot/imported/caverntilemap.png-f905ae2ebb63c6a7b5d80532130efff6.ctex"]
 
 [params]
 

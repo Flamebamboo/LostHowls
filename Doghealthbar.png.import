@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ci4h58mniaitu"
-path="res://.godot/imported/Batcave.png-5f50ded35a078c6298ee4d25ec1a459d.ctex"
+uid="uid://dlhssgmjexua2"
+path="res://.godot/imported/Doghealthbar.png-530955136ab58eeb0c6b99b6addc73ae.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/LevelDesign/Batcave.png"
-dest_files=["res://.godot/imported/Batcave.png-5f50ded35a078c6298ee4d25ec1a459d.ctex"]
+source_file="res://Doghealthbar.png"
+dest_files=["res://.godot/imported/Doghealthbar.png-530955136ab58eeb0c6b99b6addc73ae.ctex"]
 
 [params]
 

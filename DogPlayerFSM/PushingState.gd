@@ -16,8 +16,10 @@ func s_physics_process(_delta):
 			return	
 	if Input.is_action_pressed("pushbox"):
 		push_box()
-	else:
 		
+	
+		
+	else:
 		machine.transition_to(machine.states["IdleState"])
 		
 		
@@ -30,7 +32,15 @@ func push_box():
 			if c.get_collider() is MovableRock: 
 				var push_force = (PUSH_FORCE * owner.velocity.length() / physics.acceleration) + MIN_FORCE
 				c.get_collider().apply_impulse(-c.get_normal() * push_force)
-				
+#
+#func pull_box():
+	#for i in owner.get_slide_collision_count(): 
+		#var c = owner.get_slide_collision(i) 
+		#if c.get_collider() is MovableRock:
+			#var follow_player = (owner.global_position - c.get_collider().global_position).normalized()
+			#c.get_collider().apply_impulse(follow_player * PUSH_FORCE)
+			#
+				#
 
 
 

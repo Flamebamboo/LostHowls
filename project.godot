@@ -23,7 +23,6 @@ SoundManager="*res://Scenes/SoundManager.tscn"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
 LoadManager="*res://singletons/LoadManager.gd"
 ScreenGui="*res://Scenes/GUI.tscn"
-Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 [dialogic]
 
@@ -48,7 +47,7 @@ mouse_cursor/custom_image="res://art/Interface Elements/crosshair.png"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogic/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
+enabled=PackedStringArray("res://addons/phantom_camera/plugin.cfg")
 
 [input]
 

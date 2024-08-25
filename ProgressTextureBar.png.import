@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csbyalrcuan77"
-path="res://.godot/imported/tilesetv3.png-638c6202524a4a58623fdfcf40d158bf.ctex"
+uid="uid://d0j8fah8kwycl"
+path="res://.godot/imported/ProgressTextureBar.png-245a053cdb7b948401d952f7eddf380c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/LevelDesign/tilesetv3.png"
-dest_files=["res://.godot/imported/tilesetv3.png-638c6202524a4a58623fdfcf40d158bf.ctex"]
+source_file="res://ProgressTextureBar.png"
+dest_files=["res://.godot/imported/ProgressTextureBar.png-245a053cdb7b948401d952f7eddf380c.ctex"]
 
 [params]
 

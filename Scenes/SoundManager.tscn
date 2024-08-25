@@ -12,6 +12,7 @@ script = ExtResource("1_xqc4i")
 
 [node name="Main" type="AudioStreamPlayer" parent="."]
 volume_db = -8.04
+autoplay = true
 
 [node name="LaserSoundQueue" type="Node" parent="."]
 script = ExtResource("2_j1s2b")

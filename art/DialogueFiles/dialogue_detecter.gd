@@ -6,6 +6,7 @@ extends Area2D
 	
 func _on_body_entered(body):
 	if body is Player:
+		await get_tree().create_timer(1).timeout
 		Dialogic.timeline_ended.connect(ended)
 		Dialogic.start(timeline)
 		Global.dogFreeze = true

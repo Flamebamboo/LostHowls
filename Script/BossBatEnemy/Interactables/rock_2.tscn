@@ -16,17 +16,18 @@ collision_mask = 2
 script = ExtResource("1_j4g7e")
 
 [node name="Rock2" type="Sprite2D" parent="."]
-self_modulate = Color(0.898039, 0.678431, 0.670588, 1)
 material = ExtResource("2_wubx4")
 position = Vector2(1, 2)
 texture = ExtResource("1_38xl1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_7lwaw")
 debug_color = Color(0.87362, 0.000448304, 0.840483, 0.42)
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 position = Vector2(-1, -1)
 collision_mask = 2
 

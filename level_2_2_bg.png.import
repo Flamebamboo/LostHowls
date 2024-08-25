@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csbyalrcuan77"
-path="res://.godot/imported/tilesetv3.png-638c6202524a4a58623fdfcf40d158bf.ctex"
+uid="uid://fwwoo8tpn15l"
+path="res://.godot/imported/level_2_2_bg.png-d2443299cbf781939fa9c1feb84935db.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/LevelDesign/tilesetv3.png"
-dest_files=["res://.godot/imported/tilesetv3.png-638c6202524a4a58623fdfcf40d158bf.ctex"]
+source_file="res://level_2_2_bg.png"
+dest_files=["res://.godot/imported/level_2_2_bg.png-d2443299cbf781939fa9c1feb84935db.ctex"]
 
 [params]
 

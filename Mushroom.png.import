@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://csbyalrcuan77"
-path="res://.godot/imported/tilesetv3.png-638c6202524a4a58623fdfcf40d158bf.ctex"
+uid="uid://b826w1ht02r05"
+path="res://.godot/imported/Mushroom.png-145cdd0caf659d67dbf669e55f2c3463.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/LevelDesign/tilesetv3.png"
-dest_files=["res://.godot/imported/tilesetv3.png-638c6202524a4a58623fdfcf40d158bf.ctex"]
+source_file="res://Mushroom.png"
+dest_files=["res://.godot/imported/Mushroom.png-145cdd0caf659d67dbf669e55f2c3463.ctex"]
 
 [params]
 
