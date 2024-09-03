@@ -67,9 +67,9 @@ func _process(_delta):
 			loaded_resource = ResourceLoader.load_threaded_get(scene_path)
 			emit_signal("progress_changed", 1.0)
 			emit_signal("load_done")
-			get_tree().change_scene_to_packed(loaded_resource)
-	
-	
+			if get_tree():
+				get_tree().change_scene_to_packed(loaded_resource)
+			
 	
 	
 	

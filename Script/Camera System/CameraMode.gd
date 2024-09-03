@@ -25,7 +25,3 @@ func _on_body_exited(body):
 	if body.is_in_group("player"):
 		# Reset the priority of the Phantom Camera
 		area_pcam.set_priority(0)
-
-
-
-

@@ -148,7 +148,7 @@ func shoot():
 	var spawned_bullet := bullet_scene.instantiate()
 	get_tree().root.call_deferred("add_child", spawned_bullet)
 	spawned_bullet.global_position = shooting_marker.global_position
-	SoundManager.PlayShootSound()
+	SoundManager.shoot_sound.play()
 	
 ##still in development 
 #func launch():

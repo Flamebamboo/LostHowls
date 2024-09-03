@@ -40,4 +40,3 @@ func _get_configuration_warnings():
 	#The modulo operator % calculates the remainder of the division of (next + 1) by the size of the audioStreamPlayers array.
 	#This ensures that if next reaches the end of the array, it wraps around to 0. For example, if there are 3 AudioStreamPlayer nodes, and next is 2 (the last index), next + 1 would be 3, and 3 % 3 is 0, so next wraps around to 0.
 	#next = (next + 1) % audioStreamPlayers.size(): Updates the next variable to point to the next AudioStreamPlayer in the array, ensuring it wraps around if it reaches the end.
-

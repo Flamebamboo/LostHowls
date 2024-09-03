@@ -23,5 +23,3 @@ func _physics_process(delta):
 	travelled_distance += move.length()
 	if travelled_distance >= max_distance:
 		queue_free()
-
-

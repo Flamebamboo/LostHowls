@@ -11,7 +11,7 @@ func s_activate():
 	anim.play("laser")
 	owner.velocity = Vector2.ZERO
 	owner.move_and_slide()
-	SoundManager.PlayLaserSound()
+	SoundManager.laser_sound.play()
 func s_deactivate():
 	anim.play("off")
 

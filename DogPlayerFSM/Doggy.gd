@@ -57,6 +57,3 @@ func instantdeath():
 
 func _on_air_state_floor():
 	display_jump_effects()
-
-
-

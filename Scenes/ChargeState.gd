@@ -12,7 +12,7 @@ func s_activate():
 	dog = Global.dogCharacter
 	animation.play("attack")
 	animator.play("attack")
-	SoundManager.PlayChargeSound()
+	SoundManager.charge_sound.play()
 	
 	
 	

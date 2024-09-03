@@ -39,7 +39,3 @@ func apply_damage(damage):
 	#instance bullet impact scene here
 
 	
-
-
-
-

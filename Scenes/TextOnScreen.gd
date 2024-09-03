@@ -16,4 +16,3 @@ func play_animation(animation_type: String):
 	anim_player.play(animation_type)
 	await anim_player.animation_finished
 	#self.visible = false
-

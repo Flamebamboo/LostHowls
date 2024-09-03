@@ -42,7 +42,3 @@ func _on_health_components_died():
 	queue_free()
 
 	
-
-
-
-

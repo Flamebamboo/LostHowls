@@ -32,6 +32,3 @@ func _process(delta):
 
 func random_offset() -> Vector2:
 	return Vector2(rng.randf_range(-shake_strength, shake_strength), rng.randf_range(-shake_strength, shake_strength))
-
-
-

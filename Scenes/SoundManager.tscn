@@ -7,8 +7,12 @@
 [ext_resource type="AudioStream" uid="uid://c2kutx72kxlpo" path="res://music/sfx/hit-sound-effect-12445.mp3" id="6_qchve"]
 [ext_resource type="AudioStream" uid="uid://dle21yv173oum" path="res://music/BatBossCharge.wav" id="7_osxef"]
 
-[node name="Sound Manager" type="Node"]
+[node name="Sound Manager" type="Node" node_paths=PackedStringArray("shoot_sound", "laser_sound", "impact_sound", "charge_sound")]
 script = ExtResource("1_xqc4i")
+shoot_sound = NodePath("ShootSound")
+laser_sound = NodePath("LaserSound")
+impact_sound = NodePath("ImpactSound")
+charge_sound = NodePath("ChargeSound")
 
 [node name="Main" type="AudioStreamPlayer" parent="."]
 volume_db = -8.04
@@ -40,4 +44,17 @@ volume_db = -3.259
 script = ExtResource("2_j1s2b")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ChargeSoundQueue"]
+stream = ExtResource("7_osxef")
+
+[node name="LaserSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_mbago")
+pitch_scale = 2.35
+
+[node name="ShootSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_oqskh")
+
+[node name="ImpactSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_oqskh")
+
+[node name="ChargeSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_osxef")

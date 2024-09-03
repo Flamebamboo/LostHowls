@@ -10,7 +10,7 @@ func _on_took_damage():
 	%ProgressBar.value = health
 	player.sprite_flash()
 	owner.camera.apply_shake(40.0, 10.0) #why throwing error here hmm
-	SoundManager.PlayImpactSound()
+	SoundManager.impact_sound.play()
 	ScreenGui.play_animation("redflash")
 func _on_respawn_manager_player_alive():
 	health = health_max
