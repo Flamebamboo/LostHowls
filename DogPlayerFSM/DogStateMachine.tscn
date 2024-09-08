@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://cb46co0m8f53s"]
+[gd_scene load_steps=53 format=3 uid="uid://cb46co0m8f53s"]
 
 [ext_resource type="Script" path="res://DogPlayerFSM/Doggy.gd" id="1_njf21"]
 [ext_resource type="Texture2D" uid="uid://bwotynnxhce0s" path="res://art/Player/dogattack-Sheet.png" id="2_dx8ja"]
@@ -23,6 +23,8 @@
 [ext_resource type="Script" path="res://Script/respawn_manager.gd" id="15_1bl7q"]
 [ext_resource type="FontFile" uid="uid://bnf2p438dv3b5" path="res://Fonts/Pixellari.ttf" id="16_qt5yi"]
 [ext_resource type="Script" path="res://DogPlayerFSM/PushingState.gd" id="17_h6uys"]
+[ext_resource type="Script" path="res://DogPlayerFSM/pulling_state.gd" id="20_dvwr5"]
+[ext_resource type="Script" path="res://DogPlayerFSM/dash_state.gd" id="21_qhtuv"]
 
 [sub_resource type="Theme" id="Theme_f4cmb"]
 
@@ -310,8 +312,14 @@ script = ExtResource("14_vj8r3")
 [node name="JumpState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("6_xn3d4")
 
+[node name="PullingState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("20_dvwr5")
+
 [node name="PushingState" type="Node" parent="PlayerStateMachine"]
 script = ExtResource("17_h6uys")
+
+[node name="DashState" type="Node" parent="PlayerStateMachine"]
+script = ExtResource("21_qhtuv")
 
 [node name="Hurtbox Components" type="Area2D" parent="." node_paths=PackedStringArray("health_components", "gpu_particles_2d")]
 unique_name_in_owner = true

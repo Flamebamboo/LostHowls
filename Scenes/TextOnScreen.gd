@@ -3,7 +3,6 @@ extends CanvasLayer
 #this class should and will contain all related gui like flash when player hurt enemy killed and stuff
 @onready var anim_player = $AnimationPlayer
 
-
 #show fps
 @onready var fps_label := $FPSlabel
 

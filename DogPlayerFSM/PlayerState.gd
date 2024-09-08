@@ -13,10 +13,9 @@ var can_jump: bool  = true
 var can_air: bool  = true
 var can_run: bool  = true
 var can_push: bool = true
+var can_pull: bool = true
 
 #player can obtain state
 
 var can_glide: bool = false
-
-
-
+var can_dash: bool = true

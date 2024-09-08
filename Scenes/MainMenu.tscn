@@ -1,11 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://markjj64l73a"]
+[gd_scene load_steps=9 format=3 uid="uid://markjj64l73a"]
 
 [ext_resource type="Script" path="res://Script/MainMenu.gd" id="1_88yg1"]
-[ext_resource type="FontFile" uid="uid://hufexn2nqr30" path="res://Fonts/KarenFat.ttf" id="2_a21yi"]
+[ext_resource type="Theme" uid="uid://ppyaxyc3afmp" path="res://StyleMain.tres" id="3_j6b0j"]
 [ext_resource type="Texture2D" uid="uid://c88ydtv6coj3a" path="res://art/LevelDesign/MainMenu-Sheet.png" id="3_xr0n7"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5e7xa"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t83lp"]
 atlas = ExtResource("3_xr0n7")
@@ -44,6 +41,7 @@ animations = [{
 }]
 
 [node name="Control" type="Control"]
+z_index = -11
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -53,8 +51,16 @@ grow_vertical = 2
 size_flags_horizontal = 4
 script = ExtResource("1_88yg1")
 
-[node name="Panel" type="Panel" parent="."]
-self_modulate = Color(0, 0, 0, 0.890196)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = -11
+position = Vector2(238, 135)
+sprite_frames = SubResource("SpriteFrames_v0frr")
+autoplay = "default"
+frame_progress = 0.285954
+
+[node name="Margin" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+z_index = -10
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -62,51 +68,53 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Button" type="Button" parent="Panel"]
+[node name="Button" type="Button" parent="Margin"]
+texture_filter = 1
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -220.0
+offset_left = 17.0
 offset_top = 8.0
-offset_right = -86.0
-offset_bottom = 34.0
-grow_horizontal = 2
+offset_right = 226.0
+offset_bottom = 32.0
 grow_vertical = 2
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_color = Color(0.768729, 0.768729, 0.768729, 1)
-theme_override_fonts/font = ExtResource("2_a21yi")
-theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = SubResource("StyleBoxFlat_5e7xa")
+size_flags_horizontal = 0
+theme = ExtResource("3_j6b0j")
 text = "Start Game"
+alignment = 0
 
-[node name="Button2" type="Button" parent="Panel"]
+[node name="Button2" type="Button" parent="Margin"]
+texture_filter = 1
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -221.0
-offset_top = 49.0
-offset_right = -59.0
-offset_bottom = 75.0
-grow_horizontal = 2
+offset_left = 17.0
+offset_top = 38.0
+offset_right = 187.0
+offset_bottom = 62.0
 grow_vertical = 2
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/font_color = Color(0.768729, 0.768729, 0.768729, 1)
-theme_override_fonts/font = ExtResource("2_a21yi")
-theme_override_font_sizes/font_size = 25
-theme_override_styles/normal = SubResource("StyleBoxFlat_5e7xa")
-text = "Game Options"
+size_flags_horizontal = 0
+theme = ExtResource("3_j6b0j")
+text = "Options"
+alignment = 0
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel"]
-z_index = -1
-position = Vector2(238, 135)
-sprite_frames = SubResource("SpriteFrames_v0frr")
-autoplay = "default"
-frame_progress = 0.285954
+[node name="Button3" type="Button" parent="Margin"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 17.0
+offset_top = 70.0
+offset_right = 151.0
+offset_bottom = 94.0
+grow_vertical = 2
+size_flags_horizontal = 0
+theme = ExtResource("3_j6b0j")
+text = "Quit
+"
+alignment = 0
 
-[connection signal="pressed" from="Panel/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Margin/Button" to="." method="_on_button_pressed"]

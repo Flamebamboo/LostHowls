@@ -32,6 +32,3 @@ func choose(array):
 		
 func s_deactivate():
 	owner.velocity = Vector2.ZERO
-
-
-

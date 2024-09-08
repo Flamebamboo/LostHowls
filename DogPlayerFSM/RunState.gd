@@ -4,7 +4,7 @@ extends PlayerState
 func s_activate():
 	super()
 	Global.current_run = true
-	
+	can_dash = true
 
 func s_process(_delta):
 	pass
@@ -26,6 +26,9 @@ func s_physics_process(_delta):
 
 	if Input.is_action_just_pressed("pushbox") && machine.active_state.can_push:
 		machine.transition_to(machine.states["PushingState"])
+	
+	if Input.is_action_just_pressed("pullbox") && machine.active_state.can_pull:
+		machine.transition_to(machine.states["PullingState"])
 		
 	if !Global.dogAlive:
 		machine.transition_to(machine.states["DeadState"])

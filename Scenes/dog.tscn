@@ -131,7 +131,7 @@ func dash_power(input_axis):
 	if doDash:
 		velocity.x = dashDirection * movement_data.speed * movement_data.SpeedMultiplicator
 		velocity.y = 0
-	elif input_axis:velocity.x = input_axis * movement_data.speed
+	elif input_axis: velocity.x = input_axis * movement_data.speed
 	else: velocity.x = move_toward(velocity.x,0,movement_data.speed)
 		
 func apply_gravity(delta):

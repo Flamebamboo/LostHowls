@@ -30,7 +30,7 @@ var input_axis = Input.get_axis("moveleft", "moveright")
 @export var acceleration: float
 @export var friction: float 
 @export var max_speed: float 
-
+@export var speed_multiplier: float
 @export var air_accel = 200
 	
 	

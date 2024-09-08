@@ -8,6 +8,8 @@ func s_activate(): #Called every time the state is entered.
 	can_jump = true
 	can_run = true
 	Global.current_idle = true
+	can_dash = true 
+	
 	
 	
 func s_physics_process(_delta):
@@ -25,6 +27,9 @@ func s_physics_process(_delta):
 		machine.transition_to(machine.states["JumpState"])
 	if !Global.dogAlive:
 		machine.transition_to(machine.states["DeadState"])	
+		
+	if Input.is_action_just_pressed("dash"):
+		machine.transition_to(machine.states["DashState"])
 func s_deactivate():
 	Global.current_idle = false	
 

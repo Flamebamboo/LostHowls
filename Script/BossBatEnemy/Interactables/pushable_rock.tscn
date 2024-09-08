@@ -5,11 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://b0ord3vdolbpn" path="res://art/Props/Rocks/pushables rocks.png" id="2_xg2hx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l2207"]
-size = Vector2(93, 61)
+size = Vector2(93, 64)
 
 [node name="rigidbody" type="RigidBody2D" groups=["boxes"]]
 top_level = true
-z_index = 560
 mass = 2.0
 physics_material_override = ExtResource("1_hgp5g")
 lock_rotation = true
@@ -19,11 +18,10 @@ script = ExtResource("1_38c2v")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visibility_layer = 2
-z_index = 410
 position = Vector2(0, -8)
 texture = ExtResource("2_xg2hx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 650
-position = Vector2(-3.5, -1.5)
+position = Vector2(-3.5, 0)
 shape = SubResource("RectangleShape2D_l2207")
