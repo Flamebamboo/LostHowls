@@ -13,7 +13,7 @@ func s_activate(): #Called every time the state is entered.
 	
 	
 func s_physics_process(_delta):
-
+	
 	physics.ground_decel(_delta)
 	
 	var direction = Input.get_axis("moveleft", "moveright")
@@ -22,7 +22,9 @@ func s_physics_process(_delta):
 		machine.transition_to(machine.states["RunState"])
 		
 
-
+	if !owner.is_on_floor():
+		machine.transition_to(machine.states["AirState"])
+		
 	if Input.is_action_just_pressed("moveup") && machine.active_state.can_jump:
 		machine.transition_to(machine.states["JumpState"])
 	if !Global.dogAlive:

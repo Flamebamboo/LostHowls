@@ -239,7 +239,6 @@ libraries = {
 }
 
 [node name="Control" type="Control" parent="."]
-visible = false
 z_index = 20
 layout_mode = 3
 anchors_preset = 15
@@ -264,7 +263,6 @@ size_flags_vertical = 4
 color = Color(0, 0, 0, 1)
 
 [node name="ProgressBar" type="ProgressBar" parent="Control"]
-visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -282,7 +280,6 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_1e2ma")
 show_percentage = false
 
 [node name="Label" type="Label" parent="Control"]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

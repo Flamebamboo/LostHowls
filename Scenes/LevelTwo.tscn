@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=4 uid="uid://cp5opm5cnrywh"]
+[gd_scene load_steps=55 format=4 uid="uid://cp5opm5cnrywh"]
 
 [ext_resource type="Script" path="res://Script/Camera System/CameraMode.gd" id="1_cd30k"]
 [ext_resource type="Script" path="res://Scenes/LevelTwo.gd" id="1_nomkj"]
@@ -17,7 +17,10 @@
 [ext_resource type="PackedScene" uid="uid://dgebxxsq0f2lk" path="res://Scenes/respawn_points.tscn" id="14_in06w"]
 [ext_resource type="PackedScene" uid="uid://0drrtr1rw0n1" path="res://Scenes/MiniBat.tscn" id="15_ufj75"]
 [ext_resource type="Texture2D" uid="uid://dd48qbijycf3p" path="res://art/LevelDesign/PurpleTiles.png" id="17_fqinh"]
+[ext_resource type="PackedScene" uid="uid://c8peaow087m8" path="res://activation_platform.tscn" id="19_utw5j"]
+[ext_resource type="PackedScene" uid="uid://cirgj655pd7w0" path="res://pressure_plates.tscn" id="20_qqoa8"]
 [ext_resource type="Texture2D" uid="uid://bw7jyw4jso6h" path="res://Script/windFX.png" id="21_7w73i"]
+[ext_resource type="PackedScene" uid="uid://cb3yfd0yuk4o6" path="res://rock_collision.tscn" id="21_nj0cc"]
 
 [sub_resource type="Environment" id="Environment_44g4k"]
 background_mode = 3
@@ -694,10 +697,6 @@ explosiveness = 0.07
 
 [node name="Pushable Rocks" type="Node" parent="."]
 
-[node name="rigidbody" parent="Pushable Rocks" instance=ExtResource("11_rsbss")]
-position = Vector2(715, 442)
-angular_velocity = 0.0174533
-
 [node name="firecamp" parent="." instance=ExtResource("14_in06w")]
 unique_name_in_owner = false
 visible = false
@@ -791,6 +790,20 @@ trail_lifetime = 0.5
 trail_sections = 96
 trail_section_subdivisions = 96
 
+[node name="ActivationPlatform" parent="." instance=ExtResource("19_utw5j")]
+position = Vector2(773, 362)
+
+[node name="PressurePlates" parent="." instance=ExtResource("20_qqoa8")]
+position = Vector2(1081, 452)
+
+[node name="rigidbody" parent="." instance=ExtResource("11_rsbss")]
+position = Vector2(399, 545)
+collision_layer = 1024
+collision_mask = 129
+
+[node name="RockCollision" parent="." instance=ExtResource("21_nj0cc")]
+position = Vector2(103, 560)
+
 [connection signal="body_entered" from="CameraSystem/cam_1" to="CameraSystem/cam_1" method="_on_body_entered"]
 [connection signal="body_exited" from="CameraSystem/cam_1" to="CameraSystem/cam_1" method="_on_body_exited"]
 [connection signal="body_entered" from="CameraSystem/cam_3" to="CameraSystem/cam_3" method="_on_body_entered"]
@@ -798,3 +811,5 @@ trail_section_subdivisions = 96
 [connection signal="body_entered" from="CameraSystem/cam_4" to="CameraSystem/cam_4" method="_on_body_entered"]
 [connection signal="body_exited" from="CameraSystem/cam_4" to="CameraSystem/cam_4" method="_on_body_exited"]
 [connection signal="body_entered" from="boundries" to="boundries" method="_on_body_entered"]
+[connection signal="body_entered" from="PressurePlates" to="ActivationPlatform" method="_on_pressure_plates_body_entered"]
+[connection signal="body_exited" from="PressurePlates" to="ActivationPlatform" method="_on_pressure_plates_body_exited"]
