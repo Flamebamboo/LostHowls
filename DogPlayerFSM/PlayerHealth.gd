@@ -17,3 +17,4 @@ func _on_respawn_manager_player_alive():
 	%ProgressBar.value = health_max
 	await get_tree().create_timer(2).timeout
 	Global.dogAlive = true
+	Global

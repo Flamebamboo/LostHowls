@@ -1,7 +1,7 @@
 extends AnimatableBody2D
 
 var current_pos: Vector2
-var amplitude: float = 100.0
+@export var amplitude: float = 100.0
 var move_speed: float = 2.0
 
 var last_position: Vector2

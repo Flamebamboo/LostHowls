@@ -1,39 +1,30 @@
 extends PlayerState
 
-const PUSH_FORCE: float = 50.0
-const  MIN_FORCE : float = 30.0
-#const max_power: float = 100.0
 
+@onready var raycast_l: RayCast2D = $"../../RaycastL"
+
+@onready var raycast_r: RayCast2D = $"../../RaycastR"
+
+var is_colliding: bool 
 func s_activate():
 	super()
-	can_run = true
-	can_jump = true
+	#can_run = true
+	#can_jump = true
 	can_idle = true
-
+	
 func s_physics_process(_delta):
 	if !owner.is_on_floor():
 			machine.transition_to(machine.states["AirState"])
 			return	
-	if Input.is_action_pressed("pushbox"):
-		push_box()	
+			
+			
+	if Input.is_action_pressed("pushbox") && raycast_r.is_colliding() or raycast_l.is_colliding():
+		push_accel(_delta)
 		
 	else:
 		machine.transition_to(machine.states["IdleState"])
-		
-		
-		
 	
-
-func push_box():
-	for i in owner.get_slide_collision_count():
-			var c = owner.get_slide_collision(i)
-			if c.get_collider() is MovableRock: 
-				var push_force = (PUSH_FORCE * owner.velocity.length() / physics.acceleration) + MIN_FORCE
-				c.get_collider().apply_impulse(-c.get_normal() * push_force)
-#
-
-				#
-
-
-
 	
+func push_accel(delta: float = get_physics_process_delta_time()):
+	var input_axis = Input.get_axis("moveleft", "moveright")
+	physics.velocity.x = lerp(physics.velocity.x, input_axis * physics.push_speed, physics.push_acceleration * delta)

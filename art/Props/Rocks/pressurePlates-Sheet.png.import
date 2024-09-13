@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xunnyvelc00c"
-path="res://.godot/imported/pressurePlates-Sheet.png-abfb7f0586034fcbb4bbd0bbe19cdabe.ctex"
+uid="uid://c03ajeihrgdua"
+path="res://.godot/imported/pressurePlates-Sheet.png-10c1197a7a01f10cd70fb7acb51110ce.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/pressurePlates-Sheet.png"
-dest_files=["res://.godot/imported/pressurePlates-Sheet.png-abfb7f0586034fcbb4bbd0bbe19cdabe.ctex"]
+source_file="res://art/Props/Rocks/pressurePlates-Sheet.png"
+dest_files=["res://.godot/imported/pressurePlates-Sheet.png-10c1197a7a01f10cd70fb7acb51110ce.ctex"]
 
 [params]
 

@@ -30,8 +30,16 @@ func s_physics_process(_delta):
 	if !Global.dogAlive:
 		machine.transition_to(machine.states["DeadState"])	
 		
-	if Input.is_action_just_pressed("dash"):
-		machine.transition_to(machine.states["DashState"])
+	if Input.is_action_just_pressed("pushbox") && machine.active_state.can_push:
+		machine.transition_to(machine.states["PushingState"])
+		
+	if Input.is_action_just_pressed("pullbox") && machine.active_state.can_pull:
+		machine.transition_to(machine.states["PullingState"])
+	
+
+		
+	#if Input.is_action_just_pressed("dash"):
+		#machine.transition_to(machine.states["DashState"])
 func s_deactivate():
 	Global.current_idle = false	
 

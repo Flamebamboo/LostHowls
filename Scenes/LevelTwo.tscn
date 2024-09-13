@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=4 uid="uid://cp5opm5cnrywh"]
+[gd_scene load_steps=56 format=4 uid="uid://cp5opm5cnrywh"]
 
 [ext_resource type="Script" path="res://Script/Camera System/CameraMode.gd" id="1_cd30k"]
 [ext_resource type="Script" path="res://Scenes/LevelTwo.gd" id="1_nomkj"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://0drrtr1rw0n1" path="res://Scenes/MiniBat.tscn" id="15_ufj75"]
 [ext_resource type="Texture2D" uid="uid://dd48qbijycf3p" path="res://art/LevelDesign/PurpleTiles.png" id="17_fqinh"]
 [ext_resource type="PackedScene" uid="uid://c8peaow087m8" path="res://activation_platform.tscn" id="19_utw5j"]
+[ext_resource type="PackedScene" uid="uid://bp0pim2t0a55p" path="res://movable_object.tscn" id="20_4k72f"]
 [ext_resource type="PackedScene" uid="uid://cirgj655pd7w0" path="res://pressure_plates.tscn" id="20_qqoa8"]
 [ext_resource type="Texture2D" uid="uid://bw7jyw4jso6h" path="res://Script/windFX.png" id="21_7w73i"]
 [ext_resource type="PackedScene" uid="uid://cb3yfd0yuk4o6" path="res://rock_collision.tscn" id="21_nj0cc"]
@@ -791,10 +792,13 @@ trail_sections = 96
 trail_section_subdivisions = 96
 
 [node name="ActivationPlatform" parent="." instance=ExtResource("19_utw5j")]
-position = Vector2(773, 362)
+position = Vector2(774, 279)
+amplitude = 80.0
 
 [node name="PressurePlates" parent="." instance=ExtResource("20_qqoa8")]
-position = Vector2(1081, 452)
+position = Vector2(1071, 451)
+
+[node name="Box" parent="." instance=ExtResource("20_4k72f")]
 
 [node name="rigidbody" parent="." instance=ExtResource("11_rsbss")]
 position = Vector2(399, 545)

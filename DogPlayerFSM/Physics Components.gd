@@ -32,6 +32,16 @@ var input_axis = Input.get_axis("moveleft", "moveright")
 @export var max_speed: float 
 @export var speed_multiplier: float
 @export var air_accel = 200
+
+
+## pushing/pull
+const push_speed: float = 80.0
+const pull_speed: float = 60.0
+
+const push_acceleration: float = 5.5
+const pull_acceleration: float = 5.0
+
+
 	
 	
 func _physics_process(_delta):	
@@ -63,6 +73,8 @@ func apply_gravity(delta: float = get_physics_process_delta_time()):
 func ground_accel(delta: float = get_physics_process_delta_time()):
 	var input_axis = Input.get_axis("moveleft", "moveright")
 	velocity.x = lerp(velocity.x, input_axis * max_speed,(acceleration/ 100) * delta)
+	
+
 	
 	#lerp(a, b, t) = a + (b - a) * t
 	#lerp will return a value inbetween the first parameter and the second parameter.

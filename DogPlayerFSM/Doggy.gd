@@ -9,19 +9,22 @@ class_name Player
 @export var health_component : PlayerHealth
 @export var hurtbox_component: Hurtbox
 
-@export var camera: Camera2D
 
+@export var camera: Camera2D
+var input_axis = 0
 
 func _ready():
 	Global.dogCharacter = self
 	Global.dogAlive = true
 func _physics_process(_delta):
-	var direction = Input.get_axis("moveleft", "moveright")
+	input_axis = Input.get_axis("moveleft", "moveright")
 	if Global.dogAlive:
-		if direction == 1:
+		if input_axis == 1:
 			anim.flip_h = false
-		elif direction == -1:
+			
+		elif input_axis == -1:
 			anim.flip_h = true
+			
 	
 	
 	var state_name = machine.active_state.get_name()

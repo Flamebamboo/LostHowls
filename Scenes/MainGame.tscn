@@ -237,9 +237,6 @@ ease = 2
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ts6d3"]
 size = Vector2(1863, 559.5)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uq6y3"]
-size = Vector2(62, 53)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tmsgx"]
 size = Vector2(1798.22, 433)
 
@@ -250,9 +247,9 @@ transition = 5
 ease = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l0ew3"]
-size = Vector2(1220.97, 628)
+size = Vector2(1176.2, 628)
 
-[sub_resource type="Resource" id="Resource_k77m6"]
+[sub_resource type="Resource" id="Resource_hf7e6"]
 script = ExtResource("29_b4euh")
 duration = 2.0
 transition = 0
@@ -260,6 +257,12 @@ ease = 0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u7sl4"]
 size = Vector2(1243, 659)
+
+[sub_resource type="Resource" id="Resource_k77m6"]
+script = ExtResource("29_b4euh")
+duration = 2.0
+transition = 0
+ease = 0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uqwb7"]
 size = Vector2(1888, 228)
@@ -833,7 +836,7 @@ area_pcam = NodePath("PhantomCamera2D")
 
 [node name="PhantomCamera2D" type="Node2D" parent="CameraSystem/cam_1" node_paths=PackedStringArray("follow_target", "follow_targets")]
 visible = false
-position = Vector2(906, -338.857)
+position = Vector2(842, -338.857)
 script = ExtResource("28_dmuih")
 follow_mode = 3
 follow_target = NodePath("../../../Enitys/Dog")
@@ -846,20 +849,6 @@ limit_target = NodePath("../Limit")
 [node name="Limit" type="CollisionShape2D" parent="CameraSystem/cam_1"]
 position = Vector2(356.5, -425.75)
 shape = SubResource("RectangleShape2D_ts6d3")
-
-[node name="cam_zoom" type="Area2D" parent="CameraSystem" node_paths=PackedStringArray("CameraRef")]
-visible = false
-position = Vector2(3150, 836)
-collision_layer = 0
-collision_mask = 2
-priority = 50
-script = ExtResource("29_ku8ay")
-CameraRef = NodePath("../Camera2D")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraSystem/cam_zoom"]
-z_index = 20
-position = Vector2(-342, -238.5)
-shape = SubResource("RectangleShape2D_uq6y3")
 
 [node name="cam_2" type="Area2D" parent="CameraSystem" node_paths=PackedStringArray("CameraRef", "area_pcam")]
 visible = false
@@ -885,7 +874,6 @@ follow_offset = Vector2(100, 2.08165e-12)
 limit_target = NodePath("../Limit")
 
 [node name="cam_3 proceed" type="Area2D" parent="CameraSystem" node_paths=PackedStringArray("CameraRef", "area_pcam")]
-visible = false
 position = Vector2(-332, 122)
 collision_layer = 0
 collision_mask = 2
@@ -894,18 +882,19 @@ CameraRef = NodePath("../Camera2D")
 area_pcam = NodePath("PhantomCamera2D")
 
 [node name="Limit" type="CollisionShape2D" parent="CameraSystem/cam_3 proceed"]
-position = Vector2(2706.06, 324)
+position = Vector2(2684.06, 324)
 scale = Vector2(0.982717, 1)
 shape = SubResource("RectangleShape2D_l0ew3")
 
 [node name="PhantomCamera2D" type="Node2D" parent="CameraSystem/cam_3 proceed" node_paths=PackedStringArray("follow_target")]
 visible = false
-position = Vector2(2972, 202.857)
+position = Vector2(2844, 269)
 script = ExtResource("28_dmuih")
+priority = 50
 follow_mode = 2
 follow_target = NodePath("../../../Enitys/Dog")
 zoom = Vector2(0.7, 0.7)
-tween_resource = SubResource("Resource_k77m6")
+tween_resource = SubResource("Resource_hf7e6")
 follow_offset = Vector2(0, -100)
 limit_target = NodePath("../Limit")
 
@@ -949,7 +938,7 @@ script = ExtResource("31_rkuxi")
 [node name="interactions" type="Node" parent="."]
 
 [node name="Notes" parent="interactions" instance=ExtResource("33_unu8y")]
-position = Vector2(2808, 602)
+position = Vector2(2838, 598)
 
 [node name="Radiotape" parent="interactions" instance=ExtResource("34_hrose")]
 position = Vector2(89, 706)
@@ -989,7 +978,7 @@ needs_update = false
 
 [node name="Dog" parent="Enitys" node_paths=PackedStringArray("camera") instance=ExtResource("50_w0dsa")]
 z_index = 1
-position = Vector2(2640, 408)
+position = Vector2(2512, 491)
 camera = NodePath("../../CameraSystem/Camera2D")
 
 [node name="spirit" parent="Enitys" instance=ExtResource("63_g7hrd")]
@@ -1090,8 +1079,6 @@ position = Vector2(1432, -5)
 
 [connection signal="body_entered" from="CameraSystem/cam_1" to="CameraSystem/cam_1" method="_on_body_entered"]
 [connection signal="body_exited" from="CameraSystem/cam_1" to="CameraSystem/cam_1" method="_on_body_exited"]
-[connection signal="body_entered" from="CameraSystem/cam_zoom" to="CameraSystem/cam_zoom" method="_on_body_entered"]
-[connection signal="body_exited" from="CameraSystem/cam_zoom" to="CameraSystem/cam_zoom" method="_on_body_exited"]
 [connection signal="body_entered" from="CameraSystem/cam_2" to="CameraSystem/cam_2" method="_on_body_entered"]
 [connection signal="body_exited" from="CameraSystem/cam_2" to="CameraSystem/cam_2" method="_on_body_exited"]
 [connection signal="body_entered" from="CameraSystem/cam_3 proceed" to="CameraSystem/cam_3 proceed" method="_on_body_entered"]
