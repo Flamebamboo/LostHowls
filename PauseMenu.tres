@@ -1,0 +1,25 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://cbkm5krrx8r4o"]
+
+[ext_resource type="FontFile" uid="uid://hufexn2nqr30" path="res://Fonts/KarenFat.ttf" id="1_7lkls"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_k6k8l"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a7rkf"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w6w4r"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qud10"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[resource]
+default_font = ExtResource("1_7lkls")
+/font_sizes/size = 16
+/fonts/font_type = ExtResource("1_7lkls")
+Button/colors/font_hover_color = Color(0.0901961, 0.858824, 0.831373, 1)
+Button/styles/focus = SubResource("StyleBoxFlat_k6k8l")
+Button/styles/hover = SubResource("StyleBoxFlat_a7rkf")
+Button/styles/normal = SubResource("StyleBoxFlat_w6w4r")
+Button/styles/pressed = SubResource("StyleBoxFlat_qud10")

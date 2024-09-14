@@ -1,7 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bowtw0sey5qb5"]
+[gd_scene load_steps=18 format=3 uid="uid://bowtw0sey5qb5"]
 
 [ext_resource type="Script" path="res://Scenes/TextOnScreen.gd" id="1_ododx"]
 [ext_resource type="FontFile" uid="uid://bnf2p438dv3b5" path="res://Fonts/Pixellari.ttf" id="2_3n3ax"]
+[ext_resource type="Shader" path="res://Scenes/pause_menu.gdshader" id="3_umdy4"]
+[ext_resource type="Script" path="res://topright_display.gd" id="4_jawl0"]
+[ext_resource type="Texture2D" uid="uid://c3xfp8v2jsn7x" path="res://Scenes/PauseMenu.png" id="5_c84c7"]
+[ext_resource type="Theme" uid="uid://cbkm5krrx8r4o" path="res://PauseMenu.tres" id="6_48q6f"]
 
 [sub_resource type="Animation" id="Animation_bid2p"]
 length = 0.001
@@ -166,8 +170,49 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
+[sub_resource type="Animation" id="Animation_5ax3u"]
+resource_name = "Open"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PauseMenu:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PauseMenu:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.8]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rf542"]
 _data = {
+"Open": SubResource("Animation_5ax3u"),
 "RESET": SubResource("Animation_bid2p"),
 "death_flash": SubResource("Animation_fq2ls"),
 "fade_in": SubResource("Animation_8vwbn"),
@@ -175,11 +220,25 @@ _data = {
 "redflash": SubResource("Animation_u4s8r")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rqkui"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_crlv6"]
+font_size = 8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q7n2o"]
+shader = ExtResource("3_umdy4")
+shader_parameter/lod = 0.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_il18x"]
+texture = ExtResource("5_c84c7")
+
 [node name="ScreenGUI" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_ododx")
 
 [node name="Label" type="Label" parent="."]
-modulate = Color(1, 1, 1, 0)
+visible = false
 z_index = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -202,22 +261,117 @@ libraries = {
 "": SubResource("AnimationLibrary_rf542")
 }
 
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 6720.0
-offset_bottom = 3780.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0)
-
-[node name="FPSlabel" type="Label" parent="."]
+[node name="TopRightInfo" type="PanelContainer" parent="."]
+process_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -63.0
-offset_bottom = 23.0
+offset_left = -70.0
+offset_top = 7.0
+offset_bottom = 51.0
 grow_horizontal = 0
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_rqkui")
+script = ExtResource("4_jawl0")
+
+[node name="MarginContainer" type="MarginContainer" parent="TopRightInfo"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TopRightInfo/MarginContainer"]
+layout_mode = 2
+
+[node name="FPSlabel" type="Label" parent="TopRightInfo/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_3n3ax")
+theme_override_font_sizes/font_size = 8
+text = "3"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TopRightInfo/MarginContainer/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="minutes" type="Label" parent="TopRightInfo/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_3n3ax")
+text = "
+1"
+label_settings = SubResource("LabelSettings_crlv6")
+
+[node name="seconds" type="Label" parent="TopRightInfo/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_3n3ax")
+text = "
+1"
+label_settings = SubResource("LabelSettings_crlv6")
+
+[node name="Msecs" type="Label" parent="TopRightInfo/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_3n3ax")
+text = "
+1"
+label_settings = SubResource("LabelSettings_crlv6")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_q7n2o")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -90.0
+offset_right = -540.0
+offset_bottom = -360.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseMenu" type="PanelContainer" parent="."]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -90.0
+offset_right = 150.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_il18x")
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenu"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/margin_top = 60
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Resume" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+theme = ExtResource("6_48q6f")
+text = "Resume Game"
+
+[node name="Options" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("6_48q6f")
+text = "Options"
+
+[node name="Audio" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("6_48q6f")
+text = "Audio"
+
+[node name="Quit" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("6_48q6f")
+text = "Quit To Title"

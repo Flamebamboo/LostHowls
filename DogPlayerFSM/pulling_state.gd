@@ -20,6 +20,9 @@ func s_physics_process(_delta):
 		
 	else:
 		machine.transition_to(machine.states["IdleState"])
+		
+	if Input.is_action_pressed("moveup") && machine.active_state.can_jump:
+		machine.transition_to(machine.states["JumpState"])
 
 func pull_accel(delta: float = get_physics_process_delta_time()):
 	var input_axis = Input.get_axis("moveleft", "moveright")

@@ -35,10 +35,10 @@ var input_axis = Input.get_axis("moveleft", "moveright")
 
 
 ## pushing/pull
-const push_speed: float = 80.0
+const push_speed: float = 100.0
 const pull_speed: float = 60.0
 
-const push_acceleration: float = 5.5
+const push_acceleration: float = 10.0
 const pull_acceleration: float = 5.0
 
 

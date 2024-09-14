@@ -4,14 +4,32 @@ extends CanvasLayer
 @onready var anim_player = $AnimationPlayer
 
 #show fps
-@onready var fps_label := $FPSlabel
+
+
+
+func _ready():
+	anim_player.play("RESET")
 
 func _process(delta):
-	fps_label.text = str("FPS ", Engine.get_frames_per_second())
-
+	esc_pressed()
+	
+	
+	
+	
+	
 
 func play_animation(animation_type: String):
 	#self.visible = true
 	anim_player.play(animation_type)
 	await anim_player.animation_finished
 	#self.visible = false
+	
+func esc_pressed():
+	if Input.is_action_just_pressed("menu") && !get_tree().paused:
+		anim_player.play("Open")
+		get_tree().paused = true
+	elif Input.is_action_just_pressed("menu") && get_tree().paused:
+		get_tree().paused = false
+		anim_player.play_backwards("Open")
+		#anim_player.play("Close")
+		

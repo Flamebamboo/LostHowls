@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=4 uid="uid://cp5opm5cnrywh"]
+[gd_scene load_steps=55 format=4 uid="uid://cp5opm5cnrywh"]
 
 [ext_resource type="Script" path="res://Script/Camera System/CameraMode.gd" id="1_cd30k"]
 [ext_resource type="Script" path="res://Scenes/LevelTwo.gd" id="1_nomkj"]
@@ -12,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://r8fwkr0ot8rp" path="res://Scenes/spirit.tscn" id="9_8b6j2"]
 [ext_resource type="Texture2D" uid="uid://cemf18thtmb43" path="res://art/Obstacles/redwireframe.png" id="9_p46e2"]
 [ext_resource type="Script" path="res://Scenes/boundriesTemporary.gd" id="9_pyw8y"]
-[ext_resource type="PackedScene" uid="uid://coe2bigkbj883" path="res://Script/BossBatEnemy/Interactables/pushable_rock.tscn" id="11_rsbss"]
 [ext_resource type="Texture2D" uid="uid://c81fbkw8stwpr" path="res://floaty_64.png" id="13_ihoia"]
 [ext_resource type="PackedScene" uid="uid://dgebxxsq0f2lk" path="res://Scenes/respawn_points.tscn" id="14_in06w"]
 [ext_resource type="PackedScene" uid="uid://0drrtr1rw0n1" path="res://Scenes/MiniBat.tscn" id="15_ufj75"]
@@ -526,7 +525,6 @@ script = ExtResource("2_3rgbs")
 script = ExtResource("5_a75qp")
 
 [node name="cam_1" type="Area2D" parent="CameraSystem" node_paths=PackedStringArray("CameraRef", "area_pcam")]
-visible = false
 position = Vector2(455, 470)
 collision_layer = 0
 collision_mask = 2
@@ -798,12 +796,8 @@ amplitude = 80.0
 [node name="PressurePlates" parent="." instance=ExtResource("20_qqoa8")]
 position = Vector2(1071, 451)
 
-[node name="Box" parent="." instance=ExtResource("20_4k72f")]
-
-[node name="rigidbody" parent="." instance=ExtResource("11_rsbss")]
-position = Vector2(399, 545)
-collision_layer = 1024
-collision_mask = 129
+[node name="ObjectsMovable" parent="." instance=ExtResource("20_4k72f")]
+position = Vector2(655, 457)
 
 [node name="RockCollision" parent="." instance=ExtResource("21_nj0cc")]
 position = Vector2(103, 560)

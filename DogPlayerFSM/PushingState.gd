@@ -11,6 +11,7 @@ func s_activate():
 	#can_run = true
 	#can_jump = true
 	can_idle = true
+	can_jump = true
 	
 func s_physics_process(_delta):
 	if !owner.is_on_floor():
@@ -23,6 +24,9 @@ func s_physics_process(_delta):
 		
 	else:
 		machine.transition_to(machine.states["IdleState"])
+		
+	if Input.is_action_pressed("moveup") && machine.active_state.can_jump:
+		machine.transition_to(machine.states["JumpState"])
 	
 	
 func push_accel(delta: float = get_physics_process_delta_time()):
