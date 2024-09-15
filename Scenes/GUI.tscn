@@ -1,11 +1,94 @@
-[gd_scene load_steps=18 format=3 uid="uid://bowtw0sey5qb5"]
+[gd_scene load_steps=23 format=3 uid="uid://bowtw0sey5qb5"]
 
-[ext_resource type="Script" path="res://Scenes/TextOnScreen.gd" id="1_ododx"]
+[ext_resource type="Script" path="res://Scenes/screen_gui.gd" id="1_ododx"]
 [ext_resource type="FontFile" uid="uid://bnf2p438dv3b5" path="res://Fonts/Pixellari.ttf" id="2_3n3ax"]
 [ext_resource type="Shader" path="res://Scenes/pause_menu.gdshader" id="3_umdy4"]
 [ext_resource type="Script" path="res://topright_display.gd" id="4_jawl0"]
 [ext_resource type="Texture2D" uid="uid://c3xfp8v2jsn7x" path="res://Scenes/PauseMenu.png" id="5_c84c7"]
 [ext_resource type="Theme" uid="uid://cbkm5krrx8r4o" path="res://PauseMenu.tres" id="6_48q6f"]
+[ext_resource type="Theme" uid="uid://ddi3fe4upbtie" path="res://AudioMenu.tres" id="7_8mkbd"]
+[ext_resource type="LabelSettings" uid="uid://c5ymxl4a6n0xx" path="res://AudioLabels.tres" id="7_etlyw"]
+[ext_resource type="Script" path="res://Scenes/master_slider.gd" id="9_0410j"]
+
+[sub_resource type="Animation" id="Animation_68hdq"]
+resource_name = "AudioOptions"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Audio:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Audio:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_5ax3u"]
+resource_name = "MenuOpen"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PauseMenu:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PauseMenu:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Blur:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Blur:material:shader_parameter/lod")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.8]
+}
 
 [sub_resource type="Animation" id="Animation_bid2p"]
 length = 0.001
@@ -170,49 +253,10 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="Animation" id="Animation_5ax3u"]
-resource_name = "Open"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PauseMenu:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PauseMenu:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.0333333, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("ColorRect:material:shader_parameter/lod")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 0.8]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rf542"]
 _data = {
-"Open": SubResource("Animation_5ax3u"),
+"AudioOptions": SubResource("Animation_68hdq"),
+"MenuOpen": SubResource("Animation_5ax3u"),
 "RESET": SubResource("Animation_bid2p"),
 "death_flash": SubResource("Animation_fq2ls"),
 "fade_in": SubResource("Animation_8vwbn"),
@@ -226,19 +270,28 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 [sub_resource type="LabelSettings" id="LabelSettings_crlv6"]
 font_size = 8
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_q7n2o"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_po4mp"]
 shader = ExtResource("3_umdy4")
 shader_parameter/lod = 0.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_il18x"]
 texture = ExtResource("5_c84c7")
 
-[node name="ScreenGUI" type="CanvasLayer"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1qn7l"]
+texture = ExtResource("5_c84c7")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ScreenGUI" type="CanvasLayer" parent="."]
 process_mode = 3
 script = ExtResource("1_ododx")
 
-[node name="Label" type="Label" parent="."]
-visible = false
+[node name="Label" type="Label" parent="ScreenGUI"]
+modulate = Color(1, 1, 1, 0)
 z_index = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -256,12 +309,12 @@ theme_override_fonts/font = ExtResource("2_3n3ax")
 theme_override_font_sizes/font_size = 48
 text = "-FIND YOUR OWNER-"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ScreenGUI"]
 libraries = {
 "": SubResource("AnimationLibrary_rf542")
 }
 
-[node name="TopRightInfo" type="PanelContainer" parent="."]
+[node name="TopRightInfo" type="PanelContainer" parent="ScreenGUI"]
 process_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -274,64 +327,72 @@ size_flags_horizontal = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_rqkui")
 script = ExtResource("4_jawl0")
 
-[node name="MarginContainer" type="MarginContainer" parent="TopRightInfo"]
+[node name="MarginContainer" type="MarginContainer" parent="ScreenGUI/TopRightInfo"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 3
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TopRightInfo/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScreenGUI/TopRightInfo/MarginContainer"]
 layout_mode = 2
 
-[node name="FPSlabel" type="Label" parent="TopRightInfo/MarginContainer/VBoxContainer"]
+[node name="FPSlabel" type="Label" parent="ScreenGUI/TopRightInfo/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("2_3n3ax")
 theme_override_font_sizes/font_size = 8
 text = "3"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TopRightInfo/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="ScreenGUI/TopRightInfo/MarginContainer/VBoxContainer"]
 clip_contents = true
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 theme_override_constants/separation = 4
 alignment = 1
 
-[node name="minutes" type="Label" parent="TopRightInfo/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="minutes" type="Label" parent="ScreenGUI/TopRightInfo/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_3n3ax")
 text = "
 1"
 label_settings = SubResource("LabelSettings_crlv6")
 
-[node name="seconds" type="Label" parent="TopRightInfo/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="seconds" type="Label" parent="ScreenGUI/TopRightInfo/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_3n3ax")
 text = "
 1"
 label_settings = SubResource("LabelSettings_crlv6")
 
-[node name="Msecs" type="Label" parent="TopRightInfo/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Msecs" type="Label" parent="ScreenGUI/TopRightInfo/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_3n3ax")
 text = "
 1"
 label_settings = SubResource("LabelSettings_crlv6")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_q7n2o")
+[node name="ColorRect" type="ColorRect" parent="ScreenGUI"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -60.0
-offset_top = -90.0
-offset_right = -540.0
-offset_bottom = -360.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+color = Color(1, 0, 0, 0)
+
+[node name="Blur" type="ColorRect" parent="ScreenGUI"]
+visible = false
+material = SubResource("ShaderMaterial_po4mp")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PauseMenu" type="PanelContainer" parent="."]
+[node name="PauseMenu" type="PanelContainer" parent="ScreenGUI"]
+process_mode = 3
+visible = false
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 8
 anchor_left = 0.5
@@ -346,32 +407,124 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_il18x")
 
-[node name="MarginContainer" type="MarginContainer" parent="PauseMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="ScreenGUI/PauseMenu"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/margin_top = 60
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="ScreenGUI/PauseMenu/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Resume" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer"]
+[node name="Resume" type="Button" parent="ScreenGUI/PauseMenu/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 theme = ExtResource("6_48q6f")
 text = "Resume Game"
 
-[node name="Options" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer"]
+[node name="Graphic" type="Button" parent="ScreenGUI/PauseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("6_48q6f")
-text = "Options"
+text = "Graphic"
 
-[node name="Audio" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer"]
+[node name="Audio" type="Button" parent="ScreenGUI/PauseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("6_48q6f")
 text = "Audio"
 
-[node name="Quit" type="Button" parent="PauseMenu/MarginContainer/VBoxContainer"]
+[node name="Quit" type="Button" parent="ScreenGUI/PauseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("6_48q6f")
 text = "Quit To Title"
+
+[node name="Audio" type="PanelContainer" parent="ScreenGUI"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -90.0
+offset_right = 150.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_1qn7l")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScreenGUI/Audio"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 1
+
+[node name="MasterLabel" type="Label" parent="ScreenGUI/Audio/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Master Volume"
+label_settings = ExtResource("7_etlyw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MasterSlider" type="HSlider" parent="ScreenGUI/Audio/VBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+theme = ExtResource("7_8mkbd")
+max_value = 1.0
+step = 0.05
+value = 0.5
+script = ExtResource("9_0410j")
+bus_name = "Master"
+
+[node name="MusicLabel" type="Label" parent="ScreenGUI/Audio/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Music Volume
+"
+label_settings = ExtResource("7_etlyw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MusicSlider" type="HSlider" parent="ScreenGUI/Audio/VBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+theme = ExtResource("7_8mkbd")
+max_value = 1.0
+step = 0.05
+value = 0.5
+script = ExtResource("9_0410j")
+bus_name = "Music"
+
+[node name="SFXLabel" type="Label" parent="ScreenGUI/Audio/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "SFX Volume"
+label_settings = ExtResource("7_etlyw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SFXSlider" type="HSlider" parent="ScreenGUI/Audio/VBoxContainer"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+theme = ExtResource("7_8mkbd")
+max_value = 1.0
+step = 0.05
+value = 0.5
+script = ExtResource("9_0410j")
+bus_name = "Sfx"
+
+[connection signal="pressed" from="ScreenGUI/PauseMenu/MarginContainer/VBoxContainer/Resume" to="ScreenGUI" method="_on_resume_pressed"]
+[connection signal="pressed" from="ScreenGUI/PauseMenu/MarginContainer/VBoxContainer/Graphic" to="ScreenGUI" method="_on_graphic_pressed"]
+[connection signal="pressed" from="ScreenGUI/PauseMenu/MarginContainer/VBoxContainer/Audio" to="ScreenGUI" method="_on_audio_pressed"]
+[connection signal="pressed" from="ScreenGUI/PauseMenu/MarginContainer/VBoxContainer/Quit" to="ScreenGUI" method="_on_quit_pressed"]
+[connection signal="mouse_exited" from="ScreenGUI/Audio/VBoxContainer/MasterSlider" to="ScreenGUI/Audio/VBoxContainer/MasterSlider" method="_on_mouse_exited"]
+[connection signal="mouse_exited" from="ScreenGUI/Audio/VBoxContainer/MusicSlider" to="ScreenGUI/Audio/VBoxContainer/MusicSlider" method="_on_mouse_exited"]
+[connection signal="mouse_exited" from="ScreenGUI/Audio/VBoxContainer/SFXSlider" to="ScreenGUI/Audio/VBoxContainer/SFXSlider" method="_on_mouse_exited"]

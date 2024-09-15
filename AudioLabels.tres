@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://c5ymxl4a6n0xx"]
+
+[ext_resource type="FontFile" uid="uid://bnf2p438dv3b5" path="res://Fonts/Pixellari.ttf" id="1_2oa2h"]
+
+[resource]
+font = ExtResource("1_2oa2h")
+font_size = 6

@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bxoegi06c2upq"]
+[gd_scene load_steps=8 format=3 uid="uid://bxoegi06c2upq"]
 
 [ext_resource type="Script" path="res://Script/SoundManager.gd" id="1_xqc4i"]
 [ext_resource type="Script" path="res://Script/Sound Queue.gd" id="2_j1s2b"]
+[ext_resource type="AudioStream" uid="uid://bfbwnj6wmsxnl" path="res://music/Regenerator.mp3" id="2_x878w"]
 [ext_resource type="AudioStream" uid="uid://tnohss5vshud" path="res://music/laseraim.wav" id="4_mbago"]
 [ext_resource type="AudioStream" uid="uid://d10pwinfu5o2e" path="res://music/Spirit_Shoot_SFX.wav" id="4_oqskh"]
 [ext_resource type="AudioStream" uid="uid://c2kutx72kxlpo" path="res://music/sfx/hit-sound-effect-12445.mp3" id="6_qchve"]
@@ -15,8 +16,11 @@ impact_sound = NodePath("ImpactSound")
 charge_sound = NodePath("ChargeSound")
 
 [node name="Main" type="AudioStreamPlayer" parent="."]
-volume_db = -8.04
+process_mode = 3
+stream = ExtResource("2_x878w")
+volume_db = -20.0
 autoplay = true
+bus = &"Music"
 
 [node name="LaserSoundQueue" type="Node" parent="."]
 script = ExtResource("2_j1s2b")
@@ -24,6 +28,7 @@ script = ExtResource("2_j1s2b")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="LaserSoundQueue"]
 stream = ExtResource("4_mbago")
 pitch_scale = 2.35
+bus = &"Sfx"
 
 [node name="ShootSoundQueue" type="Node" parent="."]
 script = ExtResource("2_j1s2b")
@@ -31,6 +36,7 @@ Count = 50
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ShootSoundQueue"]
 stream = ExtResource("4_oqskh")
+bus = &"Sfx"
 
 [node name="ImpactSoundQueue" type="Node" parent="."]
 script = ExtResource("2_j1s2b")
@@ -39,22 +45,28 @@ Count = 10
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ImpactSoundQueue"]
 stream = ExtResource("6_qchve")
 volume_db = -3.259
+bus = &"Sfx"
 
 [node name="ChargeSoundQueue" type="Node" parent="."]
 script = ExtResource("2_j1s2b")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="ChargeSoundQueue"]
 stream = ExtResource("7_osxef")
+bus = &"Sfx"
 
 [node name="LaserSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_mbago")
 pitch_scale = 2.35
+bus = &"Sfx"
 
 [node name="ShootSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_oqskh")
+bus = &"Sfx"
 
 [node name="ImpactSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_oqskh")
+bus = &"Sfx"
 
 [node name="ChargeSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_osxef")
+bus = &"Sfx"

@@ -1,0 +1,27 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://ddi3fe4upbtie"]
+
+[ext_resource type="Texture2D" uid="uid://c0qql5ge3nshe" path="res://SliderGrabber.png" id="1_rhphg"]
+[ext_resource type="Texture2D" uid="uid://cxhrep2jotuv5" path="res://SliderHighlight.png" id="2_xosor"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aqbfb"]
+bg_color = Color(0.0901961, 0.858824, 0.831373, 1)
+border_color = Color(0.8, 0.8, 0.8, 0)
+expand_margin_top = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7jfjg"]
+bg_color = Color(0.0901961, 0.858824, 0.831373, 1)
+expand_margin_top = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8m0nm"]
+bg_color = Color(0, 0, 0, 1)
+expand_margin_top = 2.0
+
+[resource]
+HSlider/constants/center_grabber = 0
+HSlider/constants/grabber_offset = 0
+HSlider/icons/grabber = ExtResource("1_rhphg")
+HSlider/icons/grabber_disabled = ExtResource("1_rhphg")
+HSlider/icons/grabber_highlight = ExtResource("2_xosor")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_aqbfb")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_7jfjg")
+HSlider/styles/slider = SubResource("StyleBoxFlat_8m0nm")
