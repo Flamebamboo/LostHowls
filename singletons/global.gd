@@ -1,5 +1,11 @@
 extends Node
 
+
+signal world_post_processing
+
+signal particle_toggled(toggled_on)
+signal lights_toggled(toggled_on)
+
 var dogAlive: bool
 var dogCharacter: CharacterBody2D
 var dogFreeze: bool 
@@ -12,6 +18,7 @@ var current_jump: bool
 var current_air: bool
 var current_run: bool
 var current_glide: bool
+
 
 
 #func load_screen_to_scene(target: String, anim_name: String):

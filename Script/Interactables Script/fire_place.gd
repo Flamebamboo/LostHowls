@@ -4,12 +4,10 @@ extends Area2D
 
 func _ready():
 	firecamp.play("no_fire")
-	light.hide()
+	light.enabled = false
 	
 func _on_body_entered(body):
 	if body is Player:
 		firecamp.play("fire")
-		light.show()
+		light.enabled = true
 		CheckpointManager.add_checkpoint(global_position)
-
-

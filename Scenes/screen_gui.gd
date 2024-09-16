@@ -1,11 +1,11 @@
-extends CanvasLayer
+extends Control
 
 #this class should and will contain all related gui like flash when player hurt enemy killed and stuff
-@onready var anim_player = $AnimationPlayer
+@onready var anim_player = $ScreenGUI/AnimationPlayer
 
 #show fps
 
-enum MenuState { NONE, PAUSE_MENU, AUDIO_MENU }
+enum MenuState { NONE, PAUSE_MENU, AUDIO_MENU, GRAPHIC_MENU }
 var menu_state: MenuState = MenuState.NONE
 
 
@@ -17,6 +17,8 @@ func _ready():
 func _process(delta):
 	PauseMenu()
 	AudioMenu()
+	GraphicMenu()
+	
 
 	
 
@@ -25,7 +27,8 @@ func play_animation(animation_type: String):
 	anim_player.play(animation_type)
 	await anim_player.animation_finished
 	#self.visible = false
-	
+
+#PauseMenu	
 func PauseMenu():
 	if Input.is_action_just_pressed("esc"):
 		if menu_state == MenuState.NONE:
@@ -51,15 +54,12 @@ func close_pause_menu():
 		#anim_player.play_backwards("MenuOpen")
 		
 		
-#audio related
-
+#Audio Menu
 func _on_audio_pressed() -> void:
 	if menu_state == MenuState.PAUSE_MENU:
 		open_audio_menu()
 		print("pressed audio button from paused menu")
-
-		
-		
+	
 func open_audio_menu():
 	anim_player.play("AudioOptions")
 	await anim_player.animation_finished
@@ -80,9 +80,28 @@ func close_audio_menu():
 	print("pressed closed")
 
 
+
+
+
+
 func _on_graphic_pressed() -> void:
-	print("chelllelel")
-	#to be made
+	if menu_state == MenuState.PAUSE_MENU:
+		open_graphic_menu()
+		
+		
+func open_graphic_menu():
+	anim_player.play("GraphicOptions")
+	await anim_player.animation_finished
+	menu_state = MenuState.GRAPHIC_MENU
+	
+func close_graphic_menu():
+	anim_player.play_backwards("GraphicOptions")
+	menu_state = MenuState.PAUSE_MENU
+
+func GraphicMenu():
+	if menu_state == MenuState.GRAPHIC_MENU && Input.is_action_just_pressed("esc"):
+		close_graphic_menu()
+	
 
 
 func _on_quit_pressed() -> void:
@@ -91,3 +110,19 @@ func _on_quit_pressed() -> void:
 
 func _on_resume_pressed() -> void:
 	close_pause_menu()
+
+
+##graphic settings 
+
+
+
+func _on_glow_buttom_toggled(toggled_on: bool) -> void:
+	Global.world_post_processing.emit(toggled_on)
+
+
+func _on_particles_button_toggled(toggled_on: bool) -> void:
+	Global.particle_toggled.emit(toggled_on)
+
+
+func _on_lightings_button_toggled(toggled_on: bool) -> void:
+	Global.lights_toggled.emit(toggled_on)

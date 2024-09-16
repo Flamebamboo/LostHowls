@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bowtw0sey5qb5"]
+[gd_scene load_steps=26 format=3 uid="uid://bowtw0sey5qb5"]
 
 [ext_resource type="Script" path="res://Scenes/screen_gui.gd" id="1_ododx"]
 [ext_resource type="FontFile" uid="uid://bnf2p438dv3b5" path="res://Fonts/Pixellari.ttf" id="2_3n3ax"]
@@ -9,6 +9,7 @@
 [ext_resource type="Theme" uid="uid://ddi3fe4upbtie" path="res://AudioMenu.tres" id="7_8mkbd"]
 [ext_resource type="LabelSettings" uid="uid://c5ymxl4a6n0xx" path="res://AudioLabels.tres" id="7_etlyw"]
 [ext_resource type="Script" path="res://Scenes/master_slider.gd" id="9_0410j"]
+[ext_resource type="Theme" uid="uid://cfkwd1gjicsa2" path="res://Buttons.tres" id="10_pqtt5"]
 
 [sub_resource type="Animation" id="Animation_68hdq"]
 resource_name = "AudioOptions"
@@ -253,9 +254,38 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
+[sub_resource type="Animation" id="Animation_2atoy"]
+resource_name = "GraphicOptions"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Graphic:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Graphic:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rf542"]
 _data = {
 "AudioOptions": SubResource("Animation_68hdq"),
+"GraphicOptions": SubResource("Animation_2atoy"),
 "MenuOpen": SubResource("Animation_5ax3u"),
 "RESET": SubResource("Animation_bid2p"),
 "death_flash": SubResource("Animation_fq2ls"),
@@ -280,17 +310,23 @@ texture = ExtResource("5_c84c7")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1qn7l"]
 texture = ExtResource("5_c84c7")
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_khahm"]
+content_margin_top = 30.0
+texture = ExtResource("5_c84c7")
+
 [node name="Control" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("1_ododx")
 
 [node name="ScreenGUI" type="CanvasLayer" parent="."]
 process_mode = 3
-script = ExtResource("1_ododx")
 
 [node name="Label" type="Label" parent="ScreenGUI"]
+visible = false
 modulate = Color(1, 1, 1, 0)
 z_index = 1
 anchors_preset = 8
@@ -373,6 +409,7 @@ text = "
 label_settings = SubResource("LabelSettings_crlv6")
 
 [node name="ColorRect" type="ColorRect" parent="ScreenGUI"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -394,6 +431,7 @@ grow_vertical = 2
 process_mode = 3
 visible = false
 modulate = Color(1, 1, 1, 0)
+top_level = true
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -438,6 +476,7 @@ theme = ExtResource("6_48q6f")
 text = "Quit To Title"
 
 [node name="Audio" type="PanelContainer" parent="ScreenGUI"]
+process_mode = 3
 visible = false
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 8
@@ -521,10 +560,131 @@ value = 0.5
 script = ExtResource("9_0410j")
 bus_name = "Sfx"
 
-[connection signal="pressed" from="ScreenGUI/PauseMenu/MarginContainer/VBoxContainer/Resume" to="ScreenGUI" method="_on_resume_pressed"]
-[connection signal="pressed" from="ScreenGUI/PauseMenu/MarginContainer/VBoxContainer/Graphic" to="ScreenGUI" method="_on_graphic_pressed"]
-[connection signal="pressed" from="ScreenGUI/PauseMenu/MarginContainer/VBoxContainer/Audio" to="ScreenGUI" method="_on_audio_pressed"]
-[connection signal="pressed" from="ScreenGUI/PauseMenu/MarginContainer/VBoxContainer/Quit" to="ScreenGUI" method="_on_quit_pressed"]
+[node name="Graphic" type="PanelContainer" parent="ScreenGUI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 90.0
+offset_top = 45.0
+offset_right = -90.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_khahm")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScreenGUI/Graphic"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="LeftVbox" type="VBoxContainer" parent="ScreenGUI/Graphic/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = -6
+
+[node name="Glow Label" type="Label" parent="ScreenGUI/Graphic/HBoxContainer/LeftVbox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Glow
+"
+label_settings = ExtResource("7_etlyw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Glow Buttom" type="CheckButton" parent="ScreenGUI/Graphic/HBoxContainer/LeftVbox"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("10_pqtt5")
+button_pressed = true
+
+[node name="Particles Label" type="Label" parent="ScreenGUI/Graphic/HBoxContainer/LeftVbox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Particles"
+label_settings = ExtResource("7_etlyw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Particles Button" type="CheckButton" parent="ScreenGUI/Graphic/HBoxContainer/LeftVbox"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("10_pqtt5")
+button_pressed = true
+
+[node name="Lightings Label" type="Label" parent="ScreenGUI/Graphic/HBoxContainer/LeftVbox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Lightings
+"
+label_settings = ExtResource("7_etlyw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Lightings Button" type="CheckButton" parent="ScreenGUI/Graphic/HBoxContainer/LeftVbox"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("10_pqtt5")
+button_pressed = true
+
+[node name="RightVbox" type="VBoxContainer" parent="ScreenGUI/Graphic/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = -6
+
+[node name="Colourblind Filter" type="Label" parent="ScreenGUI/Graphic/HBoxContainer/RightVbox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Colourblind filter
+"
+label_settings = ExtResource("7_etlyw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColourBlindButton" type="CheckButton" parent="ScreenGUI/Graphic/HBoxContainer/RightVbox"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("10_pqtt5")
+
+[node name="FPS HUD" type="Label" parent="ScreenGUI/Graphic/HBoxContainer/RightVbox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "FPS HUD"
+label_settings = ExtResource("7_etlyw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FPSButton" type="CheckButton" parent="ScreenGUI/Graphic/HBoxContainer/RightVbox"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("10_pqtt5")
+button_pressed = true
+
+[node name="IDK2" type="Label" parent="ScreenGUI/Graphic/HBoxContainer/RightVbox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "IDK
+"
+label_settings = ExtResource("7_etlyw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="IDK" type="CheckButton" parent="ScreenGUI/Graphic/HBoxContainer/RightVbox"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("10_pqtt5")
+toggle_mode = false
+button_mask = 0
+
+[connection signal="pressed" from="ScreenGUI/PauseMenu/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="ScreenGUI/PauseMenu/MarginContainer/VBoxContainer/Graphic" to="." method="_on_graphic_pressed"]
+[connection signal="pressed" from="ScreenGUI/PauseMenu/MarginContainer/VBoxContainer/Audio" to="." method="_on_audio_pressed"]
+[connection signal="pressed" from="ScreenGUI/PauseMenu/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
 [connection signal="mouse_exited" from="ScreenGUI/Audio/VBoxContainer/MasterSlider" to="ScreenGUI/Audio/VBoxContainer/MasterSlider" method="_on_mouse_exited"]
 [connection signal="mouse_exited" from="ScreenGUI/Audio/VBoxContainer/MusicSlider" to="ScreenGUI/Audio/VBoxContainer/MusicSlider" method="_on_mouse_exited"]
 [connection signal="mouse_exited" from="ScreenGUI/Audio/VBoxContainer/SFXSlider" to="ScreenGUI/Audio/VBoxContainer/SFXSlider" method="_on_mouse_exited"]
+[connection signal="toggled" from="ScreenGUI/Graphic/HBoxContainer/LeftVbox/Glow Buttom" to="." method="_on_glow_buttom_toggled"]
+[connection signal="toggled" from="ScreenGUI/Graphic/HBoxContainer/LeftVbox/Particles Button" to="." method="_on_particles_button_toggled"]
+[connection signal="toggled" from="ScreenGUI/Graphic/HBoxContainer/LeftVbox/Lightings Button" to="." method="_on_lightings_button_toggled"]

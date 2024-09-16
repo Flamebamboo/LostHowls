@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://cb46co0m8f53s"]
+[gd_scene load_steps=54 format=3 uid="uid://cb46co0m8f53s"]
 
 [ext_resource type="Script" path="res://DogPlayerFSM/Doggy.gd" id="1_njf21"]
 [ext_resource type="Texture2D" uid="uid://bwotynnxhce0s" path="res://art/Player/dogattack-Sheet.png" id="2_dx8ja"]
@@ -25,6 +25,7 @@
 [ext_resource type="Script" path="res://DogPlayerFSM/PushingState.gd" id="17_h6uys"]
 [ext_resource type="Script" path="res://DogPlayerFSM/pulling_state.gd" id="20_dvwr5"]
 [ext_resource type="Script" path="res://DogPlayerFSM/dash_state.gd" id="21_qhtuv"]
+[ext_resource type="Script" path="res://gpu_particles.gd" id="24_jjt7p"]
 
 [sub_resource type="Theme" id="Theme_f4cmb"]
 
@@ -341,6 +342,7 @@ lifetime = 0.2
 one_shot = true
 explosiveness = 1.0
 randomness = 1.0
+script = ExtResource("24_jjt7p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox Components"]
 position = Vector2(0, -15)

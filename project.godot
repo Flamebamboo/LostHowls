@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Lost Howls"
-run/main_scene="res://Scenes/LevelTwo.tscn"
+run/main_scene="res://Scenes/MainGame.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 run/max_fps=100
 
@@ -24,6 +24,10 @@ SoundManager="*res://Scenes/SoundManager.tscn"
 LoadManager="*res://singletons/LoadManager.gd"
 ScreenGui="*res://Scenes/GUI.tscn"
 PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
+
+[debug]
+
+gdscript/warnings/enable=false
 
 [dialogic]
 

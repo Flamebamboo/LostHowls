@@ -1,9 +1,10 @@
-[gd_scene load_steps=55 format=4 uid="uid://cp5opm5cnrywh"]
+[gd_scene load_steps=57 format=4 uid="uid://cp5opm5cnrywh"]
 
 [ext_resource type="Script" path="res://Script/Camera System/CameraMode.gd" id="1_cd30k"]
 [ext_resource type="Script" path="res://Scenes/LevelTwo.gd" id="1_nomkj"]
 [ext_resource type="TileSet" uid="uid://byvgusw8ywfl2" path="res://Scenes/Tilemaps.tres" id="1_ogv62"]
 [ext_resource type="Script" path="res://Script/Camera System/Camera.gd" id="2_3rgbs"]
+[ext_resource type="Script" path="res://Scenes/world_environment.gd" id="2_a05y1"]
 [ext_resource type="TileSet" uid="uid://duvywr0e4alq6" path="res://Scenes/Mosses.tres" id="2_gp0sw"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="2_q0863"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="3_7q5yo"]
@@ -16,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://dgebxxsq0f2lk" path="res://Scenes/respawn_points.tscn" id="14_in06w"]
 [ext_resource type="PackedScene" uid="uid://0drrtr1rw0n1" path="res://Scenes/MiniBat.tscn" id="15_ufj75"]
 [ext_resource type="Texture2D" uid="uid://dd48qbijycf3p" path="res://art/LevelDesign/PurpleTiles.png" id="17_fqinh"]
+[ext_resource type="Script" path="res://gpu_particles.gd" id="19_op7ew"]
 [ext_resource type="PackedScene" uid="uid://c8peaow087m8" path="res://activation_platform.tscn" id="19_utw5j"]
 [ext_resource type="PackedScene" uid="uid://bp0pim2t0a55p" path="res://movable_object.tscn" id="20_4k72f"]
 [ext_resource type="PackedScene" uid="uid://cirgj655pd7w0" path="res://pressure_plates.tscn" id="20_qqoa8"]
@@ -508,6 +510,7 @@ script = ExtResource("1_nomkj")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_44g4k")
+script = ExtResource("2_a05y1")
 
 [node name="CameraSystem" type="Node" parent="."]
 
@@ -693,16 +696,15 @@ process_material = SubResource("ParticleProcessMaterial_440a6")
 texture = ExtResource("13_ihoia")
 lifetime = 1.5
 explosiveness = 0.07
+script = ExtResource("19_op7ew")
 
 [node name="Pushable Rocks" type="Node" parent="."]
 
 [node name="firecamp" parent="." instance=ExtResource("14_in06w")]
 unique_name_in_owner = false
-visible = false
 position = Vector2(387, 544)
 
 [node name="firecamp2" parent="." instance=ExtResource("14_in06w")]
-visible = false
 position = Vector2(2485, 2114)
 
 [node name="boundries" type="Area2D" parent="." node_paths=PackedStringArray("player")]
@@ -788,6 +790,7 @@ trail_enabled = true
 trail_lifetime = 0.5
 trail_sections = 96
 trail_section_subdivisions = 96
+script = ExtResource("19_op7ew")
 
 [node name="ActivationPlatform" parent="." instance=ExtResource("19_utw5j")]
 position = Vector2(774, 279)

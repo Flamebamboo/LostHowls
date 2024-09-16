@@ -1,6 +1,7 @@
-[gd_scene load_steps=119 format=4 uid="uid://dxo0h0k8bfdee"]
+[gd_scene load_steps=121 format=4 uid="uid://dxo0h0k8bfdee"]
 
 [ext_resource type="Script" path="res://Script/Level_1/MainGame.gd" id="1_sw385"]
+[ext_resource type="Script" path="res://Scenes/world_environment.gd" id="2_5tl8c"]
 [ext_resource type="Texture2D" uid="uid://dpqru6htgukk2" path="res://art/LevelDesign/TutorialKeys/keycaps-Sheet.png" id="2_kni8x"]
 [ext_resource type="Texture2D" uid="uid://g4up3wdwp1xg" path="res://art/LevelDesign/BossBatCaveV2.png" id="3_3qyjn"]
 [ext_resource type="Texture2D" uid="uid://bpy27duv6rniw" path="res://art/Props/Plants/tree.png" id="4_7m8hg"]
@@ -17,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://dxydd83uy4nug" path="res://art/Props/tent.png" id="17_p61ve"]
 [ext_resource type="Texture2D" uid="uid://cudso7rkbkjqs" path="res://art/leafs_particle.png" id="20_xurq5"]
 [ext_resource type="PackedScene" uid="uid://cqfuu3blbblkk" path="res://Scenes/spikeball.tscn" id="22_kqo1w"]
+[ext_resource type="Script" path="res://gpu_particles.gd" id="22_oe1a2"]
 [ext_resource type="FontFile" uid="uid://bnf2p438dv3b5" path="res://Fonts/Pixellari.ttf" id="24_kaot5"]
 [ext_resource type="Texture2D" uid="uid://brumdmardy1g" path="res://art/Props/Interactables/bagpack_n.png" id="25_6hba6"]
 [ext_resource type="PackedScene" uid="uid://cb3yfd0yuk4o6" path="res://rock_collision.tscn" id="26_t7eaf"]
@@ -457,6 +459,7 @@ metadata/_edit_horizontal_guides_ = [-352.0, -22.0, 617.0]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_40x0r")
+script = ExtResource("2_5tl8c")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 position = Vector2(-1975, -492)
@@ -583,7 +586,7 @@ texture = ExtResource("14_2lk3s")
 [node name="tilemaps" type="Node" parent="."]
 
 [node name="overlays" type="ParallaxBackground" parent="tilemaps"]
-layer = 1
+layer = 0
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="tilemaps/overlays"]
 z_index = 1
@@ -642,6 +645,7 @@ texture = ExtResource("20_xurq5")
 lifetime = 2.0
 fixed_fps = 15
 visibility_rect = Rect2(-1000, -200, 2000, 400)
+script = ExtResource("22_oe1a2")
 
 [node name="effects" type="Node" parent="."]
 
@@ -836,7 +840,7 @@ area_pcam = NodePath("PhantomCamera2D")
 
 [node name="PhantomCamera2D" type="Node2D" parent="CameraSystem/cam_1" node_paths=PackedStringArray("follow_target", "follow_targets")]
 visible = false
-position = Vector2(858, -338.857)
+position = Vector2(312, -338.857)
 script = ExtResource("28_dmuih")
 follow_mode = 3
 follow_target = NodePath("../../../Enitys/Dog")
@@ -888,7 +892,7 @@ shape = SubResource("RectangleShape2D_l0ew3")
 
 [node name="PhantomCamera2D" type="Node2D" parent="CameraSystem/cam_3 proceed" node_paths=PackedStringArray("follow_target")]
 visible = false
-position = Vector2(2876, 263)
+position = Vector2(2438.86, 202.857)
 script = ExtResource("28_dmuih")
 priority = 50
 follow_mode = 2
@@ -912,7 +916,7 @@ position = Vector2(1962.5, 74)
 shape = SubResource("RectangleShape2D_u7sl4")
 
 [node name="PhantomCamera2D" type="Node2D" parent="CameraSystem/cam_3 Fight" node_paths=PackedStringArray("follow_target")]
-position = Vector2(1821, 134)
+position = Vector2(1821, 71)
 script = ExtResource("28_dmuih")
 follow_mode = 2
 follow_target = NodePath("../../../Enitys/Dog")
@@ -978,7 +982,7 @@ needs_update = false
 
 [node name="Dog" parent="Enitys" node_paths=PackedStringArray("camera") instance=ExtResource("50_w0dsa")]
 z_index = 1
-position = Vector2(2544, 485)
+position = Vector2(1452, 50)
 camera = NodePath("../../CameraSystem/Camera2D")
 
 [node name="spirit" parent="Enitys" instance=ExtResource("63_g7hrd")]

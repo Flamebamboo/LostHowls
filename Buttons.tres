@@ -1,0 +1,17 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://cfkwd1gjicsa2"]
+
+[ext_resource type="Texture2D" uid="uid://y3bkxgl3vima" path="res://checked.png" id="1_pnwqw"]
+[ext_resource type="Texture2D" uid="uid://bi1c58ds5opa0" path="res://unchecked.png" id="2_rmfj2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_beruf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_phn7o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d471l"]
+
+[resource]
+CheckButton/icons/checked = ExtResource("1_pnwqw")
+CheckButton/icons/unchecked = ExtResource("2_rmfj2")
+CheckButton/styles/focus = SubResource("StyleBoxEmpty_beruf")
+CheckButton/styles/normal = SubResource("StyleBoxEmpty_phn7o")
+CheckButton/styles/pressed = SubResource("StyleBoxEmpty_d471l")
