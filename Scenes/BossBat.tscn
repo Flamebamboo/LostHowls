@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bd24oc54elotu"]
+[gd_scene load_steps=36 format=3 uid="uid://bd24oc54elotu"]
 
 [ext_resource type="Material" uid="uid://bmgyfioow48f8" path="res://shader/unshadedlight.tres" id="1_xyjkw"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/boss_bat.gd" id="2_ympke"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scenes/Hitbox Component.gd" id="5_s5xi1"]
 [ext_resource type="Texture2D" uid="uid://boijh8vbuie55" path="res://art/Enemies/Bossbat-Sheet.png" id="6_8r4q4"]
 [ext_resource type="Script" path="res://Scenes/EnemyHealth.gd" id="6_im028"]
+[ext_resource type="Script" path="res://gpu_particles.gd" id="7_75kkb"]
 [ext_resource type="FontFile" uid="uid://bnf2p438dv3b5" path="res://Fonts/Pixellari.ttf" id="7_pkbwp"]
 [ext_resource type="AudioStream" uid="uid://kupcp0jcvv8" path="res://music/sfx/BossBatROAR.mp3" id="8_oufed"]
 [ext_resource type="Script" path="res://Scenes/ChargeState.gd" id="8_qkxlu"]
@@ -231,6 +232,7 @@ lifetime = 0.2
 one_shot = true
 explosiveness = 1.0
 randomness = 1.0
+script = ExtResource("7_75kkb")
 
 [node name="StateController" type="Node" parent="." node_paths=PackedStringArray("machine")]
 script = ExtResource("4_25j3u")

@@ -44,7 +44,6 @@ animations = [{
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="Control" type="Control"]
-z_index = -11
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -55,13 +54,14 @@ size_flags_horizontal = 4
 script = ExtResource("1_88yg1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-z_index = -11
+z_index = -10
 position = Vector2(238, 135)
 sprite_frames = SubResource("SpriteFrames_v0frr")
 autoplay = "default"
 frame_progress = 0.285954
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
+z_index = 10
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -107,3 +107,5 @@ text = "Quit
 alignment = 0
 
 [connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="PanelContainer/MarginContainer/VBoxContainer/Button3" to="." method="_on_button_3_pressed"]

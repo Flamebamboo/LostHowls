@@ -14,8 +14,7 @@ func apply_damage(damage):
 	if health_components.health > 0: #if both of this conditions are met damage will be applied to health components
 		health_components.take_damage(damage) 
 	
-	if gpu_particles_2d:	
-		gpu_particles_2d.restart()
+	if gpu_particles_2d && Global.particle_setting:	
 		gpu_particles_2d.emitting = true
 			
 	#if bullet_impact:

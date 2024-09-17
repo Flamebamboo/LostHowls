@@ -2,6 +2,8 @@ extends Control
 
 #this class should and will contain all related gui like flash when player hurt enemy killed and stuff
 @onready var anim_player = $ScreenGUI/AnimationPlayer
+@onready var colour_blind: ColorRect = $ScreenGUI/ColorBlind
+@onready var top_right_info: PanelContainer = $ScreenGUI/TopRightInfo/MarginContainer/VBoxContainer/FPSlabel
 
 #show fps
 
@@ -11,8 +13,10 @@ var menu_state: MenuState = MenuState.NONE
 
 func _ready():
 	anim_player.play("RESET")
-	
-	
+	Global.particle_setting = true
+	Global.light_setting = true
+	colour_blind.visible = false
+	top_right_info.visible = true
 
 func _process(delta):
 	PauseMenu()
@@ -96,6 +100,7 @@ func open_graphic_menu():
 	
 func close_graphic_menu():
 	anim_player.play_backwards("GraphicOptions")
+	await anim_player.animation_finished
 	menu_state = MenuState.PAUSE_MENU
 
 func GraphicMenu():
@@ -122,7 +127,17 @@ func _on_glow_buttom_toggled(toggled_on: bool) -> void:
 
 func _on_particles_button_toggled(toggled_on: bool) -> void:
 	Global.particle_toggled.emit(toggled_on)
+	Global.particle_setting = toggled_on
 
 
-func _on_lightings_button_toggled(toggled_on: bool) -> void:
-	Global.lights_toggled.emit(toggled_on)
+func _on_lightings_button_toggled(toggled_on: bool) -> void: #this function is called when the button is toggled
+	Global.lights_toggled.emit(toggled_on) # this method calls the global function and passed bool value
+	Global.light_setting = toggled_on
+
+
+func _on_colour_blind_button_toggled(toggled_on: bool) -> void:
+	colour_blind.visible = toggled_on
+
+
+func _on_fps_button_toggled(toggled_on: bool) -> void:
+	top_right_info.visible = toggled_on 

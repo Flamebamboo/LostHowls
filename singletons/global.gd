@@ -6,6 +6,11 @@ signal world_post_processing
 signal particle_toggled(toggled_on)
 signal lights_toggled(toggled_on)
 
+var light_setting: bool = false
+var particle_setting: bool = false
+
+
+
 var dogAlive: bool
 var dogCharacter: CharacterBody2D
 var dogFreeze: bool 

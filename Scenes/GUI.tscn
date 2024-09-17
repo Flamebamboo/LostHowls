@@ -1,15 +1,19 @@
-[gd_scene load_steps=26 format=3 uid="uid://bowtw0sey5qb5"]
+[gd_scene load_steps=28 format=3 uid="uid://bowtw0sey5qb5"]
 
 [ext_resource type="Script" path="res://Scenes/screen_gui.gd" id="1_ododx"]
 [ext_resource type="FontFile" uid="uid://bnf2p438dv3b5" path="res://Fonts/Pixellari.ttf" id="2_3n3ax"]
 [ext_resource type="Shader" path="res://Scenes/pause_menu.gdshader" id="3_umdy4"]
 [ext_resource type="Script" path="res://topright_display.gd" id="4_jawl0"]
+[ext_resource type="Shader" path="res://colourblind.gdshader" id="4_v782b"]
 [ext_resource type="Texture2D" uid="uid://c3xfp8v2jsn7x" path="res://Scenes/PauseMenu.png" id="5_c84c7"]
 [ext_resource type="Theme" uid="uid://cbkm5krrx8r4o" path="res://PauseMenu.tres" id="6_48q6f"]
 [ext_resource type="Theme" uid="uid://ddi3fe4upbtie" path="res://AudioMenu.tres" id="7_8mkbd"]
 [ext_resource type="LabelSettings" uid="uid://c5ymxl4a6n0xx" path="res://AudioLabels.tres" id="7_etlyw"]
 [ext_resource type="Script" path="res://Scenes/master_slider.gd" id="9_0410j"]
 [ext_resource type="Theme" uid="uid://cfkwd1gjicsa2" path="res://Buttons.tres" id="10_pqtt5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h01p0"]
+shader = ExtResource("4_v782b")
 
 [sub_resource type="Animation" id="Animation_68hdq"]
 resource_name = "AudioOptions"
@@ -30,6 +34,34 @@ tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("Audio:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2atoy"]
+resource_name = "GraphicOptions"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Graphic:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Graphic:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -93,6 +125,102 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_bid2p"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Blur:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PauseMenu:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Audio:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Graphic:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("TopRightInfo:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Label:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("ColorBlind:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_fq2ls"]
 resource_name = "death_flash"
@@ -116,10 +244,10 @@ tracks/1/path = NodePath("ColorRect:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 1.7),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true]
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_8vwbn"]
@@ -254,34 +382,6 @@ tracks/1/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="Animation" id="Animation_2atoy"]
-resource_name = "GraphicOptions"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Graphic:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Graphic:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rf542"]
 _data = {
 "AudioOptions": SubResource("Animation_68hdq"),
@@ -324,6 +424,19 @@ script = ExtResource("1_ododx")
 
 [node name="ScreenGUI" type="CanvasLayer" parent="."]
 process_mode = 3
+layer = 10
+
+[node name="ColorBlind" type="ColorRect" parent="ScreenGUI"]
+visible = false
+top_level = true
+material = SubResource("ShaderMaterial_h01p0")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="Label" type="Label" parent="ScreenGUI"]
 visible = false
@@ -416,7 +529,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-color = Color(1, 0, 0, 0)
+color = Color(0, 0, 0, 0)
 
 [node name="Blur" type="ColorRect" parent="ScreenGUI"]
 visible = false
@@ -561,6 +674,7 @@ script = ExtResource("9_0410j")
 bus_name = "Sfx"
 
 [node name="Graphic" type="PanelContainer" parent="ScreenGUI"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -688,3 +802,5 @@ button_mask = 0
 [connection signal="toggled" from="ScreenGUI/Graphic/HBoxContainer/LeftVbox/Glow Buttom" to="." method="_on_glow_buttom_toggled"]
 [connection signal="toggled" from="ScreenGUI/Graphic/HBoxContainer/LeftVbox/Particles Button" to="." method="_on_particles_button_toggled"]
 [connection signal="toggled" from="ScreenGUI/Graphic/HBoxContainer/LeftVbox/Lightings Button" to="." method="_on_lightings_button_toggled"]
+[connection signal="toggled" from="ScreenGUI/Graphic/HBoxContainer/RightVbox/ColourBlindButton" to="." method="_on_colour_blind_button_toggled"]
+[connection signal="toggled" from="ScreenGUI/Graphic/HBoxContainer/RightVbox/FPSButton" to="." method="_on_fps_button_toggled"]

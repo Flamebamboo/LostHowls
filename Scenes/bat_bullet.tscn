@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://b63htybecwy5g"]
+[gd_scene load_steps=10 format=3 uid="uid://b63htybecwy5g"]
 
 [ext_resource type="Script" path="res://Script/bat_bullet.gd" id="1_uryag"]
 [ext_resource type="Texture2D" uid="uid://bcrdypc2aw3jf" path="res://art/Enemies/BatBullet.png" id="2_wruuo"]
 [ext_resource type="Script" path="res://Scenes/Hitbox Component.gd" id="3_e4wul"]
+[ext_resource type="Script" path="res://gpu_particles.gd" id="4_2db55"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1v13y"]
 radius = 36.6667
@@ -50,5 +51,7 @@ is_bullet = true
 shape = SubResource("CircleShape2D_4k6oc")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_063rf")
+script = ExtResource("4_2db55")

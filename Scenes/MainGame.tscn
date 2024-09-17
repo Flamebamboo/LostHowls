@@ -840,7 +840,7 @@ area_pcam = NodePath("PhantomCamera2D")
 
 [node name="PhantomCamera2D" type="Node2D" parent="CameraSystem/cam_1" node_paths=PackedStringArray("follow_target", "follow_targets")]
 visible = false
-position = Vector2(312, -338.857)
+position = Vector2(945.143, -338.857)
 script = ExtResource("28_dmuih")
 follow_mode = 3
 follow_target = NodePath("../../../Enitys/Dog")
@@ -892,7 +892,7 @@ shape = SubResource("RectangleShape2D_l0ew3")
 
 [node name="PhantomCamera2D" type="Node2D" parent="CameraSystem/cam_3 proceed" node_paths=PackedStringArray("follow_target")]
 visible = false
-position = Vector2(2438.86, 202.857)
+position = Vector2(2929.14, 202.857)
 script = ExtResource("28_dmuih")
 priority = 50
 follow_mode = 2
@@ -916,7 +916,7 @@ position = Vector2(1962.5, 74)
 shape = SubResource("RectangleShape2D_u7sl4")
 
 [node name="PhantomCamera2D" type="Node2D" parent="CameraSystem/cam_3 Fight" node_paths=PackedStringArray("follow_target")]
-position = Vector2(1821, 71)
+position = Vector2(1821, 134)
 script = ExtResource("28_dmuih")
 follow_mode = 2
 follow_target = NodePath("../../../Enitys/Dog")
@@ -982,7 +982,7 @@ needs_update = false
 
 [node name="Dog" parent="Enitys" node_paths=PackedStringArray("camera") instance=ExtResource("50_w0dsa")]
 z_index = 1
-position = Vector2(1452, 50)
+position = Vector2(2822, 314)
 camera = NodePath("../../CameraSystem/Camera2D")
 
 [node name="spirit" parent="Enitys" instance=ExtResource("63_g7hrd")]

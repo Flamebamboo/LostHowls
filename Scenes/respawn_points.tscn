@@ -1,7 +1,6 @@
-[gd_scene load_steps=21 format=3 uid="uid://dgebxxsq0f2lk"]
+[gd_scene load_steps=20 format=3 uid="uid://dgebxxsq0f2lk"]
 
 [ext_resource type="Texture2D" uid="uid://dfxa6lg32utl" path="res://art/Props/Interactables/firecamp-Sheet.png" id="1_sv6hi"]
-[ext_resource type="Script" path="res://lightings_effects.gd" id="3_6ewwv"]
 [ext_resource type="Texture2D" uid="uid://ddsej4sp1dm32" path="res://art/Props/Interactables/firecampstone.png" id="3_ecjk8"]
 [ext_resource type="Script" path="res://Script/Interactables Script/fire_place.gd" id="3_y04lr"]
 
@@ -175,7 +174,6 @@ z_index = 900
 position = Vector2(-1, 4.57143)
 energy = 1.31
 texture = SubResource("GradientTexture2D_vnugm")
-script = ExtResource("3_6ewwv")
 
 [node name="respawn_points" type="Area2D" parent="." node_paths=PackedStringArray("light", "firecamp") groups=["respawn_points"]]
 collision_layer = 0
