@@ -32,7 +32,6 @@
 [ext_resource type="PackedScene" uid="uid://dyts0n16u8h8n" path="res://Scenes/radiotape.tscn" id="34_hrose"]
 [ext_resource type="PackedScene" uid="uid://bd24oc54elotu" path="res://Scenes/BossBat.tscn" id="39_auycg"]
 [ext_resource type="Texture2D" uid="uid://k8vo7syeuslr" path="res://art/Props/Interactables/skeleton.png" id="42_uy14o"]
-[ext_resource type="Shader" path="res://shader/water.gdshader" id="46_75cln"]
 [ext_resource type="Script" path="res://Scenes/boundriesTemporary.gd" id="46_ysstv"]
 [ext_resource type="PackedScene" uid="uid://d24wjreyddt1s" path="res://Script/BossBatEnemy/Interactables/rock_3.tscn" id="48_3gk76"]
 [ext_resource type="Texture2D" uid="uid://b234lak5x3mra" path="res://art/LevelDesign/overlay_1.png" id="48_o7q3d"]
@@ -110,8 +109,35 @@ normal_texture = ExtResource("25_6hba6")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7xy0v"]
 size = Vector2(519, 75)
 
+[sub_resource type="Shader" id="Shader_lw1pn"]
+code = "shader_type canvas_item;
+
+uniform float progress: hint_range(0.0, 1.0) = 0.5;
+uniform vec4 bg_color: source_color;
+uniform vec4 wave_1_color: source_color;
+uniform vec4 wave_2_color: source_color;
+uniform float wave_1_speed = -1.0;
+uniform float wave_2_speed = 1.0;
+
+vec4 wave( vec2 uv, vec4 wave_color, float level, float freq, float amp, float sin_shift, float speed ){
+	float sinus = sin( (uv.x + sin_shift + TIME * speed) * freq) * amp;
+	float shifted_level = ( 1.0 + 2.0 * amp ) * level - amp; //shift to completely hide or fill
+	float treshold = step( 1.0 - sinus - shifted_level, uv.y);
+	return wave_color * treshold;
+}
+
+void fragment() {
+
+	vec4 wave1 = wave(UV, wave_1_color, progress, 2.5, 0.13, 0.0, wave_1_speed);
+	vec4 wave2 = wave(UV, wave_2_color, progress, 2.0, 0.1, 0.7785*TIME, wave_2_speed);
+
+	vec4 combined_waves = mix(wave1, wave2, wave2.a);
+	COLOR.rgba = mix( bg_color, combined_waves, combined_waves.a ).rgba;
+}
+"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lgc8b"]
-shader = ExtResource("46_75cln")
+shader = SubResource("Shader_lw1pn")
 shader_parameter/progress = 0.961
 shader_parameter/bg_color = Color(0, 0, 0, 0)
 shader_parameter/wave_1_color = Color(0.141176, 0.486275, 0.670588, 1)
@@ -982,7 +1008,7 @@ needs_update = false
 
 [node name="Dog" parent="Enitys" node_paths=PackedStringArray("camera") instance=ExtResource("50_w0dsa")]
 z_index = 1
-position = Vector2(2822, 314)
+position = Vector2(3347, 164)
 camera = NodePath("../../CameraSystem/Camera2D")
 
 [node name="spirit" parent="Enitys" instance=ExtResource("63_g7hrd")]
@@ -1072,9 +1098,11 @@ metadata/_edit_lock_ = true
 
 [node name="ActivationPlatform" parent="." instance=ExtResource("51_hsoca")]
 position = Vector2(819, -166)
+verticle_movement = true
 
-[node name="PressurePlates" parent="." instance=ExtResource("50_hvbsm")]
+[node name="PressurePlates" parent="." node_paths=PackedStringArray("activation_platform") instance=ExtResource("50_hvbsm")]
 position = Vector2(1432, -5)
+activation_platform = NodePath("../ActivationPlatform")
 
 [node name="Box" parent="." instance=ExtResource("53_jthoq")]
 position = Vector2(711, 72)

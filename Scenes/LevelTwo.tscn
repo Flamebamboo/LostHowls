@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=4 uid="uid://cp5opm5cnrywh"]
+[gd_scene load_steps=72 format=4 uid="uid://cp5opm5cnrywh"]
 
 [ext_resource type="Script" path="res://Script/Camera System/CameraMode.gd" id="1_cd30k"]
 [ext_resource type="Script" path="res://Scenes/LevelTwo.gd" id="1_nomkj"]
@@ -25,6 +25,8 @@
 [ext_resource type="PackedScene" uid="uid://cirgj655pd7w0" path="res://pressure_plates.tscn" id="20_qqoa8"]
 [ext_resource type="Texture2D" uid="uid://bw7jyw4jso6h" path="res://Script/windFX.png" id="21_7w73i"]
 [ext_resource type="PackedScene" uid="uid://cb3yfd0yuk4o6" path="res://rock_collision.tscn" id="21_nj0cc"]
+[ext_resource type="Shader" path="res://shader/water.gdshader" id="26_dmt61"]
+[ext_resource type="Texture2D" uid="uid://dg5y5v70gqcd1" path="res://shader/sdasdasd.png" id="27_2b32p"]
 
 [sub_resource type="Environment" id="Environment_44g4k"]
 background_mode = 3
@@ -457,26 +459,26 @@ spread = 180.0
 gravity = Vector3(2.08165e-12, -100, 2.08165e-12)
 color_ramp = SubResource("GradientTexture1D_vfq1g")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4v6au"]
-size = Vector2(193, 102.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kjwsh"]
-size = Vector2(81.5, 472.25)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_l8jfc"]
-size = Vector2(92.75, 225)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1uuww"]
-size = Vector2(92.75, 579.5)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v45as"]
-size = Vector2(265.375, 76.75)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w3gun"]
 size = Vector2(1040.69, 527.375)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4v6au"]
+size = Vector2(184, 83.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kjwsh"]
+size = Vector2(60, 472.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l8jfc"]
+size = Vector2(69.75, 210)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1uuww"]
+size = Vector2(89.375, 569.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v45as"]
+size = Vector2(265.375, 60)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fj0e6"]
-size = Vector2(265.375, 76.75)
+size = Vector2(270.688, 56)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k5s8c"]
 size = Vector2(77.3438, 276.375)
@@ -492,6 +494,9 @@ size = Vector2(315.672, 92.7969)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vij67"]
 size = Vector2(79, 86)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xqym0"]
+size = Vector2(1607, 93.6875)
 
 [sub_resource type="Curve" id="Curve_0j40p"]
 _data = [Vector2(0.00646204, 0.158949), 0.0, 0.0, 0, 0, Vector2(0.505654, 0.500681), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -527,6 +532,40 @@ scale_min = 0.05
 scale_max = 0.05
 alpha_curve = SubResource("CurveTexture_5ejrb")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fddjv"]
+shader = ExtResource("26_dmt61")
+shader_parameter/progress = 0.802
+shader_parameter/bg_color = Color(0, 0, 0, 0)
+shader_parameter/wave_1_color = Color(1, 0, 0, 1)
+shader_parameter/wave_2_color = Color(1, 0, 0, 1)
+shader_parameter/wave_1_speed = -0.05
+shader_parameter/wave_2_speed = 0.05
+
+[sub_resource type="Gradient" id="Gradient_smyk7"]
+offsets = PackedFloat32Array(0.025, 1)
+colors = PackedColorArray(1, 0.207843, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_u3jhd"]
+gradient = SubResource("Gradient_smyk7")
+
+[sub_resource type="Gradient" id="Gradient_1nra3"]
+colors = PackedColorArray(1, 0, 0, 1, 0.701961, 0.0431373, 0.223529, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ii1ob"]
+gradient = SubResource("Gradient_1nra3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kq3kl"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(1000, 25, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(0, -1, 0)
+initial_velocity_max = 98.52
+gravity = Vector3(0, -100, 0)
+scale_min = 0.7
+scale_max = 1.3
+color_ramp = SubResource("GradientTexture1D_ii1ob")
+
 [node name="World2" type="Node2D"]
 script = ExtResource("1_nomkj")
 
@@ -538,7 +577,7 @@ script = ExtResource("2_a05y1")
 
 [node name="Camera2D" type="Camera2D" parent="CameraSystem"]
 physics_interpolation_mode = 1
-position = Vector2(1708, 623.143)
+position = Vector2(375.857, 462)
 zoom = Vector2(0.7, 0.7)
 limit_left = 33
 limit_top = -142
@@ -558,7 +597,7 @@ CameraRef = NodePath("../Camera2D")
 area_pcam = NodePath("PhantomCamera2D")
 
 [node name="PhantomCamera2D" type="Node2D" parent="CameraSystem/cam_1" node_paths=PackedStringArray("follow_target")]
-position = Vector2(1253, 153.143)
+position = Vector2(-79.1429, -8)
 script = ExtResource("2_q0863")
 follow_mode = 2
 follow_target = NodePath("../../../dog")
@@ -581,7 +620,7 @@ CameraRef = NodePath("../Camera2D")
 area_pcam = NodePath("PhantomCamera2D")
 
 [node name="PhantomCamera2D" type="Node2D" parent="CameraSystem/cam_3" node_paths=PackedStringArray("follow_target")]
-position = Vector2(2223, 747)
+position = Vector2(2223, 142)
 script = ExtResource("2_q0863")
 follow_mode = 2
 follow_target = NodePath("../../../dog")
@@ -604,7 +643,7 @@ CameraRef = NodePath("../Camera2D")
 area_pcam = NodePath("PhantomCamera2D")
 
 [node name="PhantomCamera2D" type="Node2D" parent="CameraSystem/cam_4" node_paths=PackedStringArray("follow_target")]
-position = Vector2(2258, 466.5)
+position = Vector2(1151, 466.5)
 script = ExtResource("2_q0863")
 follow_mode = 2
 follow_target = NodePath("../../../dog")
@@ -710,7 +749,7 @@ tile_set = SubResource("TileSet_1bkht")
 script = ExtResource("13_chsxi")
 
 [node name="dog" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("7_efhlf")]
-position = Vector2(1708, 1576)
+position = Vector2(154, 512)
 camera = NodePath("../CameraSystem/Camera2D")
 
 [node name="spirit" parent="." instance=ExtResource("9_8b6j2")]
@@ -733,7 +772,7 @@ unique_name_in_owner = false
 position = Vector2(387, 544)
 
 [node name="firecamp2" parent="." instance=ExtResource("14_in06w")]
-position = Vector2(1721, 1631)
+position = Vector2(2475, 2111)
 
 [node name="boundries" type="Area2D" parent="." node_paths=PackedStringArray("player")]
 position = Vector2(2491, 389)
@@ -741,32 +780,32 @@ collision_mask = 2
 script = ExtResource("9_pyw8y")
 player = NodePath("../dog")
 
+[node name="CollisionShape2D13" type="CollisionShape2D" parent="boundries"]
+position = Vector2(-802, 699.375)
+shape = SubResource("RectangleShape2D_w3gun")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="boundries"]
-position = Vector2(-60.5, 181.25)
+position = Vector2(-65, 190.75)
 shape = SubResource("RectangleShape2D_4v6au")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="boundries"]
-position = Vector2(357.25, 17.125)
+position = Vector2(368, 17.125)
 shape = SubResource("RectangleShape2D_kjwsh")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="boundries"]
-position = Vector2(180.375, 585.5)
+position = Vector2(191.875, 578)
 shape = SubResource("RectangleShape2D_l8jfc")
 
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="boundries"]
-position = Vector2(-153, 670.25)
+position = Vector2(-154.688, 665.25)
 shape = SubResource("RectangleShape2D_1uuww")
 
 [node name="CollisionShape2D5" type="CollisionShape2D" parent="boundries"]
-position = Vector2(122.312, 792.625)
+position = Vector2(122.312, 801)
 shape = SubResource("RectangleShape2D_v45as")
 
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="boundries/CollisionShape2D5"]
-position = Vector2(-924.312, -101.625)
-shape = SubResource("RectangleShape2D_w3gun")
-
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="boundries"]
-position = Vector2(341, 469)
+position = Vector2(338.344, 480)
 shape = SubResource("RectangleShape2D_fj0e6")
 
 [node name="CollisionShape2D7" type="CollisionShape2D" parent="boundries"]
@@ -792,6 +831,10 @@ shape = SubResource("RectangleShape2D_vij67")
 [node name="CollisionShape2D12" type="CollisionShape2D" parent="boundries"]
 position = Vector2(-226.5, 1073)
 shape = SubResource("RectangleShape2D_vij67")
+
+[node name="CollisionShape2D14" type="CollisionShape2D" parent="boundries"]
+position = Vector2(-1344.5, 1962.16)
+shape = SubResource("RectangleShape2D_xqym0")
 
 [node name="CharacterBody2D" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("15_ufj75")]
 position = Vector2(1033, 2103)
@@ -858,6 +901,21 @@ position = Vector2(2713, 2088)
 
 [node name="RockCollision" parent="." instance=ExtResource("21_nj0cc")]
 position = Vector2(103, 560)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_fddjv")
+offset_left = 272.0
+offset_top = 2283.0
+offset_right = 1985.0
+offset_bottom = 2483.0
+texture = SubResource("GradientTexture2D_u3jhd")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="TextureRect"]
+position = Vector2(787, -16)
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_kq3kl")
+texture = ExtResource("27_2b32p")
+script = ExtResource("19_op7ew")
 
 [connection signal="body_entered" from="CameraSystem/cam_1" to="CameraSystem/cam_1" method="_on_body_entered"]
 [connection signal="body_exited" from="CameraSystem/cam_1" to="CameraSystem/cam_1" method="_on_body_exited"]

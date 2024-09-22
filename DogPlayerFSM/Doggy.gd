@@ -54,7 +54,7 @@ func display_jump_effects():
 func instantdeath():
 	health_component.health = health_component.health_min
 	Global.dogAlive = false
-	
+	SoundManager.death_sound.play()
 
 
 

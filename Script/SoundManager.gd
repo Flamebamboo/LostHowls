@@ -7,7 +7,7 @@ var sound_poolByName: Dictionary = {}
 @export var laser_sound: AudioStreamPlayer
 @export var impact_sound: AudioStreamPlayer
 @export var charge_sound: AudioStreamPlayer
-
+@export var death_sound: AudioStreamPlayer
 #func _ready():
 	#sound_queuesByName["ShootSoundQueue"] = get_node("ShootSoundQueue")
 	#sound_queuesByName["LaserSoundQueue"] = get_node("LaserSoundQueue")
