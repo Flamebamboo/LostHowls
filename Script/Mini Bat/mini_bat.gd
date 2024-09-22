@@ -6,11 +6,16 @@ class_name MiniBat
 @export var hurtbox_component:= Hurtbox
 @onready var machine := %MiniBatFSM
 @export var animatedsprite: AnimatedSprite2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
+func ready():
+	animation_player.play("RESET")
 func _physics_process(_delta):
 	move_and_slide()
+	
+	
 	var state_name = machine.active_state.get_name()
-	$Label.text = state_name	
+	#$Label.text = state_name	
 	
 func _on_health_components_took_damage():
 	pass

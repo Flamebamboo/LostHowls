@@ -38,8 +38,8 @@ func s_physics_process(_delta):
 	
 
 		
-	#if Input.is_action_just_pressed("dash"):
-		#machine.transition_to(machine.states["DashState"])
+	if Input.is_action_just_pressed("dash"):
+		machine.transition_to(machine.states["DashState"])
 func s_deactivate():
 	Global.current_idle = false	
 

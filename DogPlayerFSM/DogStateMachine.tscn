@@ -253,6 +253,7 @@ offset_bottom = 100.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = SubResource("Theme_f4cmb")
+step = 0.1
 value = 100.0
 texture_under = ExtResource("2_hitdm")
 texture_over = ExtResource("3_by805")
@@ -286,7 +287,7 @@ air_resistance = 700
 acceleration = 500.0
 friction = 2000.0
 max_speed = 280.0
-speed_multiplier = 1000.0
+speed_multiplier = 300.0
 
 [node name="Health Components" type="Node" parent="." node_paths=PackedStringArray("player", "CharacterBody")]
 script = ExtResource("9_hr7x4")

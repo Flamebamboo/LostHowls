@@ -224,7 +224,7 @@ tracks/7/keys = {
 
 [sub_resource type="Animation" id="Animation_fq2ls"]
 resource_name = "death_flash"
-length = 1.7
+length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -232,10 +232,10 @@ tracks/0/path = NodePath("ColorRect:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1.5),
-"transitions": PackedFloat32Array(1, 1, 3.32087),
+"times": PackedFloat32Array(0, 0.5, 1.26667, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 3.32087),
 "update": 0,
-"values": [Color(0, 0, 0, 0), Color(1, 0, 0, 1), Color(1, 0, 0, 0)]
+"values": [Color(0, 0, 0, 0), Color(1, 0, 0, 1), Color(1, 0, 0, 1), Color(1, 0, 0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -244,7 +244,7 @@ tracks/1/path = NodePath("ColorRect:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.7),
+"times": PackedFloat32Array(0, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -402,7 +402,7 @@ font_size = 8
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_po4mp"]
 shader = ExtResource("3_umdy4")
-shader_parameter/lod = 0.0
+shader_parameter/lod = 0.8
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_il18x"]
 texture = ExtResource("5_c84c7")
@@ -417,9 +417,11 @@ texture = ExtResource("5_c84c7")
 [node name="Control" type="Control"]
 process_mode = 3
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_ododx")
 
 [node name="ScreenGUI" type="CanvasLayer" parent="."]
@@ -529,7 +531,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-color = Color(0, 0, 0, 0)
+color = Color(1, 0, 0, 0.633333)
 
 [node name="Blur" type="ColorRect" parent="ScreenGUI"]
 visible = false
@@ -543,7 +545,6 @@ grow_vertical = 2
 [node name="PauseMenu" type="PanelContainer" parent="ScreenGUI"]
 process_mode = 3
 visible = false
-modulate = Color(1, 1, 1, 0)
 top_level = true
 anchors_preset = 8
 anchor_left = 0.5
@@ -675,6 +676,7 @@ bus_name = "Sfx"
 
 [node name="Graphic" type="PanelContainer" parent="ScreenGUI"]
 visible = false
+modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

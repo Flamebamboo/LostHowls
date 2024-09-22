@@ -3,7 +3,8 @@ extends Control
 #this class should and will contain all related gui like flash when player hurt enemy killed and stuff
 @onready var anim_player = $ScreenGUI/AnimationPlayer
 @onready var colour_blind: ColorRect = $ScreenGUI/ColorBlind
-@onready var top_right_info: PanelContainer = $ScreenGUI/TopRightInfo/MarginContainer/VBoxContainer/FPSlabel
+@onready var fps: Label = $ScreenGUI/TopRightInfo/MarginContainer/VBoxContainer/FPSlabel
+
 
 #show fps
 
@@ -16,7 +17,7 @@ func _ready():
 	Global.particle_setting = true
 	Global.light_setting = true
 	colour_blind.visible = false
-	top_right_info.visible = true
+	fps.visible = true
 
 func _process(delta):
 	PauseMenu()
@@ -140,4 +141,4 @@ func _on_colour_blind_button_toggled(toggled_on: bool) -> void:
 
 
 func _on_fps_button_toggled(toggled_on: bool) -> void:
-	top_right_info.visible = toggled_on 
+	fps.visible = toggled_on 

@@ -9,6 +9,7 @@ signal lights_toggled(toggled_on)
 var light_setting: bool = false
 var particle_setting: bool = false
 
+var navigation_tile: TileMapLayer
 
 
 var dogAlive: bool

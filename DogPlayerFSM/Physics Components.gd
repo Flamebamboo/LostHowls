@@ -114,6 +114,17 @@ func jumps():
 	velocity.y = jump_velocity
 	jump_count += 1
 	
+func dash(delta: float = get_physics_process_delta_time()):
+	var direction: int
+	if owner.anim.flip_h == true:
+		direction = -1
+	elif owner.anim.flip_h == false:
+		direction = 1
+	velocity.x = direction * max_speed * speed_multiplier * delta 
+	velocity.y = 0
+	
+
+	
 	
 #func double_jump():
 	#velocity.y = jump_velocity/2

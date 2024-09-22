@@ -1,10 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://0drrtr1rw0n1"]
+[gd_scene load_steps=27 format=3 uid="uid://0drrtr1rw0n1"]
 
 [ext_resource type="Script" path="res://Script/Mini Bat/mini_bat.gd" id="1_pulgo"]
 [ext_resource type="Script" path="res://Scenes/Velocity Component.gd" id="2_a3so0"]
 [ext_resource type="Texture2D" uid="uid://qxey0hadkc6l" path="res://art/Enemies/mini_bat-Sheet.png" id="5_aijwg"]
 [ext_resource type="Script" path="res://Script/Mini Bat/mini_bat_controller.gd" id="6_5l8mv"]
 [ext_resource type="Script" path="res://Scenes/Hitbox Component.gd" id="7_n8hwc"]
+[ext_resource type="Script" path="res://Script/Mini Bat/Mini Bat States/chase_state.gd" id="8_sksoy"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/hurtbox_components.gd" id="8_wndaj"]
 [ext_resource type="Script" path="res://Script/Mini Bat/mini_bat_statemachine.gd" id="9_vs084"]
 [ext_resource type="Script" path="res://Script/Mini Bat/Mini Bat States/laser_state.gd" id="10_m1j8f"]
@@ -19,38 +20,14 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("RayCast2D/Line2D:default_color")
+tracks/0/path = NodePath("RayCast2D/Line2D:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 0, 0, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("RayCast2D/Line2D:width")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [10.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("RayCast2D/Line2D:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.001),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_85ph8"]
@@ -172,7 +149,7 @@ animations = [{
 radius = 15.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pubmf"]
-radius = 258.095
+radius = 367.001
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xuj0o"]
 radius = 78.0064
@@ -196,6 +173,8 @@ color_ramp = SubResource("GradientTexture1D_0iiwp")
 [node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("health_component", "hurtbox_component", "animatedsprite") groups=["Enemy"]]
 collision_layer = 128
 collision_mask = 17
+motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_pulgo")
 health_component = NodePath("Health Components")
 hurtbox_component = NodePath("Hurtbox")
@@ -210,22 +189,29 @@ libraries = {
 "": SubResource("AnimationLibrary_qq0eo")
 }
 
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
+avoidance_enabled = true
+radius = 50.0
+
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(250, 2.08165e-12)
-collision_mask = 2
+collision_mask = 3
 hit_from_inside = true
 collide_with_areas = true
-collide_with_bodies = false
 
 [node name="Line2D" type="Line2D" parent="RayCast2D"]
+visible = false
 z_index = 240
 position = Vector2(-1, -6)
 points = PackedVector2Array(2.08165e-12, 2.08165e-12, 150, 2.08165e-12)
+width = 2.0
 default_color = Color(1, 0, 0, 1)
 
 [node name="VelocityComponents" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("2_a3so0")
+max_speed = 100.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(3, -1)
@@ -250,9 +236,23 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Entity Detector"]
+position = Vector2(28, 4)
 shape = SubResource("CircleShape2D_pubmf")
 
+[node name="Laser Executer" type="Area2D" parent="."]
+rotation = 1.5708
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Laser Executer"]
+polygon = PackedVector2Array(0, 0, 150, -500, -150, -500)
+
+[node name="Polygon2D" type="Polygon2D" parent="Laser Executer"]
+color = Color(1, 0, 0, 0.101961)
+polygon = PackedVector2Array(0, 0, -150, -500, 150, -500)
+
 [node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health_components", "gpu_particles_2d")]
+visible = false
 collision_layer = 128
 collision_mask = 16
 script = ExtResource("8_wndaj")
@@ -279,6 +279,7 @@ script = ExtResource("6_5l8mv")
 machine = NodePath("../MiniBatFSM")
 
 [node name="Label" type="Label" parent="."]
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 
@@ -286,25 +287,27 @@ offset_bottom = 23.0
 unique_name_in_owner = true
 script = ExtResource("9_vs084")
 
+[node name="ChaseState" type="Node" parent="MiniBatFSM"]
+script = ExtResource("8_sksoy")
+
 [node name="LaserState" type="Node" parent="MiniBatFSM" node_paths=PackedStringArray("raycast", "line", "anim")]
 script = ExtResource("10_m1j8f")
 raycast = NodePath("../../RayCast2D")
 line = NodePath("../../RayCast2D/Line2D")
 anim = NodePath("../../AnimationPlayer")
 
-[node name="WanderingState" type="Node" parent="MiniBatFSM" node_paths=PackedStringArray("flyingtimer")]
+[node name="WanderingState" type="Node" parent="MiniBatFSM"]
 script = ExtResource("11_y1rkr")
-flyingtimer = NodePath("../../flyingtimer")
-
-[node name="flyingtimer" type="Timer" parent="."]
-autostart = true
 
 [node name="Health Components" type="Node" parent="." node_paths=PackedStringArray("CharacterBody")]
 script = ExtResource("10_ut1yg")
 health_max = 60
 CharacterBody = NodePath("..")
 
+[connection signal="velocity_computed" from="NavigationAgent2D" to="MiniBatFSM/ChaseState" method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="body_entered" from="Entity Detector" to="State Controller" method="_on_entity_detector_body_entered"]
-[connection signal="timeout" from="flyingtimer" to="MiniBatFSM/WanderingState" method="_on_flyingtimer_timeout"]
+[connection signal="body_exited" from="Entity Detector" to="State Controller" method="_on_entity_detector_body_exited"]
+[connection signal="body_entered" from="Laser Executer" to="State Controller" method="_on_laser_executer_body_entered"]
+[connection signal="body_exited" from="Laser Executer" to="State Controller" method="_on_laser_executer_body_exited"]
 [connection signal="died" from="Health Components" to="." method="_on_health_components_died"]
 [connection signal="took_damage" from="Health Components" to="." method="_on_health_components_took_damage"]
