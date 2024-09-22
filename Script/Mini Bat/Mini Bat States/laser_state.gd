@@ -34,7 +34,7 @@ func s_physics_process(delta):
 			
 			if collider is Hurtbox:
 				# Apply reduced damage over time instead of instant heavy damage
-				collider.apply_damage(10)
+				collider.apply_laser_damage(1, delta)
 
 	# Deactivate laser when the timer runs out
 	if laser_timer.is_stopped():

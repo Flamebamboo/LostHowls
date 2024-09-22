@@ -12,11 +12,17 @@ class_name Hurtbox
 func apply_damage(damage):
 	print(damage, "damage amount")
 	if health_components.health > 0: #if both of this conditions are met damage will be applied to health components
-		health_components.take_damage(damage) 
+		health_components.take_damage(damage)
+ 
 	
 	if gpu_particles_2d && Global.particle_setting:	
 		gpu_particles_2d.emitting = true
-			
+		
+func apply_laser_damage(laser_damage, delta):
+	var damage_over_time = laser_damage * delta
+	health_components.take_damage(laser_damage)
+	
+	
 	#if bullet_impact:
 		#var impact_show = bullet_impact.instantiate()
 		#impact_show.global_position = owner.global_position

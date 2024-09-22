@@ -538,7 +538,7 @@ script = ExtResource("2_a05y1")
 
 [node name="Camera2D" type="Camera2D" parent="CameraSystem"]
 physics_interpolation_mode = 1
-position = Vector2(1936.14, 623.143)
+position = Vector2(1708, 623.143)
 zoom = Vector2(0.7, 0.7)
 limit_left = 33
 limit_top = -142
@@ -558,7 +558,7 @@ CameraRef = NodePath("../Camera2D")
 area_pcam = NodePath("PhantomCamera2D")
 
 [node name="PhantomCamera2D" type="Node2D" parent="CameraSystem/cam_1" node_paths=PackedStringArray("follow_target")]
-position = Vector2(1481.14, 153.143)
+position = Vector2(1253, 153.143)
 script = ExtResource("2_q0863")
 follow_mode = 2
 follow_target = NodePath("../../../dog")
@@ -604,7 +604,7 @@ CameraRef = NodePath("../Camera2D")
 area_pcam = NodePath("PhantomCamera2D")
 
 [node name="PhantomCamera2D" type="Node2D" parent="CameraSystem/cam_4" node_paths=PackedStringArray("follow_target")]
-position = Vector2(2930, 466.5)
+position = Vector2(2258, 466.5)
 script = ExtResource("2_q0863")
 follow_mode = 2
 follow_target = NodePath("../../../dog")
@@ -710,7 +710,7 @@ tile_set = SubResource("TileSet_1bkht")
 script = ExtResource("13_chsxi")
 
 [node name="dog" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("7_efhlf")]
-position = Vector2(2423, 1663)
+position = Vector2(1708, 1576)
 camera = NodePath("../CameraSystem/Camera2D")
 
 [node name="spirit" parent="." instance=ExtResource("9_8b6j2")]
@@ -733,7 +733,7 @@ unique_name_in_owner = false
 position = Vector2(387, 544)
 
 [node name="firecamp2" parent="." instance=ExtResource("14_in06w")]
-position = Vector2(2485, 2114)
+position = Vector2(1721, 1631)
 
 [node name="boundries" type="Area2D" parent="." node_paths=PackedStringArray("player")]
 position = Vector2(2491, 389)
@@ -798,6 +798,21 @@ position = Vector2(1033, 2103)
 collision_mask = 145
 camera = NodePath("../CameraSystem/Camera2D")
 
+[node name="CharacterBody2D3" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("15_ufj75")]
+position = Vector2(1092, 2260)
+collision_mask = 145
+camera = NodePath("../CameraSystem/Camera2D")
+
+[node name="CharacterBody2D5" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("15_ufj75")]
+position = Vector2(577, 2301)
+collision_mask = 145
+camera = NodePath("../CameraSystem/Camera2D")
+
+[node name="CharacterBody2D4" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("15_ufj75")]
+position = Vector2(618, 1991)
+collision_mask = 145
+camera = NodePath("../CameraSystem/Camera2D")
+
 [node name="CharacterBody2D2" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("15_ufj75")]
 position = Vector2(1211, 2195)
 collision_mask = 145
@@ -827,11 +842,6 @@ position = Vector2(2311, 1765)
 amplitude = 280.0
 verticle_movement = true
 
-[node name="ActivationPlatform3" parent="." instance=ExtResource("19_utw5j")]
-position = Vector2(1287, 1575)
-amplitude = 300.0
-horizontal_movement = true
-
 [node name="PressurePlates" parent="." node_paths=PackedStringArray("activation_platform") instance=ExtResource("20_qqoa8")]
 position = Vector2(1071, 451)
 activation_platform = NodePath("../ActivationPlatform")
@@ -840,18 +850,11 @@ activation_platform = NodePath("../ActivationPlatform")
 position = Vector2(3541, 2020)
 activation_platform = NodePath("../ActivationPlatform2")
 
-[node name="PressurePlates3" parent="." node_paths=PackedStringArray("activation_platform") instance=ExtResource("20_qqoa8")]
-position = Vector2(2823, 1633)
-activation_platform = NodePath("../ActivationPlatform3")
-
 [node name="ObjectsMovable" parent="." instance=ExtResource("20_4k72f")]
 position = Vector2(270, 485)
 
 [node name="ObjectsMovable2" parent="." instance=ExtResource("20_4k72f")]
 position = Vector2(2713, 2088)
-
-[node name="ObjectsMovable3" parent="." instance=ExtResource("20_4k72f")]
-position = Vector2(1894, 1620)
 
 [node name="RockCollision" parent="." instance=ExtResource("21_nj0cc")]
 position = Vector2(103, 560)
