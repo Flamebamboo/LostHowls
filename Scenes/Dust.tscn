@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://uy16c27g5iga"]
 
 [ext_resource type="Texture2D" uid="uid://2fd1moekd0f0" path="res://art/VFX/dustjumpeffect-Sheet.png" id="1_658ta"]
-[ext_resource type="Script" path="res://Script/dissapear_effect.gd" id="2_ldrtd"]
+[ext_resource type="Script" path="res://Script/Player/dissapear_effect.gd" id="2_ldrtd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r2lhc"]
 atlas = ExtResource("1_658ta")

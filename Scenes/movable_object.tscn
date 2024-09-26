@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bp0pim2t0a55p"]
 
-[ext_resource type="Script" path="res://Script/movable_object.gd" id="1_wwywf"]
-[ext_resource type="Texture2D" uid="uid://c8c0wxckpyur" path="res://Scenes/Movable_Rock-Sheet.png" id="2_76mlx"]
+[ext_resource type="Script" path="res://Script/Interactables Script/movable_object.gd" id="1_wwywf"]
+[ext_resource type="Texture2D" uid="uid://c8c0wxckpyur" path="res://art/Props/Interactables/Movable_Rock-Sheet.png" id="2_76mlx"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gqnj6"]
 light_mode = 1

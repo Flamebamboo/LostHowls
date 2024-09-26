@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://c8peaow087m8"]
 
-[ext_resource type="Script" path="res://Script/ActivationPlatform.gd" id="1_08tkq"]
-[ext_resource type="Texture2D" uid="uid://sh3nasnafg0u" path="res://art/Platform-Sheet.png" id="2_o5f22"]
+[ext_resource type="Script" path="res://Script/Interactables Script/ActivationPlatform.gd" id="1_08tkq"]
+[ext_resource type="Texture2D" uid="uid://sh3nasnafg0u" path="res://art/Props/Interactables/Platform-Sheet.png" id="2_o5f22"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6maeh"]
 light_mode = 1

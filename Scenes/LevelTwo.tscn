@@ -1,36 +1,40 @@
-[gd_scene load_steps=87 format=4 uid="uid://cp5opm5cnrywh"]
+[gd_scene load_steps=97 format=4 uid="uid://cp5opm5cnrywh"]
 
 [ext_resource type="Script" path="res://Script/Camera System/CameraMode.gd" id="1_cd30k"]
-[ext_resource type="Script" path="res://Script/LevelTwo.gd" id="1_nomkj"]
-[ext_resource type="TileSet" uid="uid://byvgusw8ywfl2" path="res://Scenes/Tilemaps.tres" id="1_ogv62"]
+[ext_resource type="Script" path="res://Script/Scene Scripts/LevelTwo.gd" id="1_nomkj"]
+[ext_resource type="TileSet" uid="uid://byvgusw8ywfl2" path="res://Resource/Tilemaps.tres" id="1_ogv62"]
 [ext_resource type="Script" path="res://Script/Camera System/Camera.gd" id="2_3rgbs"]
-[ext_resource type="Script" path="res://Script/world_environment.gd" id="2_a05y1"]
-[ext_resource type="TileSet" uid="uid://duvywr0e4alq6" path="res://Scenes/Mosses.tres" id="2_gp0sw"]
+[ext_resource type="Script" path="res://Script/Modular Scripts/world_environment.gd" id="2_a05y1"]
+[ext_resource type="TileSet" uid="uid://duvywr0e4alq6" path="res://Resource/Mosses.tres" id="2_gp0sw"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="2_q0863"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="3_7q5yo"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="5_a75qp"]
-[ext_resource type="PackedScene" uid="uid://cb46co0m8f53s" path="res://DogPlayerFSM/DogStateMachine.tscn" id="7_efhlf"]
+[ext_resource type="PackedScene" uid="uid://cb46co0m8f53s" path="res://Script/DogPlayerFSM/DogStateMachine.tscn" id="7_efhlf"]
 [ext_resource type="PackedScene" uid="uid://r8fwkr0ot8rp" path="res://Scenes/spirit.tscn" id="9_8b6j2"]
 [ext_resource type="Texture2D" uid="uid://q1eswmyccpph" path="res://art/Obstacles/redwireframe.png" id="9_p46e2"]
-[ext_resource type="Script" path="res://Script/boundriesTemporary.gd" id="9_pyw8y"]
+[ext_resource type="Script" path="res://Script/Interactables Script/boundriesTemporary.gd" id="9_pyw8y"]
 [ext_resource type="Texture2D" uid="uid://42e3dhkoudfi" path="res://art/LevelDesign/wireframe.png" id="12_584x0"]
-[ext_resource type="Script" path="res://Script/navigation_tile.gd" id="13_chsxi"]
-[ext_resource type="Texture2D" uid="uid://c81fbkw8stwpr" path="res://art/floaty_64.png" id="13_ihoia"]
+[ext_resource type="Script" path="res://Script/Interactables Script/navigation_tile.gd" id="13_chsxi"]
+[ext_resource type="Texture2D" uid="uid://c81fbkw8stwpr" path="res://art/VFX/floaty_64.png" id="13_ihoia"]
 [ext_resource type="PackedScene" uid="uid://dgebxxsq0f2lk" path="res://Scenes/respawn_points.tscn" id="14_in06w"]
 [ext_resource type="PackedScene" uid="uid://0drrtr1rw0n1" path="res://Scenes/MiniBat.tscn" id="15_ufj75"]
-[ext_resource type="Script" path="res://Script/lightings_effects.gd" id="18_5qj8x"]
-[ext_resource type="Script" path="res://Script/gpu_particles.gd" id="19_op7ew"]
+[ext_resource type="Script" path="res://Script/Modular Scripts/lightings_effects.gd" id="18_5qj8x"]
+[ext_resource type="Script" path="res://Script/Interactables Script/gpu_particles.gd" id="19_op7ew"]
 [ext_resource type="PackedScene" uid="uid://c8peaow087m8" path="res://Scenes/activation_platform.tscn" id="19_utw5j"]
 [ext_resource type="PackedScene" uid="uid://bp0pim2t0a55p" path="res://Scenes/movable_object.tscn" id="20_4k72f"]
 [ext_resource type="PackedScene" uid="uid://cirgj655pd7w0" path="res://Scenes/pressure_plates.tscn" id="20_qqoa8"]
-[ext_resource type="Texture2D" uid="uid://bw7jyw4jso6h" path="res://Script/windFX.png" id="21_7w73i"]
+[ext_resource type="Texture2D" uid="uid://bw7jyw4jso6h" path="res://art/VFX/windFX.png" id="21_7w73i"]
 [ext_resource type="PackedScene" uid="uid://cb3yfd0yuk4o6" path="res://Scenes/rock_collision.tscn" id="21_nj0cc"]
 [ext_resource type="Script" path="res://Script/keys_collect.gd" id="26_a20du"]
-[ext_resource type="Texture2D" uid="uid://dg5y5v70gqcd1" path="res://art/sdasdasd.png" id="27_2b32p"]
-[ext_resource type="Script" path="res://Script/gate_1.gd" id="27_017ri"]
-[ext_resource type="Script" path="res://Script/lasers.gd" id="27_edf0t"]
+[ext_resource type="Texture2D" uid="uid://dg5y5v70gqcd1" path="res://art/VFX/sdasdasd.png" id="27_2b32p"]
+[ext_resource type="Script" path="res://Script/Interactables Script/gate_1.gd" id="27_017ri"]
+[ext_resource type="Script" path="res://Script/Interactables Script/lasers.gd" id="27_edf0t"]
 [ext_resource type="Texture2D" uid="uid://dd48qbijycf3p" path="res://art/LevelDesign/PurpleTiles.png" id="31_mvl33"]
 [ext_resource type="PackedScene" uid="uid://dpo7eea02nhf0" path="res://Scenes/timing_platform.tscn" id="31_n1r6j"]
+[ext_resource type="Script" path="res://Script/tutorial_keys.gd" id="32_72kog"]
+[ext_resource type="Texture2D" uid="uid://dmkg2vv70yqks" path="res://art/LevelDesign/TutorialKeys/shift_keys1.png" id="33_s45wt"]
+[ext_resource type="Texture2D" uid="uid://u23tw6qg8mn8" path="res://art/LevelDesign/TutorialKeys/shift_keys2.png" id="34_v8gw7"]
+[ext_resource type="Texture2D" uid="uid://cv0fjj7ajs501" path="res://art/LevelDesign/TutorialKeys/shift_keys3.png" id="35_fydiq"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_17cjn"]
 blend_mode = 1
@@ -591,6 +595,90 @@ sources/0 = SubResource("TileSetAtlasSource_1ceri")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ylqsn"]
 size = Vector2(45.5, 53.25)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xlvgt"]
+light_mode = 1
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c312p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("33_s45wt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_v8gw7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_fydiq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ak5qi"]
+size = Vector2(106, 84.5)
+
+[sub_resource type="Animation" id="Animation_4ouvr"]
+resource_name = "GlidingKey"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GlidingKeys/GlidingKeys:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GlidingKeys/GlidingKeys:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ek0xd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GlidingKeys/GlidingKeys:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GlidingKeys/GlidingKeys:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t5b05"]
+_data = {
+"GlidingKey": SubResource("Animation_4ouvr"),
+"RESET": SubResource("Animation_ek0xd")
+}
+
 [node name="World2" type="Node2D"]
 script = ExtResource("1_nomkj")
 
@@ -974,7 +1062,7 @@ position = Vector2(3541, 2020)
 activation_platform = NodePath("../ActivationPlatform2")
 
 [node name="ObjectsMovable" parent="Pushable Rocks" instance=ExtResource("20_4k72f")]
-position = Vector2(270, 485)
+position = Vector2(526, 542)
 
 [node name="ObjectsMovable2" parent="Pushable Rocks" instance=ExtResource("20_4k72f")]
 position = Vector2(2713, 2088)
@@ -1157,6 +1245,36 @@ collision_mask = 2
 position = Vector2(2246, -240)
 shape = SubResource("RectangleShape2D_ylqsn")
 
+[node name="GUI" type="Node" parent="."]
+
+[node name="GlidingKeys" type="Area2D" parent="GUI" node_paths=PackedStringArray("_tutorial_sprites", "_animation_player")]
+position = Vector2(-124, 40)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("32_72kog")
+_tutorial_sprites = NodePath("GlidingKeys")
+_animation_name = "GlidingKey"
+_animation_player = NodePath("../AnimationPlayer")
+
+[node name="GlidingKeys" type="AnimatedSprite2D" parent="GUI/GlidingKeys"]
+modulate = Color(1, 1, 1, 0)
+z_index = 10
+material = SubResource("CanvasItemMaterial_xlvgt")
+position = Vector2(1268, 93)
+sprite_frames = SubResource("SpriteFrames_c312p")
+autoplay = "default"
+frame_progress = 0.501
+offset = Vector2(-25, -54)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GUI/GlidingKeys"]
+position = Vector2(1251, 178.75)
+shape = SubResource("RectangleShape2D_ak5qi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GUI"]
+libraries = {
+"": SubResource("AnimationLibrary_t5b05")
+}
+
 [connection signal="body_entered" from="CameraSystem/cam_1" to="CameraSystem/cam_1" method="_on_body_entered"]
 [connection signal="body_exited" from="CameraSystem/cam_1" to="CameraSystem/cam_1" method="_on_body_exited"]
 [connection signal="body_entered" from="CameraSystem/cam_3" to="CameraSystem/cam_3" method="_on_body_entered"]
@@ -1179,3 +1297,5 @@ shape = SubResource("RectangleShape2D_ylqsn")
 [connection signal="body_entered" from="Keys" to="Keys" method="_on_body_entered"]
 [connection signal="key_collected" from="Keys" to="Area2D" method="_on_keys_key_collected"]
 [connection signal="body_entered" from="Next Level" to="." method="_on_next_level_body_entered"]
+[connection signal="body_entered" from="GUI/GlidingKeys" to="GUI/GlidingKeys" method="_on_body_entered"]
+[connection signal="body_exited" from="GUI/GlidingKeys" to="GUI/GlidingKeys" method="_on_body_exited"]

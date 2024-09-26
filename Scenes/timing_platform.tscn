@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://dpo7eea02nhf0"]
 
-[ext_resource type="Script" path="res://Script/timing_platform.gd" id="1_the68"]
-[ext_resource type="Texture2D" uid="uid://s6dgb58ael83" path="res://art/timing_platform.png" id="2_0bqn1"]
+[ext_resource type="Script" path="res://Script/Interactables Script/timing_platform.gd" id="1_the68"]
+[ext_resource type="Texture2D" uid="uid://s6dgb58ael83" path="res://art/Props/Interactables/timing_platform.png" id="2_0bqn1"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ehav4"]
 light_mode = 1

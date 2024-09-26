@@ -1,7 +1,7 @@
 [gd_resource type="Theme" load_steps=6 format=3 uid="uid://cfkwd1gjicsa2"]
 
-[ext_resource type="Texture2D" uid="uid://y3bkxgl3vima" path="res://art/checked.png" id="1_pnwqw"]
-[ext_resource type="Texture2D" uid="uid://bi1c58ds5opa0" path="res://art/unchecked.png" id="2_rmfj2"]
+[ext_resource type="Texture2D" uid="uid://y3bkxgl3vima" path="res://art/Interface Elements/checked.png" id="1_pnwqw"]
+[ext_resource type="Texture2D" uid="uid://bi1c58ds5opa0" path="res://art/Interface Elements/unchecked.png" id="2_rmfj2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_beruf"]
 

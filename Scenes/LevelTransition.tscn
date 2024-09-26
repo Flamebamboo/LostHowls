@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://tyi6sxqesprj"]
 
-[ext_resource type="Script" path="res://Script/LevelTransition.gd" id="1_hm280"]
+[ext_resource type="Script" path="res://Script/Modular Scripts/LevelTransition.gd" id="1_hm280"]
 [ext_resource type="FontFile" uid="uid://bnf2p438dv3b5" path="res://Fonts/Pixellari.ttf" id="2_b6h2x"]
 
 [sub_resource type="Animation" id="Animation_mkkfw"]

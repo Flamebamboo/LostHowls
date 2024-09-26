@@ -1,7 +1,7 @@
 [gd_resource type="Theme" load_steps=6 format=3 uid="uid://ddi3fe4upbtie"]
 
-[ext_resource type="Texture2D" uid="uid://c0qql5ge3nshe" path="res://art/SliderGrabber.png" id="1_r7q8s"]
-[ext_resource type="Texture2D" uid="uid://cxhrep2jotuv5" path="res://art/SliderHighlight.png" id="2_tn8ly"]
+[ext_resource type="Texture2D" uid="uid://c0qql5ge3nshe" path="res://art/Interface Elements/SliderGrabber.png" id="1_r7q8s"]
+[ext_resource type="Texture2D" uid="uid://cxhrep2jotuv5" path="res://art/Interface Elements/SliderHighlight.png" id="2_tn8ly"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aqbfb"]
 bg_color = Color(0.0901961, 0.858824, 0.831373, 1)

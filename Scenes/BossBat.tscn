@@ -1,24 +1,23 @@
-[gd_scene load_steps=38 format=3 uid="uid://bd24oc54elotu"]
+[gd_scene load_steps=37 format=3 uid="uid://bd24oc54elotu"]
 
 [ext_resource type="Material" uid="uid://bmgyfioow48f8" path="res://Resource/unshadedlight.tres" id="1_xyjkw"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/boss_bat.gd" id="2_ympke"]
-[ext_resource type="Texture2D" uid="uid://ddjogmwtkrlb8" path="res://art/bosshealthunder.png" id="3_pctn6"]
-[ext_resource type="Texture2D" uid="uid://ba6320noj0j2n" path="res://art/bosshealthover.png" id="4_1p8oj"]
+[ext_resource type="Texture2D" uid="uid://ddjogmwtkrlb8" path="res://art/Interface Elements/bosshealthunder.png" id="3_pctn6"]
+[ext_resource type="Texture2D" uid="uid://ba6320noj0j2n" path="res://art/Interface Elements/bosshealthover.png" id="4_1p8oj"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/bat_state_controller.gd" id="4_25j3u"]
-[ext_resource type="Script" path="res://Script/Hitbox Component.gd" id="5_s5xi1"]
+[ext_resource type="Script" path="res://Script/Modular Scripts/Hitbox Component.gd" id="5_s5xi1"]
 [ext_resource type="Texture2D" uid="uid://boijh8vbuie55" path="res://art/Enemies/Bossbat-Sheet.png" id="6_8r4q4"]
-[ext_resource type="Script" path="res://Script/EnemyHealth.gd" id="6_im028"]
-[ext_resource type="Script" path="res://Script/gpu_particles.gd" id="7_75kkb"]
+[ext_resource type="Script" path="res://Script/BossBatEnemy/EnemyHealth.gd" id="6_im028"]
+[ext_resource type="Script" path="res://Script/Interactables Script/gpu_particles.gd" id="7_75kkb"]
 [ext_resource type="AudioStream" uid="uid://kupcp0jcvv8" path="res://music/sfx/BossBatROAR.mp3" id="8_oufed"]
-[ext_resource type="Script" path="res://Script/ChargeState.gd" id="8_qkxlu"]
+[ext_resource type="Script" path="res://Script/BossBatEnemy/ChargeState.gd" id="8_qkxlu"]
 [ext_resource type="AudioStream" uid="uid://c4lodblowvhwe" path="res://music/zombiesound-171653.mp3" id="9_o5t5g"]
-[ext_resource type="Script" path="res://Script/SleepState.gd" id="10_5kyio"]
-[ext_resource type="Script" path="res://Script/BossBatEnemy/hurtbox_components.gd" id="10_8h1lu"]
+[ext_resource type="Script" path="res://Script/BossBatEnemy/SleepState.gd" id="10_5kyio"]
+[ext_resource type="Script" path="res://Script/Modular Scripts/hurtbox_components.gd" id="10_8h1lu"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/ShootState.gd" id="10_sxcg1"]
-[ext_resource type="Script" path="res://Script/boss_bat_state_machine.gd" id="11_0chcn"]
-[ext_resource type="Script" path="res://Script/Velocity Component.gd" id="12_2wgx0"]
+[ext_resource type="Script" path="res://Script/BossBatEnemy/boss_bat_state_machine.gd" id="11_0chcn"]
+[ext_resource type="Script" path="res://Script/Modular Scripts/Velocity Component.gd" id="12_2wgx0"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/FlyingState.gd" id="13_31c35"]
-[ext_resource type="Script" path="res://Script/object_pooling.gd" id="15_p2d7w"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ihdgj"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -316,9 +315,6 @@ script = ExtResource("12_2wgx0")
 max_speed = 100.0
 speed = 2000.0
 acceleration = 50.0
-
-[node name="Object Pool" type="Node" parent="."]
-script = ExtResource("15_p2d7w")
 
 [connection signal="died" from="Health Components" to="." method="_on_health_components_died"]
 [connection signal="took_damage" from="Health Components" to="." method="_on_health_components_took_damage"]

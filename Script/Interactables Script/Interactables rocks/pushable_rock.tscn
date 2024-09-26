@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://coe2bigkbj883"]
+
+[ext_resource type="Script" path="res://Script/Interactables Script/Interactables rocks/pushable_rock.gd" id="1_38c2v"]
+[ext_resource type="PhysicsMaterial" uid="uid://bhyjja60bj704" path="res://Resource/PushableRocks.tres" id="1_hgp5g"]
+[ext_resource type="Texture2D" uid="uid://b0ord3vdolbpn" path="res://art/Props/Rocks/pushables rocks.png" id="2_xg2hx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l2207"]
+size = Vector2(93, 64)
+
+[node name="rigidbody" type="RigidBody2D" groups=["boxes"]]
+top_level = true
+mass = 2.0
+physics_material_override = ExtResource("1_hgp5g")
+lock_rotation = true
+linear_damp = 1.0
+angular_damp = 10.0
+script = ExtResource("1_38c2v")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visibility_layer = 2
+position = Vector2(0, -8)
+texture = ExtResource("2_xg2hx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 650
+position = Vector2(-3.5, 0)
+shape = SubResource("RectangleShape2D_l2207")

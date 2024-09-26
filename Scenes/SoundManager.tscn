@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://bxoegi06c2upq"]
 
-[ext_resource type="Script" path="res://Script/SoundManager.gd" id="1_xqc4i"]
-[ext_resource type="Script" path="res://Script/Sound Queue.gd" id="2_j1s2b"]
+[ext_resource type="Script" path="res://Script/Modular Scripts/SoundManager.gd" id="1_xqc4i"]
+[ext_resource type="Script" path="res://Script/Modular Scripts/Sound Queue.gd" id="2_j1s2b"]
 [ext_resource type="AudioStream" uid="uid://bfbwnj6wmsxnl" path="res://music/Regenerator.mp3" id="2_x878w"]
 [ext_resource type="AudioStream" uid="uid://tnohss5vshud" path="res://music/laseraim.wav" id="4_mbago"]
 [ext_resource type="AudioStream" uid="uid://d10pwinfu5o2e" path="res://music/Spirit_Shoot_SFX.wav" id="4_oqskh"]

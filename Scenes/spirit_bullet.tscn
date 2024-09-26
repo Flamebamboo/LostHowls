@@ -1,9 +1,9 @@
 [gd_scene load_steps=25 format=3 uid="uid://ep5krjvy7r02"]
 
 [ext_resource type="Script" path="res://Script/Player/spirit_bullet.gd" id="1_q1rox"]
-[ext_resource type="Script" path="res://Script/Hitbox Component.gd" id="3_2ggmt"]
-[ext_resource type="Texture2D" uid="uid://djnurd02pfj0a" path="res://art/SpiritBullet2.0-Sheet.png" id="3_kcpwh"]
-[ext_resource type="Texture2D" uid="uid://dnvennqiwysgh" path="res://art/explosion_1-Sheet.png" id="4_6grxa"]
+[ext_resource type="Script" path="res://Script/Modular Scripts/Hitbox Component.gd" id="3_2ggmt"]
+[ext_resource type="Texture2D" uid="uid://djnurd02pfj0a" path="res://art/Player/SpiritBullet2.0-Sheet.png" id="3_kcpwh"]
+[ext_resource type="Texture2D" uid="uid://dnvennqiwysgh" path="res://art/VFX/explosion_1-Sheet.png" id="4_6grxa"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pyjb1"]
 radius = 9.0
