@@ -109,8 +109,7 @@ func spirit_idle(delta):
 	angle += idle_speed * delta #circular motions 
 	position = position + ( Vector2.from_angle(angle) * radius ) #circular  motion equations
 	#
-	
-	
+
 	
 func spirit_move(delta):
 	var target_position = dog.global_position + Vector2(0, -follow_distance) #same as top
@@ -120,7 +119,6 @@ func spirit_move(delta):
 		global_position += direction * speed * delta
 	elif distance_to_player > stop_distance: #slow speed starts
 		global_position = global_position.lerp(target_position, decel_speed) # smooth follow using linear interpolation 
-		
 
 func spirit_glide(delta):
 	var target_position = dog.global_position + Vector2(0, -50) #same as top
@@ -128,7 +126,7 @@ func spirit_glide(delta):
 	var direction = (target_position - global_position).normalized() #normalizing the vector and making the spirit go to the target by substracting
 	if distance_to_player:
 		global_position += direction * tel_speed * delta
-		
+	
 	
 
 		
@@ -149,6 +147,11 @@ func shoot():
 	get_tree().root.call_deferred("add_child", spawned_bullet)
 	spawned_bullet.global_position = shooting_marker.global_position
 	SoundManager.shoot_sound.play()
+	var tween = create_tween()
+	tween.tween_property($Sprite2D, "scale", Vector2(2,2), 1)
+	tween.tween_property($Sprite2D, "scale", Vector2(1,1), 1)
+	
+
 	
 ##still in development 
 #func launch():
@@ -158,7 +161,7 @@ func shoot():
 			#var direction = (dog.global_position - shooting_marker.global_position).normalized()
 			#new_launcher.velocity = direction * new_launcher.speed
 			#new_launcher.look_at(dog.global_position)	
-			#print(new_launcher.global_position)
+			#print(new_l$Sprite2Dauncher.global_position)
 			#
 			#get_tree().root.call_deferred("add_child", new_launcher)
 			#

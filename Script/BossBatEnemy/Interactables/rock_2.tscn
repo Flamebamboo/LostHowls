@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bctf04afpmqpl" path="res://art/Props/Rocks/rock2.png" id="1_38xl1"]
 [ext_resource type="Script" path="res://Script/Interactables Script/bouncyrock.gd" id="1_j4g7e"]
-[ext_resource type="Material" uid="uid://bmgyfioow48f8" path="res://shader/unshadedlight.tres" id="2_wubx4"]
+[ext_resource type="Material" uid="uid://bmgyfioow48f8" path="res://Resource/unshadedlight.tres" id="2_wubx4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7lwaw"]
 size = Vector2(70, 33)

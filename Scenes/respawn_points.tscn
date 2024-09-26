@@ -61,7 +61,7 @@ animations = [{
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mekfu"]
 blend_mode = 1
-light_mode = 2
+light_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_bjned"]
 offsets = PackedFloat32Array(0.0184615, 1)
@@ -137,7 +137,7 @@ _data = {
 }
 
 [sub_resource type="Gradient" id="Gradient_r4jg8"]
-offsets = PackedFloat32Array(0.00343643, 0.289231)
+offsets = PackedFloat32Array(0.00343643, 1)
 colors = PackedColorArray(1, 0.715186, 0.538369, 1, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_vnugm"]
@@ -159,6 +159,7 @@ sprite_frames = SubResource("SpriteFrames_33ups")
 animation = &"fire"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(1, 0.290196, 0, 0.227451)
 material = SubResource("CanvasItemMaterial_mekfu")
 position = Vector2(0, 3.65714)

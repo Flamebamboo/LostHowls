@@ -1,71 +1,14 @@
-[gd_scene load_steps=33 format=3 uid="uid://r8fwkr0ot8rp"]
+[gd_scene load_steps=20 format=3 uid="uid://r8fwkr0ot8rp"]
 
 [ext_resource type="Script" path="res://Script/Player/spirit_green.gd" id="1_y24hh"]
-[ext_resource type="Texture2D" uid="uid://c54gmj6y0wfm2" path="res://art/VFX/spotlight_1.png" id="2_8kcxk"]
-[ext_resource type="Material" uid="uid://bmgyfioow48f8" path="res://shader/unshadedlight.tres" id="2_uc4jv"]
+[ext_resource type="Material" uid="uid://bmgyfioow48f8" path="res://Resource/unshadedlight.tres" id="2_uc4jv"]
 [ext_resource type="Texture2D" uid="uid://dw1225r4bi7ia" path="res://art/Player/spirit_dimple-Sheet.png" id="3_ojv0g"]
-[ext_resource type="Script" path="res://lightings_effects.gd" id="6_kpie1"]
-[ext_resource type="Texture2D" uid="uid://cas5bngx1ua0i" path="res://art/Interface Elements/Doglauncherwhite.png" id="7_cvbms"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8sp57"]
 
 [sub_resource type="Curve" id="Curve_dpxfj"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
-
-[sub_resource type="Animation" id="Animation_wac2v"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_5nnpv"]
-resource_name = "enabled"
-length = 5.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_twxad"]
-resource_name = "paw"
-length = 5.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 4.9),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(0.0768358, 0.0768358, 0.0768358, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_1k35l"]
-_data = {
-"RESET": SubResource("Animation_wac2v"),
-"enabled": SubResource("Animation_5nnpv"),
-"paw": SubResource("Animation_twxad")
-}
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dhtlg"]
 atlas = ExtResource("3_ojv0g")
@@ -176,83 +119,6 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vbnsj"]
-blend_mode = 1
-light_mode = 2
-
-[sub_resource type="Gradient" id="Gradient_1dukv"]
-offsets = PackedFloat32Array(0.385, 0.54811)
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_gfldd"]
-gradient = SubResource("Gradient_1dukv")
-width = 100
-height = 100
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-
-[sub_resource type="Animation" id="Animation_dm77e"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture:width")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [100]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:texture:height")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [100]
-}
-
-[sub_resource type="Animation" id="Animation_s0yx4"]
-resource_name = "new_animation"
-length = 0.3
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:texture:width")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [256, 230, 200]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:texture:height")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [256, 230, 200]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_564je"]
-_data = {
-"RESET": SubResource("Animation_dm77e"),
-"new_animation": SubResource("Animation_s0yx4")
-}
-
 [node name="spirit" type="CharacterBody2D" node_paths=PackedStringArray("shooting_marker", "anim", "line")]
 collision_layer = 64
 collision_mask = 0
@@ -271,43 +137,10 @@ width_curve = SubResource("Curve_dpxfj")
 [node name="shooting" type="Marker2D" parent="."]
 unique_name_in_owner = true
 
-[node name="launcher" type="Timer" parent="."]
-process_callback = 0
-wait_time = 5.0
-
-[node name="CanvasLayer" type="CanvasLayer" parent="launcher"]
-visible = false
-
-[node name="Sprite2D" type="Sprite2D" parent="launcher/CanvasLayer"]
-visible = false
-position = Vector2(101, 48)
-texture = ExtResource("7_cvbms")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="launcher/CanvasLayer"]
-libraries = {
-"": SubResource("AnimationLibrary_1k35l")
-}
-
 [node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 material = ExtResource("2_uc4jv")
 position = Vector2(9.53674e-07, -9.53674e-07)
 sprite_frames = SubResource("SpriteFrames_40sw7")
-animation = &"move"
-
-[node name="PointLight2D" type="PointLight2D" parent="."]
-energy = 0.5
-texture = ExtResource("2_8kcxk")
-script = ExtResource("6_kpie1")
-
-[node name="Sprite2D2" type="Sprite2D" parent="PointLight2D"]
-modulate = Color(0, 0.686275, 0.454902, 0.0862745)
-material = SubResource("CanvasItemMaterial_vbnsj")
-position = Vector2(-4, 2)
-scale = Vector2(2, 2)
-texture = SubResource("GradientTexture2D_gfldd")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="PointLight2D/Sprite2D2"]
-libraries = {
-"": SubResource("AnimationLibrary_564je")
-}
-autoplay = "new_animation"
+animation = &"glide"
+frame = 4
+frame_progress = 1.0

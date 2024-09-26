@@ -1,15 +1,16 @@
-[gd_scene load_steps=27 format=3 uid="uid://0drrtr1rw0n1"]
+[gd_scene load_steps=28 format=3 uid="uid://0drrtr1rw0n1"]
 
 [ext_resource type="Script" path="res://Script/Mini Bat/mini_bat.gd" id="1_pulgo"]
-[ext_resource type="Script" path="res://Scenes/Velocity Component.gd" id="2_a3so0"]
+[ext_resource type="Script" path="res://Script/Velocity Component.gd" id="2_a3so0"]
+[ext_resource type="Texture2D" uid="uid://dq3wykt1la60j" path="res://art/triangular_light.png" id="5_1xjfy"]
 [ext_resource type="Texture2D" uid="uid://qxey0hadkc6l" path="res://art/Enemies/mini_bat-Sheet.png" id="5_aijwg"]
 [ext_resource type="Script" path="res://Script/Mini Bat/mini_bat_controller.gd" id="6_5l8mv"]
-[ext_resource type="Script" path="res://Scenes/Hitbox Component.gd" id="7_n8hwc"]
+[ext_resource type="Script" path="res://Script/Hitbox Component.gd" id="7_n8hwc"]
 [ext_resource type="Script" path="res://Script/Mini Bat/Mini Bat States/chase_state.gd" id="8_sksoy"]
 [ext_resource type="Script" path="res://Script/BossBatEnemy/hurtbox_components.gd" id="8_wndaj"]
 [ext_resource type="Script" path="res://Script/Mini Bat/mini_bat_statemachine.gd" id="9_vs084"]
 [ext_resource type="Script" path="res://Script/Mini Bat/Mini Bat States/laser_state.gd" id="10_m1j8f"]
-[ext_resource type="Script" path="res://Scenes/EnemyHealth.gd" id="10_ut1yg"]
+[ext_resource type="Script" path="res://Script/EnemyHealth.gd" id="10_ut1yg"]
 [ext_resource type="Script" path="res://Script/Mini Bat/Mini Bat States/wandering_state.gd" id="11_y1rkr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fsgoc"]
@@ -201,7 +202,6 @@ hit_from_inside = true
 collide_with_areas = true
 
 [node name="Line2D" type="Line2D" parent="RayCast2D"]
-visible = false
 z_index = 240
 position = Vector2(-1, -6)
 points = PackedVector2Array(2.08165e-12, 2.08165e-12, 150, 2.08165e-12)
@@ -244,12 +244,18 @@ rotation = 1.5708
 collision_layer = 0
 collision_mask = 2
 
+[node name="PointLight2D" type="PointLight2D" parent="Laser Executer"]
+position = Vector2(0.999356, -178)
+rotation = 3.14159
+color = Color(1, 0, 0, 1)
+texture = ExtResource("5_1xjfy")
+
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Laser Executer"]
-polygon = PackedVector2Array(0, 0, 150, -500, -150, -500)
+polygon = PackedVector2Array(0, 0, 225, -400, -225, -400)
 
 [node name="Polygon2D" type="Polygon2D" parent="Laser Executer"]
 color = Color(1, 0, 0, 0.101961)
-polygon = PackedVector2Array(0, 0, -150, -500, 150, -500)
+polygon = PackedVector2Array(0, 0, -225, -400, 225, -400)
 
 [node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health_components", "gpu_particles_2d")]
 visible = false
@@ -303,6 +309,15 @@ script = ExtResource("11_y1rkr")
 script = ExtResource("10_ut1yg")
 health_max = 60
 CharacterBody = NodePath("..")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+z_index = -210
+offset_left = -207.0
+offset_top = -369.0
+offset_right = 718.0
+offset_bottom = 332.0
+color = Color(0.658824, 1, 1, 1)
 
 [connection signal="velocity_computed" from="NavigationAgent2D" to="MiniBatFSM/ChaseState" method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="body_entered" from="Entity Detector" to="State Controller" method="_on_entity_detector_body_entered"]

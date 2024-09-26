@@ -1,0 +1,270 @@
+[gd_scene load_steps=11 format=3 uid="uid://cjivsd3bsrdxw"]
+
+[ext_resource type="Script" path="res://Script/start_up_scene.gd" id="1_fqrjt"]
+[ext_resource type="Theme" uid="uid://g8jgibtk7lys" path="res://Resource/IntroTextStyle.tres" id="2_hf6j5"]
+[ext_resource type="Texture2D" uid="uid://tkyphmvko6nh" path="res://art/Interface Elements/ContainFlashing.png" id="3_soyxa"]
+[ext_resource type="Texture2D" uid="uid://dd1rorg2aigkf" path="res://art/Interface Elements/ControllerSupport.png" id="4_5gdri"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4gogo"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_82ng0"]
+resource_name = "IntroStartUp"
+length = 9.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 8.6, 9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Intro/UseHeadPhones:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Intro/UseHeadPhones:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.333333, 2.8, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Intro/ContainFlashing:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.0333333, 3.06667, 6.03333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Intro/ContainFlashing:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(3.06667, 5.7, 6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Intro/GameController:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 6, 8.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Intro/GameController:modulate")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(6, 6.26667, 8.63333, 8.83333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_s3e06"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Intro/GameController:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Intro/GameController:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_03glx"]
+_data = {
+"IntroStartUp": SubResource("Animation_82ng0"),
+"RESET": SubResource("Animation_s3e06")
+}
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_vdp33"]
+load_path = "res://.godot/imported/playwithheadphones.png-8b4556ba3932ca8216f95c851d74a109.ctex"
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7ycdq"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+script = ExtResource("1_fqrjt")
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color(1, 1, 1, 0)
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4gogo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_03glx")
+}
+
+[node name="Intro" type="Node" parent="."]
+
+[node name="UseHeadPhones" type="PanelContainer" parent="Intro"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="Intro/UseHeadPhones"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Intro/UseHeadPhones/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="Intro/UseHeadPhones/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = SubResource("CompressedTexture2D_vdp33")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="Intro/UseHeadPhones/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_hf6j5")
+text = "Use headphones for better experience"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="ContainFlashing" type="PanelContainer" parent="Intro"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_7ycdq")
+
+[node name="MarginContainer" type="MarginContainer" parent="Intro/ContainFlashing"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Intro/ContainFlashing/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="Intro/ContainFlashing/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_soyxa")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="Intro/ContainFlashing/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_hf6j5")
+text = "WARNING:  This game contain flashing light and loud noise"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="GameController" type="PanelContainer" parent="Intro"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_7ycdq")
+
+[node name="MarginContainer" type="MarginContainer" parent="Intro/GameController"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Intro/GameController/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="Intro/GameController/MarginContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_5gdri")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="Intro/GameController/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_hf6j5")
+text = "Controller Support: I only tested Xbox, didn't implement deadzone srry"
+horizontal_alignment = 1
+vertical_alignment = 2

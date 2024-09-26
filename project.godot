@@ -14,7 +14,11 @@ config/name="Lost Howls"
 run/main_scene="res://Scenes/MainMenu.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 run/max_fps=100
-config/icon="res://LostHowlsIcon.png"
+config/icon="res://art/LostHowlsIcon.png"
+
+[audio]
+
+buses/default_bus_layout="res://Resource/default_bus_layout.tres"
 
 [autoload]
 

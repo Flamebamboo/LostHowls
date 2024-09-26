@@ -3,7 +3,7 @@ func _ready():
 	RenderingServer.set_default_clear_color(Color.BLACK)
 	ScreenGui.play_animation("fade_in")
 	ScreenGui.play_animation("findyourowner")
-
+	Global.game_start = true
 
 	
 	

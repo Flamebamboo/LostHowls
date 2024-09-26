@@ -1,16 +1,17 @@
-[gd_scene load_steps=28 format=3 uid="uid://bowtw0sey5qb5"]
+[gd_scene load_steps=33 format=3 uid="uid://bowtw0sey5qb5"]
 
-[ext_resource type="Script" path="res://Scenes/screen_gui.gd" id="1_ododx"]
+[ext_resource type="Script" path="res://Script/screen_gui.gd" id="1_ododx"]
 [ext_resource type="FontFile" uid="uid://bnf2p438dv3b5" path="res://Fonts/Pixellari.ttf" id="2_3n3ax"]
+[ext_resource type="Theme" uid="uid://g8jgibtk7lys" path="res://Resource/IntroTextStyle.tres" id="3_rs78p"]
 [ext_resource type="Shader" path="res://Scenes/pause_menu.gdshader" id="3_umdy4"]
-[ext_resource type="Script" path="res://topright_display.gd" id="4_jawl0"]
-[ext_resource type="Shader" path="res://colourblind.gdshader" id="4_v782b"]
-[ext_resource type="Texture2D" uid="uid://c3xfp8v2jsn7x" path="res://Scenes/PauseMenu.png" id="5_c84c7"]
-[ext_resource type="Theme" uid="uid://cbkm5krrx8r4o" path="res://PauseMenu.tres" id="6_48q6f"]
-[ext_resource type="Theme" uid="uid://ddi3fe4upbtie" path="res://AudioMenu.tres" id="7_8mkbd"]
-[ext_resource type="LabelSettings" uid="uid://c5ymxl4a6n0xx" path="res://AudioLabels.tres" id="7_etlyw"]
-[ext_resource type="Script" path="res://Scenes/master_slider.gd" id="9_0410j"]
-[ext_resource type="Theme" uid="uid://cfkwd1gjicsa2" path="res://Buttons.tres" id="10_pqtt5"]
+[ext_resource type="Script" path="res://Script/topright_display.gd" id="4_jawl0"]
+[ext_resource type="Shader" path="res://Shader/colourblind.gdshader" id="4_v782b"]
+[ext_resource type="Texture2D" uid="uid://c3xfp8v2jsn7x" path="res://art/PauseMenu.png" id="5_c84c7"]
+[ext_resource type="Theme" uid="uid://cbkm5krrx8r4o" path="res://Resource/PauseMenu.tres" id="6_48q6f"]
+[ext_resource type="Theme" uid="uid://ddi3fe4upbtie" path="res://Resource/AudioMenu.tres" id="7_8mkbd"]
+[ext_resource type="LabelSettings" uid="uid://c5ymxl4a6n0xx" path="res://Resource/AudioLabels.tres" id="7_etlyw"]
+[ext_resource type="Script" path="res://Script/master_slider.gd" id="9_0410j"]
+[ext_resource type="Theme" uid="uid://cfkwd1gjicsa2" path="res://Resource/Buttons.tres" id="10_pqtt5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h01p0"]
 shader = ExtResource("4_v782b")
@@ -43,6 +44,14 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_b1adf"]
+resource_name = "ContainFlashing"
+length = 2.5
+
+[sub_resource type="Animation" id="Animation_jf1a0"]
+resource_name = "ControllerSupport"
+length = 2.5
+
 [sub_resource type="Animation" id="Animation_2atoy"]
 resource_name = "GraphicOptions"
 length = 0.4
@@ -70,6 +79,10 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
+
+[sub_resource type="Animation" id="Animation_llmgk"]
+resource_name = "HeadPhones"
+length = 2.5
 
 [sub_resource type="Animation" id="Animation_5ax3u"]
 resource_name = "MenuOpen"
@@ -195,7 +208,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -339,7 +352,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.6, 1.1, 1.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -353,6 +366,9 @@ tracks/4/keys = {
 "update": 1,
 "values": [true, false]
 }
+
+[sub_resource type="Animation" id="Animation_l0kmx"]
+resource_name = "new_animation"
 
 [sub_resource type="Animation" id="Animation_u4s8r"]
 resource_name = "redflash"
@@ -385,12 +401,16 @@ tracks/1/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rf542"]
 _data = {
 "AudioOptions": SubResource("Animation_68hdq"),
+"ContainFlashing": SubResource("Animation_b1adf"),
+"ControllerSupport": SubResource("Animation_jf1a0"),
 "GraphicOptions": SubResource("Animation_2atoy"),
+"HeadPhones": SubResource("Animation_llmgk"),
 "MenuOpen": SubResource("Animation_5ax3u"),
 "RESET": SubResource("Animation_bid2p"),
 "death_flash": SubResource("Animation_fq2ls"),
 "fade_in": SubResource("Animation_8vwbn"),
 "findyourowner": SubResource("Animation_nd6p2"),
+"new_animation": SubResource("Animation_l0kmx"),
 "redflash": SubResource("Animation_u4s8r")
 }
 
@@ -442,7 +462,7 @@ size_flags_vertical = 4
 
 [node name="Label" type="Label" parent="ScreenGUI"]
 visible = false
-modulate = Color(1, 1, 1, 0)
+modulate = Color(1, 1, 1, 0.235294)
 z_index = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -467,6 +487,7 @@ libraries = {
 
 [node name="TopRightInfo" type="PanelContainer" parent="ScreenGUI"]
 process_mode = 1
+visible = false
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -531,7 +552,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-color = Color(1, 0, 0, 0.633333)
+color = Color(0, 0, 0, 0)
 
 [node name="Blur" type="ColorRect" parent="ScreenGUI"]
 visible = false
@@ -587,7 +608,7 @@ text = "Audio"
 [node name="Quit" type="Button" parent="ScreenGUI/PauseMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("6_48q6f")
-text = "Quit To Title"
+text = "Quit Game"
 
 [node name="Audio" type="PanelContainer" parent="ScreenGUI"]
 process_mode = 3
@@ -674,9 +695,15 @@ value = 0.5
 script = ExtResource("9_0410j")
 bus_name = "Sfx"
 
+[node name="Label" type="Label" parent="ScreenGUI/Audio/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("3_rs78p")
+text = "Press ESC to go back"
+horizontal_alignment = 1
+
 [node name="Graphic" type="PanelContainer" parent="ScreenGUI"]
 visible = false
-modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -778,21 +805,33 @@ size_flags_horizontal = 4
 theme = ExtResource("10_pqtt5")
 button_pressed = true
 
-[node name="IDK2" type="Label" parent="ScreenGUI/Graphic/HBoxContainer/RightVbox"]
+[node name="Camera Shake" type="Label" parent="ScreenGUI/Graphic/HBoxContainer/RightVbox"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "IDK
+text = "Camera Shake
 "
 label_settings = ExtResource("7_etlyw")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="IDK" type="CheckButton" parent="ScreenGUI/Graphic/HBoxContainer/RightVbox"]
+[node name="Camera Shake2" type="CheckButton" parent="ScreenGUI/Graphic/HBoxContainer/RightVbox"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("10_pqtt5")
-toggle_mode = false
+button_pressed = true
 button_mask = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScreenGUI/Graphic"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="ScreenGUI/Graphic/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("3_rs78p")
+text = "Press ESC to go back"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="ScreenGUI/PauseMenu/MarginContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="ScreenGUI/PauseMenu/MarginContainer/VBoxContainer/Graphic" to="." method="_on_graphic_pressed"]

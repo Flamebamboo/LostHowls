@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dbfj12uqf3041"]
 
 [ext_resource type="Script" path="res://Script/Interactables Script/bouncyrock.gd" id="1_07tgp"]
-[ext_resource type="Material" uid="uid://bmgyfioow48f8" path="res://shader/unshadedlight.tres" id="2_ilas2"]
+[ext_resource type="Material" uid="uid://bmgyfioow48f8" path="res://Resource/unshadedlight.tres" id="2_ilas2"]
 [ext_resource type="Texture2D" uid="uid://be0ci0txet4ar" path="res://art/Props/Rocks/bigrock.png" id="2_mwvef"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_23ayd"]

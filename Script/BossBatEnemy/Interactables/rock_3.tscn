@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://d24wjreyddt1s"]
 
-[ext_resource type="Material" uid="uid://bmgyfioow48f8" path="res://shader/unshadedlight.tres" id="1_sfyo8"]
+[ext_resource type="Material" uid="uid://bmgyfioow48f8" path="res://Resource/unshadedlight.tres" id="1_sfyo8"]
 [ext_resource type="Texture2D" uid="uid://bfqyh24ss44by" path="res://art/Props/Rocks/rock3.png" id="1_wp4vr"]
 [ext_resource type="Script" path="res://Script/Interactables Script/bouncyrock.gd" id="2_smc4o"]
 

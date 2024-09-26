@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Script/bat_bullet.gd" id="1_uryag"]
 [ext_resource type="Texture2D" uid="uid://bcrdypc2aw3jf" path="res://art/Enemies/BatBullet.png" id="2_wruuo"]
-[ext_resource type="Script" path="res://Scenes/Hitbox Component.gd" id="3_e4wul"]
-[ext_resource type="Script" path="res://gpu_particles.gd" id="4_2db55"]
+[ext_resource type="Script" path="res://Script/Hitbox Component.gd" id="3_e4wul"]
+[ext_resource type="Script" path="res://Script/gpu_particles.gd" id="4_2db55"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1v13y"]
 radius = 36.6667

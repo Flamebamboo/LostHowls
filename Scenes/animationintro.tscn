@@ -1,6 +1,6 @@
 [gd_scene load_steps=31 format=3 uid="uid://ht3gkmm08ll8"]
 
-[ext_resource type="Texture2D" uid="uid://7ngxdc7eoyjq" path="res://art/Explorer1-Sheet.png" id="1_3mnnn"]
+[ext_resource type="Texture2D" path="res://art/Explorer1-Sheet.png" id="1_3mnnn"]
 [ext_resource type="Texture2D" uid="uid://b5po54oukvgdx" path="res://art/Player/dogrunv2-Sheet-Sheet.png" id="1_lnvq1"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_pecot"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="3_c615x"]

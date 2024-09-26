@@ -1,0 +1,8 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://g8jgibtk7lys"]
+
+[ext_resource type="FontFile" uid="uid://hufexn2nqr30" path="res://Fonts/KarenFat.ttf" id="1_8pk3f"]
+
+[resource]
+Label/colors/font_color = Color(0.85, 1, 0.9675, 1)
+Label/font_sizes/font_size = 10
+Label/fonts/font = ExtResource("1_8pk3f")
