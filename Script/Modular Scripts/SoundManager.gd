@@ -2,7 +2,11 @@ extends Node
 #sound manager script
 var sound_queuesByName: Dictionary = {}
 var sound_poolByName: Dictionary = {}
+@onready var main: AudioStreamPlayer = $Main
+@onready var menu: AudioStreamPlayer = $Menu
+@onready var end: AudioStreamPlayer = $End
 
+@export var button_sound: AudioStreamPlayer
 @export var shoot_sound: AudioStreamPlayer
 @export var laser_sound: AudioStreamPlayer
 @export var impact_sound: AudioStreamPlayer
@@ -25,3 +29,16 @@ var sound_poolByName: Dictionary = {}
 #
 #func PlayChargeSound():
 	#sound_queuesByName["ChargeSoundQueue"].play_sound()
+
+func PlayMainPlaylist():
+	main.play()
+	menu.stop()
+
+func PlayMainMenu():
+	menu.play()
+	main.stop()
+	
+func PlayEndScreen():
+	main.stop()
+	menu.stop()
+	end.play()

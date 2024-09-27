@@ -37,8 +37,6 @@ func s_physics_process(delta):
 	if Input.is_action_just_pressed("glide") && machine.active_state.can_glide:
 		machine.transition_to(machine.states["GlidingState"])
 	
-	if Input.is_action_just_pressed("dash"):
-		machine.transition_to(machine.states["DashState"])
 	
 	if !Global.dogAlive:
 		machine.transition_to(machine.states["DeadState"])

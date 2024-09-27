@@ -9,9 +9,12 @@ signal lights_toggled(toggled_on)
 var light_setting: bool = false
 var particle_setting: bool = false
 
+var allowed_shake: bool = true
 var game_start: bool = false
+var game_finished: bool = false
 var navigation_tile: TileMapLayer
 
+var formatted_time: String 
 
 var dogAlive: bool
 var dogCharacter: CharacterBody2D

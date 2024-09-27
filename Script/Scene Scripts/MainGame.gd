@@ -4,7 +4,7 @@ func _ready():
 	ScreenGui.play_animation("fade_in")
 	ScreenGui.play_animation("findyourowner")
 	Global.game_start = true
-
+	SoundManager.PlayMainPlaylist()
 	
 	
 		

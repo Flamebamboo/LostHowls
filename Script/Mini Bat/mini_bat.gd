@@ -10,6 +10,7 @@ class_name MiniBat
 
 func ready():
 	animation_player.play("RESET")
+	$AnimationPlayer.play("off")
 func _physics_process(_delta):
 	move_and_slide()
 	

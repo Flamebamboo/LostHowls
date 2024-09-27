@@ -1,32 +1,50 @@
-[gd_scene load_steps=11 format=3 uid="uid://bxoegi06c2upq"]
+[gd_scene load_steps=16 format=3 uid="uid://bxoegi06c2upq"]
 
 [ext_resource type="Script" path="res://Script/Modular Scripts/SoundManager.gd" id="1_xqc4i"]
+[ext_resource type="AudioStream" uid="uid://blqqyt2qcdfct" path="res://music/music-no-copyright-239544.mp3" id="2_fk6wl"]
 [ext_resource type="Script" path="res://Script/Modular Scripts/Sound Queue.gd" id="2_j1s2b"]
 [ext_resource type="AudioStream" uid="uid://bfbwnj6wmsxnl" path="res://music/Regenerator.mp3" id="2_x878w"]
+[ext_resource type="AudioStream" uid="uid://cdyaxy6k4fbed" path="res://music/superhero-trailer-110450.mp3" id="2_xcnfg"]
+[ext_resource type="AudioStream" uid="uid://c560puximnihv" path="res://music/Void_Entry.mp3" id="3_p8b8j"]
 [ext_resource type="AudioStream" uid="uid://tnohss5vshud" path="res://music/laseraim.wav" id="4_mbago"]
 [ext_resource type="AudioStream" uid="uid://d10pwinfu5o2e" path="res://music/Spirit_Shoot_SFX.wav" id="4_oqskh"]
 [ext_resource type="AudioStream" uid="uid://c2kutx72kxlpo" path="res://music/sfx/hit-sound-effect-12445.mp3" id="6_qchve"]
 [ext_resource type="AudioStream" uid="uid://dle21yv173oum" path="res://music/BatBossCharge.wav" id="7_osxef"]
 [ext_resource type="AudioStream" uid="uid://dvtps6qtq45uv" path="res://music/jumpscare.mp3" id="8_bq04n"]
 [ext_resource type="AudioStream" uid="uid://ct1p5unal8ogs" path="res://music/mixkit-horror-impact-773.wav" id="8_gfewj"]
+[ext_resource type="AudioStream" uid="uid://dm03wfnkqf1wf" path="res://music/sfx/click-47609.mp3" id="13_uox3i"]
+
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_a5mpn"]
+stream_count = 2
+stream_0 = ExtResource("2_x878w")
+stream_1 = ExtResource("3_p8b8j")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_egtm5"]
 random_pitch = 1.55
 streams_count = 1
 stream_0/stream = ExtResource("4_oqskh")
 
-[node name="Sound Manager" type="Node" node_paths=PackedStringArray("shoot_sound", "laser_sound", "impact_sound", "charge_sound", "death_sound")]
+[node name="Sound Manager" type="Node" node_paths=PackedStringArray("button_sound", "shoot_sound", "laser_sound", "impact_sound", "charge_sound", "death_sound")]
 script = ExtResource("1_xqc4i")
+button_sound = NodePath("ButtonSound")
 shoot_sound = NodePath("test")
 laser_sound = NodePath("LaserSound")
 impact_sound = NodePath("ImpactSound")
 charge_sound = NodePath("ChargeSound")
 death_sound = NodePath("DeathSound")
 
+[node name="End" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_xcnfg")
+
+[node name="Menu" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_fk6wl")
+volume_db = -5.0
+bus = &"Music"
+
 [node name="Main" type="AudioStreamPlayer" parent="."]
 process_mode = 3
-stream = ExtResource("2_x878w")
-volume_db = -20.0
+stream = SubResource("AudioStreamPlaylist_a5mpn")
+volume_db = -5.0
 autoplay = true
 bus = &"Music"
 
@@ -88,3 +106,6 @@ bus = &"Sfx"
 [node name="ChargeSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_osxef")
 bus = &"Sfx"
+
+[node name="ButtonSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("13_uox3i")

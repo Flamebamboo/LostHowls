@@ -15,6 +15,7 @@ func _ready():
 	anim_player.play("RESET")
 	Global.particle_setting = true
 	Global.light_setting = true
+	Global.allowed_shake = true
 	colour_blind.visible = false
 	fps.visible = true
 		
@@ -24,7 +25,7 @@ func _process(delta):
 	PauseMenu()
 	AudioMenu()
 	GraphicMenu()
-	if !Global.BossBatAlive && !gliding_earn:
+	if !Global.BossBatAlive && !gliding_earn && Global.game_start:
 		gliding_earn = true
 		anim_player.play("gliding")
 		
@@ -145,3 +146,9 @@ func _on_colour_blind_button_toggled(toggled_on: bool) -> void:
 
 func _on_fps_button_toggled(toggled_on: bool) -> void:
 	fps.visible = toggled_on 
+
+
+
+
+func _on_camera_shake_toggled(toggled_on: bool) -> void:
+	Global.allowed_shake = toggled_on

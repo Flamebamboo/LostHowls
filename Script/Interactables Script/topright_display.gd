@@ -20,13 +20,18 @@ func _process(delta: float) -> void:
 		$MarginContainer/VBoxContainer/HBoxContainer/minutes.text = "%02d:" % minutes
 		$MarginContainer/VBoxContainer/HBoxContainer/seconds.text = "%02d." % seconds
 		$MarginContainer/VBoxContainer/HBoxContainer/Msecs.text = "%03d" % msec
-
+	
+	if Global.game_finished:
+		stoptimer()
+		visible = false
 
 
 
 func stoptimer() -> void:
 	set_process(false)
+	Global.formatted_time = get_time_formatted()
 	
 func get_time_formatted() -> String:
 	return "%02d:%02d.%03d" % [minutes, seconds, msec]
+	
  #if lter game finishes print this formatted time on win screen.

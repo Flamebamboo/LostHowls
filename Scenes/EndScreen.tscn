@@ -1,13 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://dmtu8dt3pqr1q"]
+[gd_scene load_steps=7 format=3 uid="uid://dmtu8dt3pqr1q"]
 
 [ext_resource type="Theme" uid="uid://g8jgibtk7lys" path="res://Resource/IntroTextStyle.tres" id="1_n0bw5"]
+[ext_resource type="Script" path="res://Scenes/end_screen.gd" id="1_rwhek"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3xrg4"]
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_j38rt"]
 resource_name = "EndScreen"
-length = 25.0
+length = 30.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -27,7 +28,7 @@ tracks/1/path = NodePath("End/PanelContainer/MarginContainer/Label:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 3.23333, 7.26667),
+"times": PackedFloat32Array(5.65938, 8.89271, 12.9177),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(0.41, 0.764, 1, 0)]
@@ -39,7 +40,7 @@ tracks/2/path = NodePath("End/PanelContainer/MarginContainer/Label2:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(7.33333, 8.8, 12.2333),
+"times": PackedFloat32Array(12.9844, 14.451, 17.8739),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -51,7 +52,7 @@ tracks/3/path = NodePath("End/PanelContainer/MarginContainer/Label3:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(12.7, 14.5333, 17.2333),
+"times": PackedFloat32Array(18.3406, 20.1656, 22.8656),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -63,7 +64,7 @@ tracks/4/path = NodePath("End/PanelContainer/MarginContainer/Label4:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(16.1, 17.6, 20),
+"times": PackedFloat32Array(21.7323, 23.2422, 25.6339),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -75,10 +76,22 @@ tracks/5/path = NodePath("End/PanelContainer/MarginContainer/Label5:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(20.1667, 21.6, 24.2333),
+"times": PackedFloat32Array(25.8006, 27.2438, 29.8667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("End/PanelContainer/MarginContainer/timelabel:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.266667, 0.933333, 5.03333, 5.63333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_p75bp"]
@@ -90,6 +103,18 @@ tracks/0/path = NodePath("End/PanelContainer/MarginContainer/Label5:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("End/PanelContainer/MarginContainer/timelabel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -109,6 +134,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_rwhek")
 
 [node name="End" type="Node" parent="."]
 
@@ -128,7 +154,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="Label" type="Label" parent="End/PanelContainer/MarginContainer"]
-modulate = Color(0.41, 0.764, 1, 0)
+modulate = Color(1, 1, 1, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("1_n0bw5")
@@ -163,8 +189,13 @@ size_flags_horizontal = 4
 theme = ExtResource("1_n0bw5")
 text = "Check out my youtube channel for this game devlog- FlameBamboo"
 
+[node name="timelabel" type="Label" parent="End/PanelContainer/MarginContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme = ExtResource("1_n0bw5")
+horizontal_alignment = 1
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_i7gj0")
 }
-autoplay = "EndScreen"

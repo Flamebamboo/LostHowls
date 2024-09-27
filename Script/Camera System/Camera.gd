@@ -21,13 +21,14 @@ func apply_shake(strength: float, fade: float):
 	shake_fade = fade
 
 func _process(delta):
-	if shake_active:
-		if shake_strength > 0:
-			shake_strength = lerpf(shake_strength, 0, shake_fade * delta)
-			offset = random_offset()
-		else:
-			shake_active = false
-			offset = Vector2.ZERO  # Reset offset when shake is done
+	if Global.allowed_shake:
+		if shake_active:
+			if shake_strength > 0:
+				shake_strength = lerpf(shake_strength, 0, shake_fade * delta)
+				offset = random_offset()
+			else:
+				shake_active = false
+				offset = Vector2.ZERO  # Reset offset when shake is done
 
 
 func random_offset() -> Vector2:
